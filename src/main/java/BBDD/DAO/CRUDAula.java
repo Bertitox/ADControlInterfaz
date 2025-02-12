@@ -2,7 +2,8 @@ package BBDD.DAO;
 
 import BBDD.Conexion.Conexion;
 import BBDD.DTO.Aula;
-import BBDD.DTO.InformacionSistema;
+import BBDD.Excepciones.AulaNotFoundException;
+import BBDD.Validaciones.Validaciones_systema;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
@@ -14,13 +15,20 @@ public class CRUDAula {
     EntityManager gestorEntidad = conexion.getGestor();
     EntityTransaction transaction = gestorEntidad.getTransaction();
 
+    //Clase de validaciones
+    Validaciones_systema validaciones = new Validaciones_systema();
+
     public CRUDAula() {
     }
 
     public void insertAula(Aula aula) {
-        transaction.begin();
-        gestorEntidad.persist(aula);
-        transaction.commit();
+        if (!(validaciones.onlyOneDevice(aula.getIdInformacionSistema().getId()))) {
+            transaction.begin();
+            gestorEntidad.persist(aula);
+            transaction.commit();
+        }else {
+            throw new RuntimeException("No se puede agregar el aula: Equipo ya existente en el aula");
+        }
     }
 
     public void updateAula(Aula aula) {
@@ -46,10 +54,15 @@ public class CRUDAula {
         return a;
     }
 
-    public Aula getbyReferencia(String referencia) {
-        Aula a = gestorEntidad.find(Aula.class, referencia);
-        return a;
+    public Aula getbyReferencia(String referencia) throws AulaNotFoundException {
+        for (Aula aula : readAllAulas()) {
+            if (aula.getReferencia().equals(referencia)) {
+                return aula;
+            }
+        }
+        throw new AulaNotFoundException("Aula no encontrada con la referencia: " + referencia);
     }
+
 
     public void mostrarAulas(){
         for (Aula a : readAllAulas()) {
@@ -59,6 +72,6 @@ public class CRUDAula {
 
     public static void main(String[] args) {
         CRUDAula aula = new CRUDAula();
-            //aula.insertAula(new Aula("PRUEBA1", aula.gestorEntidad.find(InformacionSistema.class, 1)));
+        //aula.insertAula(new Aula("PRUEBA1", aula.gestorEntidad.find(InformacionSistema.class, 6)));
     }
 }

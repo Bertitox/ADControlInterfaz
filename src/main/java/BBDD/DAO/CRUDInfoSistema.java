@@ -17,6 +17,9 @@ public class CRUDInfoSistema {
     EntityManager em = conexion.getGestor();
     EntityTransaction transaction = em.getTransaction();
 
+    public CRUDInfoSistema() {
+    }
+
     public void insert(InformacionSistema informacionSistema) {
         transaction.begin();
         em.persist(informacionSistema); // Usa el 'em' que es correcto
