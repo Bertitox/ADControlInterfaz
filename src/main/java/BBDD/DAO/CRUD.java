@@ -62,7 +62,7 @@ public class CRUD {
         CRUD crud = new CRUD();
         InformacionSistema info = MapearJson.mapJsonToEntity("src/main/java/BBDD/DAO/System_info.json");
         if (info != null) {
-            crud.insert(info); // Insertamos la entidad correctamente
+            crud.mostrarInformacionSistema(); // Insertamos la entidad correctamente
         }
     }
 }
