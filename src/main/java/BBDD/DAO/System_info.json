@@ -1,0 +1,16 @@
+{
+    "Sistema_Operativo": "Linux",
+    "Nombre_Nodo": "debian-gnu-linux-11",
+    "Release": "5.10.0-15-arm64",
+    "Version": "#1 SMP Debian 5.10.120-1 (2022-06-09)",
+    "Arquitectura": "aarch64",
+    "Procesador": "unknown",
+    "Memoria_Total_MB": "1981",
+    "Memoria_Disponible_MB": "1049",
+    "Uso_CPU": "18.2%",
+    "Discos": [
+        {"Disco": "Filesystem", "Tamaño": "Size", "Usado": "Used", "Disponible": "Avail", "Porcentaje": "Use%"},
+        {"Disco": "/dev/sda2", "Tamaño": "62G   ", "Usado": "4.3G", "Disponible": "54G", "Porcentaje": "8%"},
+        {"Disco": "/dev/sda1", "Tamaño": "512M", "Usado": "3.5M", "Disponible": "509M", "Porcentaje": "1%"}
+    ]
+}
