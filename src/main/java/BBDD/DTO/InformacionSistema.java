@@ -52,6 +52,25 @@ public class InformacionSistema {
     @Column(name = "ultHora")
     private LocalTime ultHora;
 
+    public InformacionSistema() {
+    }
+
+    public InformacionSistema(String nombre, String so, LocalDate ultFecha, String nombreNodo, String releasee, String version, String arquitectura, String procesador, Integer memTotal, Integer memDisp, String usoCpu, String mac, LocalTime ultHora) {
+        this.nombre = nombre;
+        this.so = so;
+        this.ultFecha = ultFecha;
+        this.nombreNodo = nombreNodo;
+        this.releasee = releasee;
+        this.version = version;
+        this.arquitectura = arquitectura;
+        this.procesador = procesador;
+        this.memTotal = memTotal;
+        this.memDisp = memDisp;
+        this.usoCpu = usoCpu;
+        this.mac = mac;
+        this.ultHora = ultHora;
+    }
+
     public Integer getId() {
         return id;
     }
