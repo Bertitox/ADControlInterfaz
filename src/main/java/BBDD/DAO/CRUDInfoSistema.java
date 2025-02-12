@@ -2,7 +2,6 @@ package BBDD.DAO;
 
 
 import BBDD.Conexion.Conexion;
-import BBDD.DAO.MapearJson;
 import BBDD.DTO.InformacionSistema;
 
 import jakarta.persistence.EntityManager;
@@ -10,7 +9,7 @@ import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
 
-public class CRUD {
+public class CRUDInfoSistema {
 
     Conexion conexion = new Conexion();
 
@@ -59,10 +58,10 @@ public class CRUD {
     }
 
     public static void main(String[] args) {
-        CRUD crud = new CRUD();
+        CRUDInfoSistema crudInfoSistema = new CRUDInfoSistema();
         InformacionSistema info = MapearJson.mapJsonToEntity("src/main/java/BBDD/DAO/System_info.json");
         if (info != null) {
-            crud.mostrarInformacionSistema(); // Insertamos la entidad correctamente
+            crudInfoSistema.mostrarInformacionSistema(); // Insertamos la entidad correctamente
         }
     }
 }
