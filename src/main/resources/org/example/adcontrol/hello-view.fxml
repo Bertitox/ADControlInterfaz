@@ -96,7 +96,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                <children>
-                  <MenuButton layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="88.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
+                  <MenuButton layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="68.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Español" />
                       <MenuItem mnemonicParsing="false" text="Englhis" />
