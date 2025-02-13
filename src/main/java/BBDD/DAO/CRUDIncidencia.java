@@ -7,10 +7,7 @@ import BBDD.Excepciones.AulaNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CRUDIncidencia {
 
@@ -61,7 +58,7 @@ public class CRUDIncidencia {
         //System.out.println(a.getReferencia());
 
         for (Incidencia incidencia : getAllIncidencias()) {
-             if (incidencia.getIdAula().getReferencia().equals(a.getReferencia())){
+             if (incidencia.getReferencia().getReferencia().equals(a.getReferencia())){
                  incidencias++;
              }
         }
@@ -74,7 +71,7 @@ public class CRUDIncidencia {
         Aula a = crudAula.getbyReferencia(referencia);
 
         for (Incidencia i : getAllIncidencias()) {
-            if (incidencia.getIdAula().equals(a.getId())){
+            if (incidencia.getReferencia().getReferencia().equals(a.getReferencia())){
                 incidencia = i;
             }
         }
@@ -82,9 +79,9 @@ public class CRUDIncidencia {
     }
 
     public Set<String> getAulasIncidencias() throws AulaNotFoundException {
-        Set<String> aulas = new HashSet<>();
+        Set<String> aulas = new LinkedHashSet<>();
         for (Incidencia incidencia : getAllIncidencias()) {
-            aulas.add(incidencia.getIdAula().getReferencia());
+            aulas.add(incidencia.getReferencia().getReferencia());
         }
         return aulas;
     }

@@ -23,7 +23,7 @@ public class ControladorPantallaCarga implements Runnable{
             final int value = i;
             Platform.runLater(() -> progressBar.setProgress(value / 100.0)); // Se establece un valor máximo de 100
             try {
-                Thread.sleep(50); // El programa espera 0.05s para que la barra no se complete de golpe
+                Thread.sleep(1); // El programa espera 0.05s para que la barra no se complete de golpe
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

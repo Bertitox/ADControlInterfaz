@@ -2,17 +2,14 @@ package BBDD.DTO;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "aula")
 public class Aula {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
-
-    @Column(name = "referencia")
+    @Column(name = "referencia", nullable = false)
     private String referencia;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,14 +22,6 @@ public class Aula {
     public Aula(String referencia, InformacionSistema idInformacionSistema) {
         this.referencia = referencia;
         this.idInformacionSistema = idInformacionSistema;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getReferencia() {
@@ -53,7 +42,9 @@ public class Aula {
 
     @Override
     public String toString() {
-        return String.format(
-                "%s, %s, %s", id, referencia, idInformacionSistema.getId());
+        return "Aula{" +
+                "referencia='" + referencia + '\'' +
+                ", idInformacionSistema=" + idInformacionSistema.getId() +
+                '}';
     }
 }

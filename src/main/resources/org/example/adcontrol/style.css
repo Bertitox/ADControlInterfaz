@@ -3,3 +3,14 @@
 .custom-menu-buttom .arrow {
     -fx-background-color: white; /* Cambia el color de la flecha del menu button */
 }
+
+.chart-bar{
+    -fx-background-color:  #01a5e7;
+    -fx-background-radius: 5px 5px 0px 0px;
+}
+
+.data0.chart-bar {
+    -fx-background-color:  #01a5e7;
+    -fx-width:15px;
+}
+

@@ -84,7 +84,7 @@
                <children>
                   <BarChart fx:id="barChart" layoutX="-3.0" layoutY="5.0" prefHeight="310.0" prefWidth="893.0">
                      <xAxis>
-                        <CategoryAxis fx:id="xAxis" side="BOTTOM" />
+                        <CategoryAxis side="BOTTOM" fx:id="xAxis" />
                      </xAxis>
                      <yAxis>
                         <NumberAxis fx:id="yAxis" side="LEFT" />

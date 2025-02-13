@@ -19,8 +19,8 @@ public class Incidencia {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_aula", nullable = false)
-    private Aula idAula;
+    @JoinColumn(name = "referencia", nullable = false)
+    private Aula referencia;
 
     @Column(name = "codigo_error", nullable = false, length = 50)
     private String codigoError;
@@ -32,9 +32,9 @@ public class Incidencia {
     public Incidencia() {
     }
 
-    public Incidencia(InformacionSistema idInformacionSistema, Aula idAula, String codigoError, String descripcion) {
+    public Incidencia(InformacionSistema idInformacionSistema, Aula referencia, String codigoError, String descripcion) {
         this.idInformacionSistema = idInformacionSistema;
-        this.idAula = idAula;
+        this.referencia = referencia;
         this.codigoError = codigoError;
         this.descripcion = descripcion;
     }
@@ -55,12 +55,12 @@ public class Incidencia {
         this.idInformacionSistema = idInformacionSistema;
     }
 
-    public Aula getIdAula() {
-        return idAula;
+    public Aula getReferencia() {
+        return referencia;
     }
 
-    public void setIdAula(Aula idAula) {
-        this.idAula = idAula;
+    public void setReferencia(Aula referencia) {
+        this.referencia = referencia;
     }
 
     public String getCodigoError() {
@@ -84,7 +84,7 @@ public class Incidencia {
         return "Incidencia{" +
                 "id=" + id +
                 ", idInformacionSistema=" + idInformacionSistema.getId() +
-                ", idAula=" + idAula.getId() +
+                ", referencia=" + referencia.getReferencia() +
                 ", codigoError='" + codigoError + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
