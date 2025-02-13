@@ -179,6 +179,10 @@ public class ControladorApp implements Initializable {
         barChart.getData().add(serie);
     }
 
+    /**
+     * Evento que muestra al usuario una ventana de confirmación par salir o no de la app
+     * @param event Evento de pulsacion del botón
+     */
     public void salir(Event event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea salir?", ButtonType.YES, ButtonType.NO);
         alert.setTitle("Salir de ADControl");
