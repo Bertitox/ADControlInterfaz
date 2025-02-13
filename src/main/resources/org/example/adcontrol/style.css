@@ -9,8 +9,26 @@
     -fx-background-radius: 5px 5px 0px 0px;
 }
 
-.data0.chart-bar {
-    -fx-background-color:  #01a5e7;
-    -fx-width:15px;
+
+.chart-bar {
+    -fx-background-color: #01a5e7; /* Color */
+    -fx-background-radius: 5px 5px 0px 0px; /* Bordes redondos */
+    -fx-bar-width: 10px; /* Ancho base */
+    -fx-transition: all 1s; /* Leve transición */
 }
+
+.chart-bar:hover {
+    -fx-scale-x: 1.2; /* Cambia el ancho */
+    -fx-scale-y: 1.2; /* Cambia la altura */
+}
+
+
+.chart-content {
+    -fx-background-color: white; /* Cambia el color de fondo del gráfico */
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent; /* Elimina el fondo gris */
+}
+
 

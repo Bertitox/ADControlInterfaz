@@ -134,9 +134,18 @@ public class ControladorApp implements Initializable {
             datosGrafico.add(data);
         }
 
+        NumberAxis yAxis = (NumberAxis) barChart.getYAxis();
+        barChart.setLegendVisible(false);
+        yAxis.setTickUnit(1);
+        yAxis.setMinorTickCount(0);
+        yAxis.setMinorTickVisible(false);
+        yAxis.setTickMarkVisible(true);
+
         // Crear una serie de datos y añadir los datos al gráfico
         XYChart.Series<String, Number> serie = new XYChart.Series<>();
         serie.setData(datosGrafico);
+        barChart.setBarGap(500);
+        barChart.setCategoryGap(200);
 
         // Limpiar el gráfico y añadir la nueva serie de datos
         barChart.getData().clear();

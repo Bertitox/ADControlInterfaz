@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -82,13 +83,16 @@
          <children>
             <AnchorPane layoutX="45.0" layoutY="324.0" prefHeight="313.0" prefWidth="892.0">
                <children>
-                  <BarChart fx:id="barChart" layoutX="-3.0" layoutY="5.0" prefHeight="310.0" prefWidth="893.0">
+                  <BarChart fx:id="barChart" layoutX="-3.0" layoutY="5.0" prefHeight="310.0" prefWidth="893.0" style="-fx-background-color: white; -fx-border-color: #01a5e7; -fx-border-radius: 10px; -fx-background-radius: 10px;">
                      <xAxis>
                         <CategoryAxis side="BOTTOM" fx:id="xAxis" />
                      </xAxis>
                      <yAxis>
                         <NumberAxis fx:id="yAxis" side="LEFT" />
                      </yAxis>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </BarChart>
                </children>
             </AnchorPane>
@@ -110,7 +114,7 @@
                   </MenuButton>
                </children>
             </AnchorPane>
-            <Pane layoutX="512.0" layoutY="88.0" prefHeight="213.0" prefWidth="420.0" style="-fx-background-color: #6390cb; -fx-background-radius: 10px;" />
+            <Pane layoutX="512.0" layoutY="88.0" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: #6390cb; -fx-background-radius: 10px;" />
             <Pane layoutX="45.0" layoutY="88.0" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: #6390cb; -fx-background-radius: 10px;" />
          </children>
       </AnchorPane>
