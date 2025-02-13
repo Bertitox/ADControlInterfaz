@@ -26,7 +26,7 @@
                   <Image url="@ControlADWhite copia.png" />
                </image>
             </ImageView>
-            <Button fx:id="salirBoton" layoutX="7.0" layoutY="590.0" mnemonicParsing="false" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="62.0" prefWidth="65.0" style="-fx-background-color: null;">
+            <Button fx:id="salirBoton" layoutX="7.0" layoutY="590.0" mnemonicParsing="false" onAction="#salir" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="62.0" prefWidth="65.0" style="-fx-background-color: null;">
                <graphic>
                   
                      <ImageView fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">

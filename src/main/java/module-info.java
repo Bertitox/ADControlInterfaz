@@ -8,6 +8,7 @@ module org.example.adcontrol {
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
     requires com.google.gson;
+    requires java.desktop;
 
     opens org.example.adcontrol to javafx.fxml;
     opens BBDD.DTO to org.hibernate.orm.core;

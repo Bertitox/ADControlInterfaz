@@ -1,29 +1,30 @@
 package org.example.adcontrol;
 
-import BBDD.DAO.CRUDAula;
+
 import BBDD.DAO.CRUDIncidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -176,6 +177,18 @@ public class ControladorApp implements Initializable {
         // Limpiar el gráfico y añadir la nueva serie de datos
         barChart.getData().clear();
         barChart.getData().add(serie);
+    }
+
+    public void salir(Event event){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea salir?", ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Salir de ADControl");
+        alert.setHeaderText(null); // Elimina encabezado
+
+        // Mostrar el diálogo y esperar respuesta
+        if (alert.showAndWait().get() == ButtonType.YES) {
+            Platform.exit();
+            System.exit(0);
+        }
     }
 
 }
