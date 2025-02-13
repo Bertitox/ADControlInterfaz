@@ -32,40 +32,27 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 public class ControladorApp implements Initializable {
-
     @FXML
     private ImageView exitIcon;
-
     @FXML
     private MenuButton menuButton;
-
     @FXML
     private MenuItem action1;
-
     @FXML
     private MenuItem action2;
-
-    List<Button> botones;
-
     @FXML
     private Button ajustesBoton;
-
     @FXML
     private Button ayudaBoton;
-
     @FXML
     private Button homeBoton;
-
     @FXML
     private Button monitorBoton;
-
     @FXML
     private Button salirBoton;
-
     @FXML
     private Pane panel1;
 
-    boolean primeraCarga = true;
     //Campos del Gráfico de datos
     @FXML
     private BarChart<String, Number> barChart;
@@ -74,21 +61,27 @@ public class ControladorApp implements Initializable {
     @FXML
     private NumberAxis yAxis;
 
-    // Método para inicializar componentes
+    List<Button> botones;
+
+    /**
+     * Método que incializa la lista y se añaden los botones a esta
+     */
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() throws AulaNotFoundException {
         botones = new ArrayList<>();
         botones.add(ajustesBoton);
         botones.add(ayudaBoton);
         botones.add(homeBoton);
         botones.add(monitorBoton);
         botones.add(salirBoton);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("widget1.fxml"));
-        Parent contenido = loader.load();
-        panel1.getChildren().add(contenido);
+        //actualizarGrafico(); PROBAR SI FUNCIONA ESTO Y QUITANDO EL MÉTODO INITIALIZE DE ABAJO
     }
 
-    // Método para ser llamado cuando se desee actualizar el gráfico, como por ejemplo en un botón
+    /**
+     * Método que añade los datos al gráfico de barras
+     * @param location -------------------------------------------
+     * @param resources -------------------------------------------
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -99,6 +92,10 @@ public class ControladorApp implements Initializable {
         }
     }
 
+    /**
+     * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
+     * @param event Cuando se pasa el cursor por encima
+     */
     @FXML
     void hoverBoton(MouseEvent event) {
         Button boton = (Button) event.getSource();
@@ -110,7 +107,10 @@ public class ControladorApp implements Initializable {
         zoomIn.play();
     }
 
-
+    /**
+     * Método que define el estilo normal de los botones tras pasar el cursor por encima
+     * @param event Cuando el ratón no está por encima de algun boton
+     */
     @FXML
     void normalBoton(MouseEvent event) {
         Button boton = (Button) event.getSource();
@@ -122,8 +122,11 @@ public class ControladorApp implements Initializable {
         zoomIn.play();
     }
 
-
-
+    /**
+     *  Método que se encarga de cambiar la pantalla actual por la correspondiente al botón pulsado (pantalla de administradorS de equipos)
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void cambiarPantallaMonitor(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pantallaCarga.fxml"));
@@ -137,7 +140,10 @@ public class ControladorApp implements Initializable {
         stage.show();
     }
 
-    // Método que actualizará el gráfico
+    /**
+     * Método que rellenará los datos del gráfico de barras obteniendo la información de la BBDD
+     * @throws AulaNotFoundException Excepción personalizada que se mostrará si no se encuentra ningún aula
+     */
     public void actualizarGrafico() throws AulaNotFoundException {
         // Obtener las referencias de todas las aulas con incidencias
         CRUDIncidencia incidencia = new CRUDIncidencia();

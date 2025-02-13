@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class main extends Application {
+    /**
+     * Método que incia la aplicación del programa
+     * @param stage ----------------------------------
+     * @throws IOException Excepcion necesaria para el método load() de fxmlLoader
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(main.class.getResource("pantallaCarga.fxml"));
