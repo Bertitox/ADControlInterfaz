@@ -19,8 +19,6 @@ public class main extends Application {
         stage.setResizable(false);
         stage.show();
 
-
-
         // Asegurar que la interfaz ya está cargada antes de iniciar el hilo
         Platform.runLater(() -> {
             ControladorPantallaCarga controlador = fxmlLoader.getController();

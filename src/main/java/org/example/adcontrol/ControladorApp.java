@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
@@ -19,6 +20,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -60,6 +62,10 @@ public class ControladorApp implements Initializable {
     @FXML
     private Button salirBoton;
 
+    @FXML
+    private Pane panel1;
+
+    boolean primeraCarga = true;
     //Campos del Gráfico de datos
     @FXML
     private BarChart<String, Number> barChart;
@@ -70,13 +76,27 @@ public class ControladorApp implements Initializable {
 
     // Método para inicializar componentes
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         botones = new ArrayList<>();
         botones.add(ajustesBoton);
         botones.add(ayudaBoton);
         botones.add(homeBoton);
         botones.add(monitorBoton);
         botones.add(salirBoton);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("widget1.fxml"));
+        Parent contenido = loader.load();
+        panel1.getChildren().add(contenido);
+    }
+
+    // Método para ser llamado cuando se desee actualizar el gráfico, como por ejemplo en un botón
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            actualizarGrafico();  // Llamar al método para actualizar el gráfico al iniciar la app
+        } catch (AulaNotFoundException e) {
+            e.printStackTrace();
+            // Aquí podrías agregar algún manejo de errores, como mostrar un mensaje en la UI
+        }
     }
 
     @FXML
@@ -100,9 +120,9 @@ public class ControladorApp implements Initializable {
         zoomIn.setToY(1.0);  // 10% más grande en Y
         zoomIn.setDelay(Duration.millis(100)); // Pequeño delay
         zoomIn.play();
-
-
     }
+
+
 
     @FXML
     void cambiarPantallaMonitor(ActionEvent event) throws IOException {
@@ -150,17 +170,6 @@ public class ControladorApp implements Initializable {
         // Limpiar el gráfico y añadir la nueva serie de datos
         barChart.getData().clear();
         barChart.getData().add(serie);
-    }
-
-    // Método para ser llamado cuando se desee actualizar el gráfico, como por ejemplo en un botón
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        try {
-            actualizarGrafico();  // Llamar al método para actualizar el gráfico al iniciar la app
-        } catch (AulaNotFoundException e) {
-            e.printStackTrace();
-            // Aquí podrías agregar algún manejo de errores, como mostrar un mensaje en la UI
-        }
     }
 
 }

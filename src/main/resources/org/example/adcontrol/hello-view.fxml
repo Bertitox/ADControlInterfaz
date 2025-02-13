@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.effect.DropShadow?>
@@ -13,6 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorApp">
    <left>
@@ -83,7 +86,7 @@
          <children>
             <AnchorPane layoutX="45.0" layoutY="324.0" prefHeight="313.0" prefWidth="892.0">
                <children>
-                  <BarChart fx:id="barChart" layoutX="-3.0" layoutY="5.0" prefHeight="310.0" prefWidth="893.0" style="-fx-background-color: white; -fx-border-color: #01a5e7; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+                  <BarChart fx:id="barChart" layoutX="-3.0" layoutY="5.0" prefHeight="310.0" prefWidth="893.0" style="-fx-background-color: white; -fx-border-color: #01a5e7; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-border-width: 2px;">
                      <xAxis>
                         <CategoryAxis side="BOTTOM" fx:id="xAxis" />
                      </xAxis>
@@ -91,7 +94,7 @@
                         <NumberAxis fx:id="yAxis" side="LEFT" />
                      </yAxis>
                      <effect>
-                        <DropShadow />
+                        <DropShadow height="15.0" radius="7.0" width="15.0" />
                      </effect>
                   </BarChart>
                </children>
@@ -114,8 +117,84 @@
                   </MenuButton>
                </children>
             </AnchorPane>
-            <Pane layoutX="512.0" layoutY="88.0" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: #6390cb; -fx-background-radius: 10px;" />
-            <Pane layoutX="45.0" layoutY="88.0" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: #6390cb; -fx-background-radius: 10px;" />
+            <Pane layoutX="512.0" layoutY="88.0" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 1px; -fx-border-radius: 10px;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow height="15.0" radius="7.0" width="15.0" />
+               </effect>
+               <children>
+                  <Label layoutX="61.0" layoutY="21.0" text="Incidencias leves">
+                     <font>
+                        <Font name="System Bold" size="33.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="incidenciasLeves" layoutX="27.0" layoutY="22.0" text="5">
+                     <font>
+                        <Font name="System Bold" size="33.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="37.0" layoutY="85.0" text="Cambiar pilas a ratones y teclados">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="27.0" layoutY="163.0" text="Fecha:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="357.0" layoutY="23.0">
+                     <image>
+                        <Image url="@informacion.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="campoFecha1" layoutX="73.0" layoutY="163.0" prefHeight="18.0" prefWidth="90.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
+            <Pane fx:id="panel1" layoutX="45.0" layoutY="88.0" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: rgb(254,242,242); -fx-background-radius: 10px; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 10px;">
+               <children>
+                  <Label layoutX="51.0" layoutY="23.0" text="Incidencias graves">
+                     <font>
+                        <Font name="System Bold" size="33.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="29.0" layoutY="85.0" text="Error al inciar el sistema">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="40.0" layoutY="165.0" text="Fecha:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="campoFecha" layoutX="86.0" layoutY="165.0" prefHeight="18.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="358.0" layoutY="25.0">
+                     <image>
+                        <Image url="@advertencia-de-triangulo.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="incidenciasGraves" layoutX="19.0" layoutY="23.0" text="3">
+                     <font>
+                        <Font name="System Bold" size="33.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow height="15.0" radius="7.0" width="15.0" />
+               </effect></Pane>
          </children>
       </AnchorPane>
    </center>
