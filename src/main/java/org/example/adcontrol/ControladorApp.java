@@ -20,6 +20,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -104,7 +105,6 @@ public class ControladorApp implements Initializable {
         ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), boton);
         zoomIn.setToX(1.1);  // 10% más grande en X
         zoomIn.setToY(1.1);  // 10% más grande en Y
-        zoomIn.setDelay(Duration.millis(100)); // Pequeño delay
         zoomIn.play();
     }
 
@@ -119,9 +119,49 @@ public class ControladorApp implements Initializable {
         ScaleTransition zoomIn = new ScaleTransition(Duration.millis(150), boton);
         zoomIn.setToX(1.0);  // 10% más grande en X
         zoomIn.setToY(1.0);  // 10% más grande en Y
-        zoomIn.setDelay(Duration.millis(100)); // Pequeño delay
         zoomIn.play();
     }
+
+    @FXML
+    void zoomPane(MouseEvent event){
+        Pane pane = (Pane) event.getSource();
+        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
+
+        zoomIn.setToX(1.01);
+        zoomIn.setToY(1.01);
+        zoomIn.play();
+    }
+
+    @FXML
+    void quitarzoomPane(MouseEvent event){
+        Pane pane = (Pane) event.getSource();
+        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
+
+        zoomIn.setToX(1.0);
+        zoomIn.setToY(1.0);
+        zoomIn.play();
+    }
+
+    @FXML
+    void zoomBarChart(MouseEvent event){
+        BarChart barChart = (BarChart) event.getSource();
+        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), barChart);
+
+        zoomIn.setToX(1.01);
+        zoomIn.setToY(1.01);
+        zoomIn.play();
+    }
+
+    @FXML
+    void quitarzoomBarChart(MouseEvent event){
+        BarChart barChart = (BarChart) event.getSource();
+        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), barChart);
+
+        zoomIn.setToX(1.0);
+        zoomIn.setToY(1.0);
+        zoomIn.play();
+    }
+
 
     /**
      *  Método que se encarga de cambiar la pantalla actual por la correspondiente al botón pulsado (pantalla de administradorS de equipos)
