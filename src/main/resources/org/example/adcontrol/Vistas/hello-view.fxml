@@ -101,7 +101,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                <children>
-                  <MenuButton layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="68.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
+                  <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="46.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Español" />
                       <MenuItem mnemonicParsing="false" text="Englhis" />
@@ -117,7 +117,7 @@
                   </MenuButton>
                </children>
             </AnchorPane>
-            <Pane layoutX="512.0" layoutY="88.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 1px; -fx-border-radius: 10px;">
+            <Pane fx:id="pane2" layoutX="512.0" layoutY="88.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 1px; -fx-border-radius: 10px;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -125,29 +125,29 @@
                   <DropShadow height="15.0" radius="7.0" width="15.0" />
                </effect>
                <children>
-                  <Label layoutX="61.0" layoutY="21.0" text="Incidencias leves">
+                  <Label fx:id="labelAulasDisponibles" layoutX="48.0" layoutY="21.0" prefHeight="49.0" prefWidth="306.0" text="Aulas Disponibles">
                      <font>
                         <Font name="System Bold" size="33.0" />
                      </font>
                   </Label>
-                  <Label fx:id="incidenciasLeves" layoutX="27.0" layoutY="22.0" text="5">
+                  <Label fx:id="lblTituloUltimasIncidecias" layoutX="19.0" layoutY="21.0">
                      <font>
                         <Font name="System Bold" size="33.0" />
                      </font>
                   </Label>
-                  <Label layoutX="37.0" layoutY="85.0" text="Cambiar pilas a ratones y teclados">
+                  <Label fx:id="textAulasDisponibles" layoutX="37.0" layoutY="85.0" text="Aulas disponibles actualmente">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="27.0" layoutY="163.0" text="Fecha:">
+                  <Label fx:id="textFecha2" layoutX="27.0" layoutY="163.0" text="Fecha:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="357.0" layoutY="23.0">
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="353.0" layoutY="23.0">
                      <image>
-                        <Image url="@../Imagenes/informacion.png" />
+                        <Image url="@../Imagenes/Informacion.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="campoFecha1" layoutX="73.0" layoutY="163.0" prefHeight="18.0" prefWidth="90.0">
@@ -158,17 +158,17 @@
                </children></Pane>
             <Pane fx:id="panel1" layoutX="45.0" layoutY="88.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: rgb(254,242,242); -fx-background-radius: 10px; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 10px;">
                <children>
-                  <Label layoutX="51.0" layoutY="23.0" text="Incidencias graves">
+                  <Label fx:id="labelIncidencias" layoutX="51.0" layoutY="23.0" text="Incidencias graves">
                      <font>
                         <Font name="System Bold" size="33.0" />
                      </font>
                   </Label>
-                  <Label layoutX="29.0" layoutY="85.0" text="Error al inciar el sistema">
+                  <Label fx:id="textIncidenciasSistema" layoutX="29.0" layoutY="85.0" text="Incidencias totales del sistema">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="40.0" layoutY="165.0" text="Fecha:">
+                  <Label fx:id="textFecha1" layoutX="40.0" layoutY="165.0" text="Fecha:">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -178,12 +178,12 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="358.0" layoutY="25.0">
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="359.0" layoutY="25.0">
                      <image>
                         <Image url="@../Imagenes/advertencia-de-triangulo.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="incidenciasGraves" layoutX="19.0" layoutY="23.0" text="3">
+                  <Label fx:id="lblTituloGrave" layoutX="19.0" layoutY="23.0">
                      <font>
                         <Font name="System Bold" size="33.0" />
                      </font>

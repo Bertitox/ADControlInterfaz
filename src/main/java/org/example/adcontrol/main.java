@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Clase Main que lanza la app
+ * @author Daniel y Alberto
+ * @version 1.0
+ */
 public class main extends Application {
     /**
      * Método que incia la aplicación del programa
@@ -32,8 +37,10 @@ public class main extends Application {
         });
     }
 
-
-
+    /**
+     * Método main que lanza la aplicación
+     * @param args argumentos que recibe el método main
+     */
     public static void main(String[] args) {
         launch();
     }

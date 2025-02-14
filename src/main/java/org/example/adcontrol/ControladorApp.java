@@ -1,7 +1,9 @@
 package org.example.adcontrol;
 
 
+import BBDD.DAO.CRUDAula;
 import BBDD.DAO.CRUDIncidencia;
+import BBDD.DTO.Aula;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -28,10 +30,8 @@ import javafx.util.Duration;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 
 public class ControladorApp {//implements Initializable {
     @FXML
@@ -55,6 +55,12 @@ public class ControladorApp {//implements Initializable {
     @FXML
     private Pane panel1;
 
+    @FXML
+    private Label lblTituloGrave;
+
+    @FXML
+    private Label lblTituloUltimasIncidecias;
+
     //Campos del Gráfico de datos
     @FXML
     private BarChart<String, Number> barChart;
@@ -63,9 +69,29 @@ public class ControladorApp {//implements Initializable {
     @FXML
     private NumberAxis yAxis;
 
+    @FXML
+    private Label campoFecha;
+
+    @FXML
+    private Label campoFecha1;
+
     List<Button> botones;
 
     Boolean isInHome = true;
+
+    //Elementos a traducir
+    @FXML
+    private Label labelIncidencias;
+    @FXML
+    private Label labelAulasDisponibles;
+    @FXML
+    private Label textIncidenciasSistema;
+    @FXML
+    private Label textAulasDisponibles;
+    @FXML
+    private Label textFecha1;
+    @FXML
+    private Label textFecha2;
 
     /**
      * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
@@ -79,6 +105,11 @@ public class ControladorApp {//implements Initializable {
         botones.add(monitorBoton);
         botones.add(salirBoton);
         Platform.runLater(() -> {
+            CRUDIncidencia incidencia = new CRUDIncidencia();
+            CRUDAula aula = new CRUDAula();
+            actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
+            campoFecha.setText(LocalDate.now().toString());
+            campoFecha1.setText(LocalDate.now().toString());
             try {
                 actualizarGrafico();
             }catch (Exception e){
@@ -86,6 +117,40 @@ public class ControladorApp {//implements Initializable {
         });
 
     }
+
+    //Cargar idiomas
+    // Método para cambiar el idioma
+    public void cambiarIdioma(String idioma) {
+        Locale locale;
+        switch (idioma) {
+            case "en":
+                locale = new Locale("en", "US");
+                break;
+            case "fr":
+                locale = new Locale("fr", "FR");
+                break;
+            case "es":
+            default:
+                locale = new Locale("es", "ES");
+                break;
+        }
+        ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+        labelIncidencias.setText(bundle.getString("labelIncidencias"));
+        labelAulasDisponibles.setText(bundle.getString("labelAulasDisponibles"));
+        textIncidenciasSistema.setText(bundle.getString("textIncidenciasSistema"));
+        textAulasDisponibles.setText(bundle.getString("textAulasDisponibles"));
+        textFecha1.setText(bundle.getString("textFecha1"));
+        textFecha2.setText(bundle.getString("textFecha2"));
+    }
+
+
+    //Método para actualizar el número de incidencias
+    @FXML
+    public void actualizarIncidencias(int incidenciasGraves, int incidenciasLeves) {
+        lblTituloGrave.setText(incidenciasGraves+"");
+        lblTituloUltimasIncidecias.setText(incidenciasLeves+"");
+    }
+
 
     /**
      * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
@@ -253,7 +318,7 @@ public class ControladorApp {//implements Initializable {
         XYChart.Series<String, Number> serie = new XYChart.Series<>();
         serie.setData(datosGrafico);
         barChart.setBarGap(500);
-        barChart.setCategoryGap(200);
+        barChart.setCategoryGap(100);
 
         // Limpiar el gráfico y añadir la nueva serie de datos
         barChart.getData().clear();

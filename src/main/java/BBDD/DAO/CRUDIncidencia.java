@@ -133,6 +133,14 @@ public class CRUDIncidencia {
     }
 
     /**
+     * Método que se ecarga de recontar las incidencias
+     * @return Retorna un int número de incidencias
+     */
+    public int numIncidencias() {
+        return getAllIncidencias().size();
+    }
+
+    /**
      * Método que muestra las Aulas con incidencias
      * @throws AulaNotFoundException excepción personalizada que se lanza cuando no existe el aula
      */
