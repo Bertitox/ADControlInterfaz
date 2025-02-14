@@ -65,37 +65,31 @@ public class ControladorApp {//implements Initializable {
 
     List<Button> botones;
 
+    Boolean isInHome = true;
+
     /**
-     * Método que incializa la lista y se añaden los botones a esta
+     * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
      */
     @FXML
-    public void initialize() throws AulaNotFoundException {
+    public void initialize() {
         botones = new ArrayList<>();
         botones.add(ajustesBoton);
         botones.add(ayudaBoton);
         botones.add(homeBoton);
         botones.add(monitorBoton);
         botones.add(salirBoton);
-        actualizarGrafico(); //PROBAR SI FUNCIONA ESTO Y QUITANDO EL MÉTODO INITIALIZE DE ABAJO
-    }
+        Platform.runLater(() -> {
+            try {
+                actualizarGrafico();
+            }catch (Exception e){
+            }
+        });
 
-  /*  *//**
-     * Método que añade los datos al gráfico de barras
-     * @param location -------------------------------------------
-     * @param resources -------------------------------------------
-     *//*
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        try {
-            actualizarGrafico();  // Llamar al método para actualizar el gráfico al iniciar la app
-        } catch (AulaNotFoundException e) {
-            e.printStackTrace();
-            // Aquí podrías agregar algún manejo de errores, como mostrar un mensaje en la UI
-        }
-    }*/
+    }
 
     /**
      * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
+     *
      * @param event Cuando se pasa el cursor por encima
      */
     @FXML
@@ -110,6 +104,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Método que define el estilo normal de los botones tras pasar el cursor por encima
+     *
      * @param event Cuando el ratón no está por encima de algun boton
      */
     @FXML
@@ -123,7 +118,7 @@ public class ControladorApp {//implements Initializable {
     }
 
     @FXML
-    void zoomPane(MouseEvent event){
+    void zoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
         ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
 
@@ -133,7 +128,7 @@ public class ControladorApp {//implements Initializable {
     }
 
     @FXML
-    void quitarzoomPane(MouseEvent event){
+    void quitarzoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
         ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
 
@@ -143,7 +138,7 @@ public class ControladorApp {//implements Initializable {
     }
 
     @FXML
-    void zoomBarChart(MouseEvent event){
+    void zoomBarChart(MouseEvent event) {
         BarChart barChart = (BarChart) event.getSource();
         ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), barChart);
 
@@ -153,7 +148,7 @@ public class ControladorApp {//implements Initializable {
     }
 
     @FXML
-    void quitarzoomBarChart(MouseEvent event){
+    void quitarzoomBarChart(MouseEvent event) {
         BarChart barChart = (BarChart) event.getSource();
         ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), barChart);
 
@@ -164,13 +159,58 @@ public class ControladorApp {//implements Initializable {
 
 
     /**
-     *  Método que se encarga de cambiar la pantalla actual por la correspondiente al botón pulsado (pantalla de administradorS de equipos)
+     * Método que se encarga de cambiar la pantalla actual por la correspondiente al botón pulsado (pantalla de administradorS de equipos)
+     *
      * @param event
      * @throws IOException
      */
     @FXML
     void cambiarPantallaMonitor(ActionEvent event) throws IOException {
+        this.isInHome = false;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("vistaIncidencias.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        stage.setResizable(false);
+        stage.setTitle("Pagina principal");
+        stage.show();
+    }
+
+    @FXML
+    void cambiarPantallaHome(ActionEvent event) throws IOException {
+        this.isInHome = true;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        stage.setResizable(false);
+        stage.setTitle("Pagina principal");
+        stage.show();
+    }
+
+
+    @FXML
+    void cambiarpantallaAyuda(ActionEvent event) throws IOException {
+        this.isInHome = false;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("vistaAyuda.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        stage.setResizable(false);
+        stage.setTitle("Pagina principal");
+        stage.show();
+    }
+
+    @FXML
+    void cambiarpantallaConfig(ActionEvent event) throws IOException {
+        this.isInHome = false;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("vistaConfiguracion.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ajustesBoton.getScene().getWindow();
         Scene scene = new Scene(root);
@@ -183,6 +223,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Método que rellenará los datos del gráfico de barras obteniendo la información de la BBDD
+     *
      * @throws AulaNotFoundException Excepción personalizada que se mostrará si no se encuentra ningún aula
      */
     public void actualizarGrafico() throws AulaNotFoundException {
@@ -221,9 +262,10 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Evento que muestra al usuario una ventana de confirmación par salir o no de la app
+     *
      * @param event Evento de pulsacion del botón
      */
-    public void salir(Event event){
+    public void salir(Event event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea salir?", ButtonType.YES, ButtonType.NO);
         alert.setTitle("Salir de ADControl");
         alert.setHeaderText(null); // Elimina encabezado
