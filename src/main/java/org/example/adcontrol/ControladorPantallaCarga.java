@@ -21,14 +21,12 @@ public class ControladorPantallaCarga implements Runnable{
      */
     @Override
     public void run() {
-        //AQUÍ TENDRÍA QUE ESTAR EL MÉTODO QUE RELLENA LOS DATOS DEL GRÁFICO (actualizarGrafico())
-        //****************************************************************************************//
         progressBar.setStyle("-fx-accent: #01a5e7;");
         for (int i = 0; i <= 100; i++) {
             final int value = i;
             Platform.runLater(() -> progressBar.setProgress(value / 100.0));
             try {
-                Thread.sleep(1); // Espera 0.05s para que la barra no se complete de golpe
+                Thread.sleep(50); // Espera 0.05s para que la barra no se complete de golpe
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
