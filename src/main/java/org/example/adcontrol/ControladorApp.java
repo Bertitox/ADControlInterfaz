@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class ControladorApp implements Initializable {
+public class ControladorApp {//implements Initializable {
     @FXML
     private ImageView exitIcon;
     @FXML
@@ -76,14 +76,14 @@ public class ControladorApp implements Initializable {
         botones.add(homeBoton);
         botones.add(monitorBoton);
         botones.add(salirBoton);
-        //actualizarGrafico(); PROBAR SI FUNCIONA ESTO Y QUITANDO EL MÉTODO INITIALIZE DE ABAJO
+        actualizarGrafico(); //PROBAR SI FUNCIONA ESTO Y QUITANDO EL MÉTODO INITIALIZE DE ABAJO
     }
 
-    /**
+  /*  *//**
      * Método que añade los datos al gráfico de barras
      * @param location -------------------------------------------
      * @param resources -------------------------------------------
-     */
+     *//*
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -92,7 +92,7 @@ public class ControladorApp implements Initializable {
             e.printStackTrace();
             // Aquí podrías agregar algún manejo de errores, como mostrar un mensaje en la UI
         }
-    }
+    }*/
 
     /**
      * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
@@ -170,7 +170,7 @@ public class ControladorApp implements Initializable {
      */
     @FXML
     void cambiarPantallaMonitor(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pantallaCarga.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("vistaIncidencias.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ajustesBoton.getScene().getWindow();
         Scene scene = new Scene(root);
