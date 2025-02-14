@@ -75,7 +75,7 @@
         </AnchorPane>
     </left>
     <center>
-        <AnchorPane prefHeight="664.0" prefWidth="936.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="664.0" prefWidth="936.0" style="-fx-background-color:  rgb(241,245,246);" BorderPane.alignment="CENTER">
             <children>
                 <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
