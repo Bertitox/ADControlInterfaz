@@ -5,11 +5,19 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
+/**
+ * Clase conexión a la BBDD
+ * @author Alberto y Daniel
+ * @version 1.0
+ */
 public class Conexion {
         EntityManagerFactory factoria;
         EntityManager gestor;
         EntityTransaction transaccion;
 
+        /**
+         *
+         */
         public Conexion() {
             factoria = Persistence.createEntityManagerFactory("miPersistencia");
             gestor = factoria.createEntityManager();
