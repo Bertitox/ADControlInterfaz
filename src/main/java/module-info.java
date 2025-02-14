@@ -12,6 +12,7 @@ module org.example.adcontrol {
     requires org.hibernate.orm.core;
     requires com.google.gson;
     requires java.desktop;
+    requires javafx.media;
 
     opens org.example.adcontrol to javafx.fxml;
     opens BBDD.DTO to org.hibernate.orm.core;

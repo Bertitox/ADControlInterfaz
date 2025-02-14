@@ -17,7 +17,7 @@ public class main extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(main.class.getResource("pantallaCarga.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(main.class.getResource("Vistas/pantallaCarga.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("ADControl");
         stage.setScene(scene);

@@ -16,7 +16,7 @@
             <children>
                 <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@ControlADWhite copia.png" />
+                        <Image url="@../Imagenes/ControlADWhite copia.png" />
                     </image>
                 </ImageView>
                 <Button fx:id="salirBoton" layoutX="7.0" layoutY="590.0" mnemonicParsing="false" onAction="#salir" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="62.0" prefWidth="65.0" style="-fx-background-color: null;">
@@ -24,7 +24,7 @@
 
                         <ImageView fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@salida.png" />
+                                <Image url="@../Imagenes/salida.png" />
                             </image>
                         </ImageView>
                     </graphic></Button>
@@ -33,7 +33,7 @@
 
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@hogar.png" />
+                                <Image url="@../Imagenes/hogar.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -42,16 +42,16 @@
                     <graphic>
                         <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@interrogatorio.png" />
+                                <Image url="@../Imagenes/interrogatorio.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="ajustesBoton" layoutX="11.0" layoutY="404.0" mnemonicParsing="false" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+                <Button fx:id="ajustesBoton" layoutX="11.0" layoutY="404.0" mnemonicParsing="false" onAction="#cambiarpantallaConfig" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@ajustes.png" />
+                                <Image url="@../Imagenes/ajustes.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -60,7 +60,7 @@
                     <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@monitor.png" />
+                                <Image url="@../Imagenes/monitor.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -89,14 +89,14 @@
                             <graphic>
                                 <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@idioma3.png" />
+                                        <Image url="@../Imagenes/idioma3.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
                         </MenuButton>
                     </children>
                 </AnchorPane>
-            <Label layoutX="250.0" layoutY="199.0" text="config" />
+            <Label layoutX="243.0" layoutY="201.0" text="ayuda" />
             </children>
         </AnchorPane>
     </center>

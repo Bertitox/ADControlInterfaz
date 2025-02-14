@@ -23,7 +23,7 @@
          <children>
             <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@ControlADWhite copia.png" />
+                  <Image url="@../Imagenes/ControlADWhite copia.png" />
                </image>
             </ImageView>
             <Button fx:id="salirBoton" layoutX="7.0" layoutY="590.0" mnemonicParsing="false" onAction="#salir" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="62.0" prefWidth="65.0" style="-fx-background-color: null;">
@@ -31,7 +31,7 @@
                   
                      <ImageView fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@salida.png" />
+                           <Image url="@../Imagenes/salida.png" />
                         </image>
                      </ImageView>
                </graphic></Button>
@@ -40,7 +40,7 @@
       
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@hogar.png" />
+                        <Image url="@../Imagenes/hogar.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -49,7 +49,7 @@
                <graphic>
                   <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@interrogatorio.png" />
+                        <Image url="@../Imagenes/interrogatorio.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -58,7 +58,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@ajustes.png" />
+                        <Image url="@../Imagenes/ajustes.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -67,7 +67,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@monitor.png" />
+                        <Image url="@../Imagenes/monitor.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -110,7 +110,7 @@
                      <graphic>
                         <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@idioma3.png" />
+                              <Image url="@../Imagenes/idioma3.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -147,7 +147,7 @@
                   </Label>
                   <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="357.0" layoutY="23.0">
                      <image>
-                        <Image url="@informacion.png" />
+                        <Image url="@../Imagenes/informacion.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="campoFecha1" layoutX="73.0" layoutY="163.0" prefHeight="18.0" prefWidth="90.0">
@@ -180,7 +180,7 @@
                   </Label>
                   <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="358.0" layoutY="25.0">
                      <image>
-                        <Image url="@advertencia-de-triangulo.png" />
+                        <Image url="@../Imagenes/advertencia-de-triangulo.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="incidenciasGraves" layoutX="19.0" layoutY="23.0" text="3">

@@ -28,7 +28,7 @@
     <children>
         <ImageView GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
             <image>
-                <Image url="@477.gif" />
+                <Image url="@../Imagenes/477.gif" />
             </image>
         </ImageView>
         <ProgressBar fx:id="progressBar" layoutX="72.0" layoutY="373.0" prefHeight="20.0" prefWidth="298.0" style="-fx-border-radius: 5px; -fx-background-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
@@ -41,18 +41,18 @@
                 <Font name="Roboto Bold" size="24.0" />
             </font>
         </Label>
-      <ImageView fitHeight="132.0" fitWidth="600.0" GridPane.rowIndex="5">
-         <image>
-            <Image url="@wave.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="132.0" fitWidth="600.0" rotate="180.0">
-         <image>
-            <Image url="@wave1.png" />
-         </image>
-         <GridPane.margin>
-            <Insets top="30.0" />
-         </GridPane.margin>
-      </ImageView>
+        <ImageView fitHeight="132.0" fitWidth="600.0" GridPane.rowIndex="5">
+            <image>
+                <Image url="@../Imagenes/wave.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="132.0" fitWidth="600.0" rotate="180.0">
+            <image>
+                <Image url="@../Imagenes/wave1.png" />
+            </image>
+            <GridPane.margin>
+                <Insets top="30.0" />
+            </GridPane.margin>
+        </ImageView>
     </children>
 </GridPane>

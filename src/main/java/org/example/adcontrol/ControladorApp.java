@@ -167,7 +167,7 @@ public class ControladorApp {//implements Initializable {
     @FXML
     void cambiarPantallaMonitor(ActionEvent event) throws IOException {
         this.isInHome = false;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("vistaIncidencias.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaIncidencias.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ajustesBoton.getScene().getWindow();
         Scene scene = new Scene(root);
@@ -181,7 +181,7 @@ public class ControladorApp {//implements Initializable {
     @FXML
     void cambiarPantallaHome(ActionEvent event) throws IOException {
         this.isInHome = true;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/hello-view.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ajustesBoton.getScene().getWindow();
         Scene scene = new Scene(root);
@@ -196,7 +196,7 @@ public class ControladorApp {//implements Initializable {
     @FXML
     void cambiarpantallaAyuda(ActionEvent event) throws IOException {
         this.isInHome = false;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("vistaAyuda.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAyuda.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ajustesBoton.getScene().getWindow();
         Scene scene = new Scene(root);
@@ -210,7 +210,7 @@ public class ControladorApp {//implements Initializable {
     @FXML
     void cambiarpantallaConfig(ActionEvent event) throws IOException {
         this.isInHome = false;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("vistaConfiguracion.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaConfiguracion.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ajustesBoton.getScene().getWindow();
         Scene scene = new Scene(root);

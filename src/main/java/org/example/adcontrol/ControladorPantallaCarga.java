@@ -4,15 +4,22 @@ import BBDD.Excepciones.AulaNotFoundException;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ControladorPantallaCarga implements Runnable{
+public class ControladorPantallaCarga implements Runnable {
     @FXML
     ProgressBar progressBar;
 
@@ -47,7 +54,7 @@ public class ControladorPantallaCarga implements Runnable{
      */
     @FXML
     public void primeraVentana() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/hello-view.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) progressBar.getScene().getWindow();
         Scene scene = new Scene(root);
