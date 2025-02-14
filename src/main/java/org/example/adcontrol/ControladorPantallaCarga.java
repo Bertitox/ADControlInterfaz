@@ -21,7 +21,7 @@ public class ControladorPantallaCarga implements Runnable{
      */
     @Override
     public void run() {
-        progressBar.setStyle("-fx-accent: #01a5e7;");
+        //progressBar.setStyle("-fx-accent: #01a5e7;");
         for (int i = 0; i <= 100; i++) {
             final int value = i;
             Platform.runLater(() -> progressBar.setProgress(value / 100.0));

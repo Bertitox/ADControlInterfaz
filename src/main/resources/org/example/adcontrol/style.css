@@ -14,12 +14,12 @@
     -fx-background-color: #01a5e7; /* Color de las barras del gráfico */
     -fx-background-radius: 5px 5px 0px 0px; /* Bordes redondos */
     -fx-bar-width: 10px; /* Ancho base */
-    -fx-transition: all 1s; /* Transición */
+
 }
 
 .chart-bar:hover {
-    -fx-scale-x: 1.2; /* Cambia el ancho */
-    -fx-scale-y: 1.2; /* Cambia la altura */
+    -fx-scale-x: 1.05; /* Cambia el ancho */
+    -fx-scale-y: 1.05; /* Cambia la altura */
 }
 
 

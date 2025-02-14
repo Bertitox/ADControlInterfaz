@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.effect.Reflection?>
@@ -30,7 +31,7 @@
                 <Image url="@477.gif" />
             </image>
         </ImageView>
-        <ProgressBar fx:id="progressBar" layoutX="72.0" layoutY="373.0" prefHeight="20.0" prefWidth="309.0" progress="1.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+        <ProgressBar fx:id="progressBar" layoutX="72.0" layoutY="373.0" prefHeight="20.0" prefWidth="298.0" style="-fx-border-radius: 5px; -fx-background-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
             <effect>
                 <Reflection />
             </effect>
@@ -40,5 +41,18 @@
                 <Font name="Roboto Bold" size="24.0" />
             </font>
         </Label>
+      <ImageView fitHeight="132.0" fitWidth="600.0" GridPane.rowIndex="5">
+         <image>
+            <Image url="@wave.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="132.0" fitWidth="600.0" rotate="180.0">
+         <image>
+            <Image url="@wave1.png" />
+         </image>
+         <GridPane.margin>
+            <Insets top="30.0" />
+         </GridPane.margin>
+      </ImageView>
     </children>
 </GridPane>
