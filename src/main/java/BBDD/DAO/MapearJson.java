@@ -15,6 +15,12 @@ import java.time.LocalTime;
  * @version 1.0
  */
 public class MapearJson {
+
+    /**
+     * Método que se encarga de mapear el json y convertirlo en una entidad de {@link InformacionSistema}
+     * @param jsonFilePath recibe el String del JSon
+     * @return retorna una instancia de la clase {@link InformacionSistema}
+     */
     public static InformacionSistema mapJsonToEntity(String jsonFilePath) {
         Gson gson = new Gson();
         try (FileReader reader = new FileReader("src/main/java/BBDD/DAO/System_info.json")) {
@@ -41,6 +47,11 @@ public class MapearJson {
         }
     }
 
+
+    /**
+     * Método main que prueba el mapeo del Json
+     * @param args argumentos que se le pasa al método main
+     */
     public static void main(String[] args) {
         InformacionSistema info = mapJsonToEntity("src/main/java/JPA/GESTION_BBDD/DAO/System_info.json");
         if (info != null) {

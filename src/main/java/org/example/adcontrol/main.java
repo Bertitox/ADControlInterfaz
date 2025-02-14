@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Clase main que inicia la app de ADControl
+ * @version 1.0
+ * @author Daniel y Alberto
+ */
 public class main extends Application {
     /**
      * Método que incia la aplicación del programa
@@ -33,7 +38,10 @@ public class main extends Application {
     }
 
 
-
+    /**
+     * Método main
+     * @param args argumentos que se pasan al main
+     */
     public static void main(String[] args) {
         launch();
     }
