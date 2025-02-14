@@ -11,10 +11,10 @@
 
 
 .chart-bar {
-    -fx-background-color: #01a5e7; /* Color */
+    -fx-background-color: #01a5e7; /* Color de las barras del gráfico */
     -fx-background-radius: 5px 5px 0px 0px; /* Bordes redondos */
     -fx-bar-width: 10px; /* Ancho base */
-    -fx-transition: all 1s; /* Leve transición */
+    -fx-transition: all 1s; /* Transición */
 }
 
 .chart-bar:hover {
@@ -24,11 +24,11 @@
 
 
 .chart-content {
-    -fx-background-color: white; /* Cambia el color de fondo del gráfico */
+    -fx-background-color: white; /* Propiedad que cambia el color de fondo del gráfico */
 }
 
 .chart-plot-background {
-    -fx-background-color: transparent; /* Elimina el fondo gris */
+    -fx-background-color: transparent; /* Elimina fondo gris del chart */
 }
 
 
