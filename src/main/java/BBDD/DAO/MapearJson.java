@@ -9,7 +9,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+/**
+ * La clase MapearJson que sirve para gestionar el JSON.
+ * @author Daniel y Alberto
+ * @version 1.0
+ */
 public class MapearJson {
     public static InformacionSistema mapJsonToEntity(String jsonFilePath) {
         Gson gson = new Gson();

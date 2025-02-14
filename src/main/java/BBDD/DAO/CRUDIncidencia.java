@@ -9,35 +9,59 @@ import jakarta.persistence.EntityTransaction;
 
 import java.util.*;
 
+/**
+ * Clase {@link CRUDIncidencia} que se encarga de realizar las operaciones básicas para gestionar incidencias
+ * @author Alberto y Daniel
+ * @version 1.0
+ */
+
 public class CRUDIncidencia {
 
+    //Objetos necesarios para realizar la conexión a la BBDD
     Conexion conexion = new Conexion();
-
-    // Aquí obtienes el EntityManager desde la clase CONEXION
     EntityManager em = conexion.getGestor();
     EntityTransaction transaction = em.getTransaction();
 
+    /**
+     * Constructor por defecto de la clase {@link CRUDIncidencia}
+     */
     public CRUDIncidencia() {
     }
 
+    /**
+     * Método que se encarga de insertar una nueva {@link Incidencia}
+     * @param incidencia Representa una {@link Incidencia}
+     */
     public void insertIncidencia(Incidencia incidencia) {
         em.getTransaction().begin();
         em.persist(incidencia);
         em.getTransaction().commit();
     }
 
+    /**
+     * Método que se encarga de actualizar cada {@link Incidencia}
+     * @param incidencia Representa una {@link Incidencia}
+     */
     public void updateIncidencia(Incidencia incidencia) {
         em.getTransaction().begin();
         em.merge(incidencia);
         em.getTransaction().commit();
     }
 
+    /**
+     * Método que se encarga de eleminar cada {@link Incidencia}
+     * @param incidencia Representa una {@link Incidencia}
+     */
     public void deleteIncidencia(Incidencia incidencia) {
         em.getTransaction().begin();
         em.remove(incidencia);
         em.getTransaction().commit();
     }
 
+    /**
+     * Método que retorna todas las incidencias
+     * @return devuelve una List<Incidencia>
+     */
     public List<Incidencia> getAllIncidencias() {
         List<Incidencia> incidencias;
         String consulta = "Select incidencia from Incidencia incidencia";
@@ -45,12 +69,21 @@ public class CRUDIncidencia {
         return incidencias;
     }
 
+    /**
+     * Método que muestra todas las incidencias de la BBDD
+     */
     public void mostrarIncidencias(){
         for (Incidencia incidencia : getAllIncidencias()) {
             System.out.println(incidencia);
         }
     }
 
+    /**
+     * Método que se encarga de contar el número de incidencias que existen por {@link Aula}
+     * @param referencia Referencia a un {@link Aula}
+     * @return retorna un entero que contiene el número de incidencias por aula
+     * @throws AulaNotFoundException excepción personalizada que se lanza cuando no existe el aula
+     */
     public int getNumIncidenciasAulas(String referencia) throws AulaNotFoundException {
         int incidencias = 0;
         CRUDAula crudAula = new CRUDAula();
@@ -65,19 +98,32 @@ public class CRUDIncidencia {
         return incidencias;
     }
 
-    public Incidencia getIncidenciasAulas(String referencia) throws AulaNotFoundException {
-        Incidencia incidencia = new Incidencia();
+    /**
+     * Método que retorna una lList<Incidencia> por {@link Aula}
+     *
+     * @param referencia referencia a un {@link Aula}
+     * @return retorna una List<Incidencia>
+     * @throws AulaNotFoundException excepción personalizada que se lanza cuando no existe el aula
+     */
+    public List<Incidencia> getIncidenciasAulas(String referencia) throws AulaNotFoundException {
+        List<Incidencia> incidencias = new ArrayList<>();
         CRUDAula crudAula = new CRUDAula();
         Aula a = crudAula.getbyReferencia(referencia);
 
         for (Incidencia i : getAllIncidencias()) {
-            if (incidencia.getReferencia().getReferencia().equals(a.getReferencia())){
-                incidencia = i;
+            if (i.getReferencia().getReferencia().equals(a.getReferencia())){
+                incidencias.add(i);
             }
         }
-        return incidencia;
+        return incidencias;
     }
 
+    /**
+     * Método que retorna un conjunto formado por String's que representan el nombre de las aulas con incidencias
+     *
+     * @return Set<String> con el nombre de las aulas que tiene incidencias
+     * @throws AulaNotFoundException excepción personalizada que se lanza cuando no existe el aula
+     */
     public Set<String> getAulasIncidencias() throws AulaNotFoundException {
         Set<String> aulas = new LinkedHashSet<>();
         for (Incidencia incidencia : getAllIncidencias()) {
@@ -86,15 +132,13 @@ public class CRUDIncidencia {
         return aulas;
     }
 
+    /**
+     * Método que muestra las Aulas con incidencias
+     * @throws AulaNotFoundException excepción personalizada que se lanza cuando no existe el aula
+     */
     public void mostrarAulasIncidencias() throws AulaNotFoundException {
         for (String s : getAulasIncidencias()){
             System.out.println(s);
         }
-    }
-
-    public static void main(String[] args) throws AulaNotFoundException {
-        CRUDIncidencia crudIncidencia = new CRUDIncidencia();
-        //System.out.println(crudIncidencia.getNumIncidenciasAulas("PRUEBA3"));
-        //crudIncidencia.mostrarAulasIncidencias();
     }
 }

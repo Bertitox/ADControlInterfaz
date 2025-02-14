@@ -1,3 +1,6 @@
+/**
+ * Módulo que contiene toda la información que requiere el proyecto ADControlInterfaz
+ */
 module org.example.adcontrol {
     requires javafx.controls;
     requires javafx.fxml;
