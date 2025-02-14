@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class ControladorApp implements Runnable{
+public class ControladorApp {//implements Initializable {
     @FXML
     private ImageView exitIcon;
     @FXML
@@ -78,7 +78,13 @@ public class ControladorApp implements Runnable{
         botones.add(homeBoton);
         botones.add(monitorBoton);
         botones.add(salirBoton);
-        //actualizarGrafico();
+        Platform.runLater(() -> {
+            try {
+                actualizarGrafico();
+            }catch (Exception e){
+            }
+        });
+
     }
 
     /**
@@ -271,12 +277,4 @@ public class ControladorApp implements Runnable{
         }
     }
 
-    @Override
-    public void run() {
-        try {
-            actualizarGrafico();
-        } catch (AulaNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
