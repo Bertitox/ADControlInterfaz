@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -28,6 +29,8 @@ import java.util.Set;
 public class ControladorPantallaCarga implements Runnable {
     @FXML
     ProgressBar progressBar;
+    @FXML
+    Label textoCarga;
 
 /*    *//**
      * Método encargado de poner el color a la barra de progreso y de hacer que aumente cada 50 milisegundos
@@ -59,54 +62,49 @@ public class ControladorPantallaCarga implements Runnable {
     @Override
     public void run() {
         try {
-            Platform.runLater(() -> progressBar.setProgress(0));
+            actualizarTexto("Iniciando carga de la aplicación...");
 
-            // Paso 1: Inicializar conexión con la BBDD
-            CRUDIncidencia incidencia = new CRUDIncidencia();
-            CRUDAula aula = new CRUDAula();
-            Thread.sleep(500); // Simulación de carga inicial
-            Platform.runLater(() -> progressBar.setProgress(0.2));
+            for (int i = 0; i <= 100; i++) {
+                final int value = i;
+                Platform.runLater(() -> progressBar.setProgress(value / 100.0));
 
-            // Paso 2: Obtener número de incidencias y aulas
-            int numIncidencias = incidencia.numIncidencias();
-            int numAulas = aula.readAllAulas().size();
-            Thread.sleep(500);
-            Platform.runLater(() -> progressBar.setProgress(0.4));
+                // Informar al usuario en diferentes puntos de la carga
+                if (i == 10) actualizarTexto("Conectando a la base de datos...");
+                if (i == 30) actualizarTexto("Cargando datos de las incidencias...");
+                if (i == 60) {
+                    cargarDatosBBDD();  // Aquí cargamos la información de la base de datos
+                    actualizarTexto("Datos cargados correctamente.");
+                }
+                if (i == 80) actualizarTexto("Aplicando configuraciones...");
+                if (i == 100) actualizarTexto("Carga completa. Abriendo la aplicación...");
 
-            // Paso 3: Cargar datos en la lista observable para el gráfico
-            Set<String> aulasConIncidencias = incidencia.getAulasIncidencias();
-            List<XYChart.Data<String, Number>> datosGrafico = new ArrayList<>();
-            int count = 0;
-
-            for (String referencia : aulasConIncidencias) {
-                int numIncidenciasAula = incidencia.getNumIncidenciasAulas(referencia);
-                datosGrafico.add(new XYChart.Data<>(referencia, numIncidenciasAula));
-                count++;
-
-                // Actualizar progreso dinámicamente
-                double progress = 0.4 + ((double) count / aulasConIncidencias.size()) * 0.4;
-                Platform.runLater(() -> progressBar.setProgress(progress));
-
-                Thread.sleep(200); // Simular carga gradual
+                Thread.sleep(50); // Simular el tiempo de carga
             }
-
-            // Paso 4: Completar la barra y cambiar de pantalla
-            Thread.sleep(500);
-            Platform.runLater(() -> progressBar.setProgress(1.0));
 
             Platform.runLater(() -> {
                 try {
-                    primeraVentana(); // Cambiar a la pantalla principal
+                    primeraVentana();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             });
 
         } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch (AulaNotFoundException e) {
-            throw new RuntimeException(e);
         }
+    }
+
+    private void actualizarTexto(String mensaje) {
+        Platform.runLater(() -> textoCarga.setText(mensaje));
+    }
+
+    private void cargarDatosBBDD() {
+        // Simula la carga de la base de datos
+        CRUDIncidencia incidencia = new CRUDIncidencia();
+        CRUDAula aula = new CRUDAula();
+
+        incidencia.numIncidencias();
+        aula.readAllAulas();
     }
 
     /**
