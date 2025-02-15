@@ -19,6 +19,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
@@ -28,10 +31,14 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.List;
 
 public class ControladorApp {//implements Initializable {
     @FXML
@@ -112,7 +119,7 @@ public class ControladorApp {//implements Initializable {
             campoFecha1.setText(LocalDate.now().toString());
             try {
                 actualizarGrafico();
-            }catch (Exception e){
+            } catch (Exception e) {
             }
         });
 
@@ -147,8 +154,8 @@ public class ControladorApp {//implements Initializable {
     //Método para actualizar el número de incidencias
     @FXML
     public void actualizarIncidencias(int incidenciasGraves, int incidenciasLeves) {
-        lblTituloGrave.setText(incidenciasGraves+"");
-        lblTituloUltimasIncidecias.setText(incidenciasLeves+"");
+        lblTituloGrave.setText(incidenciasGraves + "");
+        lblTituloUltimasIncidecias.setText(incidenciasLeves + "");
     }
 
 
@@ -341,5 +348,15 @@ public class ControladorApp {//implements Initializable {
             System.exit(0);
         }
     }
+
+    @FXML
+    public void lanza1(Event event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
+    }
+    @FXML
+    public void lanza2(Event event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
+    }
+
 
 }
