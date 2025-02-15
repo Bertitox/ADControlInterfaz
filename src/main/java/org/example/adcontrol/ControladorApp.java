@@ -137,12 +137,12 @@ public class ControladorApp {//implements Initializable {
             // Cargar el idioma inicial (Español)
             cargarIdioma(new Locale("es"));
 
-/*            //Gestión incidencias BBDD
+            //Gestión incidencias BBDD
             CRUDIncidencia incidencia = new CRUDIncidencia();
-            CRUDAula aula = new CRUDAula();*/
+            CRUDAula aula = new CRUDAula();
 
             //Actualizar Incidencias
-           // actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
+           actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
             campoFecha.setText(LocalDate.now().toString());
             campoFecha1.setText(LocalDate.now().toString());
             try {
