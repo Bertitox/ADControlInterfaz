@@ -86,6 +86,18 @@ public class ControladorApp {//implements Initializable {
 
     Boolean isInHome = true;
 
+    @FXML
+    MenuButton idiomas;
+
+    @FXML
+    MenuItem español;
+
+    @FXML
+    MenuItem ingles;
+
+    @FXML
+    MenuItem frances;
+
     //Elementos a traducir
     @FXML
     private Label labelIncidencias;
@@ -100,6 +112,9 @@ public class ControladorApp {//implements Initializable {
     @FXML
     private Label textFecha2;
 
+    private ResourceBundle bundle;
+
+
     /**
      * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
      */
@@ -111,9 +126,22 @@ public class ControladorApp {//implements Initializable {
         botones.add(homeBoton);
         botones.add(monitorBoton);
         botones.add(salirBoton);
+
         Platform.runLater(() -> {
+
+            //Idiomas
+            español.setOnAction(e -> cargarIdioma(new Locale("es")));
+            ingles.setOnAction(e -> cargarIdioma(new Locale("en")));
+            frances.setOnAction(e -> cargarIdioma(new Locale("fr")));
+
+            // Cargar el idioma inicial (Español)
+            cargarIdioma(new Locale("es"));
+
+            //Gestión incidencias BBDD
             CRUDIncidencia incidencia = new CRUDIncidencia();
             CRUDAula aula = new CRUDAula();
+
+            //Actualizar Incidencias
             actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
             campoFecha.setText(LocalDate.now().toString());
             campoFecha1.setText(LocalDate.now().toString());
@@ -127,27 +155,25 @@ public class ControladorApp {//implements Initializable {
 
     //Cargar idiomas
     // Método para cambiar el idioma
-    public void cambiarIdioma(String idioma) {
-        Locale locale;
-        switch (idioma) {
-            case "en":
-                locale = new Locale("en", "US");
-                break;
-            case "fr":
-                locale = new Locale("fr", "FR");
-                break;
-            case "es":
-            default:
-                locale = new Locale("es", "ES");
-                break;
+    public void cargarIdioma(Locale locale) {
+        try {
+            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
+
+            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
+            labelIncidencias.setText(bundle.getString("labelIncidencias"));
+            labelAulasDisponibles.setText(bundle.getString("labelAulasDisponibles"));
+            textIncidenciasSistema.setText(bundle.getString("textIncidenciasSistema"));
+            textAulasDisponibles.setText(bundle.getString("textAulasDisponibles"));
+            textFecha1.setText(bundle.getString("textFecha1"));
+            textFecha2.setText(bundle.getString("textFecha2"));
+
+            System.out.println("Idioma cargado exitosamente.");//Debug
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
-        labelIncidencias.setText(bundle.getString("labelIncidencias"));
-        labelAulasDisponibles.setText(bundle.getString("labelAulasDisponibles"));
-        textIncidenciasSistema.setText(bundle.getString("textIncidenciasSistema"));
-        textAulasDisponibles.setText(bundle.getString("textAulasDisponibles"));
-        textFecha1.setText(bundle.getString("textFecha1"));
-        textFecha2.setText(bundle.getString("textFecha2"));
+
     }
 
 
