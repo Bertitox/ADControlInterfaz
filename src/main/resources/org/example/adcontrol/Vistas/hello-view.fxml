@@ -21,7 +21,7 @@
    <left>
       <AnchorPane prefHeight="664.0" prefWidth="79.0" style="-fx-background-color: #01a5e7;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Imagenes/ControlADWhite copia.png" />
                </image>
@@ -118,6 +118,11 @@
                         <Font size="15.0" />
                      </font>
                   </MenuButton>
+                  <Label layoutX="14.0" layoutY="12.0" text="IES Laguna de Joatzel" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <Pane fx:id="pane2" layoutX="512.0" layoutY="88.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 1px; -fx-border-radius: 10px;">
@@ -133,7 +138,7 @@
                         <Font name="System Bold" size="33.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTituloUltimasIncidecias" layoutX="19.0" layoutY="21.0">
+                  <Label fx:id="lblTituloUltimasIncidecias" layoutX="19.0" layoutY="21.0" prefHeight="40.0" prefWidth="0.0">
                      <font>
                         <Font name="System Bold" size="33.0" />
                      </font>

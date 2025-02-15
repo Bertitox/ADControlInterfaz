@@ -164,7 +164,7 @@
                   <Font name="System Bold" size="33.0" />
                </font>
             </Label>
-            <Pane fx:id="panel12" layoutX="61.0" layoutY="396.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
+            <Pane fx:id="panel12" layoutX="61.0" layoutY="396.0" onMouseClicked="#lanza1" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
                <children>
                   <Label layoutX="17.0" layoutY="24.0" text="¿Como actualizo mysql?">
                      <font>
@@ -194,7 +194,7 @@
                   <DropShadow height="15.0" radius="7.0" width="15.0" />
                </effect>
             </Pane>
-            <Pane fx:id="panel111" layoutX="538.0" layoutY="396.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
+            <Pane fx:id="panel111" layoutX="538.0" layoutY="396.0" onMouseClicked="#lanza2" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
                <children>
                   <Label layoutX="17.0" layoutY="24.0" text="¿Que es JasperReports?">
                      <font>
