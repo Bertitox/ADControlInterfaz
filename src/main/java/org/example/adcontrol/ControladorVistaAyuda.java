@@ -9,13 +9,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -215,6 +221,15 @@ public class ControladorVistaAyuda {
         stage.setResizable(false);
         stage.setTitle("Pagina principal");
         stage.show();
+    }
+
+    @FXML
+    public void lanza1(Event event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
+    }
+    @FXML
+    public void lanza2(Event event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
     }
 
     /**

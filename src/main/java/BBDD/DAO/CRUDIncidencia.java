@@ -91,7 +91,7 @@ public class CRUDIncidencia {
         //System.out.println(a.getReferencia());
 
         for (Incidencia incidencia : getAllIncidencias()) {
-             if (incidencia.getReferencia().getReferencia().equals(a.getReferencia())){
+             if (incidencia.getIdAula().getReferencia().equals(a.getReferencia())){
                  incidencias++;
              }
         }
@@ -111,7 +111,7 @@ public class CRUDIncidencia {
         Aula a = crudAula.getbyReferencia(referencia);
 
         for (Incidencia i : getAllIncidencias()) {
-            if (i.getReferencia().getReferencia().equals(a.getReferencia())){
+            if (i.getIdAula().getReferencia().equals(a.getReferencia())){
                 incidencias.add(i);
             }
         }
@@ -127,7 +127,7 @@ public class CRUDIncidencia {
     public Set<String> getAulasIncidencias() throws AulaNotFoundException {
         Set<String> aulas = new LinkedHashSet<>();
         for (Incidencia incidencia : getAllIncidencias()) {
-            aulas.add(incidencia.getReferencia().getReferencia());
+            aulas.add(incidencia.getIdAula().getReferencia());
         }
         return aulas;
     }

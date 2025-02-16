@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorApp">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorVistaAyuda">
     <left>
         <AnchorPane prefHeight="664.0" prefWidth="79.0" style="-fx-background-color: #01a5e7;" BorderPane.alignment="CENTER">
             <children>
@@ -83,11 +83,11 @@
             <children>
                 <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
-                        <MenuButton layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="68.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
+                        <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="68.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Español" />
-                                <MenuItem mnemonicParsing="false" text="Englhis" />
-                                <MenuItem mnemonicParsing="false" text="Français" />
+                                <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
+                                <MenuItem fx:id="ingles" mnemonicParsing="false" text="Englhis" />
+                                <MenuItem fx:id="frances" mnemonicParsing="false" text="Français" />
                             </items>
                             <graphic>
                                 <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
@@ -101,12 +101,12 @@
                 </AnchorPane>
             <Pane fx:id="panel1" layoutX="55.0" layoutY="133.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
                <children>
-                  <Label layoutX="17.0" layoutY="24.0" text="¿Como veo las incidencias?">
+                  <Label fx:id="PreguntaIncidencias" layoutX="17.0" layoutY="24.0" text="¿Cómo ver incidencias?">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Dirigete a  la pestaña de informacion sobre incidencias" wrapText="true">
+                  <Label fx:id="DescIncidencias" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Dirigete a  la pestaña de informacion sobre incidencias" wrapText="true">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -118,7 +118,7 @@
                   </Label>
                   <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
                      <image>
-                        <Image url="@../Imagenes/informacion.png" />
+                        <Image url="@../Imagenes/Informacion.png" />
                      </image>
                   </ImageView>
                </children>
@@ -131,12 +131,12 @@
             </Pane>
             <Pane fx:id="panel11" layoutX="532.0" layoutY="133.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
                <children>
-                  <Label layoutX="17.0" layoutY="24.0" text="¿Como hago un informe?">
+                  <Label fx:id="PreguntaInforme" layoutX="17.0" layoutY="24.0" text="¿Cómo hago un informe?">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Blablalbalblalblablalblalbab" wrapText="true">
+                  <Label fx:id="DescInforme" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Para realizar informes, dirígete a la pestaña Generar Informes" wrapText="true">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -148,7 +148,7 @@
                   </Label>
                   <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
                      <image>
-                        <Image url="@../Imagenes/informacion.png" />
+                        <Image url="@../Imagenes/Informacion.png" />
                      </image>
                   </ImageView>
                </children>
@@ -166,12 +166,12 @@
             </Label>
             <Pane fx:id="panel12" layoutX="61.0" layoutY="396.0" onMouseClicked="#lanza1" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
                <children>
-                  <Label layoutX="17.0" layoutY="24.0" text="¿Como actualizo mysql?">
+                  <Label fx:id="TituloMysql" layoutX="17.0" layoutY="24.0" text="¿Cómo actualizo mysql?">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Haz clic en este enlace para poder conocer mas acerca de mysql" wrapText="true">
+                  <Label fx:id="DescMysql" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Haz clic en este enlace para poder conocer más acerca de Mysql" wrapText="true">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -183,7 +183,7 @@
                   </Label>
                   <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
                      <image>
-                        <Image url="@../Imagenes/libro.png" />
+                        <Image url="@../Imagenes/Libro.png" />
                      </image>
                   </ImageView>
                </children>
@@ -196,12 +196,12 @@
             </Pane>
             <Pane fx:id="panel111" layoutX="538.0" layoutY="396.0" onMouseClicked="#lanza2" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
                <children>
-                  <Label layoutX="17.0" layoutY="24.0" text="¿Que es JasperReports?">
+                  <Label fx:id="TituloJasper" layoutX="17.0" layoutY="24.0" text="¿Qué es JasperReports?">
                      <font>
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Mas informacion en el siguiente enlace" wrapText="true">
+                  <Label fx:id="DescJasper" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Más información sobre JasperReports en el siguiente enlace" wrapText="true">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -213,7 +213,7 @@
                   </Label>
                   <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
                      <image>
-                        <Image url="@../Imagenes/libro.png" />
+                        <Image url="@../Imagenes/Libro.png" />
                      </image>
                   </ImageView>
                </children>
