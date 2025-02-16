@@ -21,7 +21,7 @@
    <left>
       <AnchorPane prefHeight="664.0" prefWidth="79.0" style="-fx-background-color: #01a5e7;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Imagenes/ControlADWhite copia.png" />
                </image>
