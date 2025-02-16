@@ -55,10 +55,16 @@ public class ControladorPantallaCarga implements Runnable {
             }
         });
     }*/
+
+    /**
+     * Costructor por defecto del controlador
+     */
+    public ControladorPantallaCarga() {
+    }
+
     /**
      * Método encargado de cargar la bbdd y rellenar la barra de tareas.
      */
-
     @Override
     public void run() {
         try {
@@ -68,7 +74,7 @@ public class ControladorPantallaCarga implements Runnable {
                 final int value = i;
                 Platform.runLater(() -> progressBar.setProgress(value / 100.0));
 
-                // Informar al usuario en diferentes puntos de la carga
+                //Frases aleatoria para el usuario durante la carga
                 if (i == 10) actualizarTexto("Conectando a la base de datos...");
                 if (i == 30) actualizarTexto("Cargando datos de las incidencias...");
                 if (i == 60) {
@@ -78,7 +84,7 @@ public class ControladorPantallaCarga implements Runnable {
                 if (i == 80) actualizarTexto("Aplicando configuraciones...");
                 if (i == 100) actualizarTexto("Carga completa. Abriendo la aplicación...");
 
-                Thread.sleep(50); // Simular el tiempo de carga
+                Thread.sleep(50); //Simular tiempo de carga
             }
 
             Platform.runLater(() -> {
@@ -94,10 +100,17 @@ public class ControladorPantallaCarga implements Runnable {
         }
     }
 
+    /**
+     * Método para actualizar el texto de la pantalla de carga
+     * @param mensaje Recibe un String mensaje que muestra al usuario y va cambiando
+     */
     private void actualizarTexto(String mensaje) {
         Platform.runLater(() -> textoCarga.setText(mensaje));
     }
 
+    /**
+     * Método que realiza la carga de la base de datos
+     */
     private void cargarDatosBBDD() {
         // Simula la carga de la base de datos
         CRUDIncidencia incidencia = new CRUDIncidencia();

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class CRUDInfoSistema {
 
-    Conexion conexion = new Conexion();
+    Conexion conexion = Conexion.getInstancia();
 
     // Aquí obtienes el EntityManager desde la clase CONEXION
     EntityManager em = conexion.getGestor();

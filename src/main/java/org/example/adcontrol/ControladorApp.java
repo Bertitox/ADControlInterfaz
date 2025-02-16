@@ -160,6 +160,12 @@ public class ControladorApp {//implements Initializable {
     private ResourceBundle bundle;
 
     /**
+     * Costructor por defecto del controlador
+     */
+    public ControladorApp() {
+    }
+
+    /**
      * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico y los idiomas.
      * Inicializa la app entera.
      */
@@ -415,17 +421,17 @@ public class ControladorApp {//implements Initializable {
      * @throws AulaNotFoundException Excepción personalizada que se mostrará si no se encuentra ningún aula
      */
     public void actualizarGrafico() throws AulaNotFoundException {
-        // Obtener las referencias de todas las aulas con incidencias
+        //Obtengo la referencia de las aulas con incidencias
         CRUDIncidencia incidencia = new CRUDIncidencia();
         Set<String> aulasConIncidencias = incidencia.getAulasIncidencias();
 
-        // Crear una lista observable para almacenar los datos del gráfico
+        //Crea una lista observable para almacenar datos del gráfico
         ObservableList<XYChart.Data<String, Number>> datosGrafico = FXCollections.observableArrayList();
 
-        // Iterar sobre todas las aulas y obtener el número de incidencias para cada una
+        //Foreach sobre todas las aulas para obtener el número de incidencias de cada una
         for (String referencia : aulasConIncidencias) {
-            int numIncidencias = incidencia.getNumIncidenciasAulas(referencia);  // Obtener el número de incidencias por aula
-            // Crear un objeto Data con la referencia del aula y el número de incidencias
+            int numIncidencias = incidencia.getNumIncidenciasAulas(referencia);  //Obtiene número de incidencias por aula
+            //Objeto Data con la referencia del aula y el número de incidencias
             XYChart.Data<String, Number> data = new XYChart.Data<>(referencia, numIncidencias);
             datosGrafico.add(data);
         }
@@ -437,13 +443,13 @@ public class ControladorApp {//implements Initializable {
         yAxis.setMinorTickVisible(false);
         yAxis.setTickMarkVisible(true);
 
-        // Crear una serie de datos y añadir los datos al gráfico
+        //Añadir los datos al gráfico
         XYChart.Series<String, Number> serie = new XYChart.Series<>();
         serie.setData(datosGrafico);
         barChart.setBarGap(500);
         barChart.setCategoryGap(100);
 
-        // Limpiar el gráfico y añadir la nueva serie de datos
+        //Limpiar el gráfico
         barChart.getData().clear();
         barChart.getData().add(serie);
     }
@@ -456,22 +462,12 @@ public class ControladorApp {//implements Initializable {
     public void salir(Event event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea salir?", ButtonType.YES, ButtonType.NO);
         alert.setTitle("Salir de ADControl");
-        alert.setHeaderText(null); // Elimina encabezado
+        alert.setHeaderText(null); //Elimina el encabezado
 
-        // Mostrar el diálogo y esperar respuesta
+        //Mostrar diálogo y esperar a la respuesta del usuario
         if (alert.showAndWait().get() == ButtonType.YES) {
             Platform.exit();
             System.exit(0);
         }
-    }
-
-    @FXML
-    public void lanza1(Event event) throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
-    }
-
-    @FXML
-    public void lanza2(Event event) throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
     }
 }

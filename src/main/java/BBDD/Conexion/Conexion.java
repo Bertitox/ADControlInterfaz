@@ -6,50 +6,65 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
 /**
- * Clase conexión a la BBDD
+ * Clase Singleton para la conexión a la BBDD con JPA
  * @author Alberto y Daniel
- * @version 1.0
+ * @version 1.1
  */
 public class Conexion {
 
-        //Objetos necesarios para la conexión a la bbdd
-        EntityManagerFactory factoria;
-        EntityManager gestor;
-        EntityTransaction transaccion;
+    private static Conexion instancia;
+    private static EntityManagerFactory factoria;
+    private static EntityManager gestor;
 
-        /**
-         * Método constructor de la clase que inicializa los objetos necesarios para la conexión
-         */
-        public Conexion() {
-            factoria = Persistence.createEntityManagerFactory("miPersistencia"); // EntityManagerFactory asociado al Persistence.xml
-            gestor = factoria.createEntityManager();
-            transaccion = gestor.getTransaction();
-        }
+    /**
+     * Constructor privado para evitar múltiples instancias.
+     */
+    private Conexion() {
+        factoria = Persistence.createEntityManagerFactory("miPersistencia");
+        gestor = factoria.createEntityManager();
+    }
 
-        /**
-         * Método getter que retorna el EntityManagerFactory
-         *
-         * @return retorna EntityManagerFactory factoria
-         */
-        public EntityManagerFactory getFactoria() {
-            return factoria;
+    /**
+     * Método estático para obtener la instancia única de la conexión.
+     * @return instancia única de la clase Conexion
+     */
+    public static Conexion getInstancia() {
+        if (instancia == null) {
+            synchronized (Conexion.class) { // Bloqueo para garantizar seguridad en entornos multi-hilo
+                if (instancia == null) {
+                    instancia = new Conexion();
+                }
+            }
         }
+        return instancia;
+    }
 
-        /**
-         * Método getter que retorna el EntityManager
-         *
-         * @return retorna EntityManager gestor
-         */
-        public EntityManager getGestor() {
-            return gestor;
-        }
+    /**
+     * Método para obtener el EntityManager.
+     * @return EntityManager gestor
+     */
+    public EntityManager getGestor() {
+        return gestor;
+    }
 
-        /**
-         * Método getter que retorna el EntityTransaction
-         *
-         * @return retorna EntityTransaction transaccion
-         */
-        public EntityTransaction getTransaccion() {
-            return transaccion;
+    /**
+     * Método para iniciar una transacción.
+     * @return EntityTransaction transacción activa
+     */
+    public EntityTransaction getTransaccion() {
+        return gestor.getTransaction();
+    }
+
+    /**
+     * Método para cerrar la conexión con la base de datos.
+     */
+    public static void cerrarConexion() {
+        if (gestor != null && gestor.isOpen()) {
+            gestor.close();
         }
+        if (factoria != null && factoria.isOpen()) {
+            factoria.close();
+        }
+        instancia = null; // Permitir reinicialización si es necesario
+    }
 }

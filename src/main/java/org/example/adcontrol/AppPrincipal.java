@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Clase AppPrincipal que Inicia la aplicación de ADControl
+ */
 public class AppPrincipal extends Application {
     /**
      * Método que incia la aplicación del programa
@@ -23,13 +26,17 @@ public class AppPrincipal extends Application {
         stage.setResizable(false);
         stage.show();
 
-        // Asegurar que la interfaz ya está cargada antes de iniciar el hilo
         Platform.runLater(() -> {
             ControladorPantallaCarga controlador = fxmlLoader.getController();
             Thread hilo = new Thread(controlador);
             hilo.start();
         });
     }
+
+    /**
+     * Método main que lanza la aplicación de ADControl
+     * @param args Parámetros que recibe el método main
+     */
     public static void main(String[] args) {
         launch(args);
     }

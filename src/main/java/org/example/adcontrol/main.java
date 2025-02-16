@@ -15,6 +15,7 @@ import java.io.IOException;
  * @version 1.0
  */
 public class main {
+
     /**
      * Método main que lanza la aplicación
      * @param args argumentos que recibe el método main

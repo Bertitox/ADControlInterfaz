@@ -27,6 +27,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Clase que controla la interfaz de la ayuda al usuario.
+ *
+ * @author Daniel y Alberto
+ * @version 1.0
+ */
 public class ControladorVistaAyuda {
 
     @FXML
@@ -76,6 +82,9 @@ public class ControladorVistaAyuda {
     @FXML
     private Label DescJasper;
 
+    /**
+     * Inicializa los elementos de la interfaz y configura los botones de idioma.
+     */
     @FXML
     public void initialize() {
         botones = new ArrayList<>();
@@ -92,6 +101,11 @@ public class ControladorVistaAyuda {
 
     //Cargar idiomas
     // Método para cambiar el idioma
+    /**
+     * Carga los textos en el idioma seleccionado.
+     *
+     * @param locale El idioma a cargar.
+     */
     public void cargarIdioma(Locale locale) {
         try {
             System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
@@ -115,6 +129,11 @@ public class ControladorVistaAyuda {
 
     }
 
+    /**
+     * Método que define el estilo de los botones cuando el ratón pasa por encima.
+     *
+     * @param event El evento de pasar el ratón por encima del botón.
+     */
     @FXML
     void hoverBoton(MouseEvent event) {
         Button boton = (Button) event.getSource();
@@ -140,6 +159,11 @@ public class ControladorVistaAyuda {
         zoomIn.play();
     }
 
+    /**
+     * Aplica zoom al pasar el ratón por encima de un Pane.
+     *
+     * @param event El evento de pasar el ratón por encima del Pane.
+     */
     @FXML
     void zoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
@@ -150,6 +174,11 @@ public class ControladorVistaAyuda {
         zoomIn.play();
     }
 
+    /**
+     * Restaura el tamaño normal del Pane.
+     *
+     * @param event El evento de quitar el ratón de encima del Pane.
+     */
     @FXML
     void quitarzoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
@@ -180,6 +209,12 @@ public class ControladorVistaAyuda {
         stage.show();
     }
 
+    /**
+     * Cambia la pantalla a la vista principal.
+     *
+     * @param event El evento de pulsación del botón.
+     * @throws IOException Si ocurre un error al cargar la vista.
+     */
     @FXML
     void cambiarPantallaHome(ActionEvent event) throws IOException {
         this.isInHome = true;
@@ -194,7 +229,11 @@ public class ControladorVistaAyuda {
         stage.show();
     }
 
-
+    /**
+     * Método que se usa para cambiar la pantalla de ayuda
+     * @param event El evento de pulsación del botón.
+     * @throws IOException Si ocurre un error al cargar la vista.
+     */
     @FXML
     void cambiarpantallaAyuda(ActionEvent event) throws IOException {
         this.isInHome = false;
@@ -209,6 +248,11 @@ public class ControladorVistaAyuda {
         stage.show();
     }
 
+    /**
+     * Método que se usa para cambiar la pantalla de configuración
+     * @param event El evento de pulsación del botón.
+     * @throws IOException Si ocurre un error al cargar la vista.
+     */
     @FXML
     void cambiarpantallaConfig(ActionEvent event) throws IOException {
         this.isInHome = false;
@@ -223,10 +267,25 @@ public class ControladorVistaAyuda {
         stage.show();
     }
 
+    /**
+     * Método encargado de abrir un enlace web en el navegador
+     *
+     * @param event El evento que espera el método
+     * @throws URISyntaxException Error del recurso
+     * @throws IOException Error si no encuentra el recurso
+     */
     @FXML
     public void lanza1(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
     }
+
+    /**
+     * Método encargado de abrir un enlace web en el navegador
+     *
+     * @param event El evento que espera el método
+     * @throws URISyntaxException Error del recurso
+     * @throws IOException Error si no encuentra el recurso
+     */
     @FXML
     public void lanza2(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));

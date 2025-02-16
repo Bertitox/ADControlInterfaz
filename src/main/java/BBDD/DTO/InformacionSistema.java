@@ -57,8 +57,6 @@ public class InformacionSistema {
     @Column(name = "ultHora")
     private LocalTime ultHora;
 
-    //Constructor por defecto
-
     /**
      * Contructor por defecto de la entidad {@link InformacionSistema}
      */
@@ -66,6 +64,7 @@ public class InformacionSistema {
     }
 
     /**
+     * Constructor sobrecargado principal de la clase
      *
      * @param nombre Campos de la BBDD
      * @param so Campos de la BBDD

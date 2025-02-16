@@ -93,6 +93,12 @@
             <version>7.0.1</version>
             <type>jar</type>
         </dependency>
+        <!-- Dependencia de HikariCP -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.0.0</version> <!-- Usa la última versión disponible -->
+        </dependency>
     </dependencies>
 
     <build>

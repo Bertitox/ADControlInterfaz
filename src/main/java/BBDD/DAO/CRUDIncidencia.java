@@ -19,7 +19,7 @@ import java.util.*;
 public class CRUDIncidencia {
 
     //Objetos necesarios para realizar la conexión a la BBDD
-    Conexion conexion = new Conexion();
+    Conexion conexion = Conexion.getInstancia();
     EntityManager em = conexion.getGestor();
     EntityTransaction transaction = em.getTransaction();
 

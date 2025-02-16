@@ -34,6 +34,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Clase que controla la interfaz de usuario y la lógica de la aplicación.
+ *
+ * @author Daniel y Alberto
+ * @version 1.0
+ */
 public class ControladorPC {
 
     @FXML
@@ -86,6 +92,9 @@ public class ControladorPC {
     @FXML
     private Label tituloIncidencias;
 
+    /**
+     * Inicializa los elementos de la interfaz y configura los botones de idioma.
+     */
     @FXML
     public void initialize() {
         botones = new ArrayList<>();
@@ -102,6 +111,11 @@ public class ControladorPC {
 
     //Cargar idiomas
      //Método para cambiar el idioma
+    /**
+     * Carga los textos en el idioma seleccionado.
+     *
+     * @param locale El idioma a cargar.
+     */
     public void cargarIdioma(Locale locale) {
         try {
             System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
@@ -122,6 +136,11 @@ public class ControladorPC {
     }
 
     //Método que rellena el ListView
+    /**
+     * Muestra las incidencias en el ListView.
+     *
+     * @throws AulaNotFoundException Si el aula no se encuentra.
+     */
     public void mostrarIncidenciasListView() throws AulaNotFoundException {
         CRUDIncidencia crud = new CRUDIncidencia();
         List<Incidencia> incidencias = crud.incidenciasXAulas(textIncidencias.getText().toString());
@@ -139,9 +158,12 @@ public class ControladorPC {
     }
 
     //Método para rellenar el gráfico
+    /**
+     * Método que actualiza y rellena el gráfico de incidencias.
+     */
     @FXML
     public void actualizarGrafico() {
-        String referencia = textIncidencias.getText().trim(); // Obtener referencia del aula ingresada
+        String referencia = textIncidencias.getText().trim(); //Obtener referencia del aula ingresada
         CRUDIncidencia crudIncidencia = new CRUDIncidencia();
 
         if (referencia.isEmpty()) {
@@ -160,13 +182,18 @@ public class ControladorPC {
                 mostrarAlerta("Incidencias Aula","No hay Incidencias para el Aula "+ textIncidencias.getText().toString());
             }
         } catch (AulaNotFoundException e) {
-            System.err.println("Error: " + e.getMessage()); // Manejo de error si el aula no existe
+            System.err.println("Error: " + e.getMessage()); //Manejo del error en el caso de que el aula no exista
         }
 
-        graficoIncidencias.setData(datosGrafico); // Asignar los datos al PieChart
+        graficoIncidencias.setData(datosGrafico); //Asignación de los datos al Gráfico PieChart
     }
 
-    //Muestra errores al usuario
+    /**
+     * Muestra errores al usuario.
+     *
+     * @param titulo  El título de la alerta.
+     * @param mensaje El mensaje de la alerta.
+     */
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle(titulo);
@@ -175,6 +202,11 @@ public class ControladorPC {
         alerta.showAndWait();
     }
 
+    /**
+     * Método que define el estilo de los botones cuando el ratón pasa por encima.
+     *
+     * @param event El evento de pasar el ratón por encima del botón.
+     */
     @FXML
     void hoverBoton(MouseEvent event) {
         Button boton = (Button) event.getSource();
@@ -188,7 +220,7 @@ public class ControladorPC {
     /**
      * Método que define el estilo normal de los botones tras pasar el cursor por encima
      *
-     * @param event Cuando el ratón no está por encima de algun boton
+     * @param event Cuando el ratón no está por encima de algún boton
      */
     @FXML
     void normalBoton(MouseEvent event) {
@@ -200,6 +232,11 @@ public class ControladorPC {
         zoomIn.play();
     }
 
+    /**
+     * Aplica zoom al pasar el ratón por encima de un Pane.
+     *
+     * @param event El evento de pasar el ratón por encima del Pane.
+     */
     @FXML
     void zoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
@@ -210,6 +247,11 @@ public class ControladorPC {
         zoomIn.play();
     }
 
+    /**
+     * Restaura el tamaño normal del Pane.
+     *
+     * @param event El evento de quitar el ratón de encima del Pane.
+     */
     @FXML
     void quitarzoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
@@ -240,6 +282,12 @@ public class ControladorPC {
         stage.show();
     }
 
+    /**
+     * Cambia la pantalla a la vista principal.
+     *
+     * @param event El evento de pulsación del botón.
+     * @throws IOException Si ocurre un error al cargar la vista.
+     */
     @FXML
     void cambiarPantallaHome(ActionEvent event) throws IOException {
         this.isInHome = true;
@@ -255,6 +303,11 @@ public class ControladorPC {
     }
 
 
+    /**
+     * Método que se usa para cambiar la pantalla de ayuda
+     * @param event El evento de pulsación del botón.
+     * @throws IOException Si ocurre un error al cargar la vista.
+     */
     @FXML
     void cambiarpantallaAyuda(ActionEvent event) throws IOException {
         this.isInHome = false;
@@ -269,6 +322,11 @@ public class ControladorPC {
         stage.show();
     }
 
+    /**
+     * Método que se usa para cambiar la pantalla de configuración
+     * @param event El evento de pulsación del botón.
+     * @throws IOException Si ocurre un error al cargar la vista.
+     */
     @FXML
     void cambiarpantallaConfig(ActionEvent event) throws IOException {
         this.isInHome = false;
@@ -283,15 +341,6 @@ public class ControladorPC {
         stage.show();
     }
 
-    @FXML
-    public void lanza1(Event event) throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
-    }
-    @FXML
-    public void lanza2(Event event) throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
-    }
-
     /**
      * Evento que muestra al usuario una ventana de confirmación par salir o no de la app
      *
@@ -300,9 +349,9 @@ public class ControladorPC {
     public void salir(Event event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea salir?", ButtonType.YES, ButtonType.NO);
         alert.setTitle("Salir de ADControl");
-        alert.setHeaderText(null); // Elimina encabezado
+        alert.setHeaderText(null); //Elimina el encabezado
 
-        // Mostrar el diálogo y esperar respuesta
+        //Mostrar el diálogo y esperar respuesta
         if (alert.showAndWait().get() == ButtonType.YES) {
             Platform.exit();
             System.exit(0);

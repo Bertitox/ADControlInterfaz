@@ -17,7 +17,7 @@ import java.util.List;
 public class CRUDAula {
 
     //Inicialización de los objetos que participan en la conexión a la BBDD
-    Conexion conexion = new Conexion();
+    Conexion conexion = Conexion.getInstancia();
     EntityManager gestorEntidad = conexion.getGestor();
     EntityTransaction transaction = gestorEntidad.getTransaction();
 

@@ -126,6 +126,11 @@ public class ControladorInformes {
 
     private ResourceBundle bundle;
 
+    /**
+     * Constructor por defecto del controlador
+     */
+    public ControladorInformes() {
+    }
 
     /** Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
      */
