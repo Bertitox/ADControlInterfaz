@@ -22,20 +22,30 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
@@ -82,6 +92,12 @@ public class ControladorApp {//implements Initializable {
     @FXML
     private Label campoFecha1;
 
+    @FXML
+    private TextArea textAreaRuta;
+
+    @FXML
+    private ComboBox comboboxInforme = new ComboBox();
+
     List<Button> botones;
 
     Boolean isInHome = true;
@@ -114,12 +130,14 @@ public class ControladorApp {//implements Initializable {
 
     private ResourceBundle bundle;
 
-
     /**
      * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
      */
     @FXML
     public void initialize() {
+        ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
+        comboboxInforme.setItems(items);
+
         botones = new ArrayList<>();
         botones.add(ajustesBoton);
         botones.add(ayudaBoton);
@@ -127,54 +145,63 @@ public class ControladorApp {//implements Initializable {
         botones.add(monitorBoton);
         botones.add(salirBoton);
 
-//        Platform.runLater(() -> {
-//
-//            //Idiomas
-//            español.setOnAction(e -> cargarIdioma(new Locale("es")));
-//            ingles.setOnAction(e -> cargarIdioma(new Locale("en")));
-//            frances.setOnAction(e -> cargarIdioma(new Locale("fr")));
-//
-//            // Cargar el idioma inicial (Español)
-//            cargarIdioma(new Locale("es"));
-//
-//            //Gestión incidencias BBDD
-//            CRUDIncidencia incidencia = new CRUDIncidencia();
-//            CRUDAula aula = new CRUDAula();
-//
-//            //Actualizar Incidencias
-//           actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
-//            campoFecha.setText(LocalDate.now().toString());
-//            campoFecha1.setText(LocalDate.now().toString());
-//            try {
-//                actualizarGrafico();
-//            } catch (Exception e) {
-//            }
-//        });
+        Platform.runLater(() -> {
+
+            //Idiomas
+            español.setOnAction(e -> cargarIdioma(new Locale("es")));
+            ingles.setOnAction(e -> cargarIdioma(new Locale("en")));
+            frances.setOnAction(e -> cargarIdioma(new Locale("fr")));
+
+            // Cargar el idioma inicial (Español)
+            cargarIdioma(new Locale("es"));
+
+            //Gestión incidencias BBDD
+            CRUDIncidencia incidencia = new CRUDIncidencia();
+            CRUDAula aula = new CRUDAula();
+
+            //Actualizar Incidencias
+           actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
+            campoFecha.setText(LocalDate.now().toString());
+            campoFecha1.setText(LocalDate.now().toString());
+            try {
+                actualizarGrafico();
+            } catch (Exception e) {
+            }
+        });
 
     }
 
-//    //Cargar idiomas
-//    // Método para cambiar el idioma
-//    public void cargarIdioma(Locale locale) {
-//        try {
-//            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
-//
-//            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
-//            labelIncidencias.setText(bundle.getString("labelIncidencias"));
-//            labelAulasDisponibles.setText(bundle.getString("labelAulasDisponibles"));
-//            textIncidenciasSistema.setText(bundle.getString("textIncidenciasSistema"));
-//            textAulasDisponibles.setText(bundle.getString("textAulasDisponibles"));
-//            textFecha1.setText(bundle.getString("textFecha1"));
-//            textFecha2.setText(bundle.getString("textFecha2"));
-//
-//            System.out.println("Idioma cargado exitosamente.");//Debug
-//
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//
-//    }
+    //Cargar idiomas
+    // Método para cambiar el idioma
+    public void cargarIdioma(Locale locale) {
+        try {
+            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
+
+            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
+            labelIncidencias.setText(bundle.getString("labelIncidencias"));
+            labelAulasDisponibles.setText(bundle.getString("labelAulasDisponibles"));
+            textIncidenciasSistema.setText(bundle.getString("textIncidenciasSistema"));
+            textAulasDisponibles.setText(bundle.getString("textAulasDisponibles"));
+            textFecha1.setText(bundle.getString("textFecha1"));
+            textFecha2.setText(bundle.getString("textFecha2"));
+
+            System.out.println("Idioma cargado exitosamente.");//Debug
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+
+    //Método para actualizar el número de incidencias
+    @FXML
+    public void actualizarIncidencias(int incidenciasGraves, int incidenciasLeves) {
+        lblTituloGrave.setText(incidenciasGraves + "");
+        lblTituloUltimasIncidecias.setText(incidenciasLeves + "");
+    }
+
 
     /**
      * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
@@ -310,7 +337,44 @@ public class ControladorApp {//implements Initializable {
         stage.show();
     }
 
+    /**
+     * Método que rellenará los datos del gráfico de barras obteniendo la información de la BBDD
+     *
+     * @throws AulaNotFoundException Excepción personalizada que se mostrará si no se encuentra ningún aula
+     */
+    public void actualizarGrafico() throws AulaNotFoundException {
+        // Obtener las referencias de todas las aulas con incidencias
+        CRUDIncidencia incidencia = new CRUDIncidencia();
+        Set<String> aulasConIncidencias = incidencia.getAulasIncidencias();
 
+        // Crear una lista observable para almacenar los datos del gráfico
+        ObservableList<XYChart.Data<String, Number>> datosGrafico = FXCollections.observableArrayList();
+
+        // Iterar sobre todas las aulas y obtener el número de incidencias para cada una
+        for (String referencia : aulasConIncidencias) {
+            int numIncidencias = incidencia.getNumIncidenciasAulas(referencia);  // Obtener el número de incidencias por aula
+            // Crear un objeto Data con la referencia del aula y el número de incidencias
+            XYChart.Data<String, Number> data = new XYChart.Data<>(referencia, numIncidencias);
+            datosGrafico.add(data);
+        }
+
+        NumberAxis yAxis = (NumberAxis) barChart.getYAxis();
+        barChart.setLegendVisible(false);
+        yAxis.setTickUnit(1);
+        yAxis.setMinorTickCount(0);
+        yAxis.setMinorTickVisible(false);
+        yAxis.setTickMarkVisible(true);
+
+        // Crear una serie de datos y añadir los datos al gráfico
+        XYChart.Series<String, Number> serie = new XYChart.Series<>();
+        serie.setData(datosGrafico);
+        barChart.setBarGap(500);
+        barChart.setCategoryGap(100);
+
+        // Limpiar el gráfico y añadir la nueva serie de datos
+        barChart.getData().clear();
+        barChart.getData().add(serie);
+    }
 
     /**
      * Evento que muestra al usuario una ventana de confirmación par salir o no de la app
@@ -337,6 +401,37 @@ public class ControladorApp {//implements Initializable {
     public void lanza2(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
     }
+
+    @FXML
+    void generarPDF(ActionEvent event) throws ClassNotFoundException, SQLException, JRException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Map parametros = new HashMap();
+        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/infoSistema", "root", "210205");
+        JasperPrint print;
+        if (comboboxInforme.getValue().equals("Aulas")) {
+            //SE INDICA EL FICHERO .JASPER EN EL PROYECTO (EN ESTE CASO EL GENERICO)
+            print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
+        } else if (comboboxInforme.equals("Incidencias")) {
+            //SE INDICA EL FICHERO .JASPER EN EL PROYECTO (EN ESTE CASO EL GENERICO)
+            print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
+        } else {
+            //SE INDICA EL FICHERO .JASPER EN EL PROYECTO (EN ESTE CASO EL GENERICO)
+            print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
+        }
+
+        String ruta = textAreaRuta.getText() + "/informe.pdf";
+        JasperExportManager.exportReportToPdfFile(print, ruta);
+    }
+
+    @FXML
+    void cambiarRuta(ActionEvent event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File f = directoryChooser.showDialog(null);
+        textAreaRuta.setText(f.getAbsolutePath());
+
+    }
+
+
 
 
 }
