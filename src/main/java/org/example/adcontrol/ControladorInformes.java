@@ -1,0 +1,426 @@
+package org.example.adcontrol;
+
+import BBDD.DAO.CRUDAula;
+import BBDD.DAO.CRUDIncidencia;
+import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.List;
+
+public class ControladorInformes {
+
+    @FXML
+    private Label tituloInforme;
+    @FXML
+    private Label tipo1;
+    @FXML
+    private Label tipo2;
+    @FXML
+    private Label textdirectorio;
+    @FXML
+    private Label textTotales;
+    @FXML
+    private Label textInforme;
+    @FXML
+    private Label textUltimo;
+    @FXML
+    private Label textNombreUltimo;
+
+    //Generar Informes
+
+    @FXML
+    private TextArea nombreInforme;
+    @FXML
+    private TextArea textAreaRuta;
+    @FXML
+    private Label ultimoNombre;
+
+    @FXML
+    private Label numeroTotalInformes;
+
+    @FXML
+    private Label informeMasUtilizado;
+
+    @FXML
+    private Label ultimoInforme;
+
+
+    Map<String, Integer> mapaInformeUtilizado;
+
+    Integer nTotal = 0;
+
+    @FXML
+    private ComboBox comboboxInforme = new ComboBox();
+
+    List<Button> botones;
+
+    Boolean isInHome = true;
+
+    @FXML
+    MenuButton idiomas;
+
+    @FXML
+    MenuItem español;
+
+    @FXML
+    MenuItem ingles;
+
+    @FXML
+    MenuItem frances;
+
+    @FXML
+    Button botonGenerar;
+
+    @FXML
+    Button botonExplorar;
+
+    //Botones
+    @FXML
+    private Button ajustesBoton;
+    @FXML
+    private Button ayudaBoton;
+    @FXML
+    private Button homeBoton;
+    @FXML
+    private Button monitorBoton;
+    @FXML
+    private Button salirBoton;
+
+    private ResourceBundle bundle;
+
+
+    /** Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
+     */
+    @FXML
+    public void initialize() {
+        botonGenerar = new Button();
+        botonExplorar = new Button();
+        botonExplorar.getStyleClass().add("botonPrueba");
+        botonGenerar.getStyleClass().add("botonPrueba");
+
+        mapaInformeUtilizado = new HashMap<>();
+        //Para el Combobox
+        ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
+        comboboxInforme.setItems(items);
+
+
+        botones = new ArrayList<>();
+        botones.add(ajustesBoton);
+        botones.add(ayudaBoton);
+        botones.add(homeBoton);
+        botones.add(monitorBoton);
+        botones.add(salirBoton);
+
+        Platform.runLater(() -> {
+
+            //Idiomas
+            español.setOnAction(e -> cargarIdioma(new Locale("es")));
+            ingles.setOnAction(e -> cargarIdioma(new Locale("en")));
+            frances.setOnAction(e -> cargarIdioma(new Locale("fr")));
+
+            // Cargar el idioma inicial (Español)
+            cargarIdioma(new Locale("es"));
+
+        });
+
+    }
+
+    //Cargar idiomas
+    // Método para cambiar el idioma
+    public void cargarIdioma(Locale locale) {
+        try {
+            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
+
+            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
+            tituloInforme.setText(bundle.getString("tituloInforme"));
+            tipo1.setText(bundle.getString("tipo1"));
+            tipo2.setText(bundle.getString("tipo2"));
+            textdirectorio.setText(bundle.getString("textdirectorio"));
+            textTotales.setText(bundle.getString("textTotales"));
+            textUltimo.setText(bundle.getString("textUltimo"));
+            textInforme.setText(bundle.getString("textInforme"));
+            textNombreUltimo.setText(bundle.getString("textNombreUltimo"));
+
+            System.out.println("Idioma cargado exitosamente.");//Debug
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    /**
+     * Método que se encarga de cambiar la pantalla actual por la correspondiente al botón pulsado (pantalla de administradorS de equipos)
+     *
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    void cambiarPantallaMonitor(ActionEvent event) throws IOException {
+        this.isInHome = false;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaIncidencias.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        stage.setResizable(false);
+        stage.setTitle("Pagina principal");
+        stage.show();
+    }
+
+    /**
+     * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
+     *
+     * @param event Cuando se pasa el cursor por encima
+     */
+    @FXML
+    void hoverBoton(MouseEvent event) {
+        Button boton = (Button) event.getSource();
+
+        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), boton);
+        zoomIn.setToX(1.1);  // 10% más grande en X
+        zoomIn.setToY(1.1);  // 10% más grande en Y
+        zoomIn.play();
+    }
+
+    /**
+     * Método que define el estilo normal de los botones tras pasar el cursor por encima
+     *
+     * @param event Cuando el ratón no está por encima de algun boton
+     */
+    @FXML
+    void normalBoton(MouseEvent event) {
+        Button boton = (Button) event.getSource();
+
+        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(150), boton);
+        zoomIn.setToX(1.0);  // 10% más grande en X
+        zoomIn.setToY(1.0);  // 10% más grande en Y
+        zoomIn.play();
+    }
+
+    @FXML
+    void zoomPane(MouseEvent event) {
+        Pane pane = (Pane) event.getSource();
+        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
+
+        zoomIn.setToX(1.01);
+        zoomIn.setToY(1.01);
+        zoomIn.play();
+    }
+
+    @FXML
+    void quitarzoomPane(MouseEvent event) {
+        Pane pane = (Pane) event.getSource();
+        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
+
+        zoomIn.setToX(1.0);
+        zoomIn.setToY(1.0);
+        zoomIn.play();
+    }
+
+    @FXML
+    void cambiarPantallaHome(ActionEvent event) throws IOException {
+        this.isInHome = true;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/hello-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        stage.setResizable(false);
+        stage.setTitle("Pagina principal");
+        stage.show();
+    }
+
+
+    @FXML
+    void cambiarpantallaAyuda(ActionEvent event) throws IOException {
+        this.isInHome = false;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAyuda.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        stage.setResizable(false);
+        stage.setTitle("Pagina principal");
+        stage.show();
+    }
+
+    @FXML
+    void cambiarpantallaConfig(ActionEvent event) throws IOException {
+        this.isInHome = false;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaConfiguracion.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        stage.setResizable(false);
+        stage.setTitle("Pagina principal");
+        stage.show();
+    }
+
+    /**
+     * Evento que muestra al usuario una ventana de confirmación par salir o no de la app
+     *
+     * @param event Evento de pulsacion del botón
+     */
+    public void salir(Event event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea salir?", ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Salir de ADControl");
+        alert.setHeaderText(null); // Elimina encabezado
+
+        // Mostrar el diálogo y esperar respuesta
+        if (alert.showAndWait().get() == ButtonType.YES) {
+            Platform.exit();
+            System.exit(0);
+        }
+    }
+
+    @FXML
+    public void lanza1(Event event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
+    }
+
+    @FXML
+    public void lanza2(Event event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
+    }
+
+
+    @FXML
+    void generarPDF(ActionEvent event) throws ClassNotFoundException, SQLException, JRException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Map parametros = new HashMap();
+        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/infoSistema", "root", "210205");
+        JasperPrint print = null;
+        if (comboboxInforme.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al generar el informe", ButtonType.OK);
+            alert.setTitle("Error");
+            alert.setHeaderText(null); // Elimina encabezado
+            alert.showAndWait();
+
+        } else if(textAreaRuta.getText().isBlank() || textAreaRuta.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Selecciona una ruta", ButtonType.OK);
+            alert.setTitle("Error");
+            alert.setHeaderText(null); // Elimina encabezado
+            alert.showAndWait();
+        }else{
+            switch (comboboxInforme.getValue().toString()) {
+                case "Aulas":
+                    print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/InformeAula.jasper", null, conexion);
+                    break;
+                case "Incidencias":
+                    print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/InformeIncidencias.jasper", null, conexion);
+                    break;
+                case "Equipos":
+                    print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
+                    break;
+                default:
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error al generar el informe", ButtonType.OK);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null); // Elimina encabezado
+                    alert.showAndWait();
+                    break;
+            }
+
+            String ruta;
+            if (nombreInforme.getText().isBlank() || nombreInforme.getText().isEmpty()) {
+                ruta = textAreaRuta.getText() + "/informe.pdf";
+            } else {
+                ruta = textAreaRuta.getText() +"/" +  nombreInforme.getText() + ".pdf";
+            }
+            JasperExportManager.exportReportToPdfFile(print, ruta);
+            ultimoInforme.setText(comboboxInforme.getValue().toString());
+            mapaInformeUtilizado.put(comboboxInforme.getValue().toString(), mapaInformeUtilizado.getOrDefault(comboboxInforme.getValue().toString(), 0) + 1);
+            this.nTotal++;
+            numeroTotalInformes.setText(this.nTotal.toString());
+            informeMasUtilizado.setText(getInformeMas().toString());
+            ultimoNombre.setText(nombreInforme.getText());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Informe creado correctamente", ButtonType.OK);
+            alert.setTitle("Informe creado");
+            alert.setHeaderText(null); // Elimina encabezado
+            alert.showAndWait();
+            nombreInforme.setText("");
+        }
+    }
+
+    @FXML
+    void cambiarRuta(ActionEvent event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File f = directoryChooser.showDialog(null);
+        textAreaRuta.setText(f.getAbsolutePath());
+    }
+
+    public String getInformeMas() {
+        Integer MAX = 0;
+        String informe = null;
+        for (String i : mapaInformeUtilizado.keySet()) {
+            if (mapaInformeUtilizado.get(i) > MAX) {
+                MAX = mapaInformeUtilizado.get(i);
+                informe = i;
+            }
+        }
+        return informe;
+    }
+
+
+    @FXML
+    void hoverInforme(MouseEvent event) {
+        Button boton = (Button) event.getSource();
+
+        boton.setStyle("-fx-background-color: grey");
+        boton.setStyle("-fx-border-color: grey");
+        boton.setStyle("-fx-border-radius: 5px");
+    }
+
+    @FXML
+    void hoverNormalInforme(MouseEvent event) {
+        Button boton = (Button) event.getSource();
+
+        boton.getStyleClass().add("botonPrueba"); // Aplica la clase CSS al botón
+        boton.setStyle("-fx-background-color: transparent");
+        boton.setStyle("-fx-border-color: grey");
+        boton.setStyle("-fx-border-radius: 5px");
+
+    }
+
+
+
+}

@@ -110,7 +110,7 @@ public class ControladorPC {
             textIncidencia.setText(bundle.getString("textIncidencia"));
             tituloIncidencias.setText(bundle.getString("tituloIncidencias"));
             actualizar.setText(bundle.getString("boton.text"));
-            actualizar1.setText(bundle.getString("boton.text"));
+            actualizar1.setText(bundle.getString("boton2.text"));
 
             System.out.println("Idioma cargado exitosamente.");//Debug
 

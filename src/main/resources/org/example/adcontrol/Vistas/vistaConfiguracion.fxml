@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorApp">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorInformes">
     <left>
         <AnchorPane prefHeight="664.0" prefWidth="79.0" style="-fx-background-color: #01a5e7;" BorderPane.alignment="CENTER">
             <children>
@@ -89,7 +89,7 @@
                         <DropShadow />
                      </effect>
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" text="Informes totales">
+                        <Label fx:id="textTotales" layoutX="14.0" layoutY="14.0" text="Informes totales">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -105,7 +105,7 @@
                         <DropShadow />
                      </effect>
                      <children>
-                        <Label layoutX="16.0" layoutY="11.0" text="Ultimo tipo de informe utilizado">
+                        <Label fx:id="textUltimo" layoutX="16.0" layoutY="11.0" text="Ultimo tipo de informe utilizado">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -120,7 +120,7 @@
                         <DropShadow />
                      </effect>
                      <children>
-                        <Label layoutX="16.0" layoutY="13.0" text="Informe mas utilizado">
+                        <Label fx:id="textInforme" layoutX="16.0" layoutY="13.0" text="Informe mas utilizado">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -136,7 +136,7 @@
                         <DropShadow />
                      </effect>
                      <children>
-                        <Label layoutX="12.0" layoutY="12.0" text="Nombre del ultimo informe generado">
+                        <Label fx:id="textNombreUltimo" layoutX="12.0" layoutY="12.0" text="Nombre del ultimo informe generado">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -151,11 +151,11 @@
                </children></AnchorPane>
                 <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
-                        <MenuButton layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="68.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
+                        <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="68.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Español" />
-                                <MenuItem mnemonicParsing="false" text="Englhis" />
-                                <MenuItem mnemonicParsing="false" text="Français" />
+                                <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
+                                <MenuItem fx:id="ingles" mnemonicParsing="false" text="Englhis" />
+                                <MenuItem fx:id="frances" mnemonicParsing="false" text="Français" />
                             </items>
                             <graphic>
                                 <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
@@ -169,7 +169,7 @@
                 </AnchorPane>
             <Pane layoutX="22.0" layoutY="68.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="286.0" prefWidth="946.0" style="-fx-background-color: white; -fx-background-radius: 10px;">
                <children>
-                  <Label layoutX="16.0" layoutY="135.0" text="Directorio de guardado">
+                  <Label fx:id="textdirectorio" layoutX="16.0" layoutY="135.0" text="Directorio de guardado">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -184,13 +184,13 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label layoutX="13.0" layoutY="53.0" text="Tipo de informe">
+                  <Label fx:id="tipo1" layoutX="13.0" layoutY="53.0" text="Tipo de informe">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                   <ComboBox fx:id="comboboxInforme" layoutX="15.0" layoutY="80.0" prefHeight="38.0" prefWidth="458.0" promptText="Seleccionar" style="-fx-background-radius: 5px; -fx-border-radius: 5px;" />
-                  <Label layoutX="19.0" layoutY="13.0" text="Configuracion de informe">
+                  <Label fx:id="tituloInforme" layoutX="19.0" layoutY="13.0" text="Configuracion de informe">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -204,7 +204,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label layoutX="482.0" layoutY="53.0" text="Nombre del informe">
+                  <Label fx:id="tipo2" layoutX="482.0" layoutY="53.0" text="Nombre del informe">
                      <font>
                         <Font size="18.0" />
                      </font>
