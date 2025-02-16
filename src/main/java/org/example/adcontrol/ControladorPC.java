@@ -49,6 +49,9 @@ public class ControladorPC {
     Button actualizar;
 
     @FXML
+    Button actualizar1;
+
+    @FXML
     MenuButton idiomas;
 
     @FXML
@@ -79,21 +82,9 @@ public class ControladorPC {
 
     //Elementos a traducir
     @FXML
-    private Label PreguntaIncidencias;
+    private Label textIncidencia;
     @FXML
-    private Label PreguntaInforme;
-    @FXML
-    private Label DescIncidencias;
-    @FXML
-    private Label DescInforme;
-    @FXML
-    private Label TituloMysql;
-    @FXML
-    private Label DescMysql;
-    @FXML
-    private Label TituloJasper;
-    @FXML
-    private Label DescJasper;
+    private Label tituloIncidencias;
 
     @FXML
     public void initialize() {
@@ -104,35 +95,31 @@ public class ControladorPC {
         botones.add(monitorBoton);
         botones.add(salirBoton);
 
-//        español.setOnAction(e -> cargarIdioma(new Locale("es")));
-//        ingles.setOnAction(e -> cargarIdioma(new Locale("en")));
-//        frances.setOnAction(e -> cargarIdioma(new Locale("fr")));
+       español.setOnAction(e -> cargarIdioma(new Locale("es")));
+       ingles.setOnAction(e -> cargarIdioma(new Locale("en")));
+       frances.setOnAction(e -> cargarIdioma(new Locale("fr")));
     }
 
     //Cargar idiomas
-    // Método para cambiar el idioma
-//    public void cargarIdioma(Locale locale) {
-//        try {
-//            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
-//
-//            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
-//            PreguntaIncidencias.setText(bundle.getString("PreguntaIncidencias"));
-//            PreguntaInforme.setText(bundle.getString("PreguntaInforme"));
-//            DescIncidencias.setText(bundle.getString("DescIncidencias"));
-//            DescInforme.setText(bundle.getString("DescInforme"));
-//            TituloMysql.setText(bundle.getString("TituloMysql"));
-//            DescMysql.setText(bundle.getString("DescMysql"));
-//            TituloJasper.setText(bundle.getString("TituloJasper"));
-//            DescJasper.setText(bundle.getString("DescJasper"));
-//
-//            System.out.println("Idioma cargado exitosamente.");//Debug
-//
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//
-//    }
+     //Método para cambiar el idioma
+    public void cargarIdioma(Locale locale) {
+        try {
+            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
+
+            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
+            textIncidencia.setText(bundle.getString("textIncidencia"));
+            tituloIncidencias.setText(bundle.getString("tituloIncidencias"));
+            actualizar.setText(bundle.getString("boton.text"));
+            actualizar1.setText(bundle.getString("boton.text"));
+
+            System.out.println("Idioma cargado exitosamente.");//Debug
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
 
     //Método que rellena el ListView
     public void mostrarIncidenciasListView() throws AulaNotFoundException {

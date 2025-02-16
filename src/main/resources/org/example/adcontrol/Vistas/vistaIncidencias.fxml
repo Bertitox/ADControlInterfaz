@@ -102,14 +102,14 @@
                         </MenuButton>
                     </children>
                 </AnchorPane>
-              <Pane fx:id="panel11" layoutX="81.0" layoutY="118.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="193.0" prefWidth="415.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
+              <Pane fx:id="panel11" layoutX="39.0" layoutY="118.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="220.0" prefWidth="448.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
                   <children>
-                      <Label fx:id="PreguntaIncidencias" layoutX="14.0" layoutY="22.0" prefHeight="39.0" prefWidth="372.0" text="Consulta Incidencias">
+                      <Label fx:id="tituloIncidencias" layoutX="19.0" layoutY="22.0" prefHeight="39.0" prefWidth="372.0" text="Consulta Incidencias">
                           <font>
                               <Font name="System Bold" size="28.0" />
                           </font>
                       </Label>
-                      <Label fx:id="DescIncidencias" layoutX="29.0" layoutY="70.0" prefHeight="44.0" prefWidth="265.0" text="Inserta la referencia al Aula:" wrapText="true">
+                      <Label fx:id="textIncidencia" layoutX="28.0" layoutY="73.0" prefHeight="44.0" prefWidth="265.0" text="Inserta la referencia al Aula:" wrapText="true">
                           <font>
                               <Font size="17.0" />
                           </font>
@@ -119,14 +119,14 @@
                               <Font size="14.0" />
                           </font>
                       </Label>
-                      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="350.0" layoutY="24.0">
+                      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
                           <image>
                               <Image url="@../Imagenes/actualizar.png" />
                           </image>
                       </ImageView>
-                  <TextField fx:id="textIncidencias" layoutX="250.0" layoutY="80.0" />
-                  <Button fx:id="actualizar" layoutX="72.0" layoutY="129.0" mnemonicParsing="false" onAction="#mostrarIncidenciasListView" prefHeight="40.0" prefWidth="85.0" text="Actualizar" textFill="#030303" />
-                  <Button fx:id="actualizar1" layoutX="268.0" layoutY="129.0" mnemonicParsing="false" onAction="#actualizarGrafico" prefHeight="40.0" prefWidth="85.0" text="Ver Gráfico" textFill="#030303" />
+                  <TextField fx:id="textIncidencias" layoutX="258.0" layoutY="85.0" />
+                  <Button fx:id="actualizar" layoutX="72.0" layoutY="143.0" mnemonicParsing="false" onAction="#mostrarIncidenciasListView" prefHeight="40.0" prefWidth="105.0" styleClass="botonPrueba" text="Actualizar" textFill="#030303" />
+                  <Button fx:id="actualizar1" layoutX="264.0" layoutY="141.0" mnemonicParsing="false" onAction="#actualizarGrafico" prefHeight="40.0" prefWidth="109.0" styleClass="botonPrueba" text="Ver Gráfico" textFill="#030303" />
                   </children>
                   <cursor>
                       <Cursor fx:constant="HAND" />
@@ -135,8 +135,21 @@
                       <DropShadow height="15.0" radius="7.0" width="15.0" />
                   </effect>
               </Pane>
-            <ListView fx:id="listIncidencias" styleClass="listView" layoutX="508.0" layoutY="118.0" prefHeight="492.0" prefWidth="428.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;" />
-            <PieChart fx:id="graficoIncidencias" layoutX="92.0" layoutY="339.0" prefHeight="175.0" prefWidth="365.0" />
+            <ListView fx:id="listIncidencias" layoutX="524.0" layoutY="118.0" prefHeight="492.0" prefWidth="428.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="listView">
+               <effect>
+                  <DropShadow />
+               </effect></ListView>
+            <Pane fx:id="panel111" layoutX="39.0" layoutY="387.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="223.0" prefWidth="449.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
+               <children>
+                  <PieChart fx:id="graficoIncidencias" layoutX="14.0" layoutY="14.0" prefHeight="183.0" prefWidth="423.0" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow height="15.0" radius="7.0" width="15.0" />
+               </effect>
+            </Pane>
             </children>
         </AnchorPane>
     </center>
