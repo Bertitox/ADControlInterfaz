@@ -50,6 +50,10 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
 
+/**
+ * @author Daniel y Alberto
+ * @version 1.0
+ */
 public class ControladorApp {//implements Initializable {
     @FXML
     private ImageView exitIcon;
@@ -156,7 +160,8 @@ public class ControladorApp {//implements Initializable {
     private ResourceBundle bundle;
 
     /**
-     * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
+     * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico y los idiomas.
+     * Inicializa la app entera.
      */
     @FXML
     public void initialize() {
@@ -202,8 +207,10 @@ public class ControladorApp {//implements Initializable {
 
     }
 
-    //Cargar idiomas
-    // Método para cambiar el idioma
+    /**
+     * Método que sirve para cambiar el idioma
+     * @param locale Recive el idioma Local ("es")
+     */
     public void cargarIdioma(Locale locale) {
         try {
             System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug

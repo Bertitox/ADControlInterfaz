@@ -151,6 +151,11 @@ public class CRUDIncidencia {
         }
     }
 
+    /**
+     * Método que muestra las incidencias filtrando por ID de {@link Aula}
+     * @param id Int que representa el id de un {@link Aula}
+     * @throws AulaNotFoundException Excepción de usuario {@link AulaNotFoundException} que lanza el método
+     */
     public void mostrarIncidenciasIdAulas(String id) throws AulaNotFoundException {
         Aula a = em.find(Aula.class, 1);
         for (Incidencia incidencia : getIncidenciasAulas(a.getReferencia())) {
@@ -158,7 +163,12 @@ public class CRUDIncidencia {
         }
     }
 
-    //Método que devuelve una lista de incidencias según la referencia del aula
+    /**
+     * Método que devuelve una lista de incidencias según la referencia del aula
+     * @param referencia String que hace referencia al Aula
+     * @return List<Incidencia>
+     * @throws AulaNotFoundException Excepción de usuario {@link AulaNotFoundException} que lanza el método
+     */
     public List<Incidencia> incidenciasXAulas(String referencia) throws AulaNotFoundException {
         List<Incidencia> incidencias = new ArrayList<>();
         for (Incidencia i : getAllIncidencias()) {
@@ -169,7 +179,11 @@ public class CRUDIncidencia {
         return incidencias;
     }
 
-    //Método para Mostrar Incidencias Por Aula usando la referencia al Aula
+    /**
+     * Método para Mostrar Incidencias Por Aula usando la referencia al Aula
+     * @param referencia String que hace referencia al Aula
+     * @throws AulaNotFoundException Excepción de usuario {@link AulaNotFoundException} que lanza el método
+     */
     public void mostrarIncidenciasxAula(String referencia) throws AulaNotFoundException {
         for (Incidencia incidencia : incidenciasXAulas(referencia)) {
             System.out.println(incidencia);
