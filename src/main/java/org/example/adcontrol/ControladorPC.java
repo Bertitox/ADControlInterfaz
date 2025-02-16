@@ -1,17 +1,24 @@
 package org.example.adcontrol;
 
+import BBDD.DAO.CRUDIncidencia;
+import BBDD.DTO.Incidencia;
+import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -27,7 +34,19 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class ContoladorPC {
+public class ControladorPC {
+
+    @FXML
+    ListView<String> listIncidencias;
+
+    @FXML
+    TextField textIncidencias;
+
+    @FXML
+    PieChart graficoIncidencias;
+
+    @FXML
+    Button actualizar;
 
     @FXML
     MenuButton idiomas;
@@ -114,6 +133,60 @@ public class ContoladorPC {
 //        }
 //
 //    }
+
+    //Método que rellena el ListView
+    public void mostrarIncidenciasListView() throws AulaNotFoundException {
+        CRUDIncidencia crud = new CRUDIncidencia();
+        List<Incidencia> incidencias = crud.incidenciasXAulas(textIncidencias.getText().toString());
+
+        //Pasamos la información a una Lista observable para el ListView
+        ObservableList<String> items = FXCollections.observableArrayList();
+
+        for (Incidencia incidencia : incidencias) {
+            items.add("Código Error: " + incidencia.getCodigoError().getCodigoError());
+            items.add("Descripción: " + incidencia.getDescripcion());
+            items.add("");
+        }
+
+        listIncidencias.setItems(items);
+    }
+
+    //Método para rellenar el gráfico
+    @FXML
+    public void actualizarGrafico() {
+        String referencia = textIncidencias.getText().trim(); // Obtener referencia del aula ingresada
+        CRUDIncidencia crudIncidencia = new CRUDIncidencia();
+
+        if (referencia.isEmpty()) {
+            mostrarAlerta("Incidencias Aula","Ingrese la referencia a un Aula");
+            return;
+        }
+
+        ObservableList<PieChart.Data> datosGrafico = FXCollections.observableArrayList();
+
+        try {
+            int numIncidencias = crudIncidencia.numIncidenciasAula(referencia);
+
+            if (numIncidencias > 0) {
+                datosGrafico.add(new PieChart.Data(referencia, numIncidencias));
+            } else {
+                mostrarAlerta("Incidencias Aula","No hay Incidencias para el Aula "+ textIncidencias.getText().toString());
+            }
+        } catch (AulaNotFoundException e) {
+            System.err.println("Error: " + e.getMessage()); // Manejo de error si el aula no existe
+        }
+
+        graficoIncidencias.setData(datosGrafico); // Asignar los datos al PieChart
+    }
+
+    //Muestra errores al usuario
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
 
     @FXML
     void hoverBoton(MouseEvent event) {
