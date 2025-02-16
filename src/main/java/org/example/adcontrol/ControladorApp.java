@@ -112,6 +112,9 @@ public class ControladorApp {//implements Initializable {
     MenuItem ingles;
 
     @FXML
+    private Label ultimoInforme;
+
+    @FXML
     MenuItem frances;
 
     //Elementos a traducir
@@ -128,6 +131,16 @@ public class ControladorApp {//implements Initializable {
     @FXML
     private Label textFecha2;
 
+    @FXML
+    private Label numeroTotalInformes;
+
+    @FXML
+    private Label informeMasUtilizado;
+
+    Map<String, Integer> mapaInformeUtilizado;
+
+    Integer nTotal = 0;
+
     private ResourceBundle bundle;
 
     /**
@@ -135,6 +148,7 @@ public class ControladorApp {//implements Initializable {
      */
     @FXML
     public void initialize() {
+        mapaInformeUtilizado = new HashMap<>();
         ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
         comboboxInforme.setItems(items);
 
@@ -160,7 +174,7 @@ public class ControladorApp {//implements Initializable {
             CRUDAula aula = new CRUDAula();
 
             //Actualizar Incidencias
-           actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
+            actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
             campoFecha.setText(LocalDate.now().toString());
             campoFecha1.setText(LocalDate.now().toString());
             try {
@@ -187,7 +201,7 @@ public class ControladorApp {//implements Initializable {
 
             System.out.println("Idioma cargado exitosamente.");//Debug
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -397,6 +411,7 @@ public class ControladorApp {//implements Initializable {
     public void lanza1(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
     }
+
     @FXML
     public void lanza2(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
@@ -421,6 +436,11 @@ public class ControladorApp {//implements Initializable {
 
         String ruta = textAreaRuta.getText() + "/informe.pdf";
         JasperExportManager.exportReportToPdfFile(print, ruta);
+        ultimoInforme.setText(comboboxInforme.getValue().toString());
+        mapaInformeUtilizado.put(comboboxInforme.getValue().toString(), mapaInformeUtilizado.getOrDefault(comboboxInforme.getValue().toString(), 0) + 1);
+        this.nTotal++;
+        numeroTotalInformes.setText(this.nTotal.toString());
+        informeMasUtilizado.setText(getInformeMas().toString());
     }
 
     @FXML
@@ -428,10 +448,19 @@ public class ControladorApp {//implements Initializable {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File f = directoryChooser.showDialog(null);
         textAreaRuta.setText(f.getAbsolutePath());
-
     }
 
-
+    public String getInformeMas() {
+        Integer MAX = 0;
+        String informe = null;
+        for (String i : mapaInformeUtilizado.keySet()) {
+            if (mapaInformeUtilizado.get(i) > MAX) {
+                MAX = mapaInformeUtilizado.get(i);
+                informe = i;
+            }
+        }
+        return informe;
+    }
 
 
 }
