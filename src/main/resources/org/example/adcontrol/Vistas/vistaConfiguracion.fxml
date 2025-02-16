@@ -2,13 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorApp">
     <left>
@@ -77,7 +81,13 @@
     <center>
         <AnchorPane prefHeight="664.0" prefWidth="936.0" style="-fx-background-color:  rgb(241,245,246);" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane layoutX="45.0" layoutY="324.0" prefHeight="313.0" prefWidth="938.0" />
+                <AnchorPane layoutX="45.0" layoutY="324.0" prefHeight="313.0" prefWidth="938.0">
+               <children>
+                  <Pane layoutX="13.0" layoutY="46.0" prefHeight="122.0" prefWidth="428.0" style="-fx-background-color: red;" />
+                  <Pane layoutX="14.0" layoutY="189.0" prefHeight="122.0" prefWidth="428.0" style="-fx-background-color: red;" />
+                  <Pane layoutX="467.0" layoutY="46.0" prefHeight="122.0" prefWidth="428.0" style="-fx-background-color: red;" />
+                  <Pane layoutX="468.0" layoutY="189.0" prefHeight="122.0" prefWidth="428.0" style="-fx-background-color: red;" />
+               </children></AnchorPane>
                 <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
                         <MenuButton layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="68.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
@@ -96,7 +106,45 @@
                         </MenuButton>
                     </children>
                 </AnchorPane>
-            <Label layoutX="250.0" layoutY="199.0" text="config" />
+            <Pane layoutX="22.0" layoutY="68.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="302.0" prefWidth="946.0">
+               <children>
+                  <Label layoutX="16.0" layoutY="156.0" text="Directorio de guardado">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="textAreaRuta" layoutX="19.0" layoutY="185.0" prefHeight="39.0" prefWidth="791.0" style="-fx-background-radius: 5px; -fx-border-radius: 5px;" />
+                  <Button layoutX="827.0" layoutY="187.0" mnemonicParsing="false" onAction="#cambiarRuta" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: trasnparent; -fx-border-color: grey; -fx-border-radius: 5px;" text="Explorar">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0">
+                           <image>
+                              <Image url="@../Imagenes/carpeta.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label layoutX="13.0" layoutY="74.0" text="Tipo de informe">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="comboboxInforme" layoutX="15.0" layoutY="105.0" prefHeight="29.0" prefWidth="912.0" promptText="Seleccionar" style="-fx-background-radius: 5px; -fx-border-radius: 5px;" />
+                  <Label layoutX="19.0" layoutY="21.0" text="Selecciona el tipo de informe y el directorio de guardado">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button defaultButton="true" layoutX="19.0" layoutY="243.0" mnemonicParsing="false" onAction="#generarPDF" prefHeight="36.0" prefWidth="906.0" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 5px;" text="Generar PDF">
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="27.0">
+                           <image>
+                              <Image url="@../Imagenes/descargar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
             </children>
         </AnchorPane>
     </center>

@@ -22,20 +22,30 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
@@ -82,6 +92,12 @@ public class ControladorApp {//implements Initializable {
     @FXML
     private Label campoFecha1;
 
+    @FXML
+    private TextArea textAreaRuta;
+
+    @FXML
+    private ComboBox comboboxInforme = new ComboBox();
+
     List<Button> botones;
 
     Boolean isInHome = true;
@@ -114,12 +130,14 @@ public class ControladorApp {//implements Initializable {
 
     private ResourceBundle bundle;
 
-
     /**
      * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
      */
     @FXML
     public void initialize() {
+        ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
+        comboboxInforme.setItems(items);
+
         botones = new ArrayList<>();
         botones.add(ajustesBoton);
         botones.add(ayudaBoton);
@@ -383,6 +401,36 @@ public class ControladorApp {//implements Initializable {
     public void lanza2(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
     }
+
+    @FXML
+    void generarPDF(ActionEvent event) throws ClassNotFoundException, SQLException, JRException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Map parametros = new HashMap();
+        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/infoSistema", "root", "210205");
+        JasperPrint print;
+        if (comboboxInforme.getValue().equals("Aulas")) {
+            //SE INDICA EL FICHERO .JASPER EN EL PROYECTO (EN ESTE CASO EL GENERICO)
+            print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
+        } else if (comboboxInforme.equals("Incidencias")) {
+            //SE INDICA EL FICHERO .JASPER EN EL PROYECTO (EN ESTE CASO EL GENERICO)
+            print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
+        } else {
+            //SE INDICA EL FICHERO .JASPER EN EL PROYECTO (EN ESTE CASO EL GENERICO)
+            print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
+        }
+
+        String ruta = textAreaRuta.getText() + "/informe.pdf";
+        JasperExportManager.exportReportToPdfFile(print, ruta);
+    }
+
+    @FXML
+    void cambiarRuta(ActionEvent event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File f = directoryChooser.showDialog(null);
+        textAreaRuta.setText(f.getAbsolutePath());
+    }
+
+
 
 
 }

@@ -82,6 +82,17 @@
             <artifactId>javafx-media</artifactId>
             <version>23</version>
         </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-pdf</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-javaflow</artifactId>
+            <version>7.0.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>

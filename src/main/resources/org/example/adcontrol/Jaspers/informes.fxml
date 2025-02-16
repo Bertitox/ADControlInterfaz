@@ -17,7 +17,7 @@
             <children>
                 <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@ControlADWhite copia.png" />
+                        <Image url="@ControlADLogoSinFondoBlanco.png" />
                     </image>
                 </ImageView>
                 <Button fx:id="salirBoton" layoutX="7.0" layoutY="590.0" mnemonicParsing="false" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="62.0" prefWidth="65.0" style="-fx-background-color: null;">
