@@ -31,4 +31,20 @@
     -fx-background-color: transparent; /* Elimina fondo gris del chart */
 }
 
+.botonPrueba{
+    -fx-background-color: transparent;
+    -fx-border-color: grey;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.botonPrueba:hover{
+    -fx-background-color: grey;
+    -fx-border-color: grey;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-text-fill: white;
+}
+
+
 

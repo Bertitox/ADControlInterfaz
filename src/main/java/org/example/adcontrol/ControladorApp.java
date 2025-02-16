@@ -76,6 +76,9 @@ public class ControladorApp {//implements Initializable {
     private Label lblTituloGrave;
 
     @FXML
+    private TextArea nombreInforme;
+
+    @FXML
     private Label lblTituloUltimasIncidecias;
 
     //Campos del Gráfico de datos
@@ -112,7 +115,19 @@ public class ControladorApp {//implements Initializable {
     MenuItem ingles;
 
     @FXML
+    private Label ultimoNombre;
+
+    @FXML
+    private Label ultimoInforme;
+
+    @FXML
     MenuItem frances;
+
+    @FXML
+    Button botonGenerar;
+
+    @FXML
+    Button botonExplorar;
 
     //Elementos a traducir
     @FXML
@@ -128,6 +143,16 @@ public class ControladorApp {//implements Initializable {
     @FXML
     private Label textFecha2;
 
+    @FXML
+    private Label numeroTotalInformes;
+
+    @FXML
+    private Label informeMasUtilizado;
+
+    Map<String, Integer> mapaInformeUtilizado;
+
+    Integer nTotal = 0;
+
     private ResourceBundle bundle;
 
     /**
@@ -135,6 +160,12 @@ public class ControladorApp {//implements Initializable {
      */
     @FXML
     public void initialize() {
+        botonGenerar = new Button();
+        botonExplorar = new Button();
+        botonExplorar.getStyleClass().add("botonPrueba");
+        botonGenerar.getStyleClass().add("botonPrueba");
+
+        mapaInformeUtilizado = new HashMap<>();
         ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
         comboboxInforme.setItems(items);
 
@@ -160,7 +191,7 @@ public class ControladorApp {//implements Initializable {
             CRUDAula aula = new CRUDAula();
 
             //Actualizar Incidencias
-           actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
+            actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
             campoFecha.setText(LocalDate.now().toString());
             campoFecha1.setText(LocalDate.now().toString());
             try {
@@ -187,7 +218,7 @@ public class ControladorApp {//implements Initializable {
 
             System.out.println("Idioma cargado exitosamente.");//Debug
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -397,6 +428,7 @@ public class ControladorApp {//implements Initializable {
     public void lanza1(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
     }
+
     @FXML
     public void lanza2(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
@@ -407,20 +439,56 @@ public class ControladorApp {//implements Initializable {
         Class.forName("com.mysql.jdbc.Driver");
         Map parametros = new HashMap();
         Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/infoSistema", "root", "210205");
-        JasperPrint print;
-        if (comboboxInforme.getValue().equals("Aulas")) {
-            //SE INDICA EL FICHERO .JASPER EN EL PROYECTO (EN ESTE CASO EL GENERICO)
-            print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
-        } else if (comboboxInforme.equals("Incidencias")) {
-            //SE INDICA EL FICHERO .JASPER EN EL PROYECTO (EN ESTE CASO EL GENERICO)
-            print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
-        } else {
-            //SE INDICA EL FICHERO .JASPER EN EL PROYECTO (EN ESTE CASO EL GENERICO)
-            print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
-        }
+        JasperPrint print = null;
+        if (comboboxInforme.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al generar el informe", ButtonType.OK);
+            alert.setTitle("Error");
+            alert.setHeaderText(null); // Elimina encabezado
+            alert.showAndWait();
 
-        String ruta = textAreaRuta.getText() + "/informe.pdf";
-        JasperExportManager.exportReportToPdfFile(print, ruta);
+        } else if(textAreaRuta.getText().isBlank() || textAreaRuta.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Selecciona una ruta", ButtonType.OK);
+            alert.setTitle("Error");
+            alert.setHeaderText(null); // Elimina encabezado
+            alert.showAndWait();
+        }else{
+            switch (comboboxInforme.getValue().toString()) {
+                case "Aulas":
+                    print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
+                    break;
+                case "Incidencias":
+                    print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
+                    break;
+                case "Equipos":
+                    print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
+                    break;
+                default:
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error al generar el informe", ButtonType.OK);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null); // Elimina encabezado
+                    alert.showAndWait();
+                    break;
+            }
+
+            String ruta;
+            if (nombreInforme.getText().isBlank() || nombreInforme.getText().isEmpty()) {
+                ruta = textAreaRuta.getText() + "/informe.pdf";
+            } else {
+                ruta = textAreaRuta.getText() +"/" +  nombreInforme.getText() + ".pdf";
+            }
+            JasperExportManager.exportReportToPdfFile(print, ruta);
+            ultimoInforme.setText(comboboxInforme.getValue().toString());
+            mapaInformeUtilizado.put(comboboxInforme.getValue().toString(), mapaInformeUtilizado.getOrDefault(comboboxInforme.getValue().toString(), 0) + 1);
+            this.nTotal++;
+            numeroTotalInformes.setText(this.nTotal.toString());
+            informeMasUtilizado.setText(getInformeMas().toString());
+            ultimoNombre.setText(nombreInforme.getText());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Informe creado correctamente", ButtonType.OK);
+            alert.setTitle("Informe creado");
+            alert.setHeaderText(null); // Elimina encabezado
+            alert.showAndWait();
+            nombreInforme.setText("");
+        }
     }
 
     @FXML
@@ -428,10 +496,38 @@ public class ControladorApp {//implements Initializable {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File f = directoryChooser.showDialog(null);
         textAreaRuta.setText(f.getAbsolutePath());
+    }
 
+    public String getInformeMas() {
+        Integer MAX = 0;
+        String informe = null;
+        for (String i : mapaInformeUtilizado.keySet()) {
+            if (mapaInformeUtilizado.get(i) > MAX) {
+                MAX = mapaInformeUtilizado.get(i);
+                informe = i;
+            }
+        }
+        return informe;
     }
 
 
+    @FXML
+    void hoverInforme(MouseEvent event) {
+        Button boton = (Button) event.getSource();
 
+        boton.setStyle("-fx-background-color: grey");
+        boton.setStyle("-fx-border-color: grey");
+        boton.setStyle("-fx-border-radius: 5px");
+    }
 
+    @FXML
+    void hoverNormalInforme(MouseEvent event) {
+        Button boton = (Button) event.getSource();
+
+        boton.getStyleClass().add("botonPrueba"); // Aplica la clase CSS al botón
+        boton.setStyle("-fx-background-color: transparent");
+        boton.setStyle("-fx-border-color: grey");
+        boton.setStyle("-fx-border-radius: 5px");
+
+    }
 }
