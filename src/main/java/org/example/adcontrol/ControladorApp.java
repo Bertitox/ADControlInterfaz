@@ -428,6 +428,7 @@ public class ControladorApp {//implements Initializable {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File f = directoryChooser.showDialog(null);
         textAreaRuta.setText(f.getAbsolutePath());
+
     }
 
 
