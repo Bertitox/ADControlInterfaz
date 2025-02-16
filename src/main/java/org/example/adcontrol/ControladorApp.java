@@ -225,8 +225,11 @@ public class ControladorApp {//implements Initializable {
 
     }
 
-
-    //Método para actualizar el número de incidencias
+    /**
+     * Método para actualizar el número de incidencias que hay en el sistema
+     * @param incidenciasGraves Recive un int de las incidencias graves que hay en el sistema
+     * @param incidenciasLeves Recive un int de las incidencias leves que hay en el sistema
+     */
     @FXML
     public void actualizarIncidencias(int incidenciasGraves, int incidenciasLeves) {
         lblTituloGrave.setText(incidenciasGraves + "");
@@ -264,6 +267,10 @@ public class ControladorApp {//implements Initializable {
         zoomIn.play();
     }
 
+    /**
+     * Pone el zoom al Pane
+     * @param event Evento que espera el método
+     */
     @FXML
     void zoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
@@ -274,6 +281,10 @@ public class ControladorApp {//implements Initializable {
         zoomIn.play();
     }
 
+    /**
+     * Pone el zoom al Pane
+     * @param event Evento que espera el método
+     */
     @FXML
     void quitarzoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
@@ -284,6 +295,10 @@ public class ControladorApp {//implements Initializable {
         zoomIn.play();
     }
 
+    /**
+     * Pone el zoom al Gráfico
+     * @param event Evento que espera el método
+     */
     @FXML
     void zoomBarChart(MouseEvent event) {
         BarChart barChart = (BarChart) event.getSource();
@@ -294,6 +309,10 @@ public class ControladorApp {//implements Initializable {
         zoomIn.play();
     }
 
+    /**
+     * Quita el zoom al Gráfico
+     * @param event Evento que espera el método
+     */
     @FXML
     void quitarzoomBarChart(MouseEvent event) {
         BarChart barChart = (BarChart) event.getSource();
@@ -308,8 +327,8 @@ public class ControladorApp {//implements Initializable {
     /**
      * Método que se encarga de cambiar la pantalla actual por la correspondiente al botón pulsado (pantalla de administradorS de equipos)
      *
-     * @param event
-     * @throws IOException
+     * @param event evento que espera el método
+     * @throws IOException excepción de entrada salida lanzada por el método
      */
     @FXML
     void cambiarPantallaMonitor(ActionEvent event) throws IOException {
@@ -325,6 +344,11 @@ public class ControladorApp {//implements Initializable {
         stage.show();
     }
 
+    /**
+     * Método que sirve para cambiar la pantalla Home
+     * @param event Evento que inicia el método
+     * @throws IOException Excepción de entrada salida lanzada por el método
+     */
     @FXML
     void cambiarPantallaHome(ActionEvent event) throws IOException {
         this.isInHome = true;
@@ -340,6 +364,11 @@ public class ControladorApp {//implements Initializable {
     }
 
 
+    /**
+     * Método que sirve para cambiar la pantalla de Ayuda
+     * @param event Evento que inicia el método
+     * @throws IOException Excepción de entrada salida lanzada por el método
+     */
     @FXML
     void cambiarpantallaAyuda(ActionEvent event) throws IOException {
         this.isInHome = false;
@@ -354,6 +383,11 @@ public class ControladorApp {//implements Initializable {
         stage.show();
     }
 
+    /**
+     * Método que sirve para cambiar la pantalla de Configuracion
+     * @param event Evento que inicia el método
+     * @throws IOException Excepción de entrada salida lanzada por el método
+     */
     @FXML
     void cambiarpantallaConfig(ActionEvent event) throws IOException {
         this.isInHome = false;
@@ -432,102 +466,5 @@ public class ControladorApp {//implements Initializable {
     @FXML
     public void lanza2(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
-    }
-
-    @FXML
-    void generarPDF(ActionEvent event) throws ClassNotFoundException, SQLException, JRException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Map parametros = new HashMap();
-        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/infoSistema", "root", "210205");
-        JasperPrint print = null;
-        if (comboboxInforme.getValue() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al generar el informe", ButtonType.OK);
-            alert.setTitle("Error");
-            alert.setHeaderText(null); // Elimina encabezado
-            alert.showAndWait();
-
-        } else if(textAreaRuta.getText().isBlank() || textAreaRuta.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Selecciona una ruta", ButtonType.OK);
-            alert.setTitle("Error");
-            alert.setHeaderText(null); // Elimina encabezado
-            alert.showAndWait();
-        }else{
-            switch (comboboxInforme.getValue().toString()) {
-                case "Aulas":
-                    print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/InformeAula.jasper", null, conexion);
-                    break;
-                case "Incidencias":
-                    print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/InformeIncidencias.jasper", null, conexion);
-                    break;
-                case "Equipos":
-                    print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/Informe.jasper", null, conexion);
-                    break;
-                default:
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error al generar el informe", ButtonType.OK);
-                    alert.setTitle("Error");
-                    alert.setHeaderText(null); // Elimina encabezado
-                    alert.showAndWait();
-                    break;
-            }
-
-            String ruta;
-            if (nombreInforme.getText().isBlank() || nombreInforme.getText().isEmpty()) {
-                ruta = textAreaRuta.getText() + "/informe.pdf";
-            } else {
-                ruta = textAreaRuta.getText() +"/" +  nombreInforme.getText() + ".pdf";
-            }
-            JasperExportManager.exportReportToPdfFile(print, ruta);
-            ultimoInforme.setText(comboboxInforme.getValue().toString());
-            mapaInformeUtilizado.put(comboboxInforme.getValue().toString(), mapaInformeUtilizado.getOrDefault(comboboxInforme.getValue().toString(), 0) + 1);
-            this.nTotal++;
-            numeroTotalInformes.setText(this.nTotal.toString());
-            informeMasUtilizado.setText(getInformeMas().toString());
-            ultimoNombre.setText(nombreInforme.getText());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Informe creado correctamente", ButtonType.OK);
-            alert.setTitle("Informe creado");
-            alert.setHeaderText(null); // Elimina encabezado
-            alert.showAndWait();
-            nombreInforme.setText("");
-        }
-    }
-
-    @FXML
-    void cambiarRuta(ActionEvent event) {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        File f = directoryChooser.showDialog(null);
-        textAreaRuta.setText(f.getAbsolutePath());
-    }
-
-    public String getInformeMas() {
-        Integer MAX = 0;
-        String informe = null;
-        for (String i : mapaInformeUtilizado.keySet()) {
-            if (mapaInformeUtilizado.get(i) > MAX) {
-                MAX = mapaInformeUtilizado.get(i);
-                informe = i;
-            }
-        }
-        return informe;
-    }
-
-
-    @FXML
-    void hoverInforme(MouseEvent event) {
-        Button boton = (Button) event.getSource();
-
-        boton.setStyle("-fx-background-color: grey");
-        boton.setStyle("-fx-border-color: grey");
-        boton.setStyle("-fx-border-radius: 5px");
-    }
-
-    @FXML
-    void hoverNormalInforme(MouseEvent event) {
-        Button boton = (Button) event.getSource();
-
-        boton.getStyleClass().add("botonPrueba"); // Aplica la clase CSS al botón
-        boton.setStyle("-fx-background-color: transparent");
-        boton.setStyle("-fx-border-color: grey");
-        boton.setStyle("-fx-border-radius: 5px");
-
     }
 }

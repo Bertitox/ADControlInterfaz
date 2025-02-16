@@ -40,6 +40,11 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Clase Controladora de la pestaña informes
+ * @author Daniel y Alberto
+ * @version 1.0
+ */
 public class ControladorInformes {
 
     @FXML
@@ -160,6 +165,10 @@ public class ControladorInformes {
 
     //Cargar idiomas
     // Método para cambiar el idioma
+    /**
+     * Carga el idioma seleccionado y actualiza los textos de la interfaz de usuario.
+     * @param locale El idioma a cargar (por ejemplo, español, inglés, francés).
+     */
     public void cargarIdioma(Locale locale) {
         try {
             System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
@@ -186,8 +195,8 @@ public class ControladorInformes {
     /**
      * Método que se encarga de cambiar la pantalla actual por la correspondiente al botón pulsado (pantalla de administradorS de equipos)
      *
-     * @param event
-     * @throws IOException
+     * @param event El evento de acción generado al hacer clic en el botón.
+     * @throws IOException Si hay un error al cargar el archivo FXML.
      */
     @FXML
     void cambiarPantallaMonitor(ActionEvent event) throws IOException {
@@ -233,6 +242,10 @@ public class ControladorInformes {
         zoomIn.play();
     }
 
+    /**
+     * Aplica un efecto de zoom a un pane cuando el ratón pasa sobre él.
+     * @param event El evento generado al pasar el ratón sobre el pane.
+     */
     @FXML
     void zoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
@@ -243,6 +256,10 @@ public class ControladorInformes {
         zoomIn.play();
     }
 
+    /**
+     * Restablece el tamaño de un pane a su estado normal cuando el ratón deja de estar sobre él.
+     * @param event El evento generado cuando el ratón deja de estar sobre el pane.
+     */
     @FXML
     void quitarzoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
@@ -253,6 +270,11 @@ public class ControladorInformes {
         zoomIn.play();
     }
 
+    /**
+     * Cambia la pantalla actual a la vista principal (pantalla de inicio).
+     * @param event El evento de acción generado al hacer clic en el botón.
+     * @throws IOException Si hay un error al cargar el archivo FXML.
+     */
     @FXML
     void cambiarPantallaHome(ActionEvent event) throws IOException {
         this.isInHome = true;
@@ -268,6 +290,11 @@ public class ControladorInformes {
     }
 
 
+    /**
+     * Cambia la pantalla actual a la vista de ayuda.
+     * @param event El evento de acción generado al hacer clic en el botón.
+     * @throws IOException Si hay un error al cargar el archivo FXML.
+     */
     @FXML
     void cambiarpantallaAyuda(ActionEvent event) throws IOException {
         this.isInHome = false;
@@ -282,6 +309,11 @@ public class ControladorInformes {
         stage.show();
     }
 
+    /**
+     * Cambia la pantalla actual a la vista de configuración.
+     * @param event El evento de acción generado al hacer clic en el botón.
+     * @throws IOException Si hay un error al cargar el archivo FXML.
+     */
     @FXML
     void cambiarpantallaConfig(ActionEvent event) throws IOException {
         this.isInHome = false;
@@ -313,17 +345,29 @@ public class ControladorInformes {
         }
     }
 
+    /**
+     * Abre una página web con información sobre el instalador de MySQL.
+     * @param event El evento generado al hacer clic en el botón.
+     */
     @FXML
     public void lanza1(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
     }
 
+    /**
+     * Abre una página web con información sobre JasperReports.
+     * @param event El evento generado al hacer clic en el botón.
+     */
     @FXML
     public void lanza2(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
     }
 
 
+    /**
+     * Genera un archivo PDF con base en los parámetros seleccionados en la interfaz.
+     * @param event El evento generado al hacer clic en el botón de generar PDF.
+     */
     @FXML
     void generarPDF(ActionEvent event) throws ClassNotFoundException, SQLException, JRException {
         Class.forName("com.mysql.jdbc.Driver");
@@ -381,6 +425,10 @@ public class ControladorInformes {
         }
     }
 
+    /**
+     * Abre un selector de directorios para cambiar la ruta donde se guardará el informe generado.
+     * @param event El evento generado al hacer clic en el botón de explorar.
+     */
     @FXML
     void cambiarRuta(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -388,6 +436,10 @@ public class ControladorInformes {
         textAreaRuta.setText(f.getAbsolutePath());
     }
 
+    /**
+     * Método que obtiene el informe más utilizado basado en el contador de informes generados.
+     * @return El nombre del informe más utilizado.
+     */
     public String getInformeMas() {
         Integer MAX = 0;
         String informe = null;
@@ -401,6 +453,10 @@ public class ControladorInformes {
     }
 
 
+    /**
+     * Método que aplica un estilo de fondo y borde al pasar el cursor sobre un botón de informe.
+     * @param event El evento generado cuando el ratón pasa sobre el botón de informe.
+     */
     @FXML
     void hoverInforme(MouseEvent event) {
         Button boton = (Button) event.getSource();
@@ -410,6 +466,10 @@ public class ControladorInformes {
         boton.setStyle("-fx-border-radius: 5px");
     }
 
+    /**
+     * Método que restablece el estilo de fondo y borde de un botón de informe cuando el ratón deja de estar sobre él.
+     * @param event El evento generado cuando el ratón deja de estar sobre el botón de informe.
+     */
     @FXML
     void hoverNormalInforme(MouseEvent event) {
         Button boton = (Button) event.getSource();
@@ -420,7 +480,4 @@ public class ControladorInformes {
         boton.setStyle("-fx-border-radius: 5px");
 
     }
-
-
-
 }
