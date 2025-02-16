@@ -6,6 +6,7 @@ import BBDD.DTO.Incidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 
 import java.util.*;
 
@@ -149,4 +150,43 @@ public class CRUDIncidencia {
             System.out.println(s);
         }
     }
+
+    public void mostrarIncidenciasIdAulas(String id) throws AulaNotFoundException {
+        Aula a = em.find(Aula.class, 1);
+        for (Incidencia incidencia : getIncidenciasAulas(a.getReferencia())) {
+            System.out.println(incidencia);
+        }
+    }
+
+    //Método que devuelve una lista de incidencias según la referencia del aula
+    public List<Incidencia> incidenciasXAulas(String referencia) throws AulaNotFoundException {
+        List<Incidencia> incidencias = new ArrayList<>();
+        for (Incidencia i : getAllIncidencias()) {
+            if (i.getIdAula().getReferencia().equals(referencia)){
+                 incidencias.add(i);
+            }
+        }
+        return incidencias;
+    }
+
+    //Método para Mostrar Incidencias Por Aula usando la referencia al Aula
+    public void mostrarIncidenciasxAula(String referencia) throws AulaNotFoundException {
+        for (Incidencia incidencia : incidenciasXAulas(referencia)) {
+            System.out.println(incidencia);
+        }
+    }
+
+    /**
+     * Método que se ecarga de recontar las incidencias por Aula
+     * @return Retorna un int número de incidencias por Aula
+     */
+    public int numIncidenciasAula(String referencia) throws AulaNotFoundException {
+        return incidenciasXAulas(referencia).size();
+    }
+
+
+//    public static void main(String[] args) throws AulaNotFoundException {
+//        CRUDIncidencia crudIncidencia = new CRUDIncidencia();
+//        crudIncidencia.mostrarIncidenciasxAula("PRUEBA2");
+//    }
 }
