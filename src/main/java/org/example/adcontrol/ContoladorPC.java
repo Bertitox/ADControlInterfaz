@@ -1,31 +1,18 @@
 package org.example.adcontrol;
 
-
-import BBDD.DAO.CRUDAula;
-import BBDD.DAO.CRUDIncidencia;
-import BBDD.DTO.Aula;
-import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -35,56 +22,12 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-public class ControladorApp {//implements Initializable {
-    @FXML
-    private ImageView exitIcon;
-    @FXML
-    private MenuButton menuButton;
-    @FXML
-    private MenuItem action1;
-    @FXML
-    private MenuItem action2;
-    @FXML
-    private Button ajustesBoton;
-    @FXML
-    private Button ayudaBoton;
-    @FXML
-    private Button homeBoton;
-    @FXML
-    private Button monitorBoton;
-    @FXML
-    private Button salirBoton;
-    @FXML
-    private Pane panel1;
-
-    @FXML
-    private Label lblTituloGrave;
-
-    @FXML
-    private Label lblTituloUltimasIncidecias;
-
-    //Campos del Gráfico de datos
-    @FXML
-    private BarChart<String, Number> barChart;
-    @FXML
-    private CategoryAxis xAxis;
-    @FXML
-    private NumberAxis yAxis;
-
-    @FXML
-    private Label campoFecha;
-
-    @FXML
-    private Label campoFecha1;
-
-    List<Button> botones;
-
-    Boolean isInHome = true;
+public class ContoladorPC {
 
     @FXML
     MenuButton idiomas;
@@ -98,26 +41,41 @@ public class ControladorApp {//implements Initializable {
     @FXML
     MenuItem frances;
 
-    //Elementos a traducir
     @FXML
-    private Label labelIncidencias;
+    private Button ajustesBoton;
     @FXML
-    private Label labelAulasDisponibles;
+    private Button ayudaBoton;
     @FXML
-    private Label textIncidenciasSistema;
+    private Button homeBoton;
     @FXML
-    private Label textAulasDisponibles;
+    private Button monitorBoton;
     @FXML
-    private Label textFecha1;
-    @FXML
-    private Label textFecha2;
+    private Button salirBoton;
 
     private ResourceBundle bundle;
 
+    List<Button> botones;
 
-    /**
-     * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
-     */
+    Boolean isInHome = true;
+
+    //Elementos a traducir
+    @FXML
+    private Label PreguntaIncidencias;
+    @FXML
+    private Label PreguntaInforme;
+    @FXML
+    private Label DescIncidencias;
+    @FXML
+    private Label DescInforme;
+    @FXML
+    private Label TituloMysql;
+    @FXML
+    private Label DescMysql;
+    @FXML
+    private Label TituloJasper;
+    @FXML
+    private Label DescJasper;
+
     @FXML
     public void initialize() {
         botones = new ArrayList<>();
@@ -127,45 +85,26 @@ public class ControladorApp {//implements Initializable {
         botones.add(monitorBoton);
         botones.add(salirBoton);
 
-//        Platform.runLater(() -> {
-//
-//            //Idiomas
-//            español.setOnAction(e -> cargarIdioma(new Locale("es")));
-//            ingles.setOnAction(e -> cargarIdioma(new Locale("en")));
-//            frances.setOnAction(e -> cargarIdioma(new Locale("fr")));
-//
-//            // Cargar el idioma inicial (Español)
-//            cargarIdioma(new Locale("es"));
-//
-//            //Gestión incidencias BBDD
-//            CRUDIncidencia incidencia = new CRUDIncidencia();
-//            CRUDAula aula = new CRUDAula();
-//
-//            //Actualizar Incidencias
-//           actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
-//            campoFecha.setText(LocalDate.now().toString());
-//            campoFecha1.setText(LocalDate.now().toString());
-//            try {
-//                actualizarGrafico();
-//            } catch (Exception e) {
-//            }
-//        });
-
+//        español.setOnAction(e -> cargarIdioma(new Locale("es")));
+//        ingles.setOnAction(e -> cargarIdioma(new Locale("en")));
+//        frances.setOnAction(e -> cargarIdioma(new Locale("fr")));
     }
 
-//    //Cargar idiomas
-//    // Método para cambiar el idioma
+    //Cargar idiomas
+    // Método para cambiar el idioma
 //    public void cargarIdioma(Locale locale) {
 //        try {
 //            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
 //
 //            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
-//            labelIncidencias.setText(bundle.getString("labelIncidencias"));
-//            labelAulasDisponibles.setText(bundle.getString("labelAulasDisponibles"));
-//            textIncidenciasSistema.setText(bundle.getString("textIncidenciasSistema"));
-//            textAulasDisponibles.setText(bundle.getString("textAulasDisponibles"));
-//            textFecha1.setText(bundle.getString("textFecha1"));
-//            textFecha2.setText(bundle.getString("textFecha2"));
+//            PreguntaIncidencias.setText(bundle.getString("PreguntaIncidencias"));
+//            PreguntaInforme.setText(bundle.getString("PreguntaInforme"));
+//            DescIncidencias.setText(bundle.getString("DescIncidencias"));
+//            DescInforme.setText(bundle.getString("DescInforme"));
+//            TituloMysql.setText(bundle.getString("TituloMysql"));
+//            DescMysql.setText(bundle.getString("DescMysql"));
+//            TituloJasper.setText(bundle.getString("TituloJasper"));
+//            DescJasper.setText(bundle.getString("DescJasper"));
 //
 //            System.out.println("Idioma cargado exitosamente.");//Debug
 //
@@ -176,11 +115,6 @@ public class ControladorApp {//implements Initializable {
 //
 //    }
 
-    /**
-     * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
-     *
-     * @param event Cuando se pasa el cursor por encima
-     */
     @FXML
     void hoverBoton(MouseEvent event) {
         Button boton = (Button) event.getSource();
@@ -201,8 +135,8 @@ public class ControladorApp {//implements Initializable {
         Button boton = (Button) event.getSource();
 
         ScaleTransition zoomIn = new ScaleTransition(Duration.millis(150), boton);
-        zoomIn.setToX(1.0);  // 10% más grande en X
-        zoomIn.setToY(1.0);  // 10% más grande en Y
+        zoomIn.setToX(1.0);  //10% más grande en X
+        zoomIn.setToY(1.0);  //10% más grande en Y
         zoomIn.play();
     }
 
@@ -225,27 +159,6 @@ public class ControladorApp {//implements Initializable {
         zoomIn.setToY(1.0);
         zoomIn.play();
     }
-
-    @FXML
-    void zoomBarChart(MouseEvent event) {
-        BarChart barChart = (BarChart) event.getSource();
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), barChart);
-
-        zoomIn.setToX(1.01);
-        zoomIn.setToY(1.01);
-        zoomIn.play();
-    }
-
-    @FXML
-    void quitarzoomBarChart(MouseEvent event) {
-        BarChart barChart = (BarChart) event.getSource();
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), barChart);
-
-        zoomIn.setToX(1.0);
-        zoomIn.setToY(1.0);
-        zoomIn.play();
-    }
-
 
     /**
      * Método que se encarga de cambiar la pantalla actual por la correspondiente al botón pulsado (pantalla de administradorS de equipos)
@@ -310,7 +223,14 @@ public class ControladorApp {//implements Initializable {
         stage.show();
     }
 
-
+    @FXML
+    public void lanza1(Event event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
+    }
+    @FXML
+    public void lanza2(Event event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
+    }
 
     /**
      * Evento que muestra al usuario una ventana de confirmación par salir o no de la app
@@ -328,15 +248,4 @@ public class ControladorApp {//implements Initializable {
             System.exit(0);
         }
     }
-
-    @FXML
-    public void lanza1(Event event) throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(new URI("https://dev.mysql.com/doc/mysql-installer/en/"));
-    }
-    @FXML
-    public void lanza2(Event event) throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
-    }
-
-
 }
