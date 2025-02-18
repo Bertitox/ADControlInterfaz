@@ -99,6 +99,7 @@
             <artifactId>HikariCP</artifactId>
             <version>5.0.0</version> <!-- Usa la última versión disponible -->
         </dependency>
+
     </dependencies>
 
     <build>
