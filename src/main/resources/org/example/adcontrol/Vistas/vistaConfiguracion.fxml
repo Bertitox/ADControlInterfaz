@@ -83,75 +83,75 @@
         <AnchorPane prefHeight="664.0" prefWidth="936.0" style="-fx-background-color:  rgb(241,245,246);" BorderPane.alignment="CENTER">
             <children>
                 <AnchorPane layoutX="36.0" layoutY="324.0" prefHeight="313.0" prefWidth="947.0">
-               <children>
-                  <Pane layoutX="-8.0" layoutY="58.0" prefHeight="122.0" prefWidth="458.0" style="-fx-background-color: white; -fx-border-width: 2px; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-radius: 10px;">
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                     <children>
-                        <Label fx:id="textTotales" layoutX="14.0" layoutY="14.0" text="Informes totales">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="numeroTotalInformes" layoutX="28.0" layoutY="62.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children></Pane>
-                  <Pane layoutX="-11.0" layoutY="201.0" prefHeight="122.0" prefWidth="462.0" style="-fx-background-color: white; -fx-border-width: 2px; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-radius: 10px;">
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                     <children>
-                        <Label fx:id="textUltimo" layoutX="16.0" layoutY="11.0" text="Ultimo tipo de informe utilizado">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="ultimoInforme" layoutX="28.0" layoutY="53.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font></Label>
-                     </children></Pane>
-                  <Pane layoutX="475.0" layoutY="58.0" prefHeight="122.0" prefWidth="455.0" style="-fx-background-color: white; -fx-border-width: 2px; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-radius: 10px;">
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                     <children>
-                        <Label fx:id="textInforme" layoutX="16.0" layoutY="13.0" text="Informe mas utilizado">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="informeMasUtilizado" layoutX="18.0" layoutY="53.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font></Label>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="479.0" layoutY="201.0" prefHeight="122.0" prefWidth="450.0" style="-fx-background-color: white; -fx-border-width: 2px; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-radius: 10px;">
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                     <children>
-                        <Label fx:id="textNombreUltimo" layoutX="12.0" layoutY="12.0" text="Nombre del ultimo informe generado">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="ultimoNombre" layoutX="12.0" layoutY="43.0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-               </children></AnchorPane>
+                    <children>
+                        <Pane layoutX="-8.0" layoutY="58.0" prefHeight="122.0" prefWidth="458.0" style="-fx-background-color: white; -fx-border-width: 2px; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-radius: 10px;">
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                            <children>
+                                <Label fx:id="textTotales" layoutX="14.0" layoutY="14.0" text="Informes totales">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="numeroTotalInformes" layoutX="28.0" layoutY="62.0">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                            </children></Pane>
+                        <Pane layoutX="-11.0" layoutY="201.0" prefHeight="122.0" prefWidth="462.0" style="-fx-background-color: white; -fx-border-width: 2px; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-radius: 10px;">
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                            <children>
+                                <Label fx:id="textUltimo" layoutX="16.0" layoutY="11.0" text="Ultimo tipo de informe utilizado">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="ultimoInforme" layoutX="28.0" layoutY="53.0">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font></Label>
+                            </children></Pane>
+                        <Pane layoutX="475.0" layoutY="58.0" prefHeight="122.0" prefWidth="455.0" style="-fx-background-color: white; -fx-border-width: 2px; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-radius: 10px;">
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                            <children>
+                                <Label fx:id="textInforme" layoutX="16.0" layoutY="13.0" text="Informe mas utilizado">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="informeMasUtilizado" layoutX="18.0" layoutY="53.0">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font></Label>
+                            </children>
+                        </Pane>
+                        <Pane layoutX="479.0" layoutY="201.0" prefHeight="122.0" prefWidth="450.0" style="-fx-background-color: white; -fx-border-width: 2px; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-radius: 10px;">
+                            <effect>
+                                <DropShadow />
+                            </effect>
+                            <children>
+                                <Label fx:id="textNombreUltimo" layoutX="12.0" layoutY="12.0" text="Nombre del ultimo informe generado">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="ultimoNombre" layoutX="12.0" layoutY="43.0">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </Pane>
+                    </children></AnchorPane>
                 <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
-                        <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="68.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
+                        <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
                             <items>
                                 <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
                                 <MenuItem fx:id="ingles" mnemonicParsing="false" text="Englhis" />
@@ -164,57 +164,60 @@
                                     </image>
                                 </ImageView>
                             </graphic>
+                            <font>
+                                <Font size="15.0" />
+                            </font>
                         </MenuButton>
                     </children>
                 </AnchorPane>
-            <Pane layoutX="22.0" layoutY="68.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="286.0" prefWidth="946.0" style="-fx-background-color: white; -fx-background-radius: 10px;">
-               <children>
-                  <Label fx:id="textdirectorio" layoutX="16.0" layoutY="135.0" text="Directorio de guardado">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="textAreaRuta" layoutX="19.0" layoutY="164.0" prefHeight="39.0" prefWidth="791.0" style="-fx-background-radius: 5px; -fx-border-radius: 5px;" />
-                  <Button fx:id="botonExplorar" layoutX="827.0" layoutY="166.0" mnemonicParsing="false" onAction="#cambiarRuta" onMouseEntered="#hoverInforme" onMouseExited="#hoverNormalInforme" prefHeight="36.0" prefWidth="98.0" styleClass="botonPrueba" text="Explorar">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0">
-                           <image>
-                              <Image url="@../Imagenes/carpeta.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Label fx:id="tipo1" layoutX="13.0" layoutY="53.0" text="Tipo de informe">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="comboboxInforme" layoutX="15.0" layoutY="80.0" prefHeight="38.0" prefWidth="458.0" promptText="Seleccionar" style="-fx-background-radius: 5px; -fx-border-radius: 5px;" />
-                  <Label fx:id="tituloInforme" layoutX="19.0" layoutY="13.0" text="Configuracion de informe">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="botonGenerar" defaultButton="true" layoutX="19.0" layoutY="223.0" mnemonicParsing="false" onAction="#generarPDF" onMouseEntered="#hoverInforme" onMouseExited="#hoverNormalInforme" prefHeight="36.0" prefWidth="906.0" styleClass="botonPrueba" text="Generar PDF">
-                     <graphic>
-                        <ImageView fitHeight="27.0" fitWidth="27.0">
-                           <image>
-                              <Image url="@../Imagenes/descargar.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Label fx:id="tipo2" layoutX="482.0" layoutY="53.0" text="Nombre del informe">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="nombreInforme" layoutX="482.0" layoutY="80.0" prefHeight="0.0" prefWidth="443.0" style="-fx-background-radius: 5px; -fx-border-radius: 5px;" />
-               </children>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Pane>
+                <Pane layoutX="22.0" layoutY="68.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="286.0" prefWidth="946.0" style="-fx-background-color: white; -fx-background-radius: 10px;">
+                    <children>
+                        <Label fx:id="textdirectorio" layoutX="16.0" layoutY="135.0" text="Directorio de guardado">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <TextArea fx:id="textAreaRuta" layoutX="19.0" layoutY="164.0" prefHeight="39.0" prefWidth="791.0" style="-fx-background-radius: 5px; -fx-border-radius: 5px;" />
+                        <Button fx:id="botonExplorar" layoutX="827.0" layoutY="166.0" mnemonicParsing="false" onAction="#cambiarRuta" onMouseEntered="#hoverInforme" onMouseExited="#hoverNormalInforme" prefHeight="36.0" prefWidth="98.0" styleClass="botonPrueba" text="Explorar">
+                            <graphic>
+                                <ImageView fitHeight="20.0" fitWidth="20.0">
+                                    <image>
+                                        <Image url="@../Imagenes/carpeta.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Label fx:id="tipo1" layoutX="13.0" layoutY="53.0" text="Tipo de informe">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <ComboBox fx:id="comboboxInforme" layoutX="15.0" layoutY="80.0" prefHeight="38.0" prefWidth="458.0" promptText="Seleccionar" style="-fx-background-radius: 5px; -fx-border-radius: 5px;" />
+                        <Label fx:id="tituloInforme" layoutX="19.0" layoutY="13.0" text="Configuracion de informe">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="botonGenerar" defaultButton="true" layoutX="19.0" layoutY="223.0" mnemonicParsing="false" onAction="#generarPDF" onMouseEntered="#hoverInforme" onMouseExited="#hoverNormalInforme" prefHeight="36.0" prefWidth="906.0" styleClass="botonPrueba" text="Generar PDF">
+                            <graphic>
+                                <ImageView fitHeight="27.0" fitWidth="27.0">
+                                    <image>
+                                        <Image url="@../Imagenes/descargar.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Label fx:id="tipo2" layoutX="482.0" layoutY="53.0" text="Nombre del informe">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <TextArea fx:id="nombreInforme" layoutX="482.0" layoutY="80.0" prefHeight="0.0" prefWidth="443.0" style="-fx-background-radius: 5px; -fx-border-radius: 5px;" />
+                    </children>
+                    <effect>
+                        <DropShadow />
+                    </effect>
+                </Pane>
             </children>
         </AnchorPane>
     </center>

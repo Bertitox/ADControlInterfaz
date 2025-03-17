@@ -83,7 +83,7 @@
             <children>
                 <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
-                        <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="68.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
+                        <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
                             <items>
                                 <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
                                 <MenuItem fx:id="ingles" mnemonicParsing="false" text="Englhis" />
@@ -96,139 +96,142 @@
                                     </image>
                                 </ImageView>
                             </graphic>
+                            <font>
+                                <Font size="15.0" />
+                            </font>
                         </MenuButton>
                     </children>
                 </AnchorPane>
-            <Pane fx:id="panel1" layoutX="55.0" layoutY="133.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
-               <children>
-                  <Label fx:id="PreguntaIncidencias" layoutX="17.0" layoutY="24.0" text="¿Cómo ver incidencias?">
-                     <font>
-                        <Font name="System Bold" size="28.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="DescIncidencias" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Dirigete a  la pestaña de informacion sobre incidencias" wrapText="true">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="campoFecha" layoutX="86.0" layoutY="165.0" prefHeight="18.0" prefWidth="85.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
-                     <image>
-                        <Image url="@../Imagenes/Informacion.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <DropShadow height="15.0" radius="7.0" width="15.0" />
-               </effect>
-            </Pane>
-            <Pane fx:id="panel11" layoutX="532.0" layoutY="133.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
-               <children>
-                  <Label fx:id="PreguntaInforme" layoutX="17.0" layoutY="24.0" text="¿Cómo hago un informe?">
-                     <font>
-                        <Font name="System Bold" size="28.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="DescInforme" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Para realizar informes, dirígete a la pestaña Generar Informes" wrapText="true">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="campoFecha1" layoutX="86.0" layoutY="165.0" prefHeight="18.0" prefWidth="85.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
-                     <image>
-                        <Image url="@../Imagenes/Informacion.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <DropShadow height="15.0" radius="7.0" width="15.0" />
-               </effect>
-            </Pane>
-            <Label layoutX="36.0" layoutY="75.0" text="Preguntas frecuentes">
-               <font>
-                  <Font name="System Bold" size="33.0" />
-               </font>
-            </Label>
-            <Pane fx:id="panel12" layoutX="61.0" layoutY="396.0" onMouseClicked="#lanza1" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
-               <children>
-                  <Label fx:id="TituloMysql" layoutX="17.0" layoutY="24.0" text="¿Cómo actualizo mysql?">
-                     <font>
-                        <Font name="System Bold" size="28.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="DescMysql" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Haz clic en este enlace para poder conocer más acerca de Mysql" wrapText="true">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="campoFecha2" layoutX="86.0" layoutY="165.0" prefHeight="18.0" prefWidth="85.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
-                     <image>
-                        <Image url="@../Imagenes/Libro.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <DropShadow height="15.0" radius="7.0" width="15.0" />
-               </effect>
-            </Pane>
-            <Pane fx:id="panel111" layoutX="538.0" layoutY="396.0" onMouseClicked="#lanza2" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
-               <children>
-                  <Label fx:id="TituloJasper" layoutX="17.0" layoutY="24.0" text="¿Qué es JasperReports?">
-                     <font>
-                        <Font name="System Bold" size="28.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="DescJasper" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Más información sobre JasperReports en el siguiente enlace" wrapText="true">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="campoFecha11" layoutX="86.0" layoutY="165.0" prefHeight="18.0" prefWidth="85.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
-                     <image>
-                        <Image url="@../Imagenes/Libro.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <DropShadow height="15.0" radius="7.0" width="15.0" />
-               </effect>
-            </Pane>
-            <Label layoutX="42.0" layoutY="338.0" text="Guias rapidas">
-               <font>
-                  <Font name="System Bold" size="33.0" />
-               </font>
-            </Label>
+                <Pane fx:id="panel1" layoutX="55.0" layoutY="133.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                    <children>
+                        <Label fx:id="PreguntaIncidencias" layoutX="17.0" layoutY="24.0" text="¿Cómo ver incidencias?">
+                            <font>
+                                <Font name="System Bold" size="28.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="DescIncidencias" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Dirigete a  la pestaña de informacion sobre incidencias" wrapText="true">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="campoFecha" layoutX="86.0" layoutY="165.0" prefHeight="18.0" prefWidth="85.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
+                            <image>
+                                <Image url="@../Imagenes/Informacion.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <effect>
+                        <DropShadow height="15.0" radius="7.0" width="15.0" />
+                    </effect>
+                </Pane>
+                <Pane fx:id="panel11" layoutX="532.0" layoutY="133.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                    <children>
+                        <Label fx:id="PreguntaInforme" layoutX="17.0" layoutY="24.0" text="¿Cómo hago un informe?">
+                            <font>
+                                <Font name="System Bold" size="28.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="DescInforme" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Para realizar informes, dirígete a la pestaña Generar Informes" wrapText="true">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="campoFecha1" layoutX="86.0" layoutY="165.0" prefHeight="18.0" prefWidth="85.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
+                            <image>
+                                <Image url="@../Imagenes/Informacion.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <effect>
+                        <DropShadow height="15.0" radius="7.0" width="15.0" />
+                    </effect>
+                </Pane>
+                <Label layoutX="36.0" layoutY="75.0" text="Preguntas frecuentes">
+                    <font>
+                        <Font name="System Bold" size="33.0" />
+                    </font>
+                </Label>
+                <Pane fx:id="panel12" layoutX="61.0" layoutY="396.0" onMouseClicked="#lanza1" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                    <children>
+                        <Label fx:id="TituloMysql" layoutX="17.0" layoutY="24.0" text="¿Cómo actualizo mysql?">
+                            <font>
+                                <Font name="System Bold" size="28.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="DescMysql" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Haz clic en este enlace para poder conocer más acerca de Mysql" wrapText="true">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="campoFecha2" layoutX="86.0" layoutY="165.0" prefHeight="18.0" prefWidth="85.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
+                            <image>
+                                <Image url="@../Imagenes/Libro.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <effect>
+                        <DropShadow height="15.0" radius="7.0" width="15.0" />
+                    </effect>
+                </Pane>
+                <Pane fx:id="panel111" layoutX="538.0" layoutY="396.0" onMouseClicked="#lanza2" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="178.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                    <children>
+                        <Label fx:id="TituloJasper" layoutX="17.0" layoutY="24.0" text="¿Qué es JasperReports?">
+                            <font>
+                                <Font name="System Bold" size="28.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="DescJasper" layoutX="29.0" layoutY="66.0" prefHeight="61.0" prefWidth="374.0" text="Más información sobre JasperReports en el siguiente enlace" wrapText="true">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="campoFecha11" layoutX="86.0" layoutY="165.0" prefHeight="18.0" prefWidth="85.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
+                            <image>
+                                <Image url="@../Imagenes/Libro.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <effect>
+                        <DropShadow height="15.0" radius="7.0" width="15.0" />
+                    </effect>
+                </Pane>
+                <Label layoutX="42.0" layoutY="338.0" text="Guias rapidas">
+                    <font>
+                        <Font name="System Bold" size="33.0" />
+                    </font>
+                </Label>
             </children>
         </AnchorPane>
     </center>

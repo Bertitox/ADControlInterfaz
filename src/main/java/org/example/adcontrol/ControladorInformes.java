@@ -157,15 +157,35 @@ public class ControladorInformes {
         Platform.runLater(() -> {
 
             //Idiomas
-            español.setOnAction(e -> cargarIdioma(new Locale("es")));
-            ingles.setOnAction(e -> cargarIdioma(new Locale("en")));
-            frances.setOnAction(e -> cargarIdioma(new Locale("fr")));
+            español.setOnAction(e -> {
+                cargarIdioma(new Locale("es"));
+                actualizarTextoIdioma("Español"); //Actualizar texto Idioma
+            });
+
+            ingles.setOnAction(e -> {
+                cargarIdioma(new Locale("en"));
+                actualizarTextoIdioma("English"); //Actualizar texto Idioma
+            });
+
+            frances.setOnAction(e -> {
+                cargarIdioma(new Locale("fr"));
+                actualizarTextoIdioma("Français"); //Actualizar texto Idioma
+            });
 
             // Cargar el idioma inicial (Español)
             cargarIdioma(new Locale("es"));
+            actualizarTextoIdioma("Español"); //Actualizar texto Idioma
 
         });
 
+    }
+
+    /**
+     * Método que cambia el texto para indicar el idioma actual al que se está traduciendo.
+     * @param idioma Recibe un String idioma
+     */
+    private void actualizarTextoIdioma(String idioma) {
+        idiomas.setText("" + idioma);
     }
 
     //Cargar idiomas
