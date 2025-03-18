@@ -146,12 +146,12 @@ public class ControladorApp {//implements Initializable {
     private Label textFecha1;
     @FXML
     private Label textFecha2;
-
     @FXML
     private Label numeroTotalInformes;
-
     @FXML
     private Label informeMasUtilizado;
+    @FXML
+    private Label textoTitulo;
 
     Map<String, Integer> mapaInformeUtilizado;
 
@@ -227,6 +227,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Método que cambia el texto para indicar el idioma actual al que se está traduciendo.
+     *
      * @param idioma Recibe un String idioma
      */
     private void actualizarTextoIdioma(String idioma) {
@@ -235,6 +236,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Método que sirve para cambiar el idioma
+     *
      * @param locale Recibe el idioma Local ("es")
      */
     public void cargarIdioma(Locale locale) {
@@ -260,8 +262,9 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Método para actualizar el número de incidencias que hay en el sistema
+     *
      * @param incidenciasGraves Recive un int de las incidencias graves que hay en el sistema
-     * @param incidenciasLeves Recive un int de las incidencias leves que hay en el sistema
+     * @param incidenciasLeves  Recive un int de las incidencias leves que hay en el sistema
      */
     @FXML
     public void actualizarIncidencias(int incidenciasGraves, int incidenciasLeves) {
@@ -302,6 +305,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Pone el zoom al Pane
+     *
      * @param event Evento que espera el método
      */
     @FXML
@@ -316,6 +320,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Pone el zoom al Pane
+     *
      * @param event Evento que espera el método
      */
     @FXML
@@ -330,6 +335,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Pone el zoom al Gráfico
+     *
      * @param event Evento que espera el método
      */
     @FXML
@@ -344,6 +350,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Quita el zoom al Gráfico
+     *
      * @param event Evento que espera el método
      */
     @FXML
@@ -379,6 +386,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Método que sirve para cambiar la pantalla Home
+     *
      * @param event Evento que inicia el método
      * @throws IOException Excepción de entrada salida lanzada por el método
      */
@@ -399,6 +407,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Método que sirve para cambiar la pantalla de Ayuda
+     *
      * @param event Evento que inicia el método
      * @throws IOException Excepción de entrada salida lanzada por el método
      */
@@ -418,6 +427,7 @@ public class ControladorApp {//implements Initializable {
 
     /**
      * Método que sirve para cambiar la pantalla de Configuracion
+     *
      * @param event Evento que inicia el método
      * @throws IOException Excepción de entrada salida lanzada por el método
      */

@@ -43,24 +43,22 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="ayudaBoton" layoutX="11.0" layoutY="344.0" mnemonicParsing="false" onAction="#cambiarpantallaAyuda" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+                <Button fx:id="ayudaBoton" layoutX="12.0" layoutY="400.0" mnemonicParsing="false" onAction="#cambiarpantallaAyuda" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../Imagenes/interrogatorio.png" />
                             </image>
                         </ImageView>
-                    </graphic>
-                </Button>
-                <Button fx:id="ajustesBoton" layoutX="11.0" layoutY="404.0" mnemonicParsing="false" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+                    </graphic></Button>
+                <Button fx:id="ajustesBoton" layoutX="10.0" layoutY="338.0" mnemonicParsing="false" onAction="#cambiarpantallaConfig" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="59.0" style="-fx-background-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../Imagenes/ajustes.png" />
                             </image>
                         </ImageView>
-                    </graphic>
-                </Button>
+                    </graphic></Button>
                 <Button fx:id="monitorBoton" layoutX="10.0" layoutY="275.0" mnemonicParsing="false" onAction="#cambiarPantallaMonitor" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -168,6 +166,11 @@
                                 <Font size="15.0" />
                             </font>
                         </MenuButton>
+                        <Label fx:id="textoTitulo" layoutX="14.0" layoutY="12.0" text="IES Laguna de Joatzel" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
                     </children>
                 </AnchorPane>
                 <Pane layoutX="22.0" layoutY="68.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="286.0" prefWidth="946.0" style="-fx-background-color: white; -fx-background-radius: 10px;">
