@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Clase Main que lanza la app
  * @author Daniel y Alberto
- * @version 1.0
+ * @version 1.5
  */
 public class main {
 
