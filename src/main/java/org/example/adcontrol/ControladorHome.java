@@ -3,21 +3,12 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula;
 import BBDD.DAO.CRUDIncidencia;
-import BBDD.DTO.Aula;
-import BBDD.DTO.Incidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -27,27 +18,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-
 import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
@@ -80,9 +53,6 @@ public class ControladorHome extends Controlador{//implements Initializable {
 
     @FXML
     private Label lblTituloGrave;
-
-    @FXML
-    private TextArea nombreInforme;
 
     @FXML
     private Label lblTituloUltimasIncidecias;
@@ -189,8 +159,6 @@ public class ControladorHome extends Controlador{//implements Initializable {
      * Inicializa la app entera.
      */
     public void initialize() {
-
-
         botonGenerar = new Button();
         botonExplorar = new Button();
         botonExplorar.getStyleClass().add("botonPrueba");
