@@ -127,7 +127,7 @@ public class ControladorPantallaCarga implements Runnable {
      */
     @FXML
     public void primeraVentana() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/controlesMenu.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) progressBar.getScene().getWindow();
         Scene scene = new Scene(root);
