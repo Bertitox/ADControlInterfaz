@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.Controlador">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMenu">
     <left>
         <AnchorPane prefHeight="664.0" prefWidth="79.0" style="-fx-background-color: #01a5e7;" BorderPane.alignment="CENTER">
             <children>
@@ -48,7 +48,7 @@
                             </image>
                         </ImageView>
                     </graphic></Button>
-                <Button fx:id="ajustesBoton" layoutX="10.0" layoutY="338.0" mnemonicParsing="false" onAction="#cambiarpantallaConfig" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="59.0" style="-fx-background-color: transparent;">
+                <Button fx:id="ajustesBoton" layoutX="10.0" layoutY="338.0" mnemonicParsing="false" onAction="#cambiarpantallaInforme" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="59.0" style="-fx-background-color: transparent;">
                     <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                             <image>
