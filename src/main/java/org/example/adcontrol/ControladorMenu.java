@@ -1,20 +1,13 @@
 package org.example.adcontrol;
 
-import javafx.animation.ScaleTransition;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
-
 import java.io.IOException;
 
 
@@ -37,70 +30,42 @@ public class ControladorMenu extends Controlador {
     @FXML
     private Label textoTitulo;
 
+    ControlIdioma controlIdioma = ControlIdioma.getInstance();
 
     public ControladorMenu() {
     }
 
     @FXML
     void initialize() {
-        super.setIdioma("Español");
-
         try {
+            //SE CARGA POR DEFECTO LA VISTA HOME
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaHome.fxml"));
             Parent root = fxmlLoader.load();
             panelPrincipal.getChildren().clear();
             panelPrincipal.getChildren().add(root);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        //refrescarIdioma();
+
         español.setOnAction(e -> {
-            super.setIdioma("Español");  // Esto debería actualizar la propiedad 'idioma'
+            controlIdioma.setIdioma("Español");
             cambiarIdioma("Español");
         });
 
         ingles.setOnAction(e -> {
-            super.setIdioma("Ingles");
+            controlIdioma.setIdioma("Ingles");
             cambiarIdioma("English");
         });
 
         frances.setOnAction(e -> {
-            super.setIdioma("Frances");
+            controlIdioma.setIdioma("Frances");
             cambiarIdioma("Français");
         });
 
     }
-
-    /**
-     * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
-     *
-     * @param event Cuando se pasa el cursor por encima
-     */
-    @FXML
-    void hoverBoton(MouseEvent event) {
-        Button boton = (Button) event.getSource();
-
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), boton);
-        zoomIn.setToX(1.1);  // 10% más grande en X
-        zoomIn.setToY(1.1);  // 10% más grande en Y
-        zoomIn.play();
-    }
-
-    /**
-     * Método que define el estilo normal de los botones tras pasar el cursor por encima
-     *
-     * @param event Cuando el ratón no está por encima de algun boton
-     */
-    @FXML
-    void normalBoton(MouseEvent event) {
-        Button boton = (Button) event.getSource();
-
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(150), boton);
-        zoomIn.setToX(1.0);  // 10% más grande en X
-        zoomIn.setToY(1.0);  // 10% más grande en Y
-        zoomIn.play();
-    }
-
 
     /**
      * Método que sirve para cambiar la pantalla de Configuracion
@@ -144,7 +109,6 @@ public class ControladorMenu extends Controlador {
         panelPrincipal.getChildren().add(root);
     }
 
-
     /**
      * Método que sirve para cambiar la pantalla de Ayuda
      *
@@ -177,21 +141,12 @@ public class ControladorMenu extends Controlador {
     }
 
     /**
-     * Método que cambia el texto para indicar el idioma actual al que se está traduciendo.
+     * Método que cambia el texto del combobox para indicar el idioma actual al que se está traduciendo.
      *
      * @param idioma Recibe un String idioma
      */
     public void cambiarIdioma(String idioma) {
         menuButtonIdiomas.setText(idioma);
-    }
-
-    public StringProperty getIdioma() {
-        return idioma;
-    }
-
-    @FXML
-    public void Hola(){
-        System.out.println("hola");
     }
 
 }

@@ -3,30 +3,15 @@ package org.example.adcontrol;
 import BBDD.DAO.CRUDIncidencia;
 import BBDD.DTO.Incidencia;
 import BBDD.Excepciones.AulaNotFoundException;
-import javafx.animation.ScaleTransition;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-
 import javax.swing.*;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -37,101 +22,30 @@ import java.util.ResourceBundle;
  * @author Daniel y Alberto
  * @version 1.0
  */
-public class ControladorMonitor extends Controlador{
+public class ControladorMonitor extends Controlador {
 
     @FXML
     ListView<String> listIncidencias;
-
     @FXML
     TextField textIncidencias;
-
     @FXML
     PieChart graficoIncidencias;
-
     @FXML
     Button actualizar;
-
     @FXML
     Button actualizar1;
-
-    @FXML
-    MenuButton idiomas;
-
-    @FXML
-    MenuItem español;
-
-    @FXML
-    MenuItem ingles;
-
-    @FXML
-    MenuItem frances;
-
-    @FXML
-    private Button ajustesBoton;
-    @FXML
-    private Button ayudaBoton;
-    @FXML
-    private Button homeBoton;
-    @FXML
-    private Button monitorBoton;
-    @FXML
-    private Button salirBoton;
-
     private ResourceBundle bundle;
-
-    List<Button> botones;
-
-    Boolean isInHome = true;
-
     //Elementos a traducir
     @FXML
     private Label textIncidencia;
     @FXML
     private Label tituloIncidencias;
 
-    /**
-     * Inicializa los elementos de la interfaz y configura los botones de idioma.
-     */
     @FXML
-    public void initialize() {
-        botones = new ArrayList<>();
-        botones.add(ajustesBoton);
-        botones.add(ayudaBoton);
-        botones.add(homeBoton);
-        botones.add(monitorBoton);
-        botones.add(salirBoton);
-
-        //Idiomas
-        español.setOnAction(e -> {
-            cargarIdioma(new Locale("es"));
-            actualizarTextoIdioma("Español"); //Actualizar texto Idioma
-        });
-
-        ingles.setOnAction(e -> {
-            cargarIdioma(new Locale("en"));
-            actualizarTextoIdioma("English"); //Actualizar texto Idioma
-        });
-
-        frances.setOnAction(e -> {
-            cargarIdioma(new Locale("fr"));
-            actualizarTextoIdioma("Français"); //Actualizar texto Idioma
-        });
-
-        // Cargar el idioma inicial (Español)
-        cargarIdioma(new Locale("es"));
-        actualizarTextoIdioma("Español"); //Actualizar texto Idioma
+    void initialize() {
+        refrescarIdioma();
     }
 
-    /**
-     * Método que cambia el texto para indicar el idioma actual al que se está traduciendo.
-     * @param idioma Recibe un String idioma
-     */
-    private void actualizarTextoIdioma(String idioma) {
-        idiomas.setText("" + idioma);
-    }
-
-    //Cargar idiomas
-    //Método para cambiar el idioma
     /**
      * Carga los textos en el idioma seleccionado.
      *
@@ -149,14 +63,13 @@ public class ControladorMonitor extends Controlador{
 
             System.out.println("Idioma cargado exitosamente.");//Debug
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }
 
-    //Método que rellena el ListView
     /**
      * Muestra las incidencias en el ListView.
      *
@@ -178,7 +91,6 @@ public class ControladorMonitor extends Controlador{
         listIncidencias.setItems(items);
     }
 
-    //Método para rellenar el gráfico
     /**
      * Método que actualiza y rellena el gráfico de incidencias.
      */
@@ -188,7 +100,7 @@ public class ControladorMonitor extends Controlador{
         CRUDIncidencia crudIncidencia = new CRUDIncidencia();
 
         if (referencia.isEmpty()) {
-            mostrarAlerta("Incidencias Aula","Ingrese la referencia a un Aula");
+            mostrarAlerta("Incidencias Aula", "Ingrese la referencia a un Aula");
             return;
         }
 
@@ -200,7 +112,7 @@ public class ControladorMonitor extends Controlador{
             if (numIncidencias > 0) {
                 datosGrafico.add(new PieChart.Data(referencia, numIncidencias));
             } else {
-                mostrarAlerta("Incidencias Aula","No hay Incidencias para el Aula "+ textIncidencias.getText().toString());
+                mostrarAlerta("Incidencias Aula", "No hay Incidencias para el Aula " + textIncidencias.getText().toString());
             }
         } catch (AulaNotFoundException e) {
             System.err.println("Error: " + e.getMessage()); //Manejo del error en el caso de que el aula no exista
