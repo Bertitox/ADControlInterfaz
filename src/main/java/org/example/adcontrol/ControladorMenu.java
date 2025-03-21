@@ -12,10 +12,24 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
+/**
+ * @author Daniel y Alberto
+ * @version 1.0
+ * Clase que se encarga de controlar los botones del menú de la aplicación.
+ */
 public class ControladorMenu extends Controlador {
     @FXML
     public Pane panelPrincipal;
 
+    /**
+     * Constructor por defecto de la clase
+     */
+    public ControladorMenu() {
+    }
+
+    /**
+     * Método que inicializa los elementos que se usarán en la clase
+     */
     @FXML
     void initialize() {
         try {

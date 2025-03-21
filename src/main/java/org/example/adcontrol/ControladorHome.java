@@ -191,8 +191,6 @@ public class ControladorHome extends Controlador{//implements Initializable {
 
     }
 
-
-
     /**
      * Método para actualizar el número de incidencias que hay en el sistema
      *
@@ -259,10 +257,28 @@ public class ControladorHome extends Controlador{//implements Initializable {
 
         NumberAxis yAxis = (NumberAxis) barChart.getYAxis();
         barChart.setLegendVisible(false);
+
+// Desactiva el ajuste automático del rango
+        yAxis.setAutoRanging(false);
+// Define los valores mínimos y máximos del eje Y
+        yAxis.setLowerBound(0); // Empieza en 0
+        yAxis.setUpperBound(incidencia.numMaximoIcidenciasAula()); // Ajusta esto al máximo necesario
+// Configura la separación entre las marcas
         yAxis.setTickUnit(1);
+// Elimina marcas menores y asegura que las marcas principales sean visibles
         yAxis.setMinorTickCount(0);
         yAxis.setMinorTickVisible(false);
         yAxis.setTickMarkVisible(true);
+
+// Formatea las etiquetas como enteros
+        yAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(yAxis) {
+            @Override
+            public String toString(Number object) {
+                return String.format("%d", object.intValue());
+            }
+        });
+
+
 
         //Añadir los datos al gráfico
         XYChart.Series<String, Number> serie = new XYChart.Series<>();

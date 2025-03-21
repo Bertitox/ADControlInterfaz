@@ -198,9 +198,23 @@ public class CRUDIncidencia {
         return incidenciasXAulas(referencia).size();
     }
 
+    public Integer numMaximoIcidenciasAula() throws AulaNotFoundException {
+        Integer maxIncidencias  = Integer.parseInt(em.createNativeQuery("""
+            SELECT MAX(incidencias_por_aula)
+            FROM (
+                SELECT COUNT(*) AS incidencias_por_aula
+                FROM incidencias
+                GROUP BY id_aula
+            ) AS subconsulta;
+        """).getSingleResult().toString());
 
-//    public static void main(String[] args) throws AulaNotFoundException {
-//        CRUDIncidencia crudIncidencia = new CRUDIncidencia();
+        return maxIncidencias;
+    }
+
+
+    public static void main(String[] args) throws AulaNotFoundException {
+        CRUDIncidencia crudIncidencia = new CRUDIncidencia();
 //        crudIncidencia.mostrarIncidenciasxAula("PRUEBA2");
-//    }
+        System.out.println(crudIncidencia.numMaximoIcidenciasAula());
+    }
 }
