@@ -171,28 +171,6 @@ public class ControladorHome extends Controlador{//implements Initializable {
         botones.add(monitorBoton);
         botones.add(salirBoton);
 
-        Platform.runLater(() -> {
-
-            //Idiomas
-            español.setOnAction(e -> {
-                cargarIdioma(new Locale("es"));
-                actualizarTextoIdioma("Español"); //Actualizar texto Idioma
-            });
-
-            ingles.setOnAction(e -> {
-                cargarIdioma(new Locale("en"));
-                actualizarTextoIdioma("English"); //Actualizar texto Idioma
-            });
-
-            frances.setOnAction(e -> {
-                cargarIdioma(new Locale("fr"));
-                actualizarTextoIdioma("Français"); //Actualizar texto Idioma
-            });
-
-            // Cargar el idioma inicial (Español)
-            cargarIdioma(new Locale("es"));
-            actualizarTextoIdioma("Español"); //Actualizar texto Idioma
-        });
 
         mapaInformeUtilizado = new HashMap<>();
         ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
@@ -213,41 +191,7 @@ public class ControladorHome extends Controlador{//implements Initializable {
 
     }
 
-    /**
-     * Método que cambia el texto para indicar el idioma actual al que se está traduciendo.
-     *
-     * @param idioma Recibe un String idioma
-     */
-    private void actualizarTextoIdioma(String idioma) {
-        idiomas.setText("" + idioma);
-    }
 
-
-    /**
-     * Método que sirve para cambiar el idioma
-     *
-     * @param locale Recibe el idioma Local ("es")
-     */
-    public void cargarIdioma(Locale locale) {
-        try {
-            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
-
-            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
-            labelIncidencias.setText(bundle.getString("labelIncidencias"));
-            labelAulasDisponibles.setText(bundle.getString("labelAulasDisponibles"));
-            textIncidenciasSistema.setText(bundle.getString("textIncidenciasSistema"));
-            textAulasDisponibles.setText(bundle.getString("textAulasDisponibles"));
-            textFecha1.setText(bundle.getString("textFecha1"));
-            textFecha2.setText(bundle.getString("textFecha2"));
-
-            System.out.println("Idioma cargado exitosamente.");//Debug
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
 
     /**
      * Método para actualizar el número de incidencias que hay en el sistema

@@ -3,8 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -79,23 +77,6 @@
             <children>
                 <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
-                        <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
-                            <items>
-                                <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
-                                <MenuItem fx:id="ingles" mnemonicParsing="false" text="English" />
-                                <MenuItem fx:id="frances" mnemonicParsing="false" text="Français" />
-                            </items>
-                            <graphic>
-                                <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../Imagenes/idioma3.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </MenuButton>
                         <Label fx:id="textoTitulo" layoutX="14.0" layoutY="12.0" text="IES Laguna de Joatzel" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="24.0" />

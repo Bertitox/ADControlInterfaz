@@ -138,67 +138,6 @@ public class ControladorInforme extends Controlador{
         botones.add(homeBoton);
         botones.add(monitorBoton);
         botones.add(salirBoton);
-
-        Platform.runLater(() -> {
-
-            //Idiomas
-            español.setOnAction(e -> {
-                cargarIdioma(new Locale("es"));
-                actualizarTextoIdioma("Español"); //Actualizar texto Idioma
-            });
-
-            ingles.setOnAction(e -> {
-                cargarIdioma(new Locale("en"));
-                actualizarTextoIdioma("English"); //Actualizar texto Idioma
-            });
-
-            frances.setOnAction(e -> {
-                cargarIdioma(new Locale("fr"));
-                actualizarTextoIdioma("Français"); //Actualizar texto Idioma
-            });
-
-            // Cargar el idioma inicial (Español)
-            cargarIdioma(new Locale("es"));
-            actualizarTextoIdioma("Español"); //Actualizar texto Idioma
-
-        });
-    }
-
-    /**
-     * Método que cambia el texto para indicar el idioma actual al que se está traduciendo.
-     * @param idioma Recibe un String idioma
-     */
-    private void actualizarTextoIdioma(String idioma) {
-        idiomas.setText("" + idioma);
-    }
-
-    //Cargar idiomas
-    // Método para cambiar el idioma
-    /**
-     * Carga el idioma seleccionado y actualiza los textos de la interfaz de usuario.
-     * @param locale El idioma a cargar (por ejemplo, español, inglés, francés).
-     */
-    public void cargarIdioma(Locale locale) {
-        try {
-            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
-
-            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
-            tituloInforme.setText(bundle.getString("tituloInforme"));
-            tipo1.setText(bundle.getString("tipo1"));
-            tipo2.setText(bundle.getString("tipo2"));
-            textdirectorio.setText(bundle.getString("textdirectorio"));
-            textTotales.setText(bundle.getString("textTotales"));
-            textUltimo.setText(bundle.getString("textUltimo"));
-            textInforme.setText(bundle.getString("textInforme"));
-            textNombreUltimo.setText(bundle.getString("textNombreUltimo"));
-
-            System.out.println("Idioma cargado exitosamente.");//Debug
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
     }
 
     /**
