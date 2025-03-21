@@ -168,7 +168,7 @@ public class ControladorInforme extends Controlador{
      * Método que cambia el texto para indicar el idioma actual al que se está traduciendo.
      * @param idioma Recibe un String idioma
      */
-    private void actualizarTextoIdioma(String idioma) {
+    public void actualizarTextoIdioma(String idioma) {
         idiomas.setText("" + idioma);
     }
 

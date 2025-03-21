@@ -79,7 +79,7 @@
             <children>
                 <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
-                        <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
+                        <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" text="Español" textFill="WHITE">
                             <items>
                                 <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
                                 <MenuItem fx:id="ingles" mnemonicParsing="false" text="English" />

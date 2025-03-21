@@ -9,6 +9,9 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -21,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import javax.swing.*;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
@@ -29,7 +33,7 @@ import java.util.List;
  * @author Daniel y Alberto
  * @version 1.0
  */
-public class ControladorHome extends Controlador{//implements Initializable {
+public class ControladorHome extends Controlador {//implements Initializable {
     @FXML
     private ImageView exitIcon;
     @FXML
@@ -82,22 +86,11 @@ public class ControladorHome extends Controlador{//implements Initializable {
     Boolean isInHome = true;
 
     @FXML
-    MenuButton idiomas;
-
-    @FXML
-    MenuItem español;
-
-    @FXML
-    MenuItem ingles;
-
-    @FXML
     private Label ultimoNombre;
 
     @FXML
     private Label ultimoInforme;
 
-    @FXML
-    MenuItem frances;
 
     @FXML
     Button botonGenerar;
@@ -158,40 +151,36 @@ public class ControladorHome extends Controlador{//implements Initializable {
      * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico y los idiomas.
      * Inicializa la app entera.
      */
-    public void initialize() {
-        botonGenerar = new Button();
-        botonExplorar = new Button();
-        botonExplorar.getStyleClass().add("botonPrueba");
-        botonGenerar.getStyleClass().add("botonPrueba");
-
-        botones = new ArrayList<>();
-        botones.add(ajustesBoton);
-        botones.add(ayudaBoton);
-        botones.add(homeBoton);
-        botones.add(monitorBoton);
-        botones.add(salirBoton);
-
+    public void initialize() throws IOException {
         Platform.runLater(() -> {
+            System.out.println("Español: " + super.getEspañol().getText());
+            System.out.println("Inglés: " + super.getIngles().getText());
+            System.out.println("Francés: " + super.getFrances().getText());
+
+            if (super.getEspañol() == null || super.getIngles() == null || super.getFrances() == null) {
+                System.err.println("Error: Los elementos FXML no fueron inyectados correctamente.");
+                return;
+            }
 
             //Idiomas
-            español.setOnAction(e -> {
+            super.getEspañol().setOnAction(e -> {
                 cargarIdioma(new Locale("es"));
-                actualizarTextoIdioma("Español"); //Actualizar texto Idioma
+                actualizarTextoIdioma("Español");
             });
 
-            ingles.setOnAction(e -> {
+            super.getIngles().setOnAction(e -> {
                 cargarIdioma(new Locale("en"));
-                actualizarTextoIdioma("English"); //Actualizar texto Idioma
+                actualizarTextoIdioma("English");
             });
 
-            frances.setOnAction(e -> {
+            super.getFrances().setOnAction(e -> {
                 cargarIdioma(new Locale("fr"));
-                actualizarTextoIdioma("Français"); //Actualizar texto Idioma
+                actualizarTextoIdioma("Français");
             });
 
             // Cargar el idioma inicial (Español)
             cargarIdioma(new Locale("es"));
-            actualizarTextoIdioma("Español"); //Actualizar texto Idioma
+            actualizarTextoIdioma("Español");
         });
 
         mapaInformeUtilizado = new HashMap<>();
@@ -218,8 +207,8 @@ public class ControladorHome extends Controlador{//implements Initializable {
      *
      * @param idioma Recibe un String idioma
      */
-    private void actualizarTextoIdioma(String idioma) {
-        idiomas.setText("" + idioma);
+    public void actualizarTextoIdioma(String idioma) {
+        super.getIdiomas().setText("" + idioma);
     }
 
 
@@ -240,7 +229,7 @@ public class ControladorHome extends Controlador{//implements Initializable {
             textFecha1.setText(bundle.getString("textFecha1"));
             textFecha2.setText(bundle.getString("textFecha2"));
 
-            System.out.println("Idioma cargado exitosamente.");//Debug
+            System.out.println("Idioma cargado exitosamente.");
 
         } catch (Exception e) {
             e.printStackTrace();

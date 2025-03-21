@@ -92,6 +92,8 @@ public class ControladorMonitor extends Controlador{
     /**
      * Inicializa los elementos de la interfaz y configura los botones de idioma.
      */
+
+
     @FXML
     public void initialize() {
         botones = new ArrayList<>();
@@ -122,11 +124,12 @@ public class ControladorMonitor extends Controlador{
         actualizarTextoIdioma("Español"); //Actualizar texto Idioma
     }
 
+
     /**
      * Método que cambia el texto para indicar el idioma actual al que se está traduciendo.
      * @param idioma Recibe un String idioma
      */
-    private void actualizarTextoIdioma(String idioma) {
+    public void actualizarTextoIdioma(String idioma) {
         idiomas.setText("" + idioma);
     }
 
