@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -18,7 +19,25 @@ public class ControladorMenu extends Controlador {
     public Pane panelPrincipal;
     @FXML
     private Label textoTitulo;
+    @FXML
+    private AnchorPane barraArriba;
+    @FXML
+    private AnchorPane barraIzquierda;
 
+    Boolean daltónico = false;
+
+    @FXML
+    void alternarPaleta(ActionEvent event) {
+        if(!daltónico){
+            barraArriba.setStyle("-fx-background-color: red");
+            barraIzquierda.setStyle("-fx-background-color: red");
+            daltónico = true;
+        }else{
+            barraArriba.setStyle("-fx-background-color: #01a5e7");
+            barraIzquierda.setStyle("-fx-background-color: #01a5e7");
+            daltónico = false;
+        }
+    }
     @FXML
     void initialize() {
         try {
