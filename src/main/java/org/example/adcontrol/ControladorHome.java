@@ -6,6 +6,8 @@ import BBDD.DAO.CRUDIncidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -79,25 +81,12 @@ public class ControladorHome extends Controlador{//implements Initializable {
 
     List<Button> botones;
 
-    Boolean isInHome = true;
-
-    @FXML
-    MenuButton idiomas;
-
-    @FXML
-    MenuItem español;
-
-    @FXML
-    MenuItem ingles;
-
     @FXML
     private Label ultimoNombre;
 
     @FXML
     private Label ultimoInforme;
 
-    @FXML
-    MenuItem frances;
 
     @FXML
     Button botonGenerar;
@@ -159,6 +148,18 @@ public class ControladorHome extends Controlador{//implements Initializable {
      * Inicializa la app entera.
      */
     public void initialize() {
+        Platform.runLater(() -> {
+        System.out.println("Contenido antes de listener de idioma " + super.getIdioma().getValue());
+
+        });
+        super.getIdioma().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                // El listener debería dispararse cuando el valor de 'idioma' cambie
+                System.out.println("Idioma cambiado a: " + newValue);  // Deberías ver este mensaje
+            }
+        });
+
         botonGenerar = new Button();
         botonExplorar = new Button();
         botonExplorar.getStyleClass().add("botonPrueba");
@@ -171,32 +172,7 @@ public class ControladorHome extends Controlador{//implements Initializable {
         botones.add(monitorBoton);
         botones.add(salirBoton);
 
-        Platform.runLater(() -> {
-
-            //Idiomas
-            español.setOnAction(e -> {
-                cargarIdioma(new Locale("es"));
-                actualizarTextoIdioma("Español"); //Actualizar texto Idioma
-            });
-
-            ingles.setOnAction(e -> {
-                cargarIdioma(new Locale("en"));
-                actualizarTextoIdioma("English"); //Actualizar texto Idioma
-            });
-
-            frances.setOnAction(e -> {
-                cargarIdioma(new Locale("fr"));
-                actualizarTextoIdioma("Français"); //Actualizar texto Idioma
-            });
-
-            // Cargar el idioma inicial (Español)
-            cargarIdioma(new Locale("es"));
-            actualizarTextoIdioma("Español"); //Actualizar texto Idioma
-        });
-
-        mapaInformeUtilizado = new HashMap<>();
-        ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
-        comboboxInforme.setItems(items);
+        cargarIdioma(new Locale("es"));
 
         //Gestión incidencias BBDD
         CRUDIncidencia incidencia = new CRUDIncidencia();
@@ -211,15 +187,6 @@ public class ControladorHome extends Controlador{//implements Initializable {
         } catch (Exception e) {
         }
 
-    }
-
-    /**
-     * Método que cambia el texto para indicar el idioma actual al que se está traduciendo.
-     *
-     * @param idioma Recibe un String idioma
-     */
-    private void actualizarTextoIdioma(String idioma) {
-        idiomas.setText("" + idioma);
     }
 
 

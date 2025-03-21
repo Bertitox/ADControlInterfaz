@@ -1,6 +1,9 @@
 package org.example.adcontrol;
 
 import javafx.animation.ScaleTransition;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -9,6 +12,12 @@ import javafx.util.Duration;
 
 
 public class Controlador {
+    public StringProperty idioma = new SimpleStringProperty();
+
+    public Controlador() {
+    }
+
+
     /**
      * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
      *
@@ -69,4 +78,12 @@ public class Controlador {
         zoomIn.play();
     }
 
+    public StringProperty getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(String idioma) {
+        this.idioma.set(idioma);  // Asegúrate de usar .set() para notificar el cambio
+        System.out.println("Idioma cambiado en clase controlador a --> " + idioma);
+    }
 }
