@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorPC">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.Controlador">
     <left>
         <AnchorPane prefHeight="664.0" prefWidth="79.0" style="-fx-background-color: #01a5e7;" BorderPane.alignment="CENTER">
             <children>
@@ -80,14 +75,14 @@
         </AnchorPane>
     </left>
     <center>
-        <AnchorPane prefHeight="664.0" prefWidth="936.0" style="-fx-background-color:  rgb(241,245,246);" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="664.0" prefWidth="936.0" style="-fx-background-color: rgb(241,245,246);" BorderPane.alignment="CENTER">
             <children>
                 <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
                         <MenuButton fx:id="idiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" textFill="WHITE">
                             <items>
                                 <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
-                                <MenuItem fx:id="ingles" mnemonicParsing="false" text="Englhis" />
+                                <MenuItem fx:id="ingles" mnemonicParsing="false" text="English" />
                                 <MenuItem fx:id="frances" mnemonicParsing="false" text="Français" />
                             </items>
                             <graphic>
@@ -108,54 +103,7 @@
                         </Label>
                     </children>
                 </AnchorPane>
-                <Pane fx:id="panel11" layoutX="39.0" layoutY="118.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="220.0" prefWidth="448.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
-                    <children>
-                        <Label fx:id="tituloIncidencias" layoutX="19.0" layoutY="22.0" prefHeight="39.0" prefWidth="372.0" text="Consulta Incidencias">
-                            <font>
-                                <Font name="System Bold" size="28.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="textIncidencia" layoutX="28.0" layoutY="73.0" prefHeight="44.0" prefWidth="265.0" text="Inserta la referencia al Aula:" wrapText="true">
-                            <font>
-                                <Font size="17.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="campoFecha1" layoutX="86.0" layoutY="165.0" prefHeight="18.0" prefWidth="85.0">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="24.0">
-                            <image>
-                                <Image url="@../Imagenes/actualizar.png" />
-                            </image>
-                        </ImageView>
-                        <TextField fx:id="textIncidencias" layoutX="258.0" layoutY="85.0" />
-                        <Button fx:id="actualizar" layoutX="72.0" layoutY="143.0" mnemonicParsing="false" onAction="#mostrarIncidenciasListView" prefHeight="40.0" prefWidth="105.0" styleClass="botonPrueba" text="Actualizar" textFill="#030303" />
-                        <Button fx:id="actualizar1" layoutX="264.0" layoutY="141.0" mnemonicParsing="false" onAction="#actualizarGrafico" prefHeight="40.0" prefWidth="109.0" styleClass="botonPrueba" text="Ver Gráfico" textFill="#030303" />
-                    </children>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <effect>
-                        <DropShadow height="15.0" radius="7.0" width="15.0" />
-                    </effect>
-                </Pane>
-                <ListView fx:id="listIncidencias" layoutX="524.0" layoutY="118.0" prefHeight="492.0" prefWidth="428.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="listView">
-                    <effect>
-                        <DropShadow />
-                    </effect></ListView>
-                <Pane fx:id="panel111" layoutX="39.0" layoutY="387.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="223.0" prefWidth="449.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
-                    <children>
-                        <PieChart fx:id="graficoIncidencias" layoutX="14.0" layoutY="14.0" prefHeight="183.0" prefWidth="423.0" />
-                    </children>
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <effect>
-                        <DropShadow height="15.0" radius="7.0" width="15.0" />
-                    </effect>
-                </Pane>
+            <Pane fx:id="panelPrincipal" layoutY="52.0" prefHeight="612.0" prefWidth="987.0" />
             </children>
         </AnchorPane>
     </center>

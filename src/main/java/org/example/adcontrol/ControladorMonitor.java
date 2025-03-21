@@ -25,10 +25,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -40,7 +37,7 @@ import java.util.ResourceBundle;
  * @author Daniel y Alberto
  * @version 1.0
  */
-public class ControladorPC {
+public class ControladorMonitor extends Controlador{
 
     @FXML
     ListView<String> listIncidencias;
@@ -226,159 +223,4 @@ public class ControladorPC {
         alerta.showAndWait();
     }
 
-    /**
-     * Método que define el estilo de los botones cuando el ratón pasa por encima.
-     *
-     * @param event El evento de pasar el ratón por encima del botón.
-     */
-    @FXML
-    void hoverBoton(MouseEvent event) {
-        Button boton = (Button) event.getSource();
-
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), boton);
-        zoomIn.setToX(1.1);  // 10% más grande en X
-        zoomIn.setToY(1.1);  // 10% más grande en Y
-        zoomIn.play();
-    }
-
-    /**
-     * Método que define el estilo normal de los botones tras pasar el cursor por encima
-     *
-     * @param event Cuando el ratón no está por encima de algún boton
-     */
-    @FXML
-    void normalBoton(MouseEvent event) {
-        Button boton = (Button) event.getSource();
-
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(150), boton);
-        zoomIn.setToX(1.0);  //10% más grande en X
-        zoomIn.setToY(1.0);  //10% más grande en Y
-        zoomIn.play();
-    }
-
-    /**
-     * Aplica zoom al pasar el ratón por encima de un Pane.
-     *
-     * @param event El evento de pasar el ratón por encima del Pane.
-     */
-    @FXML
-    void zoomPane(MouseEvent event) {
-        Pane pane = (Pane) event.getSource();
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
-
-        zoomIn.setToX(1.01);
-        zoomIn.setToY(1.01);
-        zoomIn.play();
-    }
-
-    /**
-     * Restaura el tamaño normal del Pane.
-     *
-     * @param event El evento de quitar el ratón de encima del Pane.
-     */
-    @FXML
-    void quitarzoomPane(MouseEvent event) {
-        Pane pane = (Pane) event.getSource();
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
-
-        zoomIn.setToX(1.0);
-        zoomIn.setToY(1.0);
-        zoomIn.play();
-    }
-
-    /**
-     * Método que se encarga de cambiar la pantalla actual por la correspondiente al botón pulsado (pantalla de administradorS de equipos)
-     *
-     * @param event
-     * @throws IOException
-     */
-    @FXML
-    void cambiarPantallaMonitor(ActionEvent event) throws IOException {
-        this.isInHome = false;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaIncidencias.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        stage.setResizable(false);
-        stage.setTitle("Pagina principal");
-        stage.show();
-    }
-
-    /**
-     * Cambia la pantalla a la vista principal.
-     *
-     * @param event El evento de pulsación del botón.
-     * @throws IOException Si ocurre un error al cargar la vista.
-     */
-    @FXML
-    void cambiarPantallaHome(ActionEvent event) throws IOException {
-        this.isInHome = true;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/hello-view.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        stage.setResizable(false);
-        stage.setTitle("Pagina principal");
-        stage.show();
-    }
-
-
-    /**
-     * Método que se usa para cambiar la pantalla de ayuda
-     * @param event El evento de pulsación del botón.
-     * @throws IOException Si ocurre un error al cargar la vista.
-     */
-    @FXML
-    void cambiarpantallaAyuda(ActionEvent event) throws IOException {
-        this.isInHome = false;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAyuda.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        stage.setResizable(false);
-        stage.setTitle("Pagina principal");
-        stage.show();
-    }
-
-    /**
-     * Método que se usa para cambiar la pantalla de configuración
-     * @param event El evento de pulsación del botón.
-     * @throws IOException Si ocurre un error al cargar la vista.
-     */
-    @FXML
-    void cambiarpantallaConfig(ActionEvent event) throws IOException {
-        this.isInHome = false;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaConfiguracion.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        stage.setResizable(false);
-        stage.setTitle("Pagina principal");
-        stage.show();
-    }
-
-    /**
-     * Evento que muestra al usuario una ventana de confirmación par salir o no de la app
-     *
-     * @param event Evento de pulsacion del botón
-     */
-    public void salir(Event event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea salir?", ButtonType.YES, ButtonType.NO);
-        alert.setTitle("Salir de ADControl");
-        alert.setHeaderText(null); //Elimina el encabezado
-
-        //Mostrar el diálogo y esperar respuesta
-        if (alert.showAndWait().get() == ButtonType.YES) {
-            Platform.exit();
-            System.exit(0);
-        }
-    }
 }

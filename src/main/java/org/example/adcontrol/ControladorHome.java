@@ -4,6 +4,7 @@ package org.example.adcontrol;
 import BBDD.DAO.CRUDAula;
 import BBDD.DAO.CRUDIncidencia;
 import BBDD.DTO.Aula;
+import BBDD.DTO.Incidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -23,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
@@ -54,7 +56,7 @@ import java.util.List;
  * @author Daniel y Alberto
  * @version 1.0
  */
-public class ControladorApp {//implements Initializable {
+public class ControladorHome extends Controlador{//implements Initializable {
     @FXML
     private ImageView exitIcon;
     @FXML
@@ -133,6 +135,15 @@ public class ControladorApp {//implements Initializable {
     @FXML
     Button botonExplorar;
 
+    @FXML
+    ListView<String> listIncidencias;
+
+    @FXML
+    TextField textIncidencias;
+
+    @FXML
+    PieChart graficoIncidencias;
+
     //Elementos a traducir
     @FXML
     private Label labelIncidencias;
@@ -152,33 +163,38 @@ public class ControladorApp {//implements Initializable {
     private Label informeMasUtilizado;
     @FXML
     private Label textoTitulo;
+    @FXML
+    private Pane panelPrincipal;
 
     Map<String, Integer> mapaInformeUtilizado;
 
     Integer nTotal = 0;
+
+    //Elementos a traducir
+    @FXML
+    private Label textIncidencia;
+    @FXML
+    private Label tituloIncidencias;
 
     private ResourceBundle bundle;
 
     /**
      * Costructor por defecto del controlador
      */
-    public ControladorApp() {
+    public ControladorHome() {
     }
 
     /**
      * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico y los idiomas.
      * Inicializa la app entera.
      */
-    @FXML
     public void initialize() {
+
+
         botonGenerar = new Button();
         botonExplorar = new Button();
         botonExplorar.getStyleClass().add("botonPrueba");
         botonGenerar.getStyleClass().add("botonPrueba");
-
-        mapaInformeUtilizado = new HashMap<>();
-        ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
-        comboboxInforme.setItems(items);
 
         botones = new ArrayList<>();
         botones.add(ajustesBoton);
@@ -208,20 +224,24 @@ public class ControladorApp {//implements Initializable {
             // Cargar el idioma inicial (Español)
             cargarIdioma(new Locale("es"));
             actualizarTextoIdioma("Español"); //Actualizar texto Idioma
-
-            //Gestión incidencias BBDD
-            CRUDIncidencia incidencia = new CRUDIncidencia();
-            CRUDAula aula = new CRUDAula();
-
-            //Actualizar Incidencias
-            actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
-            campoFecha.setText(LocalDate.now().toString());
-            campoFecha1.setText(LocalDate.now().toString());
-            try {
-                actualizarGrafico();
-            } catch (Exception e) {
-            }
         });
+
+        mapaInformeUtilizado = new HashMap<>();
+        ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
+        comboboxInforme.setItems(items);
+
+        //Gestión incidencias BBDD
+        CRUDIncidencia incidencia = new CRUDIncidencia();
+        CRUDAula aula = new CRUDAula();
+
+        //Actualizar Incidencias
+        actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
+        campoFecha.setText(LocalDate.now().toString());
+        campoFecha1.setText(LocalDate.now().toString());
+        try {
+            actualizarGrafico();
+        } catch (Exception e) {
+        }
 
     }
 
@@ -233,6 +253,7 @@ public class ControladorApp {//implements Initializable {
     private void actualizarTextoIdioma(String idioma) {
         idiomas.setText("" + idioma);
     }
+
 
     /**
      * Método que sirve para cambiar el idioma
@@ -274,66 +295,6 @@ public class ControladorApp {//implements Initializable {
 
 
     /**
-     * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
-     *
-     * @param event Cuando se pasa el cursor por encima
-     */
-    @FXML
-    void hoverBoton(MouseEvent event) {
-        Button boton = (Button) event.getSource();
-
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), boton);
-        zoomIn.setToX(1.1);  // 10% más grande en X
-        zoomIn.setToY(1.1);  // 10% más grande en Y
-        zoomIn.play();
-    }
-
-    /**
-     * Método que define el estilo normal de los botones tras pasar el cursor por encima
-     *
-     * @param event Cuando el ratón no está por encima de algun boton
-     */
-    @FXML
-    void normalBoton(MouseEvent event) {
-        Button boton = (Button) event.getSource();
-
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(150), boton);
-        zoomIn.setToX(1.0);  // 10% más grande en X
-        zoomIn.setToY(1.0);  // 10% más grande en Y
-        zoomIn.play();
-    }
-
-    /**
-     * Pone el zoom al Pane
-     *
-     * @param event Evento que espera el método
-     */
-    @FXML
-    void zoomPane(MouseEvent event) {
-        Pane pane = (Pane) event.getSource();
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
-
-        zoomIn.setToX(1.01);
-        zoomIn.setToY(1.01);
-        zoomIn.play();
-    }
-
-    /**
-     * Pone el zoom al Pane
-     *
-     * @param event Evento que espera el método
-     */
-    @FXML
-    void quitarzoomPane(MouseEvent event) {
-        Pane pane = (Pane) event.getSource();
-        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
-
-        zoomIn.setToX(1.0);
-        zoomIn.setToY(1.0);
-        zoomIn.play();
-    }
-
-    /**
      * Pone el zoom al Gráfico
      *
      * @param event Evento que espera el método
@@ -361,88 +322,6 @@ public class ControladorApp {//implements Initializable {
         zoomIn.setToX(1.0);
         zoomIn.setToY(1.0);
         zoomIn.play();
-    }
-
-
-    /**
-     * Método que se encarga de cambiar la pantalla actual por la correspondiente al botón pulsado (pantalla de administradorS de equipos)
-     *
-     * @param event evento que espera el método
-     * @throws IOException excepción de entrada salida lanzada por el método
-     */
-    @FXML
-    void cambiarPantallaMonitor(ActionEvent event) throws IOException {
-        this.isInHome = false;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaIncidencias.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        stage.setResizable(false);
-        stage.setTitle("Pagina principal");
-        stage.show();
-    }
-
-    /**
-     * Método que sirve para cambiar la pantalla Home
-     *
-     * @param event Evento que inicia el método
-     * @throws IOException Excepción de entrada salida lanzada por el método
-     */
-    @FXML
-    void cambiarPantallaHome(ActionEvent event) throws IOException {
-        this.isInHome = true;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/hello-view.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        stage.setResizable(false);
-        stage.setTitle("Pagina principal");
-        stage.show();
-    }
-
-
-    /**
-     * Método que sirve para cambiar la pantalla de Ayuda
-     *
-     * @param event Evento que inicia el método
-     * @throws IOException Excepción de entrada salida lanzada por el método
-     */
-    @FXML
-    void cambiarpantallaAyuda(ActionEvent event) throws IOException {
-        this.isInHome = false;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAyuda.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        stage.setResizable(false);
-        stage.setTitle("Pagina principal");
-        stage.show();
-    }
-
-    /**
-     * Método que sirve para cambiar la pantalla de Configuracion
-     *
-     * @param event Evento que inicia el método
-     * @throws IOException Excepción de entrada salida lanzada por el método
-     */
-    @FXML
-    void cambiarpantallaConfig(ActionEvent event) throws IOException {
-        this.isInHome = false;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaConfiguracion.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = (Stage) ajustesBoton.getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        stage.setResizable(false);
-        stage.setTitle("Pagina principal");
-        stage.show();
     }
 
     /**
@@ -484,20 +363,4 @@ public class ControladorApp {//implements Initializable {
         barChart.getData().add(serie);
     }
 
-    /**
-     * Evento que muestra al usuario una ventana de confirmación par salir o no de la app
-     *
-     * @param event Evento de pulsacion del botón
-     */
-    public void salir(Event event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea salir?", ButtonType.YES, ButtonType.NO);
-        alert.setTitle("Salir de ADControl");
-        alert.setHeaderText(null); //Elimina el encabezado
-
-        //Mostrar diálogo y esperar a la respuesta del usuario
-        if (alert.showAndWait().get() == ButtonType.YES) {
-            Platform.exit();
-            System.exit(0);
-        }
-    }
 }
