@@ -97,6 +97,25 @@ public class ControladorMonitor extends Controlador{
         refrescarIdioma();
     }
 
+    public void cargarIdioma(Locale locale) {
+        try {
+            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
+
+            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
+            textIncidencia.setText(bundle.getString("textIncidencia"));
+            tituloIncidencias.setText(bundle.getString("tituloIncidencias"));
+            actualizar.setText(bundle.getString("boton.text"));
+            actualizar1.setText(bundle.getString("boton2.text"));
+
+            System.out.println("Idioma cargado exitosamente.");//Debug
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
     //Método que rellena el ListView
     /**
      * Muestra las incidencias en el ListView.
