@@ -7,8 +7,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.util.Locale;
+
 
 public class Controlador {
+
+
+    public void cargarIdioma(Locale locale) {
+        //MÉTDODO VACÍO QUE SOBREESCRIBEN LAS CLASES QUE EXTIENDEN DE ESTA
+    }
+
     /**
      * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
      *
