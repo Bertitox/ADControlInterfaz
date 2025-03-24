@@ -33,17 +33,10 @@ public class ControladorMenu extends Controlador {
 
     Boolean daltónico = false;
 
-    @FXML
-    void alternarPaleta(ActionEvent event) {
-        if(!daltónico){
-            barraArriba.setStyle("-fx-background-color: red");
-            barraIzquierda.setStyle("-fx-background-color: red");
-            daltónico = true;
-        }else{
-            barraArriba.setStyle("-fx-background-color: #01a5e7");
-            barraIzquierda.setStyle("-fx-background-color: #01a5e7");
-            daltónico = false;
-        }
+
+    ControlIdioma controlIdioma = ControlIdioma.getInstance();
+
+    public ControladorMenu() {
     }
 
     @FXML
@@ -54,7 +47,7 @@ public class ControladorMenu extends Controlador {
             Parent root = fxmlLoader.load();
             panelPrincipal.getChildren().clear();
             panelPrincipal.getChildren().add(root);
-            refrescarIdioma();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,6 +69,20 @@ public class ControladorMenu extends Controlador {
             cambiarIdioma("Français");
         });
 
+    }
+
+
+    @FXML
+    void alternarPaleta(ActionEvent event) {
+        if(!daltónico){
+            barraArriba.setStyle("-fx-background-color: red");
+            barraIzquierda.setStyle("-fx-background-color: red");
+            daltónico = true;
+        }else{
+            barraArriba.setStyle("-fx-background-color: #01a5e7");
+            barraIzquierda.setStyle("-fx-background-color: #01a5e7");
+            daltónico = false;
+        }
     }
 
     /**
