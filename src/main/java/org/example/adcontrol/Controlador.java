@@ -1,6 +1,8 @@
 package org.example.adcontrol;
 
 import javafx.animation.ScaleTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -12,6 +14,41 @@ import java.util.Locale;
 
 public class Controlador {
 
+    ControlIdioma controlIdioma = ControlIdioma.getInstance();
+
+    public Controlador() {
+        controlIdioma.getIdioma().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                switch (newValue) {
+                    case "Español":
+                        cargarIdioma(new Locale("es"));
+                        break;
+                    case "Ingles":
+                        cargarIdioma(new Locale("en"));
+                        break;
+                    case "Frances":
+                        cargarIdioma(new Locale("fr"));
+                        break;
+                }
+            }
+        });
+    }
+
+    public void refrescarIdioma() {
+        String idioma = controlIdioma.getIdioma().getValue();
+        switch (idioma) {
+            case "Español":
+                cargarIdioma(new Locale("es"));
+                break;
+            case "Ingles":
+                cargarIdioma(new Locale("en"));
+                break;
+            case "Frances":
+                cargarIdioma(new Locale("fr"));
+                break;
+        }
+    }
 
     public void cargarIdioma(Locale locale) {
         //MÉTDODO VACÍO QUE SOBREESCRIBEN LAS CLASES QUE EXTIENDEN DE ESTA
