@@ -83,12 +83,7 @@ public class ControladorAyuda extends Controlador{
      */
     @FXML
     public void initialize() {
-        botones = new ArrayList<>();
-        botones.add(ajustesBoton);
-        botones.add(ayudaBoton);
-        botones.add(homeBoton);
-        botones.add(monitorBoton);
-        botones.add(salirBoton);
+        refrescarIdioma();
     }
 
     /**

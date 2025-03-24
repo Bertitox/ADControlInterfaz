@@ -45,7 +45,7 @@ public class ControladorMenu extends Controlador {
             Parent root = fxmlLoader.load();
             panelPrincipal.getChildren().clear();
             panelPrincipal.getChildren().add(root);
-
+            refrescarIdioma();
         } catch (Exception e) {
             System.out.println("Error");
         }

@@ -159,17 +159,12 @@ public class ControladorHome extends Controlador{//implements Initializable {
      * Inicializa la app entera.
      */
     public void initialize() {
+        refrescarIdioma();
+
         botonGenerar = new Button();
         botonExplorar = new Button();
         botonExplorar.getStyleClass().add("botonPrueba");
         botonGenerar.getStyleClass().add("botonPrueba");
-
-        botones = new ArrayList<>();
-        botones.add(ajustesBoton);
-        botones.add(ayudaBoton);
-        botones.add(homeBoton);
-        botones.add(monitorBoton);
-        botones.add(salirBoton);
 
 
         mapaInformeUtilizado = new HashMap<>();

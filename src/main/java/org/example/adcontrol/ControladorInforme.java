@@ -121,6 +121,8 @@ public class ControladorInforme extends Controlador{
      */
     @FXML
     public void initialize() {
+        refrescarIdioma();
+
         botonGenerar = new Button();
         botonExplorar = new Button();
         botonExplorar.getStyleClass().add("botonPrueba");
