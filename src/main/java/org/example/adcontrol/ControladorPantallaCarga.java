@@ -2,29 +2,15 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula;
 import BBDD.DAO.CRUDIncidencia;
-import BBDD.Excepciones.AulaNotFoundException;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
-
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
 
 public class ControladorPantallaCarga implements Runnable {
     @FXML

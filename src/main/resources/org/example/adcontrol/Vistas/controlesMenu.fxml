@@ -77,6 +77,7 @@
             <children>
                 <AnchorPane fx:id="barraArriba" prefHeight="50.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
+
                         <Label fx:id="textoTitulo" layoutX="14.0" layoutY="12.0" text="IES Laguna de Joatzel" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="24.0" />

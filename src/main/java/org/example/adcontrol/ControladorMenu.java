@@ -6,13 +6,9 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-
 import java.io.IOException;
+
 
 public class ControladorMenu extends Controlador {
     @FXML
@@ -25,30 +21,37 @@ public class ControladorMenu extends Controlador {
     private AnchorPane barraIzquierda;
 
     Boolean daltónico = false;
-
-    @FXML
-    void alternarPaleta(ActionEvent event) {
-        if(!daltónico){
-            barraArriba.setStyle("-fx-background-color: red");
-            barraIzquierda.setStyle("-fx-background-color: red");
-            daltónico = true;
-        }else{
-            barraArriba.setStyle("-fx-background-color: #01a5e7");
-            barraIzquierda.setStyle("-fx-background-color: #01a5e7");
-            daltónico = false;
-        }
-    }
+  
     @FXML
     void initialize() {
         try {
+            //SE CARGA POR DEFECTO LA VISTA HOME
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaHome.fxml"));
             Parent root = fxmlLoader.load();
             panelPrincipal.getChildren().clear();
             panelPrincipal.getChildren().add(root);
 
         } catch (Exception e) {
-            System.out.println("Error");
+            e.printStackTrace();
         }
+
+        //refrescarIdioma();
+
+        español.setOnAction(e -> {
+            controlIdioma.setIdioma("Español");
+            cambiarIdioma("Español");
+        });
+
+        ingles.setOnAction(e -> {
+            controlIdioma.setIdioma("Ingles");
+            cambiarIdioma("English");
+        });
+
+        frances.setOnAction(e -> {
+            controlIdioma.setIdioma("Frances");
+            cambiarIdioma("Français");
+        });
+
     }
 
     /**
@@ -96,7 +99,6 @@ public class ControladorMenu extends Controlador {
         panelPrincipal.getChildren().add(root);
     }
 
-
     /**
      * Método que sirve para cambiar la pantalla de Ayuda
      *
@@ -128,4 +130,14 @@ public class ControladorMenu extends Controlador {
             System.exit(0);
         }
     }
+
+    /**
+     * Método que cambia el texto del combobox para indicar el idioma actual al que se está traduciendo.
+     *
+     * @param idioma Recibe un String idioma
+     */
+    public void cambiarIdioma(String idioma) {
+        menuButtonIdiomas.setText(idioma);
+    }
+
 }

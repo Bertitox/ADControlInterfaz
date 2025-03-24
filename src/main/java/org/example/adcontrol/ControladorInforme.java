@@ -1,6 +1,5 @@
 package org.example.adcontrol;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
@@ -16,22 +14,20 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-
 import javax.swing.*;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.List;
 
 /**
  * Clase Controladora de la pestaña informes
+ *
  * @author Daniel y Alberto
  * @version 1.0
  */
-public class ControladorInforme extends Controlador{
-
+public class ControladorInforme extends Controlador {
     @FXML
     private Label tituloInforme;
     @FXML
@@ -48,67 +44,27 @@ public class ControladorInforme extends Controlador{
     private Label textUltimo;
     @FXML
     private Label textNombreUltimo;
-
     //Generar Informes
-
     @FXML
     private TextArea nombreInforme;
     @FXML
     private TextArea textAreaRuta;
     @FXML
     private Label ultimoNombre;
-
     @FXML
     private Label numeroTotalInformes;
-
     @FXML
     private Label informeMasUtilizado;
-
     @FXML
     private Label ultimoInforme;
-
-
     Map<String, Integer> mapaInformeUtilizado;
-
     Integer nTotal = 0;
-
     @FXML
     private ComboBox comboboxInforme = new ComboBox();
-
-    List<Button> botones;
-
-    Boolean isInHome = true;
-
-    @FXML
-    MenuButton idiomas;
-
-    @FXML
-    MenuItem español;
-
-    @FXML
-    MenuItem ingles;
-
-    @FXML
-    MenuItem frances;
-
     @FXML
     Button botonGenerar;
-
     @FXML
     Button botonExplorar;
-
-    //Botones
-    @FXML
-    private Button ajustesBoton;
-    @FXML
-    private Button ayudaBoton;
-    @FXML
-    private Button homeBoton;
-    @FXML
-    private Button monitorBoton;
-    @FXML
-    private Button salirBoton;
-
     private ResourceBundle bundle;
 
     /**
@@ -117,31 +73,25 @@ public class ControladorInforme extends Controlador{
     public ControladorInforme() {
     }
 
-    /** Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
+    /**
+     * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
      */
     @FXML
     public void initialize() {
-        botonGenerar = new Button();
-        botonExplorar = new Button();
-        botonExplorar.getStyleClass().add("botonPrueba");
-        botonGenerar.getStyleClass().add("botonPrueba");
+        refrescarIdioma();
+
+        botonExplorar.getStyleClass().add("botonExplorar");
+        botonGenerar.getStyleClass().add("botonGenerar");
 
         mapaInformeUtilizado = new HashMap<>();
         //Para el Combobox
         ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
         comboboxInforme.setItems(items);
-
-
-        botones = new ArrayList<>();
-        botones.add(ajustesBoton);
-        botones.add(ayudaBoton);
-        botones.add(homeBoton);
-        botones.add(monitorBoton);
-        botones.add(salirBoton);
     }
 
     /**
      * Genera un archivo PDF con base en los parámetros seleccionados en la interfaz.
+     *
      * @param event El evento generado al hacer clic en el botón de generar PDF.
      */
     @FXML
@@ -156,12 +106,12 @@ public class ControladorInforme extends Controlador{
             alert.setHeaderText(null); // Elimina encabezado
             alert.showAndWait();
 
-        } else if(textAreaRuta.getText().isBlank() || textAreaRuta.getText().isEmpty()) {
+        } else if (textAreaRuta.getText().isBlank() || textAreaRuta.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Selecciona una ruta", ButtonType.OK);
             alert.setTitle("Error");
             alert.setHeaderText(null); // Elimina encabezado
             alert.showAndWait();
-        }else{
+        } else {
             switch (comboboxInforme.getValue().toString()) {
                 case "Aulas":
                     print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/InformeAula.jasper", null, conexion);
@@ -184,7 +134,7 @@ public class ControladorInforme extends Controlador{
             if (nombreInforme.getText().isBlank() || nombreInforme.getText().isEmpty()) {
                 ruta = textAreaRuta.getText() + "/informe.pdf";
             } else {
-                ruta = textAreaRuta.getText() +"/" +  nombreInforme.getText() + ".pdf";
+                ruta = textAreaRuta.getText() + "/" + nombreInforme.getText() + ".pdf";
             }
             JasperExportManager.exportReportToPdfFile(print, ruta);
             ultimoInforme.setText(comboboxInforme.getValue().toString());
@@ -203,6 +153,7 @@ public class ControladorInforme extends Controlador{
 
     /**
      * Abre un selector de directorios para cambiar la ruta donde se guardará el informe generado.
+     *
      * @param event El evento generado al hacer clic en el botón de explorar.
      */
     @FXML
@@ -214,6 +165,7 @@ public class ControladorInforme extends Controlador{
 
     /**
      * Método que obtiene el informe más utilizado basado en el contador de informes generados.
+     *
      * @return El nombre del informe más utilizado.
      */
     public String getInformeMas() {
@@ -228,9 +180,9 @@ public class ControladorInforme extends Controlador{
         return informe;
     }
 
-
     /**
      * Método que aplica un estilo de fondo y borde al pasar el cursor sobre un botón de informe.
+     *
      * @param event El evento generado cuando el ratón pasa sobre el botón de informe.
      */
     @FXML
@@ -244,6 +196,7 @@ public class ControladorInforme extends Controlador{
 
     /**
      * Método que restablece el estilo de fondo y borde de un botón de informe cuando el ratón deja de estar sobre él.
+     *
      * @param event El evento generado cuando el ratón deja de estar sobre el botón de informe.
      */
     @FXML
