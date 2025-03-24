@@ -6,7 +6,10 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+
 import java.io.IOException;
 
 
@@ -19,9 +22,17 @@ public class ControladorMenu extends Controlador {
     private AnchorPane barraArriba;
     @FXML
     private AnchorPane barraIzquierda;
+    @FXML
+    private MenuButton menuButtonIdiomas;
+    @FXML
+    private MenuItem español;
+    @FXML
+    private MenuItem frances;
+    @FXML
+    private MenuItem ingles;
 
     Boolean daltónico = false;
-  
+
     @FXML
     void initialize() {
         try {
