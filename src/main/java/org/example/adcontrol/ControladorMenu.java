@@ -34,6 +34,19 @@ public class ControladorMenu extends Controlador {
     Boolean daltónico = false;
 
     @FXML
+    void alternarPaleta(ActionEvent event) {
+        if(!daltónico){
+            barraArriba.setStyle("-fx-background-color: red");
+            barraIzquierda.setStyle("-fx-background-color: red");
+            daltónico = true;
+        }else{
+            barraArriba.setStyle("-fx-background-color: #01a5e7");
+            barraIzquierda.setStyle("-fx-background-color: #01a5e7");
+            daltónico = false;
+        }
+    }
+
+    @FXML
     void initialize() {
         try {
             //SE CARGA POR DEFECTO LA VISTA HOME
