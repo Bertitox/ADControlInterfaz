@@ -172,7 +172,31 @@ public class ControladorHome extends Controlador{//implements Initializable {
             actualizarGrafico();
         } catch (Exception e) {
         }
+    }
 
+    /**
+     * Método que cambia el idioma
+     *
+     * @param locale Recibe el idioma Local ("es")
+     */
+    public void cargarIdioma(Locale locale) {
+        try {
+            System.out.println("Cargando idioma: " + locale.getLanguage());
+
+            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
+            labelIncidencias.setText(bundle.getString("labelIncidencias"));
+            labelAulasDisponibles.setText(bundle.getString("labelAulasDisponibles"));
+            textIncidenciasSistema.setText(bundle.getString("textIncidenciasSistema"));
+            textAulasDisponibles.setText(bundle.getString("textAulasDisponibles"));
+            textFecha1.setText(bundle.getString("textFecha1"));
+            textFecha2.setText(bundle.getString("textFecha2"));
+
+            System.out.println("Idioma cargado exitosamente.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
