@@ -82,22 +82,11 @@ public class ControladorHome extends Controlador{//implements Initializable {
     Boolean isInHome = true;
 
     @FXML
-    MenuButton idiomas;
-
-    @FXML
-    MenuItem español;
-
-    @FXML
-    MenuItem ingles;
-
-    @FXML
     private Label ultimoNombre;
 
     @FXML
     private Label ultimoInforme;
 
-    @FXML
-    MenuItem frances;
 
     @FXML
     Button botonGenerar;
