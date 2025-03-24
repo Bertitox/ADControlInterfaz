@@ -86,6 +86,27 @@ public class ControladorAyuda extends Controlador{
         refrescarIdioma();
     }
 
+    public void cargarIdioma(Locale locale) {
+        try {
+            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
+
+            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
+            PreguntaIncidencias.setText(bundle.getString("PreguntaIncidencias"));
+            PreguntaInforme.setText(bundle.getString("PreguntaInforme"));
+            DescIncidencias.setText(bundle.getString("DescIncidencias"));
+            DescInforme.setText(bundle.getString("DescInforme"));
+            TituloMysql.setText(bundle.getString("TituloMysql"));
+            DescMysql.setText(bundle.getString("DescMysql"));
+            TituloJasper.setText(bundle.getString("TituloJasper"));
+            DescJasper.setText(bundle.getString("DescJasper"));
+
+            System.out.println("Idioma cargado exitosamente.");//Debug
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * Método encargado de abrir un enlace web en el navegador
      *
