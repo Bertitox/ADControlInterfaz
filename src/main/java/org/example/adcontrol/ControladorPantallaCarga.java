@@ -1,5 +1,4 @@
 package org.example.adcontrol;
-
 import BBDD.DAO.CRUDAula;
 import BBDD.DAO.CRUDIncidencia;
 import javafx.application.Platform;
@@ -12,35 +11,16 @@ import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import java.io.IOException;
 
+/**
+ * Clase controladora de la pantalla de carga.
+ * @author Daniel y Alberto
+ * @version 1.5
+ */
 public class ControladorPantallaCarga implements Runnable {
     @FXML
     ProgressBar progressBar;
     @FXML
     Label textoCarga;
-
-/*    *//**
-     * Método encargado de poner el color a la barra de progreso y de hacer que aumente cada 50 milisegundos
-     *//*
-    @Override
-    public void run() {
-        //progressBar.setStyle("-fx-accent: #01a5e7;");
-        for (int i = 0; i <= 100; i++) {
-            final int value = i;
-            Platform.runLater(() -> progressBar.setProgress(value / 100.0));
-            try {
-                Thread.sleep(50); // Espera 0.05s para que la barra no se complete de golpe
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        Platform.runLater(() -> {
-            try {
-                primeraVentana(); // Se llama al método que iniciará la nueva ventana
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-    }*/
 
     /**
      * Costructor por defecto del controlador

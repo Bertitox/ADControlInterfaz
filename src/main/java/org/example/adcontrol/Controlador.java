@@ -8,14 +8,21 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-
 import java.util.Locale;
 
-
+/**
+ * @author Daniel y Alberto
+ * @version 1.5
+ * Clase controladora de toda la app. Incluye métodos comunes a todos los demás controladores.
+ */
 public class Controlador {
+
 
     ControlIdioma controlIdioma = ControlIdioma.getInstance();
 
+    /**
+     * Constructor principal de la clase Controlador
+     */
     public Controlador() {
         controlIdioma.getIdioma().addListener(new ChangeListener<String>() {
             @Override
@@ -35,6 +42,9 @@ public class Controlador {
         });
     }
 
+    /**
+     * Clase que se encarga de cambiar el idioma según la opción seleccionada en el ComboBox
+     */
     public void refrescarIdioma() {
         String idioma = controlIdioma.getIdioma().getValue();
         switch (idioma) {
@@ -50,12 +60,16 @@ public class Controlador {
         }
     }
 
+    /**
+     * Método que carga el idioma, y que implementará cada controlador.
+     * @param locale
+     */
     public void cargarIdioma(Locale locale) {
         //MÉTDODO VACÍO QUE SOBREESCRIBEN LAS CLASES QUE EXTIENDEN DE ESTA
     }
 
     /**
-     * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un boton
+     * Método que añade un efecto de zoom cuando se superpone el cursor por encima de un botón.
      *
      * @param event Cuando se pasa el cursor por encima
      */

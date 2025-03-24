@@ -8,7 +8,7 @@ import jakarta.persistence.Persistence;
 /**
  * Clase Singleton para la conexión a la BBDD con JPA
  * @author Alberto y Daniel
- * @version 1.1
+ * @version 1.5
  */
 public class Conexion {
 

@@ -1,6 +1,4 @@
 package org.example.adcontrol;
-
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
@@ -16,7 +13,6 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-
 import javax.swing.*;
 import java.io.File;
 import java.sql.Connection;
@@ -28,7 +24,7 @@ import java.util.List;
 /**
  * Clase Controladora de la pestaña informes
  * @author Daniel y Alberto
- * @version 1.0
+ * @version 1.5
  */
 public class ControladorInforme extends Controlador{
 
@@ -77,37 +73,11 @@ public class ControladorInforme extends Controlador{
 
     List<Button> botones;
 
-    Boolean isInHome = true;
-
-    @FXML
-    MenuButton idiomas;
-
-    @FXML
-    MenuItem español;
-
-    @FXML
-    MenuItem ingles;
-
-    @FXML
-    MenuItem frances;
-
     @FXML
     Button botonGenerar;
 
     @FXML
     Button botonExplorar;
-
-    //Botones
-    @FXML
-    private Button ajustesBoton;
-    @FXML
-    private Button ayudaBoton;
-    @FXML
-    private Button homeBoton;
-    @FXML
-    private Button monitorBoton;
-    @FXML
-    private Button salirBoton;
 
     private ResourceBundle bundle;
 
@@ -117,7 +87,8 @@ public class ControladorInforme extends Controlador{
     public ControladorInforme() {
     }
 
-    /** Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
+    /**
+     * Método que incializa la lista y se añaden los botones a esta. También añade los datos al gráfico
      */
     @FXML
     public void initialize() {
@@ -132,14 +103,6 @@ public class ControladorInforme extends Controlador{
         //Para el Combobox
         ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
         comboboxInforme.setItems(items);
-
-
-        botones = new ArrayList<>();
-        botones.add(ajustesBoton);
-        botones.add(ayudaBoton);
-        botones.add(homeBoton);
-        botones.add(monitorBoton);
-        botones.add(salirBoton);
     }
 
     public void cargarIdioma(Locale locale) {
@@ -157,7 +120,6 @@ public class ControladorInforme extends Controlador{
             textNombreUltimo.setText(bundle.getString("textNombreUltimo"));
             botonGenerar.setText(bundle.getString("botonGenerar.text"));
             botonExplorar.setText(bundle.getString("botonExplorar.text"));
-
             System.out.println("Idioma cargado exitosamente.");//Debug
 
         } catch (Exception e) {
@@ -254,7 +216,6 @@ public class ControladorInforme extends Controlador{
         }
         return informe;
     }
-
 
     /**
      * Método que aplica un estilo de fondo y borde al pasar el cursor sobre un botón de informe.

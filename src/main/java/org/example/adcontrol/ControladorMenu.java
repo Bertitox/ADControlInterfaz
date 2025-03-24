@@ -1,5 +1,4 @@
 package org.example.adcontrol;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -9,10 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-
 import java.io.IOException;
 
-
+/**
+ * Clase ControladorMenu que sirve como controlador específico del menú.
+ * @author Daniel y Alberto
+ * @version 1.0
+ */
 public class ControladorMenu extends Controlador {
     @FXML
     public Pane panelPrincipal;
@@ -33,12 +35,17 @@ public class ControladorMenu extends Controlador {
 
     Boolean daltónico = false;
 
-
     ControlIdioma controlIdioma = ControlIdioma.getInstance();
 
+    /**
+     * Constructor por defecto de la clase ControladorMenu
+     */
     public ControladorMenu() {
     }
 
+    /**
+     * Método que inicializa los componentes de la clase ControladorMenu
+     */
     @FXML
     void initialize() {
         try {
@@ -72,6 +79,10 @@ public class ControladorMenu extends Controlador {
     }
 
 
+    /**
+     * Método que cambia la paleta de colores de la barra lateral de la aplicación.
+     * @param event Evento que espera el método para actuar.
+     */
     @FXML
     void alternarPaleta(ActionEvent event) {
         if(!daltónico){

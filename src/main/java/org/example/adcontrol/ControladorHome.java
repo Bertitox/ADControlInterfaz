@@ -1,11 +1,8 @@
 package org.example.adcontrol;
-
-
 import BBDD.DAO.CRUDAula;
 import BBDD.DAO.CRUDIncidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.ScaleTransition;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,43 +10,17 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.List;
 
 /**
  * @author Daniel y Alberto
- * @version 1.0
+ * @version 1.5
  */
 public class ControladorHome extends Controlador{//implements Initializable {
-    @FXML
-    private ImageView exitIcon;
-    @FXML
-    private MenuButton menuButton;
-    @FXML
-    private MenuItem action1;
-    @FXML
-    private MenuItem action2;
-    @FXML
-    private Button ajustesBoton;
-    @FXML
-    private Button ayudaBoton;
-    @FXML
-    private Button homeBoton;
-    @FXML
-    private Button monitorBoton;
-    @FXML
-    private Button salirBoton;
-    @FXML
-    private Pane panel1;
 
     @FXML
     private Label lblTituloGrave;
@@ -60,10 +31,6 @@ public class ControladorHome extends Controlador{//implements Initializable {
     //Campos del Gráfico de datos
     @FXML
     private BarChart<String, Number> barChart;
-    @FXML
-    private CategoryAxis xAxis;
-    @FXML
-    private NumberAxis yAxis;
 
     @FXML
     private Label campoFecha;
@@ -72,20 +39,7 @@ public class ControladorHome extends Controlador{//implements Initializable {
     private Label campoFecha1;
 
     @FXML
-    private TextArea textAreaRuta;
-
-    @FXML
     private ComboBox comboboxInforme = new ComboBox();
-
-    List<Button> botones;
-
-    Boolean isInHome = true;
-
-    @FXML
-    private Label ultimoNombre;
-
-    @FXML
-    private Label ultimoInforme;
 
 
     @FXML
@@ -93,15 +47,6 @@ public class ControladorHome extends Controlador{//implements Initializable {
 
     @FXML
     Button botonExplorar;
-
-    @FXML
-    ListView<String> listIncidencias;
-
-    @FXML
-    TextField textIncidencias;
-
-    @FXML
-    PieChart graficoIncidencias;
 
     //Elementos a traducir
     @FXML
@@ -116,24 +61,8 @@ public class ControladorHome extends Controlador{//implements Initializable {
     private Label textFecha1;
     @FXML
     private Label textFecha2;
-    @FXML
-    private Label numeroTotalInformes;
-    @FXML
-    private Label informeMasUtilizado;
-    @FXML
-    private Label textoTitulo;
-    @FXML
-    private Pane panelPrincipal;
 
     Map<String, Integer> mapaInformeUtilizado;
-
-    Integer nTotal = 0;
-
-    //Elementos a traducir
-    @FXML
-    private Label textIncidencia;
-    @FXML
-    private Label tituloIncidencias;
 
     private ResourceBundle bundle;
 
@@ -211,7 +140,6 @@ public class ControladorHome extends Controlador{//implements Initializable {
         lblTituloUltimasIncidecias.setText(incidenciasLeves + "");
     }
 
-
     /**
      * Pone el zoom al Gráfico
      *
@@ -266,19 +194,19 @@ public class ControladorHome extends Controlador{//implements Initializable {
         NumberAxis yAxis = (NumberAxis) barChart.getYAxis();
         barChart.setLegendVisible(false);
 
-// Desactiva el ajuste automático del rango
+        //Desactivamos el ajuste automático del rango
         yAxis.setAutoRanging(false);
-// Define los valores mínimos y máximos del eje Y
+        //Definimos valores mínimos y máximos del eje Y
         yAxis.setLowerBound(0); // Empieza en 0
-        yAxis.setUpperBound(incidencia.numMaximoIcidenciasAula()); // Ajusta esto al máximo necesario
-// Configura la separación entre las marcas
+        yAxis.setUpperBound(incidencia.numMaximoIcidenciasAula()); //Ajustamos al máximo necesario
+        //Configura la separación entre marcas del eje
         yAxis.setTickUnit(1);
-// Elimina marcas menores y asegura que las marcas principales sean visibles
+        //Elimina las marcas menores y asegura que las principales estén visibles
         yAxis.setMinorTickCount(0);
         yAxis.setMinorTickVisible(false);
         yAxis.setTickMarkVisible(true);
 
-// Formatea las etiquetas como enteros
+        //Formatea las etiquetas como números enteros
         yAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(yAxis) {
             @Override
             public String toString(Number object) {
@@ -287,8 +215,7 @@ public class ControladorHome extends Controlador{//implements Initializable {
         });
 
 
-
-        //Añadir los datos al gráfico
+        //Añadir datos al gráfico
         XYChart.Series<String, Number> serie = new XYChart.Series<>();
         serie.setData(datosGrafico);
         barChart.setBarGap(500);

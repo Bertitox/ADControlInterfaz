@@ -1,18 +1,8 @@
 package org.example.adcontrol;
-
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-
 /**
  * Clase Main que lanza la app
  * @author Daniel y Alberto
- * @version 1.5
+ * @version 2.0
  */
 public class main {
 

@@ -6,7 +6,6 @@ import BBDD.DTO.Incidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.NoResultException;
 
 import java.util.*;
 
