@@ -12,10 +12,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane fx:controller="org.example.adcontrol.ControladorMonitor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMonitor">
    <children>
-      <Pane fx:id="panel11" layoutX="14.0" layoutY="14.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="220.0" prefWidth="448.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
+      <Pane fx:id="panel11" layoutX="52.0" layoutY="61.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="220.0" prefWidth="448.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
          <children>
             <Label fx:id="tituloIncidencias" layoutX="19.0" layoutY="22.0" prefHeight="39.0" prefWidth="372.0" text="Consulta Incidencias">
                <font>
@@ -48,14 +47,14 @@
             <DropShadow height="15.0" radius="7.0" width="15.0" />
          </effect>
       </Pane>
-      <ListView fx:id="listIncidencias" layoutX="545.0" layoutY="60.0" prefHeight="492.0" prefWidth="428.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="listView">
+      <ListView fx:id="listIncidencias" layoutX="538.0" layoutY="60.0" prefHeight="492.0" prefWidth="428.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;" styleClass="listView">
          <effect>
             <DropShadow />
          </effect>
       </ListView>
-      <Pane fx:id="panel111" layoutX="14.0" layoutY="375.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="223.0" prefWidth="449.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
+      <Pane fx:id="panel111" layoutX="51.0" layoutY="331.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="223.0" prefWidth="449.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
          <children>
-            <PieChart fx:id="graficoIncidencias" layoutX="14.0" layoutY="14.0" prefHeight="183.0" prefWidth="423.0" />
+            <PieChart fx:id="graficoIncidencias" layoutX="13.0" layoutY="14.0" prefHeight="183.0" prefWidth="423.0" />
          </children>
          <cursor>
             <Cursor fx:constant="HAND" />

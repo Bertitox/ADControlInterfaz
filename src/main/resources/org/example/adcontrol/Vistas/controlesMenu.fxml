@@ -3,8 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +12,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMenu">
     <left>
-        <AnchorPane prefHeight="664.0" prefWidth="79.0" style="-fx-background-color: #01a5e7;" BorderPane.alignment="CENTER">
+        <AnchorPane fx:id="barraIzquierda" prefHeight="664.0" prefWidth="79.0" style="-fx-background-color: #01a5e7;" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -77,30 +75,23 @@
     <center>
         <AnchorPane prefHeight="664.0" prefWidth="936.0" style="-fx-background-color: rgb(241,245,246);" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane prefHeight="48.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
+                <AnchorPane fx:id="barraArriba" prefHeight="50.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
                     <children>
-                        <MenuButton fx:id="menuButtonIdiomas" layoutX="784.0" layoutY="3.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" text="Español" textFill="WHITE">
-                            <items>
-                                <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
-                                <MenuItem fx:id="ingles" mnemonicParsing="false" text="English" />
-                                <MenuItem fx:id="frances" mnemonicParsing="false" text="Français" />
-                            </items>
-                            <graphic>
-                                <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../Imagenes/idioma3.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </MenuButton>
+
                         <Label fx:id="textoTitulo" layoutX="14.0" layoutY="12.0" text="IES Laguna de Joatzel" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
                         </Label>
+                  <Button layoutX="915.0" layoutY="3.0" mnemonicParsing="false" onAction="#alternarPaleta" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="46.0" prefWidth="52.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Imagenes/color.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                     </children>
                 </AnchorPane>
             <Pane fx:id="panelPrincipal" layoutY="52.0" prefHeight="612.0" prefWidth="987.0" />

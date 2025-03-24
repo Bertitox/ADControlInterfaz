@@ -90,36 +90,6 @@ public class ControladorInforme extends Controlador {
     }
 
     /**
-     * Carga el idioma seleccionado y actualiza los textos de la interfaz de usuario.
-     *
-     * @param locale El idioma a cargar (por ejemplo, español, inglés, francés).
-     */
-    public void cargarIdioma(Locale locale) {
-        try {
-            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
-
-            bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
-            tituloInforme.setText(bundle.getString("tituloInforme"));
-            tipo1.setText(bundle.getString("tipo1"));
-            tipo2.setText(bundle.getString("tipo2"));
-            textdirectorio.setText(bundle.getString("textdirectorio"));
-            textTotales.setText(bundle.getString("textTotales"));
-            textUltimo.setText(bundle.getString("textUltimo"));
-            textInforme.setText(bundle.getString("textInforme"));
-            textNombreUltimo.setText(bundle.getString("textNombreUltimo"));
-            botonGenerar.setText(bundle.getString("botonGenerar.text"));
-            botonExplorar.setText(bundle.getString("botonExplorar.text"));
-
-            System.out.println("Idioma cargado exitosamente.");//Debug
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
-    /**
      * Genera un archivo PDF con base en los parámetros seleccionados en la interfaz.
      *
      * @param event El evento generado al hacer clic en el botón de generar PDF.

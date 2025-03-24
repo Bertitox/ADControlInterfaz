@@ -6,7 +6,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
 
@@ -14,27 +13,15 @@ import java.io.IOException;
 public class ControladorMenu extends Controlador {
     @FXML
     public Pane panelPrincipal;
-
-    @FXML
-    private MenuItem español;
-
-    @FXML
-    private MenuItem frances;
-
-    @FXML
-    private MenuItem ingles;
-
-    @FXML
-    private MenuButton menuButtonIdiomas;
-
     @FXML
     private Label textoTitulo;
+    @FXML
+    private AnchorPane barraArriba;
+    @FXML
+    private AnchorPane barraIzquierda;
 
-    ControlIdioma controlIdioma = ControlIdioma.getInstance();
-
-    public ControladorMenu() {
-    }
-
+    Boolean daltónico = false;
+  
     @FXML
     void initialize() {
         try {
@@ -75,6 +62,7 @@ public class ControladorMenu extends Controlador {
      */
     @FXML
     void cambiarpantallaInforme(ActionEvent event) throws IOException {
+        textoTitulo.setText("Generar informes");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaInforme.fxml"));
         Parent root = fxmlLoader.load();
         panelPrincipal.getChildren().clear();
@@ -89,6 +77,7 @@ public class ControladorMenu extends Controlador {
      */
     @FXML
     void cambiarPantallaMonitor(ActionEvent event) throws IOException {
+        textoTitulo.setText("Incidencias");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaMonitor.fxml"));
         Parent root = fxmlLoader.load();
         panelPrincipal.getChildren().clear();
@@ -103,6 +92,7 @@ public class ControladorMenu extends Controlador {
      */
     @FXML
     void cambiarPantallaHome(ActionEvent event) throws IOException {
+        textoTitulo.setText("IES Laguna de Joatzel");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaHome.fxml"));
         Parent root = fxmlLoader.load();
         panelPrincipal.getChildren().clear();
@@ -117,6 +107,7 @@ public class ControladorMenu extends Controlador {
      */
     @FXML
     void cambiarpantallaAyuda(ActionEvent event) throws IOException {
+        textoTitulo.setText("Ayuda");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAyuda.fxml"));
         Parent root = fxmlLoader.load();
         panelPrincipal.getChildren().clear();
