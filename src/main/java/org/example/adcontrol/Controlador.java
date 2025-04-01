@@ -17,7 +17,6 @@ import java.util.Locale;
  */
 public class Controlador {
 
-
     ControlIdioma controlIdioma = ControlIdioma.getInstance();
 
     /**
