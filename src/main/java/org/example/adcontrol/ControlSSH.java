@@ -4,6 +4,7 @@ import com.jcraft.jsch.ChannelShell;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
@@ -122,5 +123,21 @@ public class ControlSSH {
         if (event.getCode() == KeyCode.ENTER) {
             enviarComando();
         }
+    }
+
+    @FXML
+    void apagar(ActionEvent event) throws IOException {
+        out.write(("sudo poweroff" + "\n").getBytes());
+        out.flush();
+        salidaTerminal.clear();
+        salidaTerminal.setStyle("-fx-control-inner-background: red");
+    }
+
+    @FXML
+    void reiniciar(ActionEvent event) throws IOException {
+        out.write(("sudo reboot" + "\n").getBytes());
+        out.flush();
+        salidaTerminal.clear();
+        salidaTerminal.setStyle("-fx-control-inner-background: orange");
     }
 }
