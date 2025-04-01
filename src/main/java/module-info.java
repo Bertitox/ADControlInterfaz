@@ -14,6 +14,7 @@ module org.example.adcontrol {
     requires java.desktop;
     requires javafx.media;
     requires jasperreports;
+    requires jsch;
 
     opens org.example.adcontrol to javafx.fxml;
     opens BBDD.DTO to org.hibernate.orm.core;

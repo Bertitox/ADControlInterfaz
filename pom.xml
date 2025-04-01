@@ -100,6 +100,12 @@
             <version>5.0.0</version> <!-- Usa la última versión disponible -->
         </dependency>
 
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>0.1.55</version>
+        </dependency>
+
     </dependencies>
 
     <build>
