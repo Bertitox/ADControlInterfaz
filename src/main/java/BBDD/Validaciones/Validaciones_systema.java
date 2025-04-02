@@ -31,4 +31,28 @@ public class Validaciones_systema {
         }
         return resultado;
     }
+
+    /**
+     * Método que comprueva si existe un Aula en la BBDD
+     * @param referencia referencia al Aula que se quiere comprobar
+     * @return retorna True o False dependiendo de si el aula existe o no
+     */
+    public boolean existeAula(String referencia) {
+        CRUDAula crudAula = new CRUDAula();
+        boolean exist = false;
+
+        for (Aula a: crudAula.readAllAulas()){
+            if (a.getReferencia().equals(referencia)) {
+                exist = true;
+            }
+        }
+        return exist;
+    }
+
+    /**
+    public static void main(String[] args) {
+        Validaciones_systema validaciones = new Validaciones_systema();
+        System.out.println(validaciones.existeAula("PRUEBA0"));
+    }*/
+
 }

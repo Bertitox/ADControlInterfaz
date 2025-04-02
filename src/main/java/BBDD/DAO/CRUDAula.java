@@ -36,7 +36,7 @@ public class CRUDAula {
      * @param aula Objeto {@link Aula}
      */
     public void insertAula(Aula aula) {
-        if (!(validaciones.onlyOneDevice(aula.getIdInformacionSistema().getId()))) {
+        if (!(validaciones.onlyOneDevice(aula.getIdInformacionSistema().getId())) && (!(validaciones.existeAula(aula.getReferencia())))) {
             transaction.begin();
             gestorEntidad.persist(aula);
             transaction.commit();
@@ -99,4 +99,5 @@ public class CRUDAula {
             System.out.println(a);
         }
     }
+
 }
