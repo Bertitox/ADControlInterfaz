@@ -51,6 +51,10 @@
     -fx-font-size: 14px;
 }
 
+.estilo-monitor image{
+    -fx-alignment: center;
+}
+
 
 .botonMapa{
     -fx-background-color: transparent;

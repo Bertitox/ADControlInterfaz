@@ -1,33 +1,35 @@
 package org.example.adcontrol;
 
+import BBDD.DAO.CRUDAula;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ControladorAula {
 
     @FXML
-    private MenuButton menuButtonAulas;
+    private MenuButton menuButtonAulas = new MenuButton();
 
     @FXML
-    private FlowPane contenedorMonitores; // Mejor usar FlowPane para distribución automática
+    private GridPane gridPaneMonitores;
 
+    CRUDAula cruda = new CRUDAula();
     private Map<String, Integer> aulasMonitores;
 
     public void initialize() {
         // Mapeo de aulas con la cantidad de monitores
-        menuButtonAulas = new MenuButton("Aulas");
-        aulasMonitores = new HashMap<>();
-        aulasMonitores.put("Aula 1", 10);
-        aulasMonitores.put("Aula 2", 15);
-        aulasMonitores.put("Aula 3", 8);
+        CRUDAula cruda = new CRUDAula();
+        aulasMonitores = cruda.mapEquiposPorAula();
 
         // Agregar dinámicamente opciones al menú
         for (String aula : aulasMonitores.keySet()) {
@@ -38,28 +40,57 @@ public class ControladorAula {
     }
 
     private void actualizarMonitores(String aulaSeleccionada) {
-        // Limpiar el contenedor antes de agregar nuevos monitores
-        contenedorMonitores.getChildren().clear();
+        // Limpiar el grid antes de agregar nuevos monitores
+        gridPaneMonitores.getChildren().clear();
 
-        // Obtener la cantidad de monitores según el aula seleccionada
-        int cantidadMonitores = aulasMonitores.getOrDefault(aulaSeleccionada, 0);
-
-        // Cargar la imagen del monitor
-        InputStream imagenStream = getClass().getResourceAsStream("/Imagenes/imagenmonitor.png");
-
-        if (imagenStream == null) {
-            System.err.println("No se pudo cargar la imagen: /Imagenes/imagenmonitor.png");
+        // Validar aula seleccionada y cantidad de monitores
+        if (aulaSeleccionada == null || aulaSeleccionada.isEmpty()) {
+            System.err.println("El aula seleccionada no es válida.");
             return;
         }
 
-        Image imagenMonitor = new Image(imagenStream);
+        int cantidadMonitores = aulasMonitores.getOrDefault(aulaSeleccionada, 0);
 
-        // Crear y agregar los monitores
+        if (cantidadMonitores < 0) {
+            System.err.println("La cantidad de monitores no puede ser negativa.");
+            return;
+        }
+
+        // Cargar la imagen del monitor con manejo de excepciones
+        Image imagenMonitor;
+        try (InputStream imagenStream = getClass().getResourceAsStream("/org/example/adcontrol/Imagenes/imagenmonitor.png")) {
+            if (imagenStream == null) {
+                throw new IOException("No se encontró la imagen: /Imagenes/imagenmonitor.png");
+            }
+            imagenMonitor = new Image(imagenStream);
+        } catch (IOException e) {
+            System.err.println("Error al cargar la imagen del monitor: " + e.getMessage());
+            return;
+        }
+
+        // Dimensiones dinámicas de la cuadrícula
+        int columnas = 5; // Configuración inicial
+        int filas = 3;    // Configuración inicial
+
+        gridPaneMonitores.setHgap(10); // Espaciado horizontal entre columnas
+        gridPaneMonitores.setVgap(100); // Espaciado vertical entre filas
+
         for (int i = 0; i < cantidadMonitores; i++) {
+            int fila = i / columnas;
+            int columna = i % columnas;
+
+            if (fila >= filas) break;
+
             ImageView monitor = new ImageView(imagenMonitor);
-            monitor.setFitWidth(80);  // Ajustar tamaño
-            monitor.setFitHeight(50);
-            contenedorMonitores.getChildren().add(monitor);
+            monitor.setFitWidth(150);
+            monitor.setFitHeight(150);
+
+            GridPane.setHalignment(monitor, HPos.CENTER);
+            GridPane.setValignment(monitor, VPos.CENTER);
+
+            GridPane.setMargin(monitor, new Insets(50, 0, 0, 0));
+
+            gridPaneMonitores.add(monitor, columna, fila);
         }
 
         // Cambiar el texto del MenuButton a la opción seleccionada
