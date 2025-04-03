@@ -56,13 +56,4 @@
 }
 
 
-.botonMapa{
-    -fx-background-color: transparent;
-}
-
-.botonMapa:hover{
-    -fx-background-color: rgba(0, 0, 0, 0.24);
-}
-
-
 
