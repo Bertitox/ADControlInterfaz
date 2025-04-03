@@ -176,6 +176,15 @@ public class ControladorMenu extends Controlador {
         panelPrincipal.getChildren().add(root);
     }
 
+    @FXML
+    void cambiarpantallaMapa(ActionEvent event) throws IOException {
+        textoTitulo.setText("Mapa del Instituto");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaMapa.fxml"));
+        Parent root = fxmlLoader.load();
+        panelPrincipal.getChildren().clear();
+        panelPrincipal.getChildren().add(root);
+    }
+
 
     /**
      * Evento que muestra al usuario una ventana de confirmación par salir o no de la app

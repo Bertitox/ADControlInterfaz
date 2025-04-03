@@ -33,6 +33,7 @@ public class ControladorPantallaCarga implements Runnable {
      */
     @Override
     public void run() {
+        Integer tiempo = 10;
         try {
             actualizarTexto("Iniciando carga de la aplicación...");
 
@@ -41,16 +42,26 @@ public class ControladorPantallaCarga implements Runnable {
                 Platform.runLater(() -> progressBar.setProgress(value / 100.0));
 
                 //Frases aleatoria para el usuario durante la carga
-                if (i == 10) actualizarTexto("Conectando a la base de datos...");
-                if (i == 30) actualizarTexto("Cargando datos de las incidencias...");
-                if (i == 60) {
+                if (i == 10) {
                     cargarDatosBBDD();  // Aquí cargamos la información de la base de datos
-                    actualizarTexto("Datos cargados correctamente.");
+                    actualizarTexto("Conectando a la base de datos...");
                 }
-                if (i == 80) actualizarTexto("Aplicando configuraciones...");
+                if (i == 30){
+                    actualizarTexto("Datos cargados correctamente.");
+                    tiempo = 50;
+                }
+                if (i == 60){
+                    actualizarTexto("Cargando datos de las incidencias...");
+                    tiempo = 30;
+                }
+
+                if (i == 80){
+                    actualizarTexto("Aplicando configuraciones...");
+                    tiempo = 10;
+                }
                 if (i == 100) actualizarTexto("Carga completa. Abriendo la aplicación...");
 
-                Thread.sleep(50); //Simular tiempo de carga
+                Thread.sleep(tiempo); //Simular tiempo de carga
             }
 
             Platform.runLater(() -> {

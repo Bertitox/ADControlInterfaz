@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMapa">
+   <children>
+      <ImageView fitHeight="612.0" fitWidth="987.0">
+         <image>
+            <Image url="@../Imagenes/mapa%20v3.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="DAM1" layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="128.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 205, 210);" styleClass="botonMapa" text="DAM 1" />
+      <Button fx:id="DAM2" layoutX="751.0" layoutY="146.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="100.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 205, 210);" styleClass="botonMapa" text="DAM 2" />
+      <Button fx:id="DAW2" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="107.0" prefWidth="140.0" style="-fx-background-color: rgb(187, 222, 251);" styleClass="botonMapa" text="DAW 2" />
+      <Button fx:id="DespachoProfesores1" layoutX="648.0" layoutY="174.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="75.0" prefWidth="102.0" style="-fx-background-color: rgb(255, 249, 196);" styleClass="botonMapa" text="Desp. Prof 1" />
+      <Button layoutX="431.0" layoutY="247.0" mnemonicParsing="false" prefHeight="135.0" prefWidth="34.0" style="-fx-background-color: trasnparent;">
+         <tooltip>
+            <Tooltip text="Escaleras" />
+         </tooltip>
+      </Button>
+      <Button fx:id="DAW21" layoutX="300.0" layoutY="16.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="125.0" prefWidth="127.0" style="-fx-background-color: rgb(178, 223, 219);" styleClass="botonMapa" text="ASIR 2" />
+      <Button fx:id="DAW211" layoutX="299.0" layoutY="146.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="53.0" prefWidth="129.0" styleClass="botonMapa" text="Aula cristal" />
+      <Button fx:id="AuladeEstudio" layoutX="203.0" layoutY="289.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="53.0" prefWidth="134.0" rotate="90.0" styleClass="botonMapa" text="Aula de estudio" />
+      <Button fx:id="DAM21" layoutX="753.0" layoutY="498.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="99.0" prefWidth="142.0" style="-fx-background-color: rgb(178, 223, 219);" styleClass="botonMapa" text="ASIR 1" />
+      <Button fx:id="DAM22" layoutX="751.0" layoutY="362.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="91.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 204, 188);" styleClass="botonMapa" text="Aula de informatica" />
+      <Button layoutX="508.0" layoutY="175.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="138.0" style="-fx-background-color: rgba(0, 0, 0, 0.46);">
+         <tooltip>
+            <Tooltip text="Baños" />
+         </tooltip>
+      </Button>
+      <Button fx:id="DAM221" layoutX="646.0" layoutY="249.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="172.0" prefWidth="104.0" style="-fx-background-color: rgb(187, 222, 251);" styleClass="botonMapa" text="DAW 1" />
+      <Rectangle fx:id="rectprof2" arcHeight="5.0" arcWidth="5.0" fill="#fff9c4" height="38.0" layoutX="190.0" layoutY="59.0" smooth="false" stroke="#6b373700" strokeType="INSIDE" strokeWidth="0.0" width="35.0" />
+      <Button fx:id="DespachoProfesores11" layoutX="220.0" layoutY="59.0" mnemonicParsing="false" onAction="#cambiarAula" prefHeight="99.0" prefWidth="76.0" style="-fx-background-color: rgb(255, 249, 196);" styleClass="botonMapa" text="Desp. Prof 2" textFill="#fff9c4" />
+      <Label layoutX="212.0" layoutY="73.0" text="Desp. Prof 2" />
+      <Rectangle fx:id="rectaulainf" arcHeight="5.0" arcWidth="5.0" fill="#ffccbc" height="44.0" layoutX="777.0" layoutY="452.0" smooth="false" stroke="#6b373700" strokeType="INSIDE" strokeWidth="0.0" width="118.0" />
+   </children>
+</AnchorPane>

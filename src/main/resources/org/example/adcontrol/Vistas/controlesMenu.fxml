@@ -83,6 +83,15 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button layoutX="11.0" layoutY="149.0" mnemonicParsing="false" onAction="#cambiarpantallaMapa" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="46.0" prefWidth="52.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/mapa.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             </children>
             <BorderPane.margin>
                 <Insets />
