@@ -2,6 +2,9 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -47,6 +50,7 @@ public class ControladorAula {
         }
 
         int cantidadMonitores = aulasMonitores.getOrDefault(aulaSeleccionada, 0);
+
         if (cantidadMonitores < 0) {
             System.err.println("La cantidad de monitores no puede ser negativa.");
             return;
@@ -68,17 +72,23 @@ public class ControladorAula {
         int columnas = 5; // Configuración inicial
         int filas = 3;    // Configuración inicial
 
-        // Posicionar los monitores en la cuadrícula
+        gridPaneMonitores.setHgap(10); // Espaciado horizontal entre columnas
+        gridPaneMonitores.setVgap(100); // Espaciado vertical entre filas
+
         for (int i = 0; i < cantidadMonitores; i++) {
             int fila = i / columnas;
             int columna = i % columnas;
 
-            if (fila >= filas) break; // Evitar desbordamiento de filas
+            if (fila >= filas) break;
 
             ImageView monitor = new ImageView(imagenMonitor);
-            monitor.setFitWidth(80);
-            monitor.setFitHeight(50);
-            monitor.getStyleClass().add("estilo-monitor"); // Clase CSS opcional para personalización
+            monitor.setFitWidth(150);
+            monitor.setFitHeight(150);
+
+            GridPane.setHalignment(monitor, HPos.CENTER);
+            GridPane.setValignment(monitor, VPos.CENTER);
+
+            GridPane.setMargin(monitor, new Insets(50, 0, 0, 0));
 
             gridPaneMonitores.add(monitor, columna, fila);
         }

@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorAula">
    <children>
-       <MenuButton fx:id="menuButtonAulas" layoutX="400.0" layoutY="20.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="196.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" text="AULAS" textAlignment="JUSTIFY" textFill="#171717" GridPane.columnIndex="2">
+       <MenuButton fx:id="menuButtonAulas" layoutX="400.0" layoutY="14.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="196.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" text="AULAS" textAlignment="JUSTIFY" textFill="#171717" GridPane.columnIndex="2">
            <items>
            </items>
            <font>
@@ -29,31 +29,20 @@
                </ImageView>
            </graphic>
        </MenuButton>
-      <GridPane fx:id="gridPaneMonitores" layoutY="88.0" prefHeight="524.0" prefWidth="987.0">
+      <GridPane fx:id="gridPaneMonitores" alignment="CENTER" layoutX="33.0" layoutY="96.0" prefHeight="500.0" prefWidth="932.0" style="-fx-hgap: 10px; -fx-vgap: 50px;">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="208.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="785.0" minWidth="10.0" prefWidth="200.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="785.0" minWidth="10.0" prefWidth="217.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="785.0" minWidth="10.0" prefWidth="192.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="785.0" minWidth="10.0" prefWidth="177.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="200.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="200.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="248.0" minHeight="10.0" prefHeight="122.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="212.0" minHeight="10.0" prefHeight="133.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
         </rowConstraints>
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Imagenes/imagenmonitor.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets left="30.0" />
-               </GridPane.margin>
-            </ImageView>
-
-         </children>
       </GridPane>
    </children>
 </AnchorPane>
