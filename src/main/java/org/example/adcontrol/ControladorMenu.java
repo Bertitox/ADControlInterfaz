@@ -166,6 +166,17 @@ public class ControladorMenu extends Controlador {
         panelPrincipal.getChildren().add(root);
     }
 
+
+    @FXML
+    void cambiarpantallaAula(ActionEvent event) throws IOException {
+        textoTitulo.setText("Aulas");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAula.fxml"));
+        Parent root = fxmlLoader.load();
+        panelPrincipal.getChildren().clear();
+        panelPrincipal.getChildren().add(root);
+    }
+
+
     /**
      * Evento que muestra al usuario una ventana de confirmación par salir o no de la app
      *

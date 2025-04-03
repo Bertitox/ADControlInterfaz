@@ -2,6 +2,7 @@ package BBDD.DAO;
 
 import BBDD.Conexion.Conexion;
 import BBDD.DTO.Aula;
+import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
 import BBDD.Validaciones.Validaciones_systema;
 import jakarta.persistence.EntityManager;
@@ -99,5 +100,4 @@ public class CRUDAula {
             System.out.println(a);
         }
     }
-
 }

@@ -74,6 +74,15 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button layoutX="11.0" layoutY="501.0" mnemonicParsing="false" onAction="#cambiarpantallaAula" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/terminal.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             </children>
             <BorderPane.margin>
                 <Insets />

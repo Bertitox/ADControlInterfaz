@@ -20,4 +20,5 @@ module org.example.adcontrol {
     opens BBDD.DTO to org.hibernate.orm.core;
 
     exports org.example.adcontrol;
+    exports BBDD.DTO;
 }
