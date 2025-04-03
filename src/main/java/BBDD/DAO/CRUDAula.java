@@ -6,8 +6,6 @@ import BBDD.Excepciones.AulaNotFoundException;
 import BBDD.Validaciones.Validaciones_systema;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,7 +159,8 @@ public class CRUDAula {
         return equiposPorAula;  //Devolvemos el mapa
     }
 
-
+    /*
+    //Método main para realizar pruebas.
     public static void main(String[] args) {
         CRUDAula c = new CRUDAula();
         //c.insertAula(new Aula("PRUEBA6", c.gestorEntidad.find(InformacionSistema.class, 7)));
@@ -173,4 +172,5 @@ public class CRUDAula {
             System.out.println("Aula: " + referencia + " - Total de equipos: " + totalEquipos);
         }
     }
+     */
 }

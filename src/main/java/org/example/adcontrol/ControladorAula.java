@@ -10,11 +10,16 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+
+/**
+ * @author Daniel y Alberto
+ * @version 1.0
+ * Clase controladora de la interfaz para las aulas.
+ */
 public class ControladorAula {
 
     @FXML
@@ -23,15 +28,17 @@ public class ControladorAula {
     @FXML
     private GridPane gridPaneMonitores;
 
-    CRUDAula cruda = new CRUDAula();
+    CRUDAula cruda = new CRUDAula(); //Llamada al CRUD que conecta con la tabla Aula de la BBDD
     private Map<String, Integer> aulasMonitores;
 
+    /**
+     * Método que inicializa los elementos del controlador que se usarán.
+     */
     public void initialize() {
-        // Mapeo de aulas con la cantidad de monitores
-        CRUDAula cruda = new CRUDAula();
+        //Mapeo de aulas junto con la cantidad de monitores
         aulasMonitores = cruda.mapEquiposPorAula();
 
-        // Agregar dinámicamente opciones al menú
+        //Agregamos dinámicamente opciones (menuItem) al menú (MenuButton)
         for (String aula : aulasMonitores.keySet()) {
             MenuItem item = new MenuItem(aula);
             item.setOnAction(event -> actualizarMonitores(aula));
@@ -39,8 +46,12 @@ public class ControladorAula {
         }
     }
 
+    /**
+     * Método que se encarga de actualizar, cargar y mostrar las imágenes de los monitores por aula y el texto del comboBox correspondiente a cada aula
+     * @param aulaSeleccionada Recibe como parámetro el aula seleccionada, y la cambia en el combobox
+     */
     private void actualizarMonitores(String aulaSeleccionada) {
-        // Limpiar el grid antes de agregar nuevos monitores
+        //Limpiar el grid antes de agregar nuevos monitores
         gridPaneMonitores.getChildren().clear();
 
         // Validar aula seleccionada y cantidad de monitores
@@ -56,7 +67,7 @@ public class ControladorAula {
             return;
         }
 
-        // Cargar la imagen del monitor con manejo de excepciones
+        //Cargamos la imagen del monitor y la manejamos
         Image imagenMonitor;
         try (InputStream imagenStream = getClass().getResourceAsStream("/org/example/adcontrol/Imagenes/imagenmonitor.png")) {
             if (imagenStream == null) {
@@ -68,12 +79,12 @@ public class ControladorAula {
             return;
         }
 
-        // Dimensiones dinámicas de la cuadrícula
-        int columnas = 5; // Configuración inicial
-        int filas = 3;    // Configuración inicial
+        //Dimensiones dinámicas del contenedor
+        int columnas = 5; //Configuración total de las columnas
+        int filas = 3;    //Configuración total de las filas
 
-        gridPaneMonitores.setHgap(10); // Espaciado horizontal entre columnas
-        gridPaneMonitores.setVgap(100); // Espaciado vertical entre filas
+        gridPaneMonitores.setHgap(10); //Espaciado horizontal entre columnas
+        gridPaneMonitores.setVgap(100); //Espaciado vertical entre filas
 
         for (int i = 0; i < cantidadMonitores; i++) {
             int fila = i / columnas;
@@ -88,12 +99,11 @@ public class ControladorAula {
             GridPane.setHalignment(monitor, HPos.CENTER);
             GridPane.setValignment(monitor, VPos.CENTER);
 
-            GridPane.setMargin(monitor, new Insets(50, 0, 0, 0));
-
+            GridPane.setMargin(monitor, new Insets(50, 0, 0, 0)); //Espaciado extra entre los elementos
             gridPaneMonitores.add(monitor, columna, fila);
         }
 
-        // Cambiar el texto del MenuButton a la opción seleccionada
+        //Cambiamos el texto del MenuButton a la opción seleccionada (Aula seleccionada)
         menuButtonAulas.setText(aulaSeleccionada);
     }
 }
