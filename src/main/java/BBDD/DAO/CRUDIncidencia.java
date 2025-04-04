@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * Clase {@link CRUDIncidencia} que se encarga de realizar las operaciones básicas para gestionar incidencias
  * @author Alberto y Daniel
- * @version 1.0
+ * @version 1.5
  */
 
 public class CRUDIncidencia {
@@ -210,11 +210,15 @@ public class CRUDIncidencia {
 
         return maxIncidencias;
     }
-
-
-    public static void main(String[] args) throws AulaNotFoundException {
-        CRUDIncidencia crudIncidencia = new CRUDIncidencia();
-//        crudIncidencia.mostrarIncidenciasxAula("PRUEBA2");
-        System.out.println(crudIncidencia.numMaximoIcidenciasAula());
-    }
+    /*
+    /**
+     * Clase main para realizar pruebas
+     * @param args arg del main
+     * @throws AulaNotFoundException excepción personalizada para el aula
+    */
+    //public static void main(String[] args) throws AulaNotFoundException {
+      //  CRUDIncidencia crudIncidencia = new CRUDIncidencia();
+        //crudIncidencia.mostrarIncidenciasxAula("PRUEBA2");
+        //System.out.println(crudIncidencia.numMaximoIcidenciasAula());
+    //}
 }

@@ -1,22 +1,24 @@
 package BBDD.DAO;
 
 import BBDD.Conexion.Conexion;
-import BBDD.DTO.Aula_Equipo;
 import BBDD.DTO.Aulas;
 import BBDD.Excepciones.AulaNotFoundException;
-import BBDD.Validaciones.Validaciones_systema;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
 
+/**
+ * Clase CRUD de la instancia Aula que la conecta con la BBDD
+ * @version 1.0
+ * @author Daniel y Alberto
+ */
 public class CRUDAulas {
 
     //Inicialización de los objetos que participan en la conexión a la BBDD
     Conexion conexion = Conexion.getInstancia();
     EntityManager gestorEntidad = conexion.getGestor();
     EntityTransaction transaction = gestorEntidad.getTransaction();
-
 
     /**
      * Constructor por defecto de la clase {@link CRUDAulas}
@@ -27,7 +29,7 @@ public class CRUDAulas {
     /**
      * Método que lleva a cabo la insercción de un {@link Aulas}
      *
-     * @param aula Objeto {@link Aula_Equipo}
+     * @param aula Objeto {@link Aulas}
      */
     public void insertAula(Aulas aula) {
             transaction.begin();
@@ -38,7 +40,7 @@ public class CRUDAulas {
 
     /**
      * Método que lleva a cabo la actualización de un {@link Aulas}
-     * @param aula Objeto {@link Aula_Equipo}
+     * @param aula Objeto {@link Aulas}
      */
     public void updateAula(Aulas aula) {
         transaction.begin();
@@ -82,11 +84,11 @@ public class CRUDAulas {
     }
 
     /**
-     * Método que retorna un {@link Aula_Equipo} por su referencia
+     * Método que retorna un {@link Aulas} por su referencia
      *
-     * @param referencia String que referencia al {@link Aula_Equipo}
-     * @return Retorna un {@link Aula_Equipo}
-     * @throws AulaNotFoundException Excepción cuando el {@link Aula_Equipo} que busca no existe
+     * @param referencia String que referencia al {@link Aulas}
+     * @return Retorna un {@link Aulas}
+     * @throws AulaNotFoundException Excepción cuando el {@link Aulas} que busca no existe
      */
     public Aulas getbyReferencia(String referencia) throws AulaNotFoundException {
         for (Aulas aulaEquipo : readAllAulas()) {
