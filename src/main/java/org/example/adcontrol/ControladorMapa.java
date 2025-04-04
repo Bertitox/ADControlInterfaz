@@ -1,5 +1,9 @@
 package org.example.adcontrol;
 
+import BBDD.DAO.CRUDAula;
+import BBDD.DAO.CRUDInfoSistema;
+import BBDD.DTO.Aula;
+import BBDD.DTO.InformacionSistema;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +14,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class ControladorMapa {
     @FXML
@@ -33,11 +39,20 @@ public class ControladorMapa {
 
     @FXML
     void cambiarAula(ActionEvent event) {
+        CRUDAula cruda = new CRUDAula();
         Button b = (Button) event.getSource();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cambiando a " + b.getText());
-        alert.setTitle("Cambiando de aula");
-        alert.setHeaderText(null);
-        alert.showAndWait();
+        if (cruda.comprobarAula(b.getText().trim())) {
+            //entrar a vista aula (la vista con pcs)
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "El aula no está en la BBDD, ¿desea crearla?", ButtonType.YES, ButtonType.NO);
+            alert.setTitle(b.getText() + " no se encontró");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                cruda.insertAula(new Aula(b.getText().trim(), null));
+            } else {
+                alert.hide();
+            }
+        }
     }
 
     @FXML
