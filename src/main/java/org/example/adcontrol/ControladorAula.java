@@ -54,7 +54,7 @@ public class ControladorAula {
         //Limpiar el grid antes de agregar nuevos monitores
         gridPaneMonitores.getChildren().clear();
 
-        // Validar aula seleccionada y cantidad de monitores
+        //Validamos el aula seleccionada y la cantidad de monitores por aula
         if (aulaSeleccionada == null || aulaSeleccionada.isEmpty()) {
             System.err.println("El aula seleccionada no es válida.");
             return;

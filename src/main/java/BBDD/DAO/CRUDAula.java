@@ -159,18 +159,29 @@ public class CRUDAula {
         return equiposPorAula;  //Devolvemos el mapa
     }
 
-    /*
+    public boolean comprobarAula(String referencia) {
+        for (Aula aula : readAllAulas()) {
+            if (aula.getReferencia().equals(referencia)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     //Método main para realizar pruebas.
     public static void main(String[] args) {
         CRUDAula c = new CRUDAula();
         //c.insertAula(new Aula("PRUEBA6", c.gestorEntidad.find(InformacionSistema.class, 7)));
         //System.out.println(c.numEquiposXAula("PRUEBA5"));
-
+        /*
         for (Map.Entry<String, Integer> entry : c.mapEquiposPorAula().entrySet()) {
             String referencia = entry.getKey();
             Integer totalEquipos = entry.getValue();
             System.out.println("Aula: " + referencia + " - Total de equipos: " + totalEquipos);
         }
+         */
+        System.out.println(c.comprobarAula("PRUEBA1"));
     }
-     */
+
 }
