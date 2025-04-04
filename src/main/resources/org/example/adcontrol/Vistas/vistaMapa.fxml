@@ -5,7 +5,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMapa">
    <children>
@@ -34,9 +33,7 @@
          </tooltip>
       </Button>
       <Button fx:id="DAW1" layoutX="647.0" layoutY="250.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="171.0" prefWidth="102.0" style="-fx-background-color: rgb(187, 222, 251);" text="DAW 1" />
-      <Rectangle fx:id="rectprof" arcHeight="5.0" arcWidth="5.0" fill="#fff9c4" height="62.0" layoutX="220.0" layoutY="97.0" onMouseClicked="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" smooth="false" stroke="#6b373700" strokeType="INSIDE" strokeWidth="0.0" width="74.0" />
-      <Button fx:id="DespachoProfesores2" layoutX="190.0" layoutY="59.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" prefHeight="37.0" prefWidth="104.0" style="-fx-background-color: rgb(255, 249, 196);" styleClass="botonMapa" text="Desp. Prof 2" />
-      <Rectangle fx:id="rectaulainf" arcHeight="5.0" arcWidth="5.0" fill="#ffccbc" height="42.0" layoutX="777.0" layoutY="454.0" onMouseClicked="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" smooth="false" stroke="#6b373700" strokeType="INSIDE" strokeWidth="0.0" width="118.0" />
+      <Button fx:id="DespachoProfesores2" layoutX="190.0" layoutY="59.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="37.0" prefWidth="104.0" style="-fx-background-color: rgb(255, 249, 196);" styleClass="botonMapa" text="Desp. Prof 2" />
       <Button fx:id="aulaCristal2" layoutX="431.0" layoutY="498.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="98.0" prefWidth="75.0" style="-fx-background-color: rgb(238, 238, 238);" text="Aula cristal 2" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="aulaCristal3" layoutX="509.0" layoutY="498.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="97.0" prefWidth="135.0" style="-fx-background-color: rgb(238, 238, 238);" text="Aula cristal 3" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="aulaConvencional" layoutX="510.0" layoutY="356.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="81.0" prefWidth="134.0" style="-fx-background-color: rgb(215, 204, 200);" styleClass="botonMapa" text="Aula convencional" textAlignment="CENTER" wrapText="true" />
@@ -46,7 +43,6 @@
       <Button fx:id="SMR2B" layoutX="295.0" layoutY="481.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="115.0" prefWidth="134.0" style="-fx-background-color: rgb(197, 202, 233);" text="SMR 2B" />
       <Button fx:id="taller" layoutX="44.0" layoutY="363.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="114.0" prefWidth="144.0" style="-fx-background-color: rgb(240, 244, 195);" text="Taller" />
       <Button fx:id="aulaInfo2" layoutX="44.0" layoutY="481.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="115.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 204, 188);" text="Aula de informatica 2" />
-      <Rectangle fx:id="rectSecret" arcHeight="5.0" arcWidth="5.0" fill="#e1bee7" height="25.0" layoutX="651.0" layoutY="96.0" onMouseClicked="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" smooth="false" stroke="#6b373700" strokeType="INSIDE" strokeWidth="0.0" width="71.0" />
       <Button fx:id="secretaria" layoutX="651.0" layoutY="53.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="42.0" prefWidth="98.0" style="-fx-background-color: rgb(225, 190, 231);" text="Secretaria" />
       <Button layoutX="589.0" layoutY="250.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="56.0" style="-fx-background-color: trasnparent;">
          <tooltip>
@@ -73,5 +69,8 @@
             <Tooltip text="Jardin" />
          </tooltip>
       </Button>
+      <Button fx:id="DespachoProfesores2rect" layoutX="220.0" layoutY="97.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="61.0" prefWidth="74.0" style="-fx-background-color: rgb(255, 249, 196);" styleClass="botonMapa" text="Desp. Prof 2" textFill="#fff9c4" />
+      <Button fx:id="secretariarect" layoutX="651.0" layoutY="96.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: rgb(225, 190, 231);" text="Secretaria" textFill="#e1bee7" />
+      <Button fx:id="aulaInfo1rect" layoutX="777.0" layoutY="454.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="41.0" prefWidth="118.0" style="-fx-background-color: rgb(255, 204, 188);" text="Aula de informatica 1" textFill="#ffccbc" />
    </children>
 </AnchorPane>
