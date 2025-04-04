@@ -6,7 +6,9 @@ import BBDD.Excepciones.AulaNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Clase CRUD de la instancia Aula que la conecta con la BBDD
@@ -97,6 +99,34 @@ public class CRUDAulas {
             }
         }
         throw new AulaNotFoundException("Aula no encontrada con la referencia: " + referencia);
+    }
+
+    /**
+     * Método que devuelve un mapa con cada aula como clave y el número de equipos por aula de valor.
+     * @return devuelve un mapa con cada aula como clave y el número de equipos por aula de valor.
+     */
+    public Map<String, Integer> mapEquiposPorAula() {
+        Map<String, Integer> equiposPorAula = new LinkedHashMap<>(); //Hacemos el mapa LinkedHashMap para que se ordene de menor a mayor en orden natural
+
+        try {
+            //Ejecutamos la consulta
+            List<Object[]> resultados = gestorEntidad.createNativeQuery("""
+            SELECT referencia AS aula, COUNT(id_informacion_sistema) AS total_equipos
+            FROM aula
+            GROUP BY referencia
+            """).getResultList();
+
+            //Agregamos los resultados de la consulta al mapa
+            for (Object[] row : resultados) {
+                String referencia = (String) row[0]; //Agregamos la referencia (clave)
+                Integer totalEquipos = ((Number) row[1]).intValue(); //Agregamos el conteo de los equipos (valor)
+                equiposPorAula.put(referencia, totalEquipos);  //Agregamos los valores al mapa
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return equiposPorAula;  //Devolvemos el mapa
     }
 
 }
