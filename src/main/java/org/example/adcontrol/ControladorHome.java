@@ -1,5 +1,5 @@
 package org.example.adcontrol;
-import BBDD.DAO.CRUDAula_Equipo;
+import BBDD.DAO.CRUDAulas;
 import BBDD.DAO.CRUDIncidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.ScaleTransition;
@@ -18,7 +18,7 @@ import java.util.*;
 
 /**
  * @author Daniel y Alberto
- * @version 1.5
+ * @version 2.0
  */
 public class ControladorHome extends Controlador{//implements Initializable {
 
@@ -91,7 +91,7 @@ public class ControladorHome extends Controlador{//implements Initializable {
 
         //Gestión incidencias BBDD
         CRUDIncidencia incidencia = new CRUDIncidencia();
-        CRUDAula_Equipo aula = new CRUDAula_Equipo();
+        CRUDAulas aula = new CRUDAulas();
 
         //Actualizar Incidencias
         actualizarIncidencias(incidencia.numIncidencias(), aula.readAllAulas().size());
