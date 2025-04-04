@@ -1,5 +1,5 @@
 package org.example.adcontrol;
-import BBDD.DAO.CRUDAula;
+import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -91,7 +91,7 @@ public class ControladorPantallaCarga implements Runnable {
     private void cargarDatosBBDD() {
         // Simula la carga de la base de datos
         CRUDIncidencia incidencia = new CRUDIncidencia();
-        CRUDAula aula = new CRUDAula();
+        CRUDAula_Equipo aula = new CRUDAula_Equipo();
 
         incidencia.numIncidencias();
         aula.readAllAulas();

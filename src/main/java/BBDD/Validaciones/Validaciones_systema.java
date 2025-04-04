@@ -1,7 +1,7 @@
 package BBDD.Validaciones;
 
-import BBDD.DAO.CRUDAula;
-import BBDD.DTO.Aula;
+import BBDD.DAO.CRUDAula_Equipo;
+import BBDD.DTO.Aula_Equipo;
 
 /**
  * Clase que realiza las validaciones de la app.
@@ -22,9 +22,9 @@ public class Validaciones_systema {
      * @return devuelve un valor boolean con el resultado de la operación
      */
     public boolean onlyOneDevice(int id_infoSistema) {
-        CRUDAula crudAula = new CRUDAula();
+        CRUDAula_Equipo crudAulaEquipo = new CRUDAula_Equipo();
         boolean resultado = false;
-        for (Aula a: crudAula.readAllAulas()){
+        for (Aula_Equipo a: crudAulaEquipo.readAllAulas()){
             if (a.getIdInformacionSistema().getId().equals(id_infoSistema)) {
                 resultado = true;
             }
@@ -38,10 +38,10 @@ public class Validaciones_systema {
      * @return retorna True o False dependiendo de si el aula existe o no
      */
     public boolean existeAula(String referencia) {
-        CRUDAula crudAula = new CRUDAula();
+        CRUDAula_Equipo crudAulaEquipo = new CRUDAula_Equipo();
         boolean exist = false;
 
-        for (Aula a: crudAula.readAllAulas()){
+        for (Aula_Equipo a: crudAulaEquipo.readAllAulas()){
             if (a.getReferencia().equals(referencia)) {
                 exist = true;
             }

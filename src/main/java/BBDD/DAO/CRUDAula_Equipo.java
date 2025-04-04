@@ -1,7 +1,7 @@
 package BBDD.DAO;
 
 import BBDD.Conexion.Conexion;
-import BBDD.DTO.Aula;
+import BBDD.DTO.Aula_Equipo;
 import BBDD.Excepciones.AulaNotFoundException;
 import BBDD.Validaciones.Validaciones_systema;
 import jakarta.persistence.EntityManager;
@@ -15,7 +15,7 @@ import java.util.Map;
  * @author Alberto y Daniel
  * @version 1.0
  */
-public class CRUDAula {
+public class CRUDAula_Equipo {
 
     //Inicialización de los objetos que participan en la conexión a la BBDD
     Conexion conexion = Conexion.getInstancia();
@@ -26,20 +26,20 @@ public class CRUDAula {
     Validaciones_systema validaciones = new Validaciones_systema();
 
     /**
-     * Constructor por defecto de la clase {@link CRUDAula}
+     * Constructor por defecto de la clase {@link CRUDAula_Equipo}
      */
-    public CRUDAula() {
+    public CRUDAula_Equipo() {
     }
 
     /**
-     * Método que lleva a cabo la insercción de un {@link Aula}
+     * Método que lleva a cabo la insercción de un {@link Aula_Equipo}
      *
-     * @param aula Objeto {@link Aula}
+     * @param aulaEquipo Objeto {@link Aula_Equipo}
      */
-    public void insertAula(Aula aula) {
-        if (!(validaciones.onlyOneDevice(aula.getIdInformacionSistema().getId()))) {
+    public void insertAula(Aula_Equipo aulaEquipo) {
+        if (!(validaciones.onlyOneDevice(aulaEquipo.getIdInformacionSistema().getId()))) {
             transaction.begin();
-            gestorEntidad.persist(aula);
+            gestorEntidad.persist(aulaEquipo);
             transaction.commit();
         }else {
             throw new RuntimeException("No se puede agregar el aula: Equipo ya existente en el aula");
@@ -47,46 +47,46 @@ public class CRUDAula {
     }
 
     /**
-     * Método que lleva a cabo la actualización de un {@link Aula}
-     * @param aula Objeto {@link Aula}
+     * Método que lleva a cabo la actualización de un {@link Aula_Equipo}
+     * @param aulaEquipo Objeto {@link Aula_Equipo}
      */
-    public void updateAula(Aula aula) {
+    public void updateAula(Aula_Equipo aulaEquipo) {
         transaction.begin();
-        gestorEntidad.merge(aula);
+        gestorEntidad.merge(aulaEquipo);
         transaction.commit();
     }
 
     /**
-     * Método que lleva a cabo la eliminación de un {@link Aula}
-     * @param aula Objeto {@link Aula}
+     * Método que lleva a cabo la eliminación de un {@link Aula_Equipo}
+     * @param aulaEquipo Objeto {@link Aula_Equipo}
      */
-    public void deleteAula(Aula aula) {
+    public void deleteAula(Aula_Equipo aulaEquipo) {
         transaction.begin();
-        gestorEntidad.remove(aula);
+        gestorEntidad.remove(aulaEquipo);
         transaction.commit();
     }
 
     /**
      * Método que retorna una lista de todas las Aulas
-     * @return retorna una {@link List<Aula>}
+     * @return retorna una {@link List< Aula_Equipo >}
      */
-    public List<Aula> readAllAulas() {
-        String consulta = "Select aula from Aula aula";
-        List<Aula> aulas = gestorEntidad.createQuery(consulta, Aula.class).getResultList();
-        return aulas;
+    public List<Aula_Equipo> readAllAulas() {
+        String consulta = "Select aula from Aula_Equipo aula";
+        List<Aula_Equipo> aulaEquipos = gestorEntidad.createQuery(consulta, Aula_Equipo.class).getResultList();
+        return aulaEquipos;
     }
 
     /**
-     * Método que retorna un {@link Aula} por su referencia
+     * Método que retorna un {@link Aula_Equipo} por su referencia
      *
-     * @param referencia String que referencia al {@link Aula}
-     * @return Retorna un {@link Aula}
-     * @throws AulaNotFoundException Excepción cuando el {@link Aula} que busca no existe
+     * @param referencia String que referencia al {@link Aula_Equipo}
+     * @return Retorna un {@link Aula_Equipo}
+     * @throws AulaNotFoundException Excepción cuando el {@link Aula_Equipo} que busca no existe
      */
-    public Aula getbyReferencia(String referencia) throws AulaNotFoundException {
-        for (Aula aula : readAllAulas()) {
-            if (aula.getReferencia().equals(referencia)) {
-                return aula;
+    public Aula_Equipo getbyReferencia(String referencia) throws AulaNotFoundException {
+        for (Aula_Equipo aulaEquipo : readAllAulas()) {
+            if (aulaEquipo.getReferencia().equals(referencia)) {
+                return aulaEquipo;
             }
         }
         throw new AulaNotFoundException("Aula no encontrada con la referencia: " + referencia);
@@ -96,7 +96,7 @@ public class CRUDAula {
      * Método que muestra todas las Aulas
      */
     public void mostrarAulas(){
-        for (Aula a : readAllAulas()) {
+        for (Aula_Equipo a : readAllAulas()) {
             System.out.println(a);
         }
     }
@@ -159,19 +159,9 @@ public class CRUDAula {
         return equiposPorAula;  //Devolvemos el mapa
     }
 
-    public boolean comprobarAula(String referencia) {
-        for (Aula aula : readAllAulas()) {
-            if (aula.getReferencia().equals(referencia)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     //Método main para realizar pruebas.
     public static void main(String[] args) {
-        CRUDAula c = new CRUDAula();
+        CRUDAula_Equipo c = new CRUDAula_Equipo();
         //c.insertAula(new Aula("PRUEBA6", c.gestorEntidad.find(InformacionSistema.class, 7)));
         //System.out.println(c.numEquiposXAula("PRUEBA5"));
         /*
@@ -181,7 +171,7 @@ public class CRUDAula {
             System.out.println("Aula: " + referencia + " - Total de equipos: " + totalEquipos);
         }
          */
-        System.out.println(c.comprobarAula("PRUEBA1"));
+        //System.out.println(c.comprobarAula("PRUEBA1"));
     }
 
 }

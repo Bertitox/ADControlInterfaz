@@ -1,6 +1,6 @@
 package org.example.adcontrol;
 
-import BBDD.DAO.CRUDAula;
+import BBDD.DAO.CRUDAula_Equipo;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -28,7 +28,7 @@ public class ControladorAula {
     @FXML
     private GridPane gridPaneMonitores;
 
-    CRUDAula cruda = new CRUDAula(); //Llamada al CRUD que conecta con la tabla Aula de la BBDD
+    CRUDAula_Equipo cruda = new CRUDAula_Equipo(); //Llamada al CRUD que conecta con la tabla Aula de la BBDD
     private Map<String, Integer> aulasMonitores;
 
     /**

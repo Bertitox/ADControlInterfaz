@@ -1,7 +1,8 @@
 package BBDD.DAO;
 
 import BBDD.Conexion.Conexion;
-import BBDD.DTO.Aula;
+import BBDD.DTO.Aula_Equipo;
+import BBDD.DTO.Aulas;
 import BBDD.DTO.Incidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import jakarta.persistence.EntityManager;
@@ -79,15 +80,15 @@ public class CRUDIncidencia {
     }
 
     /**
-     * Método que se encarga de contar el número de incidencias que existen por {@link Aula}
-     * @param referencia Referencia a un {@link Aula}
+     * Método que se encarga de contar el número de incidencias que existen por {@link Aulas}
+     * @param referencia Referencia a un {@link Aulas}
      * @return retorna un entero que contiene el número de incidencias por aula
      * @throws AulaNotFoundException excepción personalizada que se lanza cuando no existe el aula
      */
     public int getNumIncidenciasAulas(String referencia) throws AulaNotFoundException {
         int incidencias = 0;
-        CRUDAula crudAula = new CRUDAula();
-        Aula a = crudAula.getbyReferencia(referencia);
+        CRUDAulas crudAulas = new CRUDAulas();
+        Aulas a = crudAulas.getbyReferencia(referencia);
         //System.out.println(a.getReferencia());
 
         for (Incidencia incidencia : getAllIncidencias()) {
@@ -99,16 +100,16 @@ public class CRUDIncidencia {
     }
 
     /**
-     * Método que retorna una lList<Incidencia> por {@link Aula}
+     * Método que retorna una lList<Incidencia> por {@link Aula_Equipo}
      *
-     * @param referencia referencia a un {@link Aula}
+     * @param referencia referencia a un {@link Aula_Equipo}
      * @return retorna una List<Incidencia>
      * @throws AulaNotFoundException excepción personalizada que se lanza cuando no existe el aula
      */
     public List<Incidencia> getIncidenciasAulas(String referencia) throws AulaNotFoundException {
         List<Incidencia> incidencias = new ArrayList<>();
-        CRUDAula crudAula = new CRUDAula();
-        Aula a = crudAula.getbyReferencia(referencia);
+        CRUDAula_Equipo crudAulaEquipo = new CRUDAula_Equipo();
+        Aula_Equipo a = crudAulaEquipo.getbyReferencia(referencia);
 
         for (Incidencia i : getAllIncidencias()) {
             if (i.getIdAula().getReferencia().equals(a.getReferencia())){
@@ -151,13 +152,13 @@ public class CRUDIncidencia {
     }
 
     /**
-     * Método que muestra las incidencias filtrando por ID de {@link Aula}
-     * @param id Int que representa el id de un {@link Aula}
+     * Método que muestra las incidencias filtrando por ID de {@link Aula_Equipo}
+     * @param id Int que representa el id de un {@link Aula_Equipo}
      * @throws AulaNotFoundException Excepción de usuario {@link AulaNotFoundException} que lanza el método
      */
     public void mostrarIncidenciasIdAulas(String id) throws AulaNotFoundException {
-        Aula a = em.find(Aula.class, 1);
-        for (Incidencia incidencia : getIncidenciasAulas(a.getReferencia())) {
+        Aula_Equipo a = em.find(Aula_Equipo.class, 1);
+        for (Incidencia incidencia : getIncidenciasAulas(a.getReferencia().getReferencia())) {
             System.out.println(incidencia);
         }
     }

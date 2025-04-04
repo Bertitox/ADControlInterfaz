@@ -1,7 +1,9 @@
 package BBDD.Excepciones;
 
+import BBDD.DTO.Aula_Equipo;
+
 /**
- * Clase {@link AulaNotFoundException} que extiende de {@link Exception} y lanza una excepción personalizada o de usuario para gestionar un {@link BBDD.DTO.Aula}
+ * Clase {@link AulaNotFoundException} que extiende de {@link Exception} y lanza una excepción personalizada o de usuario para gestionar un {@link Aula_Equipo}
  * @author Alberto y Daniel
  */
 public class AulaNotFoundException extends Exception {

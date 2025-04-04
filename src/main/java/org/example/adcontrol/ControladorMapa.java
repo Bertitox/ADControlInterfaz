@@ -1,22 +1,14 @@
 package org.example.adcontrol;
 
-import BBDD.DAO.CRUDAula;
-import BBDD.DAO.CRUDInfoSistema;
-import BBDD.DTO.Aula;
-import BBDD.DTO.InformacionSistema;
-import javafx.application.Platform;
+import BBDD.DAO.CRUDAula_Equipo;
+import BBDD.DAO.CRUDAulas;
+import BBDD.DTO.Aulas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
-
-import javax.swing.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class ControladorMapa {
     @FXML
     private Button DespachoProfesores2;
@@ -39,7 +31,7 @@ public class ControladorMapa {
 
     @FXML
     void cambiarAula(ActionEvent event) {
-        CRUDAula cruda = new CRUDAula();
+        CRUDAulas cruda = new CRUDAulas();
         Button b = (Button) event.getSource();
         if (cruda.comprobarAula(b.getText().trim())) {
             //entrar a vista aula (la vista con pcs)
@@ -48,7 +40,7 @@ public class ControladorMapa {
             alert.setTitle(b.getText() + " no se encontró");
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
-                cruda.insertAula(new Aula(b.getText().trim(), null));
+                cruda.insertAula(new Aulas(b.getText().trim()));
             } else {
                 alert.hide();
             }
