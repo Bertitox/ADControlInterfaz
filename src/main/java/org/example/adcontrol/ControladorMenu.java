@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+
 import java.io.IOException;
 
 /**
@@ -32,6 +34,8 @@ public class ControladorMenu extends Controlador {
     private MenuItem frances;
     @FXML
     private MenuItem ingles;
+    @FXML
+    public VBox contenedorBotones;
 
     Boolean daltónico = false;
 
@@ -75,6 +79,7 @@ public class ControladorMenu extends Controlador {
             controlIdioma.setIdioma("Frances");
             cambiarIdioma("Français");
         });
+
 
     }
 
@@ -212,4 +217,11 @@ public class ControladorMenu extends Controlador {
         menuButtonIdiomas.setText(idioma);
     }
 
+    public VBox getContenedorBotones() {
+        return contenedorBotones;
+    }
+
+    public void setContenedorBotones(VBox contenedorBotones) {
+        this.contenedorBotones = contenedorBotones;
+    }
 }

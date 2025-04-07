@@ -110,7 +110,7 @@ public class ControladorPantallaCarga implements Runnable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("Pagina principal");
         stage.show();
     }

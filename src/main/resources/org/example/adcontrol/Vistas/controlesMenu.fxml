@@ -9,89 +9,93 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="1061.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMenu">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="1060.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMenu">
     <left>
-        <AnchorPane fx:id="barraIzquierda" prefHeight="664.0" prefWidth="79.0" style="-fx-background-color: #01a5e7;" BorderPane.alignment="CENTER">
+        <AnchorPane fx:id="barraIzquierda" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #01a5e7;" BorderPane.alignment="TOP_CENTER">
             <children>
-                <ImageView fitHeight="67.0" fitWidth="67.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../Imagenes/ControlADWhite copia.png" />
-                    </image>
-                </ImageView>
-                <Button layoutX="7.0" layoutY="590.0" mnemonicParsing="false" onAction="#salir" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="62.0" prefWidth="65.0" style="-fx-background-color: null;">
-                    <graphic>
-
-                        <ImageView fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../Imagenes/salida.png" />
-                            </image>
+            <VBox fx:id="contenedorBotones" alignment="CENTER" layoutY="66.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="65.0" spacing="27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                      <Button mnemonicParsing="false" onAction="#salir" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: null;">
+                          <graphic>
+      
+                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../Imagenes/salida.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                  </Button>
+                      <Button mnemonicParsing="false" onAction="#cambiarPantallaHome" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
+                          <graphic>
+      
+                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../Imagenes/hogar.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                      </Button>
+                      <Button mnemonicParsing="false" onAction="#cambiarpantallaAyuda" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+                          <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../Imagenes/interrogatorio.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                  </Button>
+                      <Button mnemonicParsing="false" onAction="#cambiarpantallaInforme" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="59.0" style="-fx-background-color: transparent;">
+                          <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../Imagenes/fichero.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                  </Button>
+                      <Button mnemonicParsing="false" onAction="#cambiarPantallaMonitor" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+                          <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../Imagenes/monitor.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                      </Button>
+                  <Button mnemonicParsing="false" onAction="#cambiarpantallaSSH" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Imagenes/terminal.png" />
+                           </image>
                         </ImageView>
-                    </graphic></Button>
-                <Button layoutX="10.0" layoutY="208.0" mnemonicParsing="false" onAction="#cambiarPantallaHome" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="46.0" prefWidth="52.0" style="-fx-background-color: transparent;">
-                    <graphic>
-
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../Imagenes/hogar.png" />
-                            </image>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#cambiarpantallaAula" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Imagenes/libros.png" />
+                           </image>
                         </ImageView>
-                    </graphic>
-                </Button>
-                <Button layoutX="12.0" layoutY="400.0" mnemonicParsing="false" onAction="#cambiarpantallaAyuda" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
-                    <graphic>
-                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../Imagenes/interrogatorio.png" />
-                            </image>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#cambiarpantallaMapa" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="52.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Imagenes/mapa.png" />
+                           </image>
                         </ImageView>
-                    </graphic></Button>
-                <Button layoutX="10.0" layoutY="338.0" mnemonicParsing="false" onAction="#cambiarpantallaInforme" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="59.0" style="-fx-background-color: transparent;">
-                    <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../Imagenes/ajustes.png" />
-                            </image>
-                        </ImageView>
-                    </graphic></Button>
-                <Button layoutX="10.0" layoutY="275.0" mnemonicParsing="false" onAction="#cambiarPantallaMonitor" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
-                    <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../Imagenes/monitor.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-            <Button layoutX="12.0" layoutY="451.0" mnemonicParsing="false" onAction="#cambiarpantallaSSH" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Imagenes/terminal.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="11.0" layoutY="501.0" mnemonicParsing="false" onAction="#cambiarpantallaAula" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Imagenes/terminal.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="11.0" layoutY="149.0" mnemonicParsing="false" onAction="#cambiarpantallaMapa" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="46.0" prefWidth="52.0" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Imagenes/mapa.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
             </children>
             <BorderPane.margin>
                 <Insets />
@@ -102,17 +106,32 @@
         </AnchorPane>
     </left>
     <center>
-        <AnchorPane prefHeight="664.0" prefWidth="936.0" style="-fx-background-color: rgb(241,245,246);" BorderPane.alignment="CENTER">
+        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="987.0" style="-fx-background-color: rgb(241,245,246);" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane fx:id="barraArriba" prefHeight="50.0" prefWidth="987.0" style="-fx-background-color: #01a5e7;">
-                    <children>
-
-                        <Label fx:id="textoTitulo" layoutX="14.0" layoutY="12.0" text="IES Laguna de Joatzel" textFill="WHITE">
+            <Pane fx:id="panelPrincipal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            </children>
+        </AnchorPane>
+    </center>
+   <top>
+      <AnchorPane fx:id="barraArriba" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="1061.0" style="-fx-background-color: #01a5e7;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="67.0" prefWidth="1057.0" spacing="11.0">
+               <children>
+                      <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../Imagenes/ControlADWhite copia.png" />
+                          </image>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                      </ImageView>
+      
+                              <Label fx:id="textoTitulo" text="IES Laguna de Joatzel" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
                         </Label>
-                  <Button layoutX="915.0" layoutY="3.0" mnemonicParsing="false" onAction="#alternarPaleta" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="46.0" prefWidth="52.0" style="-fx-background-color: transparent;">
+                  <Button mnemonicParsing="false" onAction="#alternarPaleta" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -120,28 +139,30 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <HBox.margin>
+                        <Insets left="520.0" />
+                     </HBox.margin>
                   </Button>
-                    </children>
-                </AnchorPane>
-            <Pane fx:id="panelPrincipal" layoutY="52.0" prefHeight="612.0" prefWidth="987.0" />
-            <MenuButton fx:id="menuButtonIdiomas" layoutX="764.0" layoutY="2.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" text="Español" textFill="WHITE">
-               <items>
-                  <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
-                  <MenuItem fx:id="ingles" mnemonicParsing="false" text="English" />
-                  <MenuItem fx:id="frances" mnemonicParsing="false" text="Français" />
-               </items>
-               <graphic>
-                  <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Imagenes/idioma3.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </MenuButton>
-            </children>
-        </AnchorPane>
-    </center>
+                  <MenuButton fx:id="menuButtonIdiomas" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" text="Español" textFill="WHITE">
+                     <items>
+                        <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
+                        <MenuItem fx:id="ingles" mnemonicParsing="false" text="English" />
+                        <MenuItem fx:id="frances" mnemonicParsing="false" text="Français" />
+                     </items>
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Imagenes/idioma3.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </MenuButton>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

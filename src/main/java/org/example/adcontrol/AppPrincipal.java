@@ -23,7 +23,7 @@ public class AppPrincipal extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("ADControl");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
 
         Platform.runLater(() -> {
