@@ -1,4 +1,5 @@
 package org.example.adcontrol;
+
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
 import javafx.application.Platform;
@@ -7,20 +8,35 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
+
+import java.io.File;
 import java.io.IOException;
 
 /**
  * Clase controladora de la pantalla de carga.
+ *
  * @author Daniel y Alberto
  * @version 1.5
  */
-public class ControladorPantallaCarga implements Runnable {
+public class ControladorPantallaCarga {
     @FXML
     ProgressBar progressBar;
     @FXML
     Label textoCarga;
+    @FXML
+    MediaView panelMediaView;
+    @FXML
+    Pane panel;
+
+    MediaPlayer mediaPlayer;
+    Media media;
+
 
     /**
      * Costructor por defecto del controlador
@@ -28,61 +44,35 @@ public class ControladorPantallaCarga implements Runnable {
     public ControladorPantallaCarga() {
     }
 
-    /**
-     * Método encargado de cargar la bbdd y rellenar la barra de tareas.
-     */
-    @Override
-    public void run() {
-        Integer tiempo = 10;
-        try {
-            actualizarTexto("Iniciando carga de la aplicación...");
 
-            for (int i = 0; i <= 100; i++) {
-                final int value = i;
-                Platform.runLater(() -> progressBar.setProgress(value / 100.0));
+    @FXML
+    void initialize(){
+        // Cargar y reproducir vídeo
+        File f = new File("src/main/resources/org/example/adcontrol/VideoCarga.mp4");
+        media = new Media(f.toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        panelMediaView.setMediaPlayer(mediaPlayer);
 
-                //Frases aleatoria para el usuario durante la carga
-                if (i == 10) {
-                    cargarDatosBBDD();  // Aquí cargamos la información de la base de datos
-                    actualizarTexto("Conectando a la base de datos...");
-                }
-                if (i == 30){
-                    actualizarTexto("Datos cargados correctamente.");
-                    tiempo = 50;
-                }
-                if (i == 60){
-                    actualizarTexto("Cargando datos de las incidencias...");
-                    tiempo = 30;
-                }
+        // Ajustar al tamaño del contenedor
+        panelMediaView.fitWidthProperty().bind(panel.widthProperty());
+        panelMediaView.fitHeightProperty().bind(panel.heightProperty());
+        panelMediaView.setPreserveRatio(true);
+        // Cargar datos en segundo plano
+        Thread thread = new Thread(this::cargarDatosBBDD);
+        thread.setDaemon(true);
+        thread.start();
 
-                if (i == 80){
-                    actualizarTexto("Aplicando configuraciones...");
-                    tiempo = 10;
-                }
-                if (i == 100) actualizarTexto("Carga completa. Abriendo la aplicación...");
-
-                Thread.sleep(tiempo); //Simular tiempo de carga
-            }
-
+        // CUANDO TERMINE EL VÍDEO -> CAMBIAR DE PANTALLA
+        mediaPlayer.setOnEndOfMedia(() -> {
             Platform.runLater(() -> {
                 try {
                     primeraVentana();
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             });
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Método para actualizar el texto de la pantalla de carga
-     * @param mensaje Recibe un String mensaje que muestra al usuario y va cambiando
-     */
-    private void actualizarTexto(String mensaje) {
-        Platform.runLater(() -> textoCarga.setText(mensaje));
+        });
     }
 
     /**
@@ -100,13 +90,14 @@ public class ControladorPantallaCarga implements Runnable {
     /**
      * Método encargado de cargar la nueva ventana utilizando la anterior, es decir,
      * sin generar una nueva por encima de la actual
+     *
      * @throws IOException Excepcion necesaria para el método load() de fxmlLoader
      */
     @FXML
     public void primeraVentana() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/controlesMenu.fxml"));
         Parent root = fxmlLoader.load();
-        Stage stage = (Stage) progressBar.getScene().getWindow();
+        Stage stage = (Stage) panel.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());

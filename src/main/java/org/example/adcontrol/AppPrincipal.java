@@ -25,12 +25,6 @@ public class AppPrincipal extends Application {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
-        Platform.runLater(() -> {
-            ControladorPantallaCarga controlador = fxmlLoader.getController();
-            Thread hilo = new Thread(controlador);
-            hilo.start();
-        });
     }
 
     /**
