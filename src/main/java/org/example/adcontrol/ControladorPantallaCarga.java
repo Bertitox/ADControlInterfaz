@@ -58,6 +58,7 @@ public class ControladorPantallaCarga {
         panelMediaView.fitWidthProperty().bind(panel.widthProperty());
         panelMediaView.fitHeightProperty().bind(panel.heightProperty());
         panelMediaView.setPreserveRatio(true);
+        //mediaPlayer.setMute(true); ESTO MUTEA EL AUDIO
         // Cargar datos en segundo plano
         Thread thread = new Thread(this::cargarDatosBBDD);
         thread.setDaemon(true);
