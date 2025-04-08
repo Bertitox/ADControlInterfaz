@@ -190,6 +190,17 @@ public class ControladorMenu extends Controlador {
         panelPrincipal.getChildren().add(root);
     }
 
+    @FXML
+    void cambiarpantallaConfiguracion(ActionEvent event) throws IOException {
+        textoTitulo.setText("Ajustes");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAjustes.fxml"));
+        Parent root = fxmlLoader.load();
+        panelPrincipal.getChildren().clear();
+        panelPrincipal.getChildren().add(root);
+    }
+
+
+
 
 
     /**

@@ -23,6 +23,7 @@ public class ControladorAjustes {
 
     @FXML
     public void initialize() {
+        CheckBoxSonido.setSelected(true);
         // Cargar imágenes desde resources (asegúrate de que están en src/main/resources/Imagenes/)
         imagenSonidoEncendido = new Image(getClass().getResourceAsStream("/org/example/adcontrol/Imagenes/volumenencendido.png"));
         imagenSonidoApagado = new Image(getClass().getResourceAsStream("/org/example/adcontrol/Imagenes/volumenapagado.png"));
