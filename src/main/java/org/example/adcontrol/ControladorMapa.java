@@ -3,12 +3,19 @@ package org.example.adcontrol;
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDAulas;
 import BBDD.DTO.Aulas;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+
+import java.io.IOException;
+
 public class ControladorMapa {
     @FXML
     private Button DespachoProfesores2;
@@ -28,6 +35,9 @@ public class ControladorMapa {
     @FXML
     private Button aulaInfo1rect;
 
+    @FXML
+    private Pane panelMapa;
+
 
     @FXML
     void cambiarAula(ActionEvent event) {
@@ -35,7 +45,9 @@ public class ControladorMapa {
         Button b = (Button) event.getSource();
         if (cruda.comprobarAula(b.getText().trim())) {
             //entrar a vista aula (la vista con pcs)
+            vistaAula();
         } else {
+            //CREAR EL AULA EN AULA Y AULA_EQUIPO
             Alert alert = new Alert(Alert.AlertType.ERROR, "El aula no está en la BBDD, ¿desea crearla?", ButtonType.YES, ButtonType.NO);
             alert.setTitle(b.getText() + " no se encontró");
             alert.showAndWait();
@@ -79,5 +91,18 @@ public class ControladorMapa {
         } else {
             b.setOpacity(1);
         }
+    }
+
+    public void vistaAula()  {
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelAula.fxml"));
+                Parent root = fxmlLoader.load();
+                panelMapa.getChildren().clear();
+                panelMapa.getChildren().add(root);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

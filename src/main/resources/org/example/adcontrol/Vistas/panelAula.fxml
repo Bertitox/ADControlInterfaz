@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="970.0" minWidth="-Infinity" prefWidth="970.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane maxHeight="1.7976931348623157E308" maxWidth="970.0" prefWidth="970.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0" />
+                <ColumnConstraints hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="250.0" prefWidth="250.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="225.0" prefHeight="225.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="225.0" prefHeight="225.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="225.0" prefHeight="225.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="225.0" prefHeight="225.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="225.0" prefHeight="225.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-background-color: white; -fx-background-radius: 10px; -fx-border-radius: 10px;" GridPane.columnIndex="2">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </GridPane.margin>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="15.0" radius="7.0" width="15.0" />
+               </effect>
+               <children>
+                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="205.0" prefWidth="230.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: rgb(241, 248, 255); -fx-border-radius: 10px 10px 0px 0px; -fx-background-radius: 10px 10px 0px 0px; -fx-border-color: grey;">
+                           <children>
+                              <Label alignment="CENTER" text="Ultima actualizacion">
+                                 <VBox.margin>
+                                    <Insets top="25.0" />
+                                 </VBox.margin></Label>
+                              <Label text="15:45:39" textFill="#3ea8ee">
+                                 <font>
+                                    <Font name="Cascadia Code Regular" size="21.0" />
+                                 </font></Label>
+                              <Label text="8 de Abril, 2025" />
+                           </children>
+                        </VBox>
+                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+               </children>
+                </Pane>
+                <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-border-color: grey; -fx-border-radius: 10px; -fx-background-color: white; -fx-background-radius: 10px;" GridPane.columnSpan="2" GridPane.rowSpan="2">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </GridPane.margin>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="15.0" radius="7.0" width="15.0" />
+               </effect>
+               <children>
+                  <GridPane alignment="CENTER" layoutY="5.0" prefHeight="420.0" prefWidth="700.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="LEFT" minWidth="10.0" prefWidth="350.0" />
+                        <ColumnConstraints halignment="LEFT" minWidth="10.0" prefWidth="350.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="40.0" valignment="CENTER" vgrow="NEVER" />
+                      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="130.0" valignment="TOP" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="229.1097412109375" valignment="BOTTOM" vgrow="ALWAYS" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Analisis del aula" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="40.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@../Imagenes/actividad.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="10.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <Separator prefWidth="200.0" GridPane.columnSpan="3" GridPane.valignment="BOTTOM">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Separator>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #f0faff); -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: rgb(0, 149, 255);" GridPane.rowIndex="1">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                           </GridPane.margin>
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Equipos en el aula">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="15.0" layoutY="40.0" text="8">
+                                 <font>
+                                    <Font name="System Bold" size="34.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="90.0" text="8/16 equipos">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="185.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Imagenes/monitorAzul.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <effect>
+                              <DropShadow blurType="TWO_PASS_BOX">
+                                 <color>
+                                    <Color green="0.5843137502670288" blue="1.0" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #fcf0ff); -fx-background-radius: 10px; -fx-border-color: rgb(183, 90, 255); -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                           </GridPane.margin>
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Incidencias en el aula">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="15.0" layoutY="40.0" text="1">
+                                 <font>
+                                    <Font name="System Bold" size="34.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="90.0" text="14º Aula con mas incidencias">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="185.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Imagenes/trianguloPeligromorado.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <effect>
+                              <DropShadow blurType="TWO_PASS_BOX" />
+                           </effect>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 10px; -fx-border-color: red; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #fff0f0);; -fx-border-radius: 10px;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                           </GridPane.margin>
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Estado general" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="90.0" text="13 equipos tienen incidencias">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ProgressBar layoutX="15.0" layoutY="61.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="10.0" prefWidth="190.0" progress="0.56" />
+                              <Label layoutX="174.0" layoutY="39.0" text="56%">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="185.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Imagenes/medio.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <effect>
+                              <DropShadow blurType="TWO_PASS_BOX">
+                                 <color>
+                                    <Color red="1.0" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Pane>
+                        <BarChart GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </GridPane>
+               </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 10px; -fx-background-color: white; -fx-background-radius: 10px;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </GridPane.margin>
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="230.0" style="-fx-background-radius: 10px;">
+                     <children>
+                        <Label text="Accesos rapidos">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <GridPane hgap="10.0" vgap="10.0" VBox.vgrow="ALWAYS">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="102.0">
+                                       <children>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Imagenes/refrescar.png" />
+                                             </image>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                          </ImageView>
+                                          <Label text="Refrescar" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;" GridPane.columnIndex="1">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="102.0">
+                                       <children>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Imagenes/consola.png" />
+                                             </image>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                          </ImageView>
+                                          <Label text="Consola" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;" GridPane.rowIndex="1">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="102.0">
+                                       <children>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Imagenes/monitorCrear.png" />
+                                             </image>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                          </ImageView>
+                                          <Label text=" Equipos" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="102.0">
+                                       <children>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Imagenes/circuloExclamacionAzul.png" />
+                                             </image>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                          </ImageView>
+                                          <Label text="Incidencias" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </Pane>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </children>
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="15.0" radius="7.0" width="15.0" />
+               </effect>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </GridPane.margin>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: green;" GridPane.rowIndex="2">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </GridPane.margin>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: green;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </GridPane.margin>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </GridPane.margin>
+                </Pane>
+            </children>
+        </GridPane>
+    </children>
+</Pane>

@@ -12,7 +12,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "aula")
 public class Aula_Equipo {
-
+    //EN BBDD SE LLAMA AULA
     /**
      * El identificador único del aula.
      */

@@ -4,9 +4,9 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMapa">
+<Pane fx:id="panelMapa" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMapa">
    <children>
       <ImageView fitHeight="612.0" fitWidth="987.0">
          <image>
@@ -73,4 +73,4 @@
       <Button fx:id="secretariarect" layoutX="651.0" layoutY="95.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: rgb(225, 190, 231);" text="Secretaria" textFill="#e1bee7" />
       <Button fx:id="aulaInfo1rect" layoutX="777.0" layoutY="454.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="41.0" prefWidth="118.0" style="-fx-background-color: rgb(255, 204, 188);" text="Aula de informatica 1" textFill="#ffccbc" />
    </children>
-</AnchorPane>
+</Pane>
