@@ -42,17 +42,18 @@ public class Validaciones_systema {
         boolean exist = false;
 
         for (Aula_Equipo a: crudAulaEquipo.readAllAulas()){
-            if (a.getReferencia().equals(referencia)) {
+            if (a.getReferencia().getReferencia().equals(referencia)) {
                 exist = true;
             }
         }
         return exist;
     }
 
-    /**
-    public static void main(String[] args) {
-        Validaciones_systema validaciones = new Validaciones_systema();
-        System.out.println(validaciones.existeAula("PRUEBA0"));
-    }*/
+
+
+//    public static void main(String[] args) {
+//        Validaciones_systema validaciones = new Validaciones_systema();
+//        System.out.println(validaciones.existeAula("PRUEBA0"));
+//    }
 
 }

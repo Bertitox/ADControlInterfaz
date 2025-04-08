@@ -175,7 +175,7 @@ public class ControladorMenu extends Controlador {
     @FXML
     void cambiarpantallaAula(ActionEvent event) throws IOException {
         textoTitulo.setText("Aulas");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAula.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAjustes.fxml"));
         Parent root = fxmlLoader.load();
         panelPrincipal.getChildren().clear();
         panelPrincipal.getChildren().add(root);
@@ -189,6 +189,7 @@ public class ControladorMenu extends Controlador {
         panelPrincipal.getChildren().clear();
         panelPrincipal.getChildren().add(root);
     }
+
 
 
     /**
@@ -216,6 +217,7 @@ public class ControladorMenu extends Controlador {
     public void cambiarIdioma(String idioma) {
         menuButtonIdiomas.setText(idioma);
     }
+
 
     public VBox getContenedorBotones() {
         return contenedorBotones;

@@ -3,6 +3,7 @@ package BBDD.DAO;
 import BBDD.Conexion.Conexion;
 import BBDD.DTO.Aulas;
 import BBDD.Excepciones.AulaNotFoundException;
+import BBDD.Validaciones.Validaciones_systema;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
@@ -22,6 +23,10 @@ public class CRUDAulas {
     EntityManager gestorEntidad = conexion.getGestor();
     EntityTransaction transaction = gestorEntidad.getTransaction();
 
+    //Clase para las validaciones
+    Validaciones_systema validacion = new Validaciones_systema();
+
+
     /**
      * Constructor por defecto de la clase {@link CRUDAulas}
      */
@@ -37,7 +42,6 @@ public class CRUDAulas {
             transaction.begin();
             gestorEntidad.persist(aula);
             transaction.commit();
-
     }
 
     /**
