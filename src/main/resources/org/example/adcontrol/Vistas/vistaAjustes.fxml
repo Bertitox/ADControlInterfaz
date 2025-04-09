@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -23,13 +24,13 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="200.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="156.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="166.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <CheckBox fx:id="CheckBoxSonido" mnemonicParsing="false" prefHeight="38.0" prefWidth="241.0" text="Reproducir sonido al iniciar" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <CheckBox fx:id="CheckBoxSonido" mnemonicParsing="false" prefHeight="38.0" prefWidth="292.0" text="Reproducir sonido al iniciar" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="100.0" left="20.0" />
                </GridPane.margin>
@@ -45,14 +46,14 @@
                   <Insets bottom="-20.0" left="20.0" />
                </GridPane.margin>
             </Label>
-            <MenuButton fx:id="MenuButtonIdiomas" mnemonicParsing="false" prefHeight="39.0" prefWidth="148.0" style="-fx-background-color: transparent;" text="Idiomas" GridPane.columnIndex="1">
+            <MenuButton fx:id="MenuButtonIdiomas" mnemonicParsing="false" prefHeight="39.0" prefWidth="124.0" style="-fx-background-color: transparent;" text="Idiomas" GridPane.columnIndex="1">
                <items>
                   <MenuItem mnemonicParsing="false" text="Español" />
                   <MenuItem mnemonicParsing="false" text="English" />
                   <MenuItem mnemonicParsing="false" text="Français" />
                </items>
                <GridPane.margin>
-                  <Insets bottom="-20.0" left="260.0" />
+                  <Insets bottom="-20.0" left="220.0" />
                </GridPane.margin>
                <font>
                   <Font size="18.0" />
@@ -68,7 +69,7 @@
             </Label>
             <ImageView fx:id="imageViewSonido" fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets bottom="100.0" left="270.0" />
+                  <Insets bottom="95.0" left="280.0" />
                </GridPane.margin>
                <image>
                   <Image url="@../Imagenes/volumenencendido.png" />
@@ -77,6 +78,19 @@
                   <ColorAdjust contrast="-1.0" />
                </effect>
             </ImageView>
+            <Slider maxWidth="-Infinity" prefHeight="22.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="110.0" top="90.0" />
+               </GridPane.margin>
+            </Slider>
+            <Label prefHeight="27.0" prefWidth="85.0" text="Volumen" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" top="90.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </children>
