@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -89,6 +90,19 @@
                </font>
                <GridPane.margin>
                   <Insets left="20.0" top="90.0" />
+               </GridPane.margin>
+            </Label>
+            <ColorPicker prefHeight="52.0" prefWidth="104.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="170.0" />
+               </GridPane.margin>
+            </ColorPicker>
+            <Label layoutX="64.0" layoutY="86.0" prefHeight="27.0" prefWidth="139.0" text="Tema de la app " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="20.0" />
                </GridPane.margin>
             </Label>
          </children>
