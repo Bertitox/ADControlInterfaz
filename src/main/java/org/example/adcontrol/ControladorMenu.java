@@ -40,6 +40,7 @@ public class ControladorMenu extends Controlador {
     Boolean daltónico = false;
 
     ControlIdioma controlIdioma = ControlIdioma.getInstance();
+    InfoInit infoInit= InfoInit.getInstance();
 
     /**
      * Constructor por defecto de la clase ControladorMenu
@@ -52,6 +53,8 @@ public class ControladorMenu extends Controlador {
      */
     @FXML
     void initialize() {
+        barraArriba.setStyle("-fx-background-color: " + infoInit.getTemaLeido());
+        barraIzquierda.setStyle("-fx-background-color:" + infoInit.getTemaLeido());
         try {
             //SE CARGA POR DEFECTO LA VISTA HOME
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaHome.fxml"));
@@ -95,8 +98,8 @@ public class ControladorMenu extends Controlador {
             barraIzquierda.setStyle("-fx-background-color: red");
             daltónico = true;
         }else{
-            barraArriba.setStyle("-fx-background-color: #01a5e7");
-            barraIzquierda.setStyle("-fx-background-color: #01a5e7");
+            barraArriba.setStyle("-fx-background-color: " + infoInit.getTemaLeido());
+            barraIzquierda.setStyle("-fx-background-color:" + infoInit.getTemaLeido());
             daltónico = false;
         }
     }
@@ -237,4 +240,7 @@ public class ControladorMenu extends Controlador {
     public void setContenedorBotones(VBox contenedorBotones) {
         this.contenedorBotones = contenedorBotones;
     }
+
+
+
 }
