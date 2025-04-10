@@ -4,7 +4,6 @@ import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -16,12 +15,8 @@ import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Clase controladora de la pantalla de carga.
@@ -42,6 +37,7 @@ public class ControladorPantallaCarga {
     MediaPlayer mediaPlayer;
     Media media;
 
+
     /**
      * Costructor por defecto del controlador
      */
@@ -50,26 +46,16 @@ public class ControladorPantallaCarga {
 
 
     @FXML
-    void initialize() {
-        InfoInit infoInit = InfoInit.getInstance();
-
+    void initialize(){
         // Cargar y reproducir vídeo
         File f = new File("src/main/resources/org/example/adcontrol/VideoCarga.mp4");
         media = new Media(f.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
-
-        //SE LEE DEL FICHERO SI ESTÁ MUTEADO O NO
-        if(infoInit.getMuteLeido()){
-            mediaPlayer.setMute(true);
-        }else{
-            mediaPlayer.setMute(false);
-        }
-
-        mediaPlayer.setVolume(infoInit.getVolumenLeido());
-
-
         mediaPlayer.setAutoPlay(true);
         panelMediaView.setMediaPlayer(mediaPlayer);
+
+        // Ajustar al tamaño del contenedor
+        //mediaPlayer.setVolume();
         panelMediaView.fitWidthProperty().bind(panel.widthProperty());
         panelMediaView.fitHeightProperty().bind(panel.heightProperty());
         panelMediaView.setPreserveRatio(true);
@@ -121,5 +107,4 @@ public class ControladorPantallaCarga {
         stage.setTitle("Pagina principal");
         stage.show();
     }
-
 }

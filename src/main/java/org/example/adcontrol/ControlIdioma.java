@@ -19,9 +19,8 @@ public class ControlIdioma {
      */
     public static ControlIdioma getInstance() {
         if (instancia == null) {
-            InfoInit infoInit = InfoInit.getInstance();
             instancia = new ControlIdioma();
-            instancia.idioma.setValue(infoInit.getIdiomaLeido()); //IDIOMA POR DEFECTO AL INICIAR LA APP
+            instancia.idioma.setValue("Español"); //IDIOMA POR DEFECTO AL INICIAR LA APP
         }
         return instancia;
     }
@@ -41,5 +40,4 @@ public class ControlIdioma {
     public void setIdioma(String idioma) {
         this.idioma.set(idioma);
     }
-
 }

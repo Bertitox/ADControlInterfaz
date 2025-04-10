@@ -1,13 +1,11 @@
 package org.example.adcontrol;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-
-import java.io.*;
 
 public class ControladorAjustes {
 
@@ -22,24 +20,20 @@ public class ControladorAjustes {
 
     private Image imagenSonidoEncendido;
     private Image imagenSonidoApagado;
-    @FXML
-    private Slider sliderVolumen;
 
     @FXML
-    ColorPicker colorPicker;
-
-
-
-    @FXML
-    public void initialize() throws IOException {
-        cargarDatos();
-        imagenSonidoApagado = new Image(getClass().getResourceAsStream("/org/example/adcontrol/Imagenes/volumenapagado.png"));
+    public void initialize() {
+        CheckBoxSonido.setSelected(true);
+        // Cargar imágenes desde resources (asegúrate de que están en src/main/resources/Imagenes/)
         imagenSonidoEncendido = new Image(getClass().getResourceAsStream("/org/example/adcontrol/Imagenes/volumenencendido.png"));
+        imagenSonidoApagado = new Image(getClass().getResourceAsStream("/org/example/adcontrol/Imagenes/volumenapagado.png"));
 
+        // Inicializar menú de idiomas
         for (MenuItem item : MenuButtonIdiomas.getItems()) {
             item.setOnAction(e -> MenuButtonIdiomas.setText(item.getText()));
         }
 
+        // Cambiar imagen al activar/desactivar sonido
         CheckBoxSonido.setOnAction(e -> {
             if (CheckBoxSonido.isSelected()) {
                 imageViewSonido.setImage(imagenSonidoEncendido);
@@ -48,21 +42,7 @@ public class ControladorAjustes {
             }
         });
 
+        // Establecer imagen inicial
         imageViewSonido.setImage(CheckBoxSonido.isSelected() ? imagenSonidoEncendido : imagenSonidoApagado);
-    }
-
-    public void cargarDatos(){
-        InfoInit infoInit = InfoInit.getInstance();
-        MenuButtonIdiomas.setText(infoInit.getIdiomaLeido());
-
-        if(infoInit.getMuteLeido()){
-            CheckBoxSonido.setSelected(false);
-        }else{
-            CheckBoxSonido.setSelected(true);
-        }
-
-        sliderVolumen.setValue(infoInit.getVolumenLeido() * 100.0);
-        Color color = Color.web(infoInit.getTemaLeido());
-        colorPicker.setValue(color);
     }
 }
