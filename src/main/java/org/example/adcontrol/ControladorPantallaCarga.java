@@ -55,6 +55,7 @@ public class ControladorPantallaCarga {
         panelMediaView.setMediaPlayer(mediaPlayer);
 
         // Ajustar al tamaño del contenedor
+        //mediaPlayer.setVolume();
         panelMediaView.fitWidthProperty().bind(panel.widthProperty());
         panelMediaView.fitHeightProperty().bind(panel.heightProperty());
         panelMediaView.setPreserveRatio(true);
