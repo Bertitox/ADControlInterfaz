@@ -1,5 +1,6 @@
 package org.example.adcontrol;
 import BBDD.DAO.CRUDIncidencia;
+import BBDD.DAO.GestionErrores;
 import BBDD.DTO.Incidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextField;
 import javax.swing.*;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -37,6 +39,9 @@ public class ControladorMonitor extends Controlador{
     @FXML
     Button actualizar1;
 
+    @FXML
+    ListView<String> listViewErrores;
+
     private ResourceBundle bundle;
 
     //Elementos a traducir
@@ -49,8 +54,9 @@ public class ControladorMonitor extends Controlador{
      * Inicializa los elementos de la interfaz y configura los botones de idioma.
      */
     @FXML
-    public void initialize() {
+    public void initialize(){
         refrescarIdioma();
+        mostrarErroresListView();
     }
 
     /**
@@ -96,6 +102,23 @@ public class ControladorMonitor extends Controlador{
         }
 
         listIncidencias.setItems(items);
+    }
+
+    /**
+     * Método para mostrar todos los tipos del errores creados y su descripción.
+     */
+    public void mostrarErroresListView(){
+        GestionErrores g = new GestionErrores();
+        Map<String, String> errores = g.erroresMap();
+
+        //Pasamos la información a una Lista observable para el ListView
+        ObservableList<String> items = FXCollections.observableArrayList();
+
+        for (Map.Entry<String, String> entry: g.erroresMap().entrySet()){
+            items.add("Código Error: " + entry.getKey() +"   Descripción: " + entry.getValue());
+        }
+
+        listViewErrores.setItems(items);
     }
 
     //Método para rellenar el gráfico
