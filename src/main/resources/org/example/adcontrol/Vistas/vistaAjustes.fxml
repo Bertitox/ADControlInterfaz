@@ -14,26 +14,35 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorAjustes">
    <children>
-      <GridPane fx:id="gridPaneMonitores" alignment="CENTER" layoutX="3.0" layoutY="4.0" prefHeight="602.0" prefWidth="972.0">
+      <GridPane fx:id="gridPaneMonitores" alignment="CENTER" layoutX="3.0" layoutY="4.0" prefHeight="584.0" prefWidth="972.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="32.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="736.0" minWidth="10.0" prefWidth="736.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="200.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="156.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="166.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="138.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="147.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="282.0" minHeight="10.0" prefHeight="179.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
+            <ImageView fitHeight="635.0" fitWidth="992.0" opacity="0.07" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <image>
+                  <Image url="@../Imagenes/ControlADLogoSinFondo.png" />
+               </image>
+            </ImageView>
             <CheckBox fx:id="CheckBoxSonido" mnemonicParsing="false" prefHeight="38.0" prefWidth="292.0" text="Reproducir sonido al iniciar" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets bottom="100.0" left="20.0" />
+                  <Insets bottom="110.0" left="20.0" />
                </GridPane.margin>
                <font>
                   <Font size="18.0" />
@@ -70,7 +79,7 @@
             </Label>
             <ImageView fx:id="imageViewSonido" fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets bottom="95.0" left="280.0" />
+                  <Insets bottom="110.0" left="280.0" />
                </GridPane.margin>
                <image>
                   <Image url="@../Imagenes/volumenencendido.png" />
@@ -79,9 +88,9 @@
                   <ColorAdjust contrast="-1.0" />
                </effect>
             </ImageView>
-            <Slider maxWidth="-Infinity" prefHeight="22.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Slider maxWidth="-Infinity" prefHeight="38.0" prefWidth="254.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="110.0" top="90.0" />
+                  <Insets left="110.0" top="50.0" />
                </GridPane.margin>
             </Slider>
             <Label prefHeight="27.0" prefWidth="85.0" text="Volumen" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -89,23 +98,39 @@
                   <Font size="18.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="20.0" top="90.0" />
+                  <Insets left="20.0" top="50.0" />
                </GridPane.margin>
             </Label>
-            <ColorPicker prefHeight="52.0" prefWidth="104.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ColorPicker prefHeight="52.0" prefWidth="104.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets bottom="20.0" left="170.0" />
+                  <Insets bottom="-10.0" left="170.0" />
                </GridPane.margin>
+               <value>
+                  <Color red="0.003921568859368563" green="0.6470588445663452" blue="0.9058823585510254" />
+               </value>
             </ColorPicker>
-            <Label layoutX="64.0" layoutY="86.0" prefHeight="27.0" prefWidth="139.0" text="Tema de la app " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label layoutX="64.0" layoutY="86.0" prefHeight="27.0" prefWidth="139.0" text="Tema de la app " textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="20.0" left="20.0" />
+                  <Insets bottom="-10.0" left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="27.0" prefWidth="229.0" style="-fx-font-weight: bold;" text="AJUSTES DE LA APP" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="100.0" left="10.0" />
                </GridPane.margin>
             </Label>
          </children>
       </GridPane>
+      <Label layoutX="114.0" layoutY="589.0" text="ADControl es una aplicación de gestión de equipos creada por Daniel García y Alberto Castellanos. Todos los derechos reservados ©" textAlignment="CENTER">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
