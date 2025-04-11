@@ -30,10 +30,10 @@ public class Controlador {
                     case "Español":
                         cargarIdioma(new Locale("es"));
                         break;
-                    case "Ingles":
+                    case "English":
                         cargarIdioma(new Locale("en"));
                         break;
-                    case "Frances":
+                    case "Français":
                         cargarIdioma(new Locale("fr"));
                         break;
                 }
@@ -50,10 +50,10 @@ public class Controlador {
             case "Español":
                 cargarIdioma(new Locale("es"));
                 break;
-            case "Ingles":
+            case "English":
                 cargarIdioma(new Locale("en"));
                 break;
-            case "Frances":
+            case "Français":
                 cargarIdioma(new Locale("fr"));
                 break;
         }
