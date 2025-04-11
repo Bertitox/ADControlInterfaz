@@ -162,6 +162,7 @@ public class CRUDAula_Equipo {
     //Método main para realizar pruebas.
     public static void main(String[] args) {
         CRUDAula_Equipo c = new CRUDAula_Equipo();
+        //System.out.println(c.numEquiposXAula("PRUEBA1"));
         //c.insertAula(new Aula("PRUEBA6", c.gestorEntidad.find(InformacionSistema.class, 7)));
         //System.out.println(c.numEquiposXAula("PRUEBA5"));
         /*

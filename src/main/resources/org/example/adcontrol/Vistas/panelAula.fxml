@@ -114,7 +114,7 @@
                               <Insets />
                            </opaqueInsets>
                         </Separator>
-                        <Pane onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #f0faff); -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: rgb(0, 149, 255);" GridPane.rowIndex="1">
+                        <Pane fx:id="divEquiposAula" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #f0faff); -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: rgb(0, 149, 255);" GridPane.rowIndex="1">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -127,7 +127,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="15.0" layoutY="40.0" text="8">
+                              <Label fx:id="labelNumEquiposAula" layoutX="15.0" layoutY="40.0" text="8">
                                  <font>
                                     <Font name="System Bold" size="34.0" />
                                  </font>
@@ -151,7 +151,7 @@
                               </DropShadow>
                            </effect>
                         </Pane>
-                        <Pane onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #fcf0ff); -fx-background-radius: 10px; -fx-border-color: rgb(183, 90, 255); -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Pane fx:id="divincidenciasAula" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #fcf0ff); -fx-background-radius: 10px; -fx-border-color: rgb(183, 90, 255); -fx-border-radius: 10px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                            </GridPane.margin>
@@ -161,7 +161,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="15.0" layoutY="40.0" text="1">
+                              <Label fx:id="labelNumIncidenciasAula" layoutX="15.0" layoutY="40.0" text="1">
                                  <font>
                                     <Font name="System Bold" size="34.0" />
                                  </font>
@@ -181,7 +181,7 @@
                               <DropShadow blurType="TWO_PASS_BOX" />
                            </effect>
                         </Pane>
-                        <Pane onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 10px; -fx-border-color: red; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #fff0f0);; -fx-border-radius: 10px;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Pane fx:id="divEstadoAula" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 10px; -fx-border-color: red; -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #fff0f0);; -fx-border-radius: 10px;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                            </GridPane.margin>
@@ -191,12 +191,12 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="10.0" layoutY="90.0" text="13 equipos tienen incidencias">
+                              <Label fx:id="labelEquiposIncidencias" layoutX="10.0" layoutY="90.0" text="13 equipos tienen incidencias">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <ProgressBar layoutX="15.0" layoutY="61.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="10.0" prefWidth="190.0" progress="0.56" />
+                              <ProgressBar fx:id="barraEstadoAula" layoutX="15.0" layoutY="61.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="10.0" prefWidth="190.0" progress="0.56" />
                               <Label layoutX="174.0" layoutY="39.0" text="56%">
                                  <font>
                                     <Font size="14.0" />
@@ -224,12 +224,12 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </LineChart>
-                        <Label text="DAM 1" GridPane.columnIndex="1">
+                        <Label fx:id="labelAula" text="DAM 1" GridPane.columnIndex="1">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets bottom="5.0" left="-10.0" />
+                              <Insets bottom="5.0" left="5.0" />
                            </GridPane.margin>
                         </Label>
                      </children>

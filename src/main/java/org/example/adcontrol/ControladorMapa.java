@@ -3,6 +3,7 @@ package org.example.adcontrol;
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDAulas;
 import BBDD.DTO.Aulas;
+import BBDD.Excepciones.AulaNotFoundException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,9 +44,11 @@ public class ControladorMapa {
     void cambiarAula(ActionEvent event) {
         CRUDAulas cruda = new CRUDAulas();
         Button b = (Button) event.getSource();
+        String nombreAula = b.getText();
+
         if (cruda.comprobarAula(b.getText().trim())) {
-            //entrar a vista aula (la vista con pcs)
-            vistaAula();
+            //Entrar a vista aula (la vista con pcs)
+            vistaAula(nombreAula);
         } else {
             //CREAR EL AULA EN AULA Y AULA_EQUIPO
             Alert alert = new Alert(Alert.AlertType.ERROR, "El aula no está en la BBDD, ¿desea crearla?", ButtonType.YES, ButtonType.NO);
@@ -58,6 +61,7 @@ public class ControladorMapa {
             }
         }
     }
+
 
     @FXML
     void botonMapaHover(MouseEvent event) {
@@ -93,16 +97,50 @@ public class ControladorMapa {
         }
     }
 
-    public void vistaAula()  {
+//    public void vistaAula(String nombreAula)  {
+//        Platform.runLater(() -> {
+//            try {
+//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelAula.fxml"));
+//                Parent root = fxmlLoader.load();
+//                panelMapa.getChildren().clear();
+//                panelMapa.getChildren().add(root);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        });
+//    }
+
+    public void vistaAula(String nombreAula) {
         Platform.runLater(() -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelAula.fxml"));
                 Parent root = fxmlLoader.load();
+
+                ControladorVistaPanelAula controladorVista = fxmlLoader.getController();
+
+                // Esperar un poco a que cargue panelAula.fxml (por el Platform.runLater interno)
+                // Alternativa simple: usar otro runLater anidado
+                Platform.runLater(() -> {
+                    ControladorPanelAula controladorPanel = controladorVista.getControladorPanelAula();
+                    if (controladorPanel != null) {
+                        try {
+                            controladorPanel.ponerClase(nombreAula);
+                        } catch (AulaNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else {
+                        System.err.println("El controlador del panel aula no está disponible todavía.");
+                    }
+                });
+
                 panelMapa.getChildren().clear();
                 panelMapa.getChildren().add(root);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
+
+
 }

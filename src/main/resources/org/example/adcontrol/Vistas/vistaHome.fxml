@@ -32,7 +32,7 @@
             <DropShadow height="15.0" radius="7.0" width="15.0" />
          </effect>
          <children>
-            <Label fx:id="labelAulasDisponibles" layoutX="51.0" layoutY="23.0" text="Aulas Disponibles">
+            <Label fx:id="labelAulasDisponibles" layoutX="61.0" layoutY="22.0" text="Aulas Disponibles">
                <font>
                   <Font name="System Bold" size="33.0" />
                </font>
@@ -66,7 +66,7 @@
       </Pane>
       <Pane fx:id="panel1" layoutX="47.0" layoutY="39.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: rgb(254,242,242); -fx-background-radius: 10px; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 10px;">
          <children>
-            <Label fx:id="labelIncidencias" layoutX="51.0" layoutY="23.0" text="Incidencias graves">
+            <Label fx:id="labelIncidencias" layoutX="61.0" layoutY="22.0" prefHeight="49.0" prefWidth="289.0" text="Incidencias graves">
                <font>
                   <Font name="System Bold" size="33.0" />
                </font>
@@ -86,12 +86,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="360.0" layoutY="23.0">
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="361.0" layoutY="23.0">
                <image>
                   <Image url="@../Imagenes/advertencia-de-triangulo.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblTituloGrave" layoutX="19.0" layoutY="23.0">
+            <Label fx:id="lblTituloGrave" layoutX="19.0" layoutY="23.0" prefHeight="49.0" prefWidth="66.0">
                <font>
                   <Font name="System Bold" size="33.0" />
                </font>
