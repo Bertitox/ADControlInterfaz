@@ -210,15 +210,74 @@ public class CRUDIncidencia {
 
         return maxIncidencias;
     }
-    /*
+
+    public Map<String, String[]> getUltimaFechaHoraPorAula() {
+        String sql = """
+            SELECT a.referencia, i.ultFecha, i.ultHora
+            FROM aula a
+            JOIN informacion_sistema i ON a.id_informacion_sistema = i.id
+            WHERE (a.referencia, i.ultFecha, i.ultHora) IN (
+                SELECT a2.referencia, MAX(i2.ultFecha), MAX(i2.ultHora)
+                FROM aula a2
+                JOIN informacion_sistema i2 ON a2.id_informacion_sistema = i2.id
+                GROUP BY a2.referencia
+            )
+        """;
+
+        List<Object[]> results = em.createNativeQuery(sql)
+                .getResultList();
+
+        Map<String, String[]> resultMap = new HashMap<>();
+        for (Object[] row : results) {
+            String referencia = (String) row[0];
+            String ultFecha = row[1].toString();
+            String ultHora = row[2].toString();
+
+            resultMap.put(referencia, new String[]{ultFecha, ultHora});
+        }
+
+        return resultMap;
+    }
+
+    public String getUltFechaMod(String referencia) throws AulaNotFoundException {
+        String[] datos = getUltimaFechaHoraPorAula().get(referencia);
+        if (datos != null && datos[0] != null) {
+            return datos[0];
+        }
+        return null;
+    }
+
+    public String getUltHoraMod(String referencia) throws AulaNotFoundException {
+        String[] datos = getUltimaFechaHoraPorAula().get(referencia);
+        if (datos != null && datos[1] != null) {
+            return datos[1];
+        }
+        return null;
+    }
+
+
+
     /**
      * Clase main para realizar pruebas
      * @param args arg del main
      * @throws AulaNotFoundException excepción personalizada para el aula
     */
-    //public static void main(String[] args) throws AulaNotFoundException {
-      //  CRUDIncidencia crudIncidencia = new CRUDIncidencia();
-        //crudIncidencia.mostrarIncidenciasxAula("PRUEBA2");
-        //System.out.println(crudIncidencia.numMaximoIcidenciasAula());
-    //}
+
+//    public static void main(String[] args) throws AulaNotFoundException {
+//        CRUDIncidencia crudIncidencia = new CRUDIncidencia();
+//        //crudIncidencia.mostrarIncidenciasxAula("PRUEBA2");
+//        //System.out.println(crudIncidencia.numMaximoIcidenciasAula());
+//
+////        Map<String, String[]> datos = crudIncidencia.getUltimaFechaHoraPorAula();
+////
+////        for (Map.Entry<String, String[]> entry : datos.entrySet()) {
+////            System.out.println("Referencia: " + entry.getKey());
+////            System.out.println("Fecha: " + entry.getValue()[0]);
+////            System.out.println("Hora: " + entry.getValue()[1]);
+////            System.out.println("------------");
+////        }
+//        System.out.println(crudIncidencia.getUltHoraMod("PRUEBA6"));
+//        System.out.println(crudIncidencia.getUltFechaMod("PRUEBA6"));
+//
+//    }
 }

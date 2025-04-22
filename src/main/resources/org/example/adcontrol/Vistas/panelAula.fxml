@@ -50,20 +50,45 @@
                <children>
                   <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="205.0" prefWidth="230.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: rgb(241, 248, 255); -fx-border-radius: 10px 10px 0px 0px; -fx-background-radius: 10px 10px 0px 0px; -fx-border-color: grey;">
+                        <VBox alignment="TOP_CENTER" prefHeight="111.0" prefWidth="230.0" style="-fx-background-color: rgb(241, 248, 255); -fx-border-radius: 10px 10px 0px 0px; -fx-background-radius: 10px 10px 0px 0px; -fx-border-color: grey;">
                            <children>
-                              <Label alignment="CENTER" text="Ultima actualizacion">
+                              <Label alignment="CENTER" text="Fecha Actual" textAlignment="CENTER">
                                  <VBox.margin>
-                                    <Insets top="25.0" />
-                                 </VBox.margin></Label>
-                              <Label text="15:45:39" textFill="#3ea8ee">
+                                    <Insets bottom="10.0" top="25.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets></Label>
+                              <Label fx:id="fechaActual" text="15:45:39" textFill="#3ea8ee">
                                  <font>
                                     <Font name="Cascadia Code Regular" size="21.0" />
                                  </font></Label>
-                              <Label text="8 de Abril, 2025" />
                            </children>
                         </VBox>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                        <Pane prefHeight="120.0" prefWidth="230.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="52.0" layoutY="7.0" text="Última Actualizacion" textAlignment="CENTER">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="fechaUltMod" layoutX="79.0" layoutY="44.0" text="00000000" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="horaUltMod" layoutX="76.0" layoutY="64.0" text="000000" textAlignment="CENTER" textFill="#3ea8ee">
+                                 <font>
+                                    <Font name="Cascadia Code Regular" size="21.0" />
+                                 </font>
+                              </Label>
+                           </children></Pane>
                      </children>
                   </VBox>
                </children>
@@ -133,11 +158,6 @@
                                     <Font name="System Bold" size="34.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="10.0" layoutY="90.0" text="8/16 equipos">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
                               <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="185.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Imagenes/monitorAzul.png" />
@@ -167,11 +187,6 @@
                                     <Font name="System Bold" size="34.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="10.0" layoutY="90.0" text="14º Aula con mas incidencias">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
                               <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="185.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Imagenes/trianguloPeligromorado.png" />
@@ -190,11 +205,6 @@
                               <Label layoutX="10.0" layoutY="10.0" text="Estado general" wrapText="true">
                                  <font>
                                     <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelEquiposIncidencias" layoutX="10.0" layoutY="90.0" text="13 equipos tienen incidencias">
-                                 <font>
-                                    <Font size="14.0" />
                                  </font>
                               </Label>
                               <ProgressBar fx:id="barraEstadoAula" layoutX="15.0" layoutY="61.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="10.0" prefWidth="190.0" progress="0.56" />
@@ -217,7 +227,7 @@
                               </DropShadow>
                            </effect>
                         </Pane>
-                        <LineChart GridPane.columnSpan="3" GridPane.rowIndex="2">
+                        <LineChart fx:id="graficoIncidenciasAula" GridPane.columnSpan="3" GridPane.rowIndex="2">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>

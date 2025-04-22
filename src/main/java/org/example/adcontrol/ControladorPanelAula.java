@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class ControladorPanelAula extends Controlador{
 
@@ -31,6 +32,15 @@ public class ControladorPanelAula extends Controlador{
     Label labelAula;
 
     @FXML
+    Label fechaActual;
+
+    @FXML
+    Label fechaUltMod;
+
+    @FXML
+    Label horaUltMod;
+
+    @FXML
     private Pane panelLargo;
 
     ControladorMapa cm = new ControladorMapa();
@@ -43,6 +53,8 @@ public class ControladorPanelAula extends Controlador{
         //labelAula.setText(cm.getAulaSeleccionada());
         //labelNumEquiposAula.setText(AE.numEquiposXAula(labelAula.getText()));
         //labelNumIncidenciasAula.setText(" "+I.numIncidenciasAula(labelAula.getText()));
+        fechaActual.setText(LocalDate.now().toString());
+
     }
 
     public void ponerClase(String nombreAula) throws AulaNotFoundException {
@@ -51,6 +63,14 @@ public class ControladorPanelAula extends Controlador{
         // Ahora sí puedes hacer tus consultas
         labelNumEquiposAula.setText(AE.numEquiposXAula(nombreAula));
         labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(nombreAula));
+        if (I.getUltFechaMod(labelAula.getText()) == null) {
+            fechaUltMod.setText("00000000");
+            horaUltMod.setText("000000");
+
+        }else {
+            fechaUltMod.setText(I.getUltFechaMod(labelAula.getText()));
+            horaUltMod.setText(I.getUltHoraMod(labelAula.getText()));
+        }
     }
 
     @FXML
@@ -75,7 +95,4 @@ public class ControladorPanelAula extends Controlador{
             System.out.println(datos.procesador());
         });
     }
-
-
-
 }
