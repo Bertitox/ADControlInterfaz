@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import java.util.Locale;
 
@@ -120,6 +121,36 @@ public class Controlador {
     @FXML
     void quitarzoomPane(MouseEvent event) {
         Pane pane = (Pane) event.getSource();
+        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
+
+        zoomIn.setToX(1.0);
+        zoomIn.setToY(1.0);
+        zoomIn.play();
+    }
+
+    /**
+     * Pone el zoom al vBox
+     *
+     * @param event Evento que espera el método
+     */
+    @FXML
+    void zoomVBox(MouseEvent event) {
+        VBox pane = (VBox) event.getSource();
+        ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
+
+        zoomIn.setToX(1.01);
+        zoomIn.setToY(1.01);
+        zoomIn.play();
+    }
+
+    /**
+     * Quita el zoom al vBox
+     *
+     * @param event Evento que espera el método
+     */
+    @FXML
+    void quitarzoomVBox(MouseEvent event) {
+        VBox pane = (VBox) event.getSource();
         ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), pane);
 
         zoomIn.setToX(1.0);

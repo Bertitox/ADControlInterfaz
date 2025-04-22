@@ -7,12 +7,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -70,10 +74,23 @@ public class ControladorPanelAula extends Controlador{
 
     @FXML
     void agregarEquipo(ActionEvent event) {
-        FormularioPopUpEquipos pf = new FormularioPopUpEquipos();
-        pf.mostrar().ifPresent(datos -> {
-            System.out.println(datos.procesador());
-        });
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/OpcionAutomaticoManual.fxml"));
+            Parent root = loader.load();
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Modo de creacion");
+
+            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloquea la ventana principal hasta que se cierre esta
+            popupStage.initStyle(StageStyle.DECORATED); // Opcional: sin barra, etc.
+
+            Scene scene = new Scene(root);
+            popupStage.setScene(scene);
+            popupStage.setResizable(false); // Opcional
+            popupStage.showAndWait(); // Espera hasta que se cierre antes de seguir
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

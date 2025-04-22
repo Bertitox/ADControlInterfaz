@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="anchorPane" prefHeight="352.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorAutomaticoManual">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" text="Selecciona como quieres añadir el nuevo equipo">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="40.0" left="10.0" top="30.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="300.0" prefWidth="580.0" spacing="10.0">
+               <children>
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#vistaAutomatico" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="290.0" prefWidth="290.0" style="-fx-background-color: rgb(255, 253, 231); -fx-background-radius: 10px; -fx-border-color: #e1a900; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                     <children>
+                        <VBox alignment="CENTER" onDragEntered="#zoomVBox" onDragExited="#quitarzoomVBox" onMouseClicked="#vistaAutomatico" prefHeight="240.0" prefWidth="286.0">
+                           <children>
+                              <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Imagenes/zap.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="0.12" saturation="0.65" />
+                                 </effect>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Label text="Automatico" textFill="#e1a900">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label text="Añade el equipo mediante un escaneo inteligente en la red " textAlignment="CENTER" textFill="#e1a900" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#vistaManual" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="290.0" prefWidth="290.0" style="-fx-background-color: rgb(225, 245, 254); -fx-background-radius: 10px; -fx-border-color: #4fcaff; -fx-border-width: 2px; -fx-border-radius: 10px;">
+                     <children>
+                        <VBox alignment="CENTER" onDragEntered="#zoomVBox" onDragExited="#quitarzoomVBox" onMouseClicked="#vistaAutomatico" prefHeight="240.0" prefWidth="286.0">
+                           <children>
+                              <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Imagenes/square-pen.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust brightness="0.12" saturation="0.65" />
+                                 </effect>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Label text="Manual" textFill="#4fcaff">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label text="Añade el equipo rellenando un formulario" textAlignment="CENTER" textFill="#4fcaff" wrapText="true">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
