@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -20,7 +21,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="970.0" minWidth="-Infinity" prefWidth="970.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorPanelAula">
+<Pane fx:id="panelLargo" maxHeight="-Infinity" maxWidth="970.0" minWidth="-Infinity" prefWidth="970.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorPanelAula">
     <children>
         <GridPane maxHeight="1.7976931348623157E308" maxWidth="970.0" prefWidth="970.0">
             <columnConstraints>
@@ -272,7 +273,7 @@
                            <children>
                               <Pane onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="102.0">
+                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="95.0">
                                        <children>
                                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -286,10 +287,13 @@
                                        </children>
                                     </VBox>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Pane>
                               <Pane onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;" GridPane.columnIndex="1">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="102.0">
+                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="95.0">
                                        <children>
                                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -303,10 +307,13 @@
                                        </children>
                                     </VBox>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Pane>
-                              <Pane onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;" GridPane.rowIndex="1">
+                              <Pane onMouseClicked="#vistaEquipos" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;" GridPane.rowIndex="1">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="102.0">
+                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="95.0">
                                        <children>
                                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -316,14 +323,17 @@
                                                 <Insets bottom="5.0" />
                                              </VBox.margin>
                                           </ImageView>
-                                          <Label text=" Equipos" />
+                                          <Label text="Ver equipos" />
                                        </children>
                                     </VBox>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Pane>
                               <Pane onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="102.0">
+                                    <VBox alignment="CENTER" prefHeight="73.0" prefWidth="95.0">
                                        <children>
                                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -337,6 +347,9 @@
                                        </children>
                                     </VBox>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Pane>
                            </children>
                            <VBox.margin>
@@ -389,7 +402,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="136.0" style="-fx-background-color: white; -fx-border-color: grey; -fx-border-radius: 5px;" text="Agregar equipo" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                        <Button mnemonicParsing="false" onAction="#agregarEquipo" prefHeight="35.0" prefWidth="136.0" styleClass="botonAgregarEquipo" text="Agregar equipo" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets right="15.0" top="10.0" />
                            </GridPane.margin>
@@ -403,6 +416,9 @@
                                  </effect>
                               </ImageView>
                            </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                            <image>

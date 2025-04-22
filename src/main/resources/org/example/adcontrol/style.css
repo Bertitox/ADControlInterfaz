@@ -55,5 +55,17 @@
     -fx-alignment: center;
 }
 
+.botonAgregarEquipo{
+    -fx-background-color: white;
+    -fx-border-color: grey;
+    -fx-border-radius:  5px;
+}
+
+.botonAgregarEquipo:hover{
+    -fx-background-color: #e0e0e0;
+    -fx-border-color: grey;
+    -fx-border-radius:  5px;
+}
+
 
 
