@@ -3,6 +3,7 @@ import BBDD.DAO.CRUDIncidencia;
 import BBDD.DAO.GestionErrores;
 import BBDD.DTO.Incidencia;
 import BBDD.Excepciones.AulaNotFoundException;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,7 +26,7 @@ import java.util.ResourceBundle;
 public class ControladorMonitor extends Controlador{
 
     @FXML
-    ListView<String> listIncidencias;
+    TableView<Incidencia> tableIncidencias;
 
     @FXML
     TextField textIncidencias;
@@ -40,7 +41,7 @@ public class ControladorMonitor extends Controlador{
     Button actualizar1;
 
     @FXML
-    ListView<String> listViewErrores;
+    TableView<Map.Entry<String, String>> tableViewErrores;
 
     private ResourceBundle bundle;
 
@@ -56,7 +57,7 @@ public class ControladorMonitor extends Controlador{
     @FXML
     public void initialize(){
         refrescarIdioma();
-        mostrarErroresListView();
+        mostrarErroresTableView();
     }
 
     /**
@@ -82,43 +83,48 @@ public class ControladorMonitor extends Controlador{
 
     }
 
-    //Método que rellena el ListView
     /**
-     * Muestra las incidencias en el ListView.
+     * Muestra las incidencias en el TableView.
      *
      * @throws AulaNotFoundException Si el aula no se encuentra.
      */
-    public void mostrarIncidenciasListView() throws AulaNotFoundException {
+    public void mostrarIncidenciasTableView() throws AulaNotFoundException {
         CRUDIncidencia crud = new CRUDIncidencia();
         List<Incidencia> incidencias = crud.incidenciasXAulas(textIncidencias.getText().toString());
 
-        //Pasamos la información a una Lista observable para el ListView
-        ObservableList<String> items = FXCollections.observableArrayList();
+        // Pasamos la información a una Lista observable para el TableView
+        ObservableList<Incidencia> items = FXCollections.observableArrayList(incidencias);
 
-        for (Incidencia incidencia : incidencias) {
-            items.add("Código Error: " + incidencia.getCodigoError().getCodigoError());
-            items.add("Descripción: " + incidencia.getDescripcion());
-            items.add("");
-        }
+        // Configuramos las columnas del TableView si aún no están configuradas
+        TableColumn<Incidencia, String> colCodigo = new TableColumn<>("CÓDIGO ERROR");
+        colCodigo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCodigoError().getCodigoError()));
 
-        listIncidencias.setItems(items);
+        TableColumn<Incidencia, String> colDescripcion = new TableColumn<>("DESCRIPCIÓN");
+        colDescripcion.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescripcion()));
+
+        tableIncidencias.getColumns().setAll(colCodigo, colDescripcion);
+
+        tableIncidencias.setItems(items);
     }
+
 
     /**
      * Método para mostrar todos los tipos del errores creados y su descripción.
      */
-    public void mostrarErroresListView(){
+    public void mostrarErroresTableView(){
         GestionErrores g = new GestionErrores();
         Map<String, String> errores = g.erroresMap();
 
-        //Pasamos la información a una Lista observable para el ListView
-        ObservableList<String> items = FXCollections.observableArrayList();
+        ObservableList<Map.Entry<String, String>> items = FXCollections.observableArrayList(errores.entrySet());
 
-        for (Map.Entry<String, String> entry: g.erroresMap().entrySet()){
-            items.add("Código Error: " + entry.getKey() +"   Descripción: " + entry.getValue());
-        }
+        TableColumn<Map.Entry<String, String>, String> colCodigo = new TableColumn<>("Código Error");
+        colCodigo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKey()));
 
-        listViewErrores.setItems(items);
+        TableColumn<Map.Entry<String, String>, String> colDescripcion = new TableColumn<>("Descripción");
+        colDescripcion.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValue()));
+
+        tableViewErrores.getColumns().setAll(colCodigo, colDescripcion);
+        tableViewErrores.setItems(items);
     }
 
     //Método para rellenar el gráfico
@@ -127,11 +133,11 @@ public class ControladorMonitor extends Controlador{
      */
     @FXML
     public void actualizarGrafico() {
-        String referencia = textIncidencias.getText().trim(); //Obtener referencia del aula ingresada
+        String referencia = textIncidencias.getText().trim();
         CRUDIncidencia crudIncidencia = new CRUDIncidencia();
 
         if (referencia.isEmpty()) {
-            mostrarAlerta("Incidencias Aula","Ingrese la referencia a un Aula");
+            mostrarAlerta("Incidencias Aula", "Ingrese la referencia a un Aula");
             return;
         }
 
@@ -141,16 +147,20 @@ public class ControladorMonitor extends Controlador{
             int numIncidencias = crudIncidencia.numIncidenciasAula(referencia);
 
             if (numIncidencias > 0) {
-                datosGrafico.add(new PieChart.Data(referencia, numIncidencias));
+                for (int i = 1; i <= numIncidencias; i++) {
+                    datosGrafico.add(new PieChart.Data("Incidencia " + i, 1));
+                }
             } else {
-                mostrarAlerta("Incidencias Aula","No hay Incidencias para el Aula "+ textIncidencias.getText().toString());
+                mostrarAlerta("Incidencias Aula", "No hay Incidencias para el Aula " + referencia);
             }
         } catch (AulaNotFoundException e) {
-            System.err.println("Error: " + e.getMessage()); //Manejo del error en el caso de que el aula no exista
+            System.err.println("Error: " + e.getMessage());
         }
 
-        graficoIncidencias.setData(datosGrafico); //Asignación de los datos al Gráfico PieChart
+        graficoIncidencias.setData(datosGrafico);
     }
+
+
 
     /**
      * Muestra errores al usuario.
