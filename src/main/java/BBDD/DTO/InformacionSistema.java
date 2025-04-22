@@ -96,6 +96,11 @@ public class InformacionSistema {
         this.ultHora = ultHora;
     }
 
+    public InformacionSistema(String nombre, String mac) {
+        this.nombre = nombre;
+        this.mac = mac;
+    }
+
     //Getters y Setters
 
     /**

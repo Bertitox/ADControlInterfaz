@@ -3,9 +3,18 @@ package org.example.adcontrol;
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
 import BBDD.Excepciones.AulaNotFoundException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+
+import java.io.IOException;
 
 public class ControladorPanelAula extends Controlador{
 
@@ -20,6 +29,9 @@ public class ControladorPanelAula extends Controlador{
 
     @FXML
     Label labelAula;
+
+    @FXML
+    private Pane panelLargo;
 
     ControladorMapa cm = new ControladorMapa();
     //Clases gestoras de la BBDD
@@ -40,6 +52,30 @@ public class ControladorPanelAula extends Controlador{
         labelNumEquiposAula.setText(AE.numEquiposXAula(nombreAula));
         labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(nombreAula));
     }
+
+    @FXML
+    void vistaEquipos(MouseEvent event) throws IOException {
+        if(AE.numEquiposXAula(labelAula.getText()).equals("0")){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "No hay aulas en esta clase, debes de agregar un equipo al menos.", ButtonType.OK);
+            alert.setTitle("No hay equipos");
+            alert.setHeaderText(null); //Elimina el encabezado
+            alert.showAndWait();
+        }else{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAula.fxml"));
+            Parent root = fxmlLoader.load();
+            panelLargo.getChildren().clear();
+            panelLargo.getChildren().add(root);
+        }
+    }
+
+    @FXML
+    void agregarEquipo(ActionEvent event) {
+        FormularioPopUpEquipos pf = new FormularioPopUpEquipos();
+        pf.mostrar().ifPresent(datos -> {
+            System.out.println(datos.procesador());
+        });
+    }
+
 
 
 }
