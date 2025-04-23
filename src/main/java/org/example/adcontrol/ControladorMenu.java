@@ -129,7 +129,7 @@ public class ControladorMenu extends Controlador {
     @FXML
     void cambiarPantallaMonitor(ActionEvent event) throws IOException {
         textoTitulo.setText("Incidencias");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaMonitor.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelMonitor.fxml"));
         Parent root = fxmlLoader.load();
         panelPrincipal.getChildren().clear();
         panelPrincipal.getChildren().add(root);
