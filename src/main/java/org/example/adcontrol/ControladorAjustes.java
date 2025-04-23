@@ -66,6 +66,11 @@ public class ControladorAjustes {
         imageViewSonido.setImage(CheckBoxSonido.isSelected() ? imagenSonidoEncendido : imagenSonidoApagado);
         //FUNCIONA
         sliderVolumen.setOnMouseReleased(e -> {
+            if(CheckBoxSonido.isSelected()) {
+                sliderVolumen.setDisable(false);
+            }else{
+                sliderVolumen.setDisable(true);
+            }
             Double vol = sliderVolumen.getValue() * 0.01;
             infoInit.setVolumenLeido(vol);
         });
@@ -95,5 +100,10 @@ public class ControladorAjustes {
 
         Color color = Color.web(infoInit.getTemaLeido());
         colorPicker.setValue(color);
+    }
+
+    public void restablecerAjustes(){
+        infoInit.restablecerAjustes();
+        cargarDatos();
     }
 }
