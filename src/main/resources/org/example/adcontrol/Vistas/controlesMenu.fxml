@@ -126,7 +126,7 @@
                      </HBox.margin>
                       </ImageView>
       
-                              <Label fx:id="textoTitulo" text="IES Laguna de Joatzel" textFill="WHITE">
+                              <Label fx:id="textoTitulo" prefHeight="29.0" prefWidth="400.0" text="IES Laguna de Joatzel" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>

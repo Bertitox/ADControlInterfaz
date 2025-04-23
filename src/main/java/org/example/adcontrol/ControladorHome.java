@@ -6,13 +6,17 @@ import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import javax.swing.*;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -37,6 +41,9 @@ public class ControladorHome extends Controlador{//implements Initializable {
 
     @FXML
     private Label campoFecha1;
+
+    @FXML
+    private Pane panelPrincipal;
 
     @FXML
     private ComboBox comboboxInforme = new ComboBox();
@@ -224,6 +231,22 @@ public class ControladorHome extends Controlador{//implements Initializable {
         //Limpiar el gráfico
         barChart.getData().clear();
         barChart.getData().add(serie);
+    }
+
+    @FXML
+    void vistaIncidencias(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelMonitor.fxml"));
+        Parent root = fxmlLoader.load();
+        panelPrincipal.getChildren().clear();
+        panelPrincipal.getChildren().add(root);
+    }
+
+    @FXML
+    void vistaMapa(MouseEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaMapa.fxml"));
+        Parent root = fxmlLoader.load();
+        panelPrincipal.getChildren().clear();
+        panelPrincipal.getChildren().add(root);
     }
 
 }

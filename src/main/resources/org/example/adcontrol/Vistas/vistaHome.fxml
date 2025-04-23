@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorHome">
+<Pane fx:id="panelPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorHome">
    <children>
       <BarChart fx:id="barChart" layoutX="47.0" layoutY="288.0" onMouseEntered="#zoomBarChart" onMouseExited="#quitarzoomBarChart" prefHeight="310.0" prefWidth="893.0" style="-fx-background-color: white; -fx-border-color: #01a5e7; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-border-width: 2px;">
          <xAxis>
@@ -24,7 +24,7 @@
             <DropShadow height="15.0" radius="7.0" width="15.0" />
          </effect>
       </BarChart>
-      <Pane fx:id="pane2" layoutX="521.0" layoutY="39.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 1px; -fx-border-radius: 10px;">
+      <Pane fx:id="pane2" layoutX="521.0" layoutY="39.0" onMouseClicked="#vistaMapa" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 1px; -fx-border-radius: 10px;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -64,7 +64,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="panel1" layoutX="47.0" layoutY="39.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: rgb(254,242,242); -fx-background-radius: 10px; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 10px;">
+      <Pane fx:id="panel1" layoutX="47.0" layoutY="39.0" onMouseClicked="#vistaIncidencias" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="213.0" prefWidth="419.0" style="-fx-background-color: rgb(254,242,242); -fx-background-radius: 10px; -fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 10px;">
          <children>
             <Label fx:id="labelIncidencias" layoutX="61.0" layoutY="22.0" prefHeight="49.0" prefWidth="289.0" text="Incidencias graves">
                <font>
