@@ -1,6 +1,12 @@
 package org.example.adcontrol;
 
+import javafx.scene.control.Alert;
+
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class InfoInit {
     private static String idiomaLeido;
@@ -18,7 +24,41 @@ public class InfoInit {
     }
 
     public static void cargarDatos() {
-        String ruta = "src/main/resources/org/example/adcontrol/Fichero Inicio/init"; // Cambia esto por la ruta real
+        String ruta = "src/main/resources/org/example/adcontrol/Fichero Inicio/init";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] palabras = linea.split("\\s+");
+
+                switch (palabras[0]) {
+                    case "I":
+                        idiomaLeido = palabras[1];
+                        System.out.println("IDIOMA PREDEFINIDO: " + idiomaLeido);
+                        break;
+                    case "R":
+                        muteLeido = Boolean.parseBoolean(palabras[1]);
+                        System.out.println("MUTE PREDEFINIDO: " + muteLeido);
+                        break;
+                    case "V":
+                        volumenLeido = Double.valueOf(palabras[1]);
+                        System.out.println("VOLUMEN PREDEFINIDO: " + volumenLeido);
+                        break;
+                    case "T":
+                        temaLeido = palabras[1];
+                        System.out.println("TEMA PREDEFINIDO: " + temaLeido);
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void restablecerAjustes() {
+        String ruta = "src/main/resources/org/example/adcontrol/Fichero Inicio/predefinido";
 
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             String linea;
