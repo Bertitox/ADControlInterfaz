@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,16 +21,6 @@
             <children>
             <VBox fx:id="contenedorBotones" alignment="CENTER" layoutY="66.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="65.0" spacing="27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                      <Button mnemonicParsing="false" onAction="#salir" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: null;">
-                          <graphic>
-      
-                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@../Imagenes/salida.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                  </Button>
                       <Button mnemonicParsing="false" onAction="#cambiarPantallaHome" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
                           <graphic>
       
@@ -39,16 +30,10 @@
                                   </image>
                               </ImageView>
                           </graphic>
+                     <tooltip>
+                        <Tooltip text="Vista home" />
+                     </tooltip>
                       </Button>
-                      <Button mnemonicParsing="false" onAction="#cambiarpantallaAyuda" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
-                          <graphic>
-                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                  <image>
-                                      <Image url="@../Imagenes/interrogatorio.png" />
-                                  </image>
-                              </ImageView>
-                          </graphic>
-                  </Button>
                       <Button mnemonicParsing="false" onAction="#cambiarpantallaInforme" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="59.0" style="-fx-background-color: transparent;">
                           <graphic>
                               <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -57,24 +42,33 @@
                                   </image>
                               </ImageView>
                           </graphic>
+                     <tooltip>
+                        <Tooltip text="Vista de informes" />
+                     </tooltip>
                   </Button>
                       <Button mnemonicParsing="false" onAction="#cambiarPantallaMonitor" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
                           <graphic>
                               <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                   <image>
-                                      <Image url="@../Imagenes/monitor.png" />
+                                      <Image url="@../Imagenes/triangulo_alerta.png" />
                                   </image>
                               </ImageView>
                           </graphic>
+                     <tooltip>
+                        <Tooltip text="Vista de incidencias" />
+                     </tooltip>
                       </Button>
-                  <Button mnemonicParsing="false" onAction="#cambiarpantallaSSH" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+                  <Button mnemonicParsing="false" onAction="#cambiarpantallaMapa" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="52.0" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Imagenes/terminal.png" />
+                              <Image url="@../Imagenes/mapa.png" />
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Vista de mapa" />
+                     </tooltip>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#cambiarpantallaConfiguracion" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
                      <graphic>
@@ -84,15 +78,34 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Vista de ajustes" />
+                     </tooltip>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#cambiarpantallaMapa" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="52.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Imagenes/mapa.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                      <Button mnemonicParsing="false" onAction="#cambiarpantallaAyuda" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="54.0" style="-fx-background-color: transparent;">
+                          <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../Imagenes/interrogatorio.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                     <tooltip>
+                        <Tooltip text="Vista de ayuda al usuario" />
+                     </tooltip>
+                  </Button>
+                      <Button mnemonicParsing="false" onAction="#salir" onMouseEntered="#hoverBoton" onMouseExited="#normalBoton" prefHeight="50.0" prefWidth="65.0" style="-fx-background-color: null;">
+                          <graphic>
+      
+                              <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../Imagenes/salida.png" />
+                                  </image>
+                              </ImageView>
+                          </graphic>
+                     <tooltip>
+                        <Tooltip text="Salir" />
+                     </tooltip>
                   </Button>
                </children>
             </VBox>
