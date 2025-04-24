@@ -3,10 +3,7 @@ package org.example.adcontrol;
 import javafx.scene.control.Alert;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 
 public class InfoInit {
     private static String idiomaLeido;
@@ -58,36 +55,20 @@ public class InfoInit {
     }
 
     public static void restablecerAjustes() {
-        String ruta = "src/main/resources/org/example/adcontrol/Fichero Inicio/predefinido";
+        Path ini = Path.of("src/main/resources/org/example/adcontrol/Fichero Inicio/init");
+        Path predefinido = Path.of("src/main/resources/org/example/adcontrol/Fichero Inicio/predefinido");
+        try {
+            // Leer todo el contenido del archivo origen
+            byte[] contenido = Files.readAllBytes(predefinido);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] palabras = linea.split("\\s+");
+            // Escribir (reemplazar) el contenido en el archivo destino
+            Files.write(ini, contenido, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
 
-                switch (palabras[0]) {
-                    case "I":
-                        idiomaLeido = palabras[1];
-                        System.out.println("IDIOMA PREDEFINIDO: " + idiomaLeido);
-                        break;
-                    case "R":
-                        muteLeido = Boolean.parseBoolean(palabras[1]);
-                        System.out.println("MUTE PREDEFINIDO: " + muteLeido);
-                        break;
-                    case "V":
-                        volumenLeido = Double.valueOf(palabras[1]);
-                        System.out.println("VOLUMEN PREDEFINIDO: " + volumenLeido);
-                        break;
-                    case "T":
-                        temaLeido = palabras[1];
-                        System.out.println("TEMA PREDEFINIDO: " + temaLeido);
-                        break;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("Contenido copiado y reemplazado correctamente.");
+
+            cargarDatos();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error al copiar el archivo: " + e.getMessage());
         }
     }
 
