@@ -87,7 +87,7 @@
                   <Image url="@../Imagenes/error.png" />
                </image>
             </ImageView>
-            <TableView fx:id="tableViewErrores" layoutX="12.0" layoutY="57.0" prefHeight="154.0" prefWidth="423.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px;">
+            <TableView fx:id="tableViewErrores" layoutX="1.0" layoutY="57.0" prefHeight="166.0" prefWidth="448.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px;" styleClass="tableViewErrores">
               <columns>
                 <TableColumn prefWidth="75.0" text="CÓDIGO ERROR" />
                 <TableColumn prefWidth="347.0" text="DESCRIPCIÓN" />
@@ -124,19 +124,16 @@
                   <Image url="@../Imagenes/advertencia-de-triangulo.png" />
                </image>
             </ImageView>
+            <TableView fx:id="tableIncidencias" layoutX="3.0" layoutY="50.0" prefHeight="416.0" prefWidth="925.0" style="-fx-background-radius: 10PX; -fx-border-radius: 10px;" styleClass="tableViewErrores">
+              <columns>
+                <TableColumn prefWidth="167.0" text="ERROR" />
+                <TableColumn prefWidth="748.0" text="DESCRIPCIÓN" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
          </children>
       </Pane>
-      <TableView fx:id="tableIncidencias" layoutX="36.0" layoutY="665.0" prefHeight="406.0" prefWidth="925.0" style="-fx-background-radius: 10PX;">
-        <columns>
-          <TableColumn prefWidth="167.0" text="ERROR" />
-          <TableColumn prefWidth="750.0" text="DESCRIPCIÓN" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-         <effect>
-            <DropShadow />
-         </effect>
-      </TableView>
    </children>
 </Pane>
