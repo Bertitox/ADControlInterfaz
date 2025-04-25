@@ -39,6 +39,10 @@ public class CRUDIncidencia {
         em.getTransaction().commit();
     }
 
+    public EntityManager getEntityManager(){
+        return em;
+    }
+
     /**
      * Método que se encarga de actualizar cada {@link Incidencia}
      * @param incidencia Representa una {@link Incidencia}

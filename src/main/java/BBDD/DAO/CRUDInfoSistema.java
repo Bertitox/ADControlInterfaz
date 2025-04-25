@@ -69,6 +69,16 @@ public class CRUDInfoSistema {
         return info;
     }
 
+    public int getIdEquipo(String equipo) {
+        Integer idEquipo = 0;
+        for (InformacionSistema info : readAll()) {
+            if (info.getNombre().equals(equipo)) {
+                idEquipo = info.getId();
+            }
+        }
+        return idEquipo;
+    }
+
     /**
      * Muestra todas las entidades InformacionSistema en la consola.
      */
@@ -105,5 +115,7 @@ public class CRUDInfoSistema {
         if (info != null) {
             crudInfoSistema.mostrarInformacionSistema(); // Insertamos la entidad correctamente
         }
+
+        //System.out.println(crudInfoSistema.getIdEquipo("PC Aula 102"));
     }
 }

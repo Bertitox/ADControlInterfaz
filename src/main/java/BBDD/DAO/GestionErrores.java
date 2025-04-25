@@ -5,6 +5,7 @@ import BBDD.DTO.Errores;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,11 @@ public class GestionErrores {
     public GestionErrores() {
     }
 
+    public List<Errores> readAllErrores() {
+        List<Errores> errores = em.createQuery("Select e from Errores e").getResultList();
+        return errores;
+    }
+
     public Map<String, String> erroresMap(){
         Map<String, String> errores = new HashMap<String, String>();
 
@@ -33,8 +39,11 @@ public class GestionErrores {
 
 //    public static void main(String[] args) {
 //        GestionErrores g = new GestionErrores();
-//        for (Map.Entry<String, String> entry: g.erroresMap().entrySet()){
-//            System.out.println(entry.getKey() + ": " + entry.getValue());
+//      for (Map.Entry<String, String> entry: g.erroresMap().entrySet()){
+//          System.out.println(entry.getKey() + ": " + entry.getValue());
+//      }
+//        for(Errores error: g.readAllErrores()){
+//            System.out.println(error.getCodigoError());
 //        }
 //    }
 
