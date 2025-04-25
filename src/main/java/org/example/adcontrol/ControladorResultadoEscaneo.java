@@ -71,9 +71,9 @@ public class ControladorResultadoEscaneo {
 
     public Map<String, String> mapaIPEquipos(){
         Map<String, String> mapaIPEquipos = new HashMap<>();
-
+        int i = 0;
         for (String ip : ipsDetectadas) {
-            mapaIPEquipos.put(ip, "Equipo "+1);
+            mapaIPEquipos.put(ip, "Equipo "+i++);
         }
         return mapaIPEquipos;
     }
