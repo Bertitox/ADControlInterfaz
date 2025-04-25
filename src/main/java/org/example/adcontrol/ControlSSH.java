@@ -1,5 +1,7 @@
 package org.example.adcontrol;
 
+import BBDD.DAO.CRUDAula_Equipo;
+import BBDD.DTO.Aula_Equipo;
 import com.jcraft.jsch.ChannelShell;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
@@ -9,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -33,8 +37,9 @@ public class ControlSSH {
     Boolean superusuario = true;
     private OutputStream out;
     private ChannelShell channel;
+
     @FXML
-    private ComboBox<?> comboBoxEquipos;
+    private MenuButton menuButtonEquipos;
 
     public ControlSSH() {
         salidaTerminal = new TextArea();
@@ -51,8 +56,15 @@ public class ControlSSH {
     }
     @FXML
     void initialize() {
-        comboBoxEquipos = new ComboBox<>();
-        ObservableList<String> items = FXCollections.observableArrayList();
+        CRUDAula_Equipo aulaEquipo = new CRUDAula_Equipo();
+        menuButtonEquipos = new MenuButton();
+
+        for (Aula_Equipo i : aulaEquipo.readAllAulas()) {
+            if (i.getReferencia().equals(claseActual)) { //Comprobamos que el Aula coincide
+                javafx.scene.control.MenuItem item = new MenuItem(i.getIdInformacionSistema().getNombre());
+                menuButtonEquipos.getItems().add(item);
+            }
+        }
     }
 
     public void inciarConexionSSH() {
