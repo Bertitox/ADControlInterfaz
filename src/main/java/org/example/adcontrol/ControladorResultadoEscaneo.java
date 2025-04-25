@@ -24,21 +24,11 @@ public class ControladorResultadoEscaneo {
     private TableView<Map.Entry<String, String>> tablaIps;
 
     @FXML
-    private TableColumn<Map.Entry<String, String>, String> columnaIp;
-
-    @FXML
-    private TableColumn<Map.Entry<String, String>, String> columnaEquipo;
-
-
-    @FXML
     private Label textoEscaneado;
 
     @FXML
     void initialize() {
-        columnaIp.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey()));
-        columnaEquipo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue()));
-
-        rellenarTabla();
+       rellenarTabla();
         actualizarTexto();
     }
 
@@ -48,9 +38,19 @@ public class ControladorResultadoEscaneo {
     }
 
     private void rellenarTabla() {
-        ObservableList<Map.Entry<String, String>> datos = FXCollections.observableArrayList(mapaIPEquipos().entrySet());
+        Map<String, String> datosMapa = mapaIPEquipos(); //Mapa para rellenar la tabla
+        ObservableList<Map.Entry<String, String>> datos = FXCollections.observableArrayList(datosMapa.entrySet());
+
+        TableColumn<Map.Entry<String, String>, String> colIp = new TableColumn<>("IP");
+        colIp.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getKey()));
+
+        TableColumn<Map.Entry<String, String>, String> colEquipo = new TableColumn<>("Equipo");
+        colEquipo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getValue()));
+
+        tablaIps.getColumns().setAll(colIp, colEquipo);
         tablaIps.setItems(datos);
     }
+
 
     /**
      * Método que se encarga de controlar la instancia del idioma, usando la instancia ya creada.
