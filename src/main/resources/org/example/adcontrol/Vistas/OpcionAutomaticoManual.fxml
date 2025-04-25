@@ -38,7 +38,7 @@
                <children>
                   <Pane maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#vistaAutomatico" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="290.0" prefWidth="290.0" style="-fx-background-color: rgb(255, 253, 231); -fx-background-radius: 10px; -fx-border-color: #e1a900; -fx-border-width: 2px; -fx-border-radius: 10px;">
                      <children>
-                        <VBox alignment="CENTER" onDragEntered="#zoomVBox" onDragExited="#quitarzoomVBox" onMouseClicked="#vistaAutomatico" prefHeight="240.0" prefWidth="286.0">
+                        <VBox alignment="CENTER" onDragEntered="#zoomVBox" onDragExited="#quitarzoomVBox" prefHeight="240.0" prefWidth="286.0">
                            <children>
                               <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -83,7 +83,7 @@
                   </Pane>
                   <Pane maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#vistaManual" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="290.0" prefWidth="290.0" style="-fx-background-color: rgb(225, 245, 254); -fx-background-radius: 10px; -fx-border-color: #4fcaff; -fx-border-width: 2px; -fx-border-radius: 10px;">
                      <children>
-                        <VBox alignment="CENTER" onDragEntered="#zoomVBox" onDragExited="#quitarzoomVBox" onMouseClicked="#vistaAutomatico" prefHeight="240.0" prefWidth="286.0">
+                        <VBox alignment="CENTER" onDragEntered="#zoomVBox" onDragExited="#quitarzoomVBox" prefHeight="240.0" prefWidth="286.0">
                            <children>
                               <ImageView fitHeight="54.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorFormularioEquipo">
    <children>
       <TabPane layoutY="71.0" prefHeight="292.0" prefWidth="600.0">
         <tabs>
@@ -63,22 +63,22 @@
                                     <Insets bottom="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Equipo 13 (Alberto)" GridPane.vgrow="NEVER">
+                              <TextField fx:id="campoNombre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Equipo 13 (Alberto)" GridPane.vgrow="NEVER">
                                  <GridPane.margin>
                                     <Insets top="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="debian-gnu-linux-11" GridPane.rowIndex="2">
+                              <TextField fx:id="campoNodo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="debian-gnu-linux-11" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets top="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Linux Mint 20.4" GridPane.columnIndex="1">
+                              <TextField fx:id="campoSO" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Linux Mint 20.4" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets top="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="10:43:25" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <TextField fx:id="campoHora" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="10:43:25" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -86,12 +86,12 @@
                                     <Insets top="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="00:1A:2B:3C:4D:5E" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <TextField fx:id="campoMAC" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="00:1A:2B:3C:4D:5E" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets top="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <DatePicker prefHeight="30.0" prefWidth="250.0" promptText="21/03/2025" GridPane.rowIndex="1">
+                              <DatePicker fx:id="campoFecha" prefHeight="30.0" prefWidth="250.0" promptText="21/03/2025" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets top="20.0" />
                                  </GridPane.margin>
@@ -123,7 +123,7 @@
                                     <Insets bottom="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Intel Core i5 8290U">
+                              <TextField fx:id="campoCPU" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="Intel Core i5 8290U">
                                  <GridPane.margin>
                                     <Insets top="20.0" />
                                  </GridPane.margin>
@@ -133,12 +133,12 @@
                                     <Insets bottom="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <TextField prefHeight="30.0" prefWidth="250.0" promptText="153600" GridPane.columnIndex="1">
+                              <TextField fx:id="campoMemTotal" prefHeight="30.0" prefWidth="250.0" promptText="153600" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets top="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField prefHeight="30.0" prefWidth="250.0" promptText="8192" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <TextField fx:id="campoMemDisp" prefHeight="30.0" prefWidth="250.0" promptText="8192" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets top="20.0" />
                                  </GridPane.margin>
@@ -153,7 +153,7 @@
                                     <Insets bottom="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="43%" GridPane.rowIndex="1">
+                              <TextField fx:id="campoUsoCPU" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="43%" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets top="20.0" />
                                  </GridPane.margin>
@@ -170,9 +170,9 @@
                <content>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="580.0">
                      <children>
-                        <TextField layoutX="21.0" layoutY="85.0" prefHeight="30.0" prefWidth="160.0" promptText="5.10.0-15-arm64" />
-                        <TextField layoutX="210.0" layoutY="85.0" prefHeight="30.0" prefWidth="160.0" promptText="#1 SMP Debian 5.10.120-1" />
-                        <TextField layoutX="386.0" layoutY="85.0" prefHeight="30.0" prefWidth="160.0" promptText="x86_64" />
+                        <TextField fx:id="campoKernel" layoutX="21.0" layoutY="85.0" prefHeight="30.0" prefWidth="160.0" promptText="5.10.0-15-arm64" />
+                        <TextField fx:id="campoVersion" layoutX="210.0" layoutY="85.0" prefHeight="30.0" prefWidth="160.0" promptText="#1 SMP Debian 5.10.120-1" />
+                        <TextField fx:id="campoArquitectura" layoutX="386.0" layoutY="85.0" prefHeight="30.0" prefWidth="160.0" promptText="x86_64" />
                         <Label layoutX="21.0" layoutY="58.0" text="Release del kernel" />
                         <Label layoutX="210.0" layoutY="58.0" text="Version" />
                         <Label layoutX="386.0" layoutY="58.0" text="Arquitectura" />
@@ -193,6 +193,6 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button layoutX="490.0" layoutY="367.0" mnemonicParsing="false" text="Guardar" />
+      <Button layoutX="489.0" layoutY="365.0" mnemonicParsing="false" onAction="#crearEquipo" text="Crear equipo" />
    </children>
 </Pane>

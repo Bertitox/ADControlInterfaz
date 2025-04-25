@@ -98,16 +98,22 @@ public class ControladorPanelAula extends Controlador{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/OpcionAutomaticoManual.fxml"));
             Parent root = loader.load();
 
-            Stage popupStage = new Stage();
-            popupStage.setTitle("Modo de creacion");
+            // Obtener el controlador cargado desde el FXML
+            ControladorAutomaticoManual controladorAutomaticoManual = loader.getController();
 
-            popupStage.initModality(Modality.APPLICATION_MODAL); // Bloquea la ventana principal hasta que se cierre esta
-            popupStage.initStyle(StageStyle.DECORATED); // Opcional: sin barra, etc.
+            // Pasarle el dato al controlador
+            controladorAutomaticoManual.setAulaActual(labelAula.getText());
+
+            Stage stage = new Stage();
+            stage.setTitle("Modo de creación");
+
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
 
             Scene scene = new Scene(root);
-            popupStage.setScene(scene);
-            popupStage.setResizable(false); // Opcional
-            popupStage.showAndWait(); // Espera hasta que se cierre antes de seguir
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorResultadoEscaneo">
+   <children>
+      <TableView fx:id="tablaIps" layoutY="67.0" prefHeight="333.0" prefWidth="600.0">
+        <columns>
+          <TableColumn prefWidth="118.0" text="Equipos" />
+          <TableColumn prefWidth="481.0" text="Direcciones" />
+        </columns>
+      </TableView>
+      <Label fx:id="textoEscaneado" layoutX="11.0" layoutY="19.0" text="Se han escaneado 7 direcciones ip">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
