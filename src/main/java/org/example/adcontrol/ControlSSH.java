@@ -4,8 +4,11 @@ import com.jcraft.jsch.ChannelShell;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -25,10 +28,13 @@ public class ControlSSH {
     String host = "10.211.55.5";
     String user = "parallels";
     String password = "usuarioxd";
+    String claseActual;
 
     Boolean superusuario = true;
     private OutputStream out;
     private ChannelShell channel;
+    @FXML
+    private ComboBox<?> comboBoxEquipos;
 
     public ControlSSH() {
         salidaTerminal = new TextArea();
@@ -43,10 +49,10 @@ public class ControlSSH {
             }
         });
     }
-
     @FXML
     void initialize() {
-        Platform.runLater(this::inciarConexionSSH);
+        comboBoxEquipos = new ComboBox<>();
+        ObservableList<String> items = FXCollections.observableArrayList();
     }
 
     public void inciarConexionSSH() {
@@ -139,5 +145,15 @@ public class ControlSSH {
         out.flush();
         salidaTerminal.clear();
         salidaTerminal.setStyle("-fx-control-inner-background: orange");
+    }
+
+    @FXML
+    void botonConectarse(ActionEvent event) throws IOException {
+        this.inciarConexionSSH();
+    }
+
+    public void setClaseActual(String claseActual) {
+        this.claseActual = claseActual;
+        System.out.println(claseActual);
     }
 }

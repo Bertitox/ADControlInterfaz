@@ -21,7 +21,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class ControladorPanelAula extends Controlador{
+public class ControladorPanelAula extends Controlador {
 
     @FXML
     Label labelNumEquiposAula;
@@ -71,7 +71,7 @@ public class ControladorPanelAula extends Controlador{
             fechaUltMod.setText("00000000");
             horaUltMod.setText("000000");
 
-        }else {
+        } else {
             fechaUltMod.setText(I.getUltFechaMod(labelAula.getText()));
             horaUltMod.setText(I.getUltHoraMod(labelAula.getText()));
         }
@@ -79,12 +79,12 @@ public class ControladorPanelAula extends Controlador{
 
     @FXML
     void vistaEquipos(MouseEvent event) throws IOException {
-        if(AE.numEquiposXAula(labelAula.getText()).equals("0")){
+        if (AE.numEquiposXAula(labelAula.getText()).equals("0")) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "No hay aulas en esta clase, debes de agregar un equipo al menos.", ButtonType.OK);
             alert.setTitle("No hay equipos");
             alert.setHeaderText(null); //Elimina el encabezado
             alert.showAndWait();
-        }else{
+        } else {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAula.fxml"));
             Parent root = fxmlLoader.load();
             panelLargo.getChildren().clear();
@@ -114,6 +114,22 @@ public class ControladorPanelAula extends Controlador{
             stage.setScene(scene);
             stage.setResizable(false);
             stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    void conectarSSH(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/vistaSSH.fxml"));
+            Parent root = loader.load();
+            ControlSSH controladorB = loader.getController();
+            controladorB.setClaseActual(labelAula.getText());
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
