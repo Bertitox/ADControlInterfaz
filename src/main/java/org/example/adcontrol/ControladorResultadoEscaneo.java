@@ -1,10 +1,12 @@
 package org.example.adcontrol;
 
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.util.ArrayList;
@@ -19,13 +21,23 @@ public class ControladorResultadoEscaneo {
     static List<String> ipsDetectadas;
 
     @FXML
-    private TableView<String> tablaIps;
+    private TableView<Map.Entry<String, String>> tablaIps;
+
+    @FXML
+    private TableColumn<Map.Entry<String, String>, String> columnaIp;
+
+    @FXML
+    private TableColumn<Map.Entry<String, String>, String> columnaEquipo;
+
 
     @FXML
     private Label textoEscaneado;
 
     @FXML
     void initialize() {
+        columnaIp.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getKey()));
+        columnaEquipo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue()));
+
         rellenarTabla();
         actualizarTexto();
     }
@@ -36,13 +48,8 @@ public class ControladorResultadoEscaneo {
     }
 
     private void rellenarTabla() {
-            ObservableList<String> datos = FXCollections.observableArrayList();
-
-            for (Map.Entry<String, String> entry : mapaIPEquipos().entrySet()) {
-                datos.add(Integer.parseInt(entry.getKey()), entry.getValue());
-            }
-
-            tablaIps.setItems(datos);
+        ObservableList<Map.Entry<String, String>> datos = FXCollections.observableArrayList(mapaIPEquipos().entrySet());
+        tablaIps.setItems(datos);
     }
 
     /**
