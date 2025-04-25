@@ -1,5 +1,7 @@
 package org.example.adcontrol;
 
+import BBDD.DAO.CRUDAula_Equipo;
+import BBDD.DTO.Aula_Equipo;
 import com.jcraft.jsch.ChannelShell;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
@@ -9,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -28,13 +32,15 @@ public class ControlSSH {
     String host = "10.211.55.5";
     String user = "parallels";
     String password = "usuarioxd";
+
     String claseActual;
 
     Boolean superusuario = true;
     private OutputStream out;
     private ChannelShell channel;
+
     @FXML
-    private ComboBox<?> comboBoxEquipos;
+    private MenuButton menuButtonEquipos;
 
     public ControlSSH() {
         salidaTerminal = new TextArea();
@@ -48,11 +54,6 @@ public class ControlSSH {
                 case ENTER -> enviarComando();
             }
         });
-    }
-    @FXML
-    void initialize() {
-        comboBoxEquipos = new ComboBox<>();
-        ObservableList<String> items = FXCollections.observableArrayList();
     }
 
     public void inciarConexionSSH() {
@@ -154,6 +155,18 @@ public class ControlSSH {
 
     public void setClaseActual(String claseActual) {
         this.claseActual = claseActual;
-        System.out.println(claseActual);
+        cargarEquipos();
+    }
+
+    private void cargarEquipos() {
+        CRUDAula_Equipo aulaEquipo = new CRUDAula_Equipo();
+        menuButtonEquipos.getItems().clear();
+
+        for (Aula_Equipo i : aulaEquipo.readAllAulas()) {
+            if (i.getReferencia().getReferencia().equals(claseActual)) {
+                MenuItem item = new MenuItem(i.getIdInformacionSistema().getNombre());
+                menuButtonEquipos.getItems().add(item);
+            }
+        }
     }
 }
