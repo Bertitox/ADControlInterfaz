@@ -13,6 +13,9 @@
           <TableColumn prefWidth="118.0" text="Equipos" />
           <TableColumn prefWidth="481.0" text="Direcciones" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <Label fx:id="textoEscaneado" layoutX="11.0" layoutY="19.0">
          <font>
