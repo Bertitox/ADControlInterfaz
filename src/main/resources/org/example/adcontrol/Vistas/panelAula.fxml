@@ -140,7 +140,7 @@
                               <Insets />
                            </opaqueInsets>
                         </Separator>
-                        <Pane fx:id="divEquiposAula" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #f0faff); -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: rgb(0, 149, 255);" GridPane.rowIndex="1">
+                        <Pane fx:id="divEquiposAula" onMouseClicked="#vistaEquipos" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ffffff, #f0faff); -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: rgb(0, 149, 255);" GridPane.rowIndex="1">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>

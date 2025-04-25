@@ -20,6 +20,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ControladorPanelAula extends Controlador {
 
@@ -57,7 +58,9 @@ public class ControladorPanelAula extends Controlador {
         //labelAula.setText(cm.getAulaSeleccionada());
         //labelNumEquiposAula.setText(AE.numEquiposXAula(labelAula.getText()));
         //labelNumIncidenciasAula.setText(" "+I.numIncidenciasAula(labelAula.getText()));
-        fechaActual.setText(LocalDate.now().toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaFormateada = LocalDate.now().format(formatter);
+        fechaActual.setText(fechaFormateada);
 
     }
 
@@ -72,7 +75,18 @@ public class ControladorPanelAula extends Controlador {
             horaUltMod.setText("000000");
 
         } else {
-            fechaUltMod.setText(I.getUltFechaMod(labelAula.getText()));
+            DateTimeFormatter formatoBD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter formatoES = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            // Obtener la fecha en formato yyyy-MM-dd desde la base de datos
+            String fechaBD = I.getUltFechaMod(labelAula.getText());
+
+            if (fechaBD != null) {
+                LocalDate fecha = LocalDate.parse(fechaBD, formatoBD);
+                fechaUltMod.setText(fecha.format(formatoES));
+            } else {
+                fechaUltMod.setText("Sin registro");
+            }
             horaUltMod.setText(I.getUltHoraMod(labelAula.getText()));
         }
     }
