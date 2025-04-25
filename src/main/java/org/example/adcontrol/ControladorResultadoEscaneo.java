@@ -1,14 +1,16 @@
 package org.example.adcontrol;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ControladorResultadoEscaneo {
 
@@ -30,9 +32,17 @@ public class ControladorResultadoEscaneo {
 
     private void actualizarTexto() {
         textoEscaneado.setText("Se han escaneado " + ipsDetectadas.size() + " IPs diferentes");
+
     }
 
     private void rellenarTabla() {
+            ObservableList<String> datos = FXCollections.observableArrayList();
+
+            for (Map.Entry<String, String> entry : mapaIPEquipos().entrySet()) {
+                datos.add(Integer.parseInt(entry.getKey()), entry.getValue());
+            }
+
+            tablaIps.setItems(datos);
     }
 
     /**
@@ -41,7 +51,7 @@ public class ControladorResultadoEscaneo {
      */
     public static ControladorResultadoEscaneo getInstance() {
         if (instancia == null) {
-            ControladorResultadoEscaneo controladorResultadoEscaneo = ControladorResultadoEscaneo.getInstance();
+            ControladorResultadoEscaneo controladorResultadoEscaneo = new ControladorResultadoEscaneo();
             instancia = new ControladorResultadoEscaneo();
             ipsDetectadas = new ArrayList<>();
         }
@@ -52,7 +62,24 @@ public class ControladorResultadoEscaneo {
         return ipsDetectadas;
     }
 
+    public Map<String, String> mapaIPEquipos(){
+        Map<String, String> mapaIPEquipos = new HashMap<>();
+
+        for (String ip : ipsDetectadas) {
+            mapaIPEquipos.put(ip, "Equipo "+1);
+        }
+        return mapaIPEquipos;
+    }
+
     public void setIpsDetectadas(List<String> ipsDetectadas) {
         ControladorResultadoEscaneo.ipsDetectadas = ipsDetectadas;
     }
+
+//    public static void main(String[] args) {
+//        ControladorResultadoEscaneo controladorResultadoEscaneo = new ControladorResultadoEscaneo();
+//
+//        for (Map.Entry<String, String> map: controladorResultadoEscaneo.mapaIPEquipos().entrySet()) {
+//            System.out.println(controladorResultadoEscaneo.mapaIPEquipos().get(map.getKey()));
+//        }
+//    }
 }
