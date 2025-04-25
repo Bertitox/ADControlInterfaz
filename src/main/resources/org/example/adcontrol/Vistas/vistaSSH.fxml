@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.ColorAdjust?>
@@ -53,11 +52,6 @@
          </tooltip>
       </Button>
       <Button layoutX="529.0" layoutY="31.0" mnemonicParsing="false" onAction="#botonConectarse" text="Conectarse" />
-      <MenuButton fx:id="menuButtonEquipos" layoutX="348.0" layoutY="31.0" mnemonicParsing="false" text="MenuButton">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </MenuButton>
+      <MenuButton fx:id="menuButtonEquipos" layoutX="348.0" layoutY="31.0" mnemonicParsing="false" text="Equipos" />
    </children>
 </Pane>

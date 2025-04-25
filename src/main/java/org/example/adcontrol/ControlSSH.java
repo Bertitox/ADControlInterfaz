@@ -32,6 +32,7 @@ public class ControlSSH {
     String host = "10.211.55.5";
     String user = "parallels";
     String password = "usuarioxd";
+
     String claseActual;
 
     Boolean superusuario = true;
@@ -53,18 +54,6 @@ public class ControlSSH {
                 case ENTER -> enviarComando();
             }
         });
-    }
-    @FXML
-    void initialize() {
-        CRUDAula_Equipo aulaEquipo = new CRUDAula_Equipo();
-        menuButtonEquipos = new MenuButton();
-
-        for (Aula_Equipo i : aulaEquipo.readAllAulas()) {
-            if (i.getReferencia().equals(claseActual)) { //Comprobamos que el Aula coincide
-                javafx.scene.control.MenuItem item = new MenuItem(i.getIdInformacionSistema().getNombre());
-                menuButtonEquipos.getItems().add(item);
-            }
-        }
     }
 
     public void inciarConexionSSH() {
@@ -166,6 +155,18 @@ public class ControlSSH {
 
     public void setClaseActual(String claseActual) {
         this.claseActual = claseActual;
-        System.out.println(claseActual);
+        cargarEquipos();
+    }
+
+    private void cargarEquipos() {
+        CRUDAula_Equipo aulaEquipo = new CRUDAula_Equipo();
+        menuButtonEquipos.getItems().clear();
+
+        for (Aula_Equipo i : aulaEquipo.readAllAulas()) {
+            if (i.getReferencia().getReferencia().equals(claseActual)) {
+                MenuItem item = new MenuItem(i.getIdInformacionSistema().getNombre());
+                menuButtonEquipos.getItems().add(item);
+            }
+        }
     }
 }
