@@ -123,6 +123,9 @@ public class ControladorFormularioEquipo {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Equipo creado con éxito", ButtonType.OK);
             alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR, "El equipo debe tener al menos un nombre", ButtonType.OK);
+            alert.showAndWait();
         }
     }
 
