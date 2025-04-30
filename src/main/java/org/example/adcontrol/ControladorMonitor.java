@@ -40,6 +40,9 @@ public class ControladorMonitor extends Controlador{
     Button actualizar1;
 
     @FXML
+    Button borrarInidencias;
+
+    @FXML
     TableView<Map.Entry<String, String>> tableViewErrores;
 
     //Elementos para la creación de incidencias
@@ -296,4 +299,57 @@ public class ControladorMonitor extends Controlador{
         alert.setContentText("Incidencia creada correctamente.");
         alert.showAndWait();
     }
+
+    /**
+     * Método que se encarga de borrar Incidencias de la BBDD
+     */
+    public void borrarIncidencia() {
+        String equipoSeleccionado = MBequipo.getText();
+        String aulaSeleccionada = MBaula.getText();
+        String errorSeleccionado = MBerror.getText();
+        String descripcion = labelDescripcion.getText();
+
+        if (equipoSeleccionado.equals("Equipo") || equipoSeleccionado.isEmpty() ||
+                aulaSeleccionada.equals("Aula") || aulaSeleccionada.isEmpty() ||
+                errorSeleccionado.equals("Error") || errorSeleccionado.isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText(null);
+            alert.setContentText("Uno o más campos no han sido seleccionados correctamente.");
+            alert.showAndWait(); //Muestra el mensaje y espera a que el usuario cierre la alerta
+
+            return; //Salir del método si falta información
+        }
+
+        InformacionSistema infoSistemas = incidencia.getEntityManager().find(InformacionSistema.class, infoSistema.getIdEquipo(equipoSeleccionado));
+        if (infoSistema == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No se encontró el equipo en la base de datos.");
+            alert.showAndWait();
+            return;
+        }
+
+        //Borrar incidencias
+        Incidencia incBorrar = new Incidencia();
+        boolean incidenciaEncontrada = false;
+        for (Incidencia i : incidencia.getAllIncidencias()) {
+            if ((i.getIdAula().getReferencia().equalsIgnoreCase(aulaSeleccionada)) && (i.getCodigoError().getCodigoError().equalsIgnoreCase(errorSeleccionado)) && i.getIdInformacionSistema().getNombre().equalsIgnoreCase(equipoSeleccionado)) {
+                incBorrar = i;
+                //Eliminamos la incidencia
+                incidencia.deleteIncidencia(incBorrar);
+                incidenciaEncontrada = true;
+            }
+        }
+        Alert alert = new Alert(incidenciaEncontrada ? Alert.AlertType.INFORMATION : Alert.AlertType.WARNING);
+        alert.setTitle(incidenciaEncontrada ? "Incidencia Eliminada" : "Incidencia No Encontrada");
+        alert.setHeaderText(null);
+        alert.setContentText(incidenciaEncontrada ? "Incidencia eliminada correctamente." : "No se encontró ninguna incidencia con los criterios seleccionados.");
+        alert.showAndWait();
+
+    }
+
+
 }
