@@ -143,6 +143,20 @@
     -fx-background-color: #e8eaf6; /* azul clarito */
 }
 
+.circle-button {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+    -fx-cursor: hand;
+}
+
+.circle-button:hover {
+    -fx-background-color: rgba(100, 149, 237, 0.3); /* color circular transparente */
+    -fx-background-radius: 50%; /* redondear fondo */
+}
+
+.circle-button:pressed {
+    -fx-background-color: rgba(100, 149, 237, 0.6);
+}
 
 
 

@@ -1,15 +1,26 @@
 package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula_Equipo;
+import BBDD.Excepciones.AulaNotFoundException;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -31,6 +42,11 @@ public class ControladorAula {
     CRUDAula_Equipo cruda = new CRUDAula_Equipo(); //Llamada al CRUD que conecta con la tabla Aula de la BBDD
     private Map<String, Integer> aulasMonitores;
 
+    String aulaActual;
+
+    @FXML
+    AnchorPane panelLargo;
+
     /**
      * Método que inicializa los elementos del controlador que se usarán.
      */
@@ -41,7 +57,10 @@ public class ControladorAula {
         //Agregamos dinámicamente opciones (menuItem) al menú (MenuButton)
         for (String aula : aulasMonitores.keySet()) {
             MenuItem item = new MenuItem(aula);
-            item.setOnAction(event -> actualizarMonitores(aula));
+            item.setOnAction(event -> {
+                actualizarMonitores(aula);
+                setAulaActual(aula);
+            });
             menuButtonAulas.getItems().add(item);
         }
     }
@@ -105,5 +124,48 @@ public class ControladorAula {
 
         //Cambiamos el texto del MenuButton a la opción seleccionada (Aula seleccionada)
         menuButtonAulas.setText(aulaSeleccionada);
+    }
+
+    public String getAulaActual() {
+        return aulaActual;
+    }
+
+    public void setAulaActual(String aulaActual) {
+        this.aulaActual = aulaActual;
+        actualizarMonitores(aulaActual);
+    }
+
+    @FXML
+    void volver(ActionEvent event) throws IOException, AulaNotFoundException {
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelAula.fxml"));
+                Parent root = fxmlLoader.load();
+
+                ControladorVistaPanelAula controladorVista = fxmlLoader.getController();
+
+                // Esperar un poco a que cargue panelAula.fxml (por el Platform.runLater interno)
+                // Alternativa simple: usar otro runLater anidado
+                Platform.runLater(() -> {
+                    ControladorPanelAula controladorPanel = controladorVista.getControladorPanelAula();
+                    if (controladorPanel != null) {
+                        try {
+                            controladorPanel.ponerClase(aulaActual);
+                        } catch (AulaNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else {
+                        System.err.println("El controlador del panel aula no está disponible todavía.");
+                    }
+                });
+
+                panelLargo.getChildren().clear();
+                panelLargo.getChildren().add(root);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 }

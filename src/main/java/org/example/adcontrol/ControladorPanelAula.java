@@ -101,6 +101,9 @@ public class ControladorPanelAula extends Controlador {
         } else {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAula.fxml"));
             Parent root = fxmlLoader.load();
+            ControladorAula controladorAula = fxmlLoader.getController();
+            controladorAula.setAulaActual(labelAula.getText());
+
             panelLargo.getChildren().clear();
             panelLargo.getChildren().add(root);
         }
