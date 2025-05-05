@@ -11,10 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
+
+import java.util.*;
 
 /**
  * Clase que controla la interfaz de usuario y la lógica de la aplicación.
@@ -121,10 +119,10 @@ public class ControladorMonitor extends Controlador{
         CRUDIncidencia crud = new CRUDIncidencia();
         List<Incidencia> incidencias = crud.incidenciasXAulas(textIncidencias.getText().toString());
 
-        // Pasamos la información a una Lista observable para el TableView
+        //Pasamos la información a una Lista observable para el TableView
         ObservableList<Incidencia> items = FXCollections.observableArrayList(incidencias);
 
-        // Configuramos las columnas del TableView si aún no están configuradas
+        //Configuramos las columnas del TableView si aún no están configuradas
         TableColumn<Incidencia, String> colCodigo = new TableColumn<>("CÓDIGO ERROR");
         colCodigo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCodigoError().getCodigoError()));
 
@@ -208,14 +206,21 @@ public class ControladorMonitor extends Controlador{
      */
     public void rellenarMenuButtonAula() {
         MBaula.getItems().clear(); //Limpiamos elementos anteriores
+        Set<String> referenciasUnicas = new HashSet<>();
 
         for (Aula_Equipo a : aulaEquipo.readAllAulas()) {
-            MenuItem item = new MenuItem(a.getReferencia().getReferencia()); //Rellenamos los MenúItems a partir de las Aulas que haya en la tabla Aula_Equipos
-            item.setOnAction(e -> {
-                MBaula.setText(a.getReferencia().getReferencia());
-                rellenarMenuButtonEquipo(); //Llamamos al método que actualiza el MenuButton de equipos según su Aula
-            });
-            MBaula.getItems().add(item);
+            String referencia = a.getReferencia().getReferencia();
+
+            //Agregamos referencias si no han sido añadida antes
+            if (!referenciasUnicas.contains(referencia)) {
+                referenciasUnicas.add(referencia);
+                MenuItem item = new MenuItem(referencia);
+                item.setOnAction(e -> {
+                    MBaula.setText(referencia);
+                    rellenarMenuButtonEquipo();
+                });
+                MBaula.getItems().add(item);
+            }
         }
     }
 
