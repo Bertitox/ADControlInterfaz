@@ -10,17 +10,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Optional;
+
+import static org.example.adcontrol.ControladorResultadoEscaneo.mostrarFormularioSSH;
+import static org.example.adcontrol.ControladorResultadoEscaneo.mostrarPasswordLocal;
 
 public class ControlSSH {
     @FXML
@@ -28,9 +32,9 @@ public class ControlSSH {
     @FXML
     private TextArea entradaComando;
 
-    String host = "10.211.55.5";
-    String user = "parallels";
-    String password = "usuarioxd";
+    String host = "";
+    String user = "";
+    String password = "";
 
     String claseActual;
 
@@ -149,8 +153,62 @@ public class ControlSSH {
 
     @FXML
     void botonConectarse(ActionEvent event) throws IOException {
+        Pair<String, String> credenciales = mostrarFormularioSSH();
+        user = credenciales.getKey();
+        password = credenciales.getValue();
         this.inciarConexionSSH();
     }
+    public static Pair<String, String> mostrarFormularioSSH() {
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Conexión SSH");
+        dialog.setHeaderText("Introduce tus credenciales SSH");
+
+        // Botones Aceptar / Cancelar
+        ButtonType loginButtonType = new ButtonType("Conectar", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+
+        // Campos de texto
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        TextField usuarioField = new TextField();
+        usuarioField.setPromptText("Usuario");
+
+        PasswordField contrasenaField = new PasswordField();
+        contrasenaField.setPromptText("Contraseña");
+
+        grid.add(new Label("Usuario:"), 0, 0);
+        grid.add(usuarioField, 1, 0);
+        grid.add(new Label("Contraseña:"), 0, 1);
+        grid.add(contrasenaField, 1, 1);
+
+        // Hacer que el textfield crezca si se redimensiona
+        GridPane.setHgrow(usuarioField, Priority.ALWAYS);
+        GridPane.setHgrow(contrasenaField, Priority.ALWAYS);
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Habilitar o deshabilitar el botón de Conectar según haya usuario escrito
+        dialog.getDialogPane().lookupButton(loginButtonType).setDisable(true);
+
+        usuarioField.textProperty().addListener((observable, oldValue, newValue) -> {
+            dialog.getDialogPane().lookupButton(loginButtonType).setDisable(newValue.trim().isEmpty());
+        });
+
+        // Devolver los datos al pulsar Conectar
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == loginButtonType) {
+                return new Pair<>(usuarioField.getText(), contrasenaField.getText());
+            }
+            return null;
+        });
+
+        Optional<Pair<String, String>> resultado = dialog.showAndWait();
+
+        return resultado.orElse(null);
+    }
+
 
     public void setClaseActual(String claseActual) {
         this.claseActual = claseActual;
@@ -165,7 +223,13 @@ public class ControlSSH {
             if (i.getReferencia().getReferencia().equals(claseActual)) {
                 MenuItem item = new MenuItem(i.getIdInformacionSistema().getNombre());
                 menuButtonEquipos.getItems().add(item);
+                item.setOnAction(event -> {
+                    menuButtonEquipos.setText(item.getText());
+                    host = i.getIdInformacionSistema().getIp();
+                });
             }
         }
+
+
     }
 }

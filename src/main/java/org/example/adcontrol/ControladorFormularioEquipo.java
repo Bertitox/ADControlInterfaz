@@ -35,6 +35,9 @@ public class ControladorFormularioEquipo {
     private TextField campoHora;
 
     @FXML
+    private TextField campoIP;
+
+    @FXML
     private TextField campoKernel;
 
     @FXML
@@ -116,6 +119,7 @@ public class ControladorFormularioEquipo {
                 informacionSistema.setMemDisp(Integer.valueOf(campoMemTotal.getText()));
             }
             informacionSistema.setUltHora(horaActual);
+            informacionSistema.setIp(campoIP.getText());
             informacionSistema.setUltFecha(fechaActual);
             informacionSistema.setVersion(campoVersion.getText());
             informacionSistema.setSo(campoSO.getText());
@@ -167,6 +171,7 @@ public class ControladorFormularioEquipo {
             campoKernel.setText(root.path("Release").asText());
             campoVersion.setText(root.path("Version").asText());
             campoArquitectura.setText(root.path("Arquitectura").asText());
+            campoIP.setText(root.path("IP").asText());
 
         } catch (IOException e) {
             e.printStackTrace();

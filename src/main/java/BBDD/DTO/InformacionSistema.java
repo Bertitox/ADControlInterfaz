@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
 /**
  * Clase que representa la tabla {@link InformacionSistema}
  * @author Daniel y Alberto
@@ -54,6 +55,9 @@ public class InformacionSistema {
     @Column(name = "mac")
     private String mac;
 
+    @Column(name = "ip")
+    private String ip;
+
     @Column(name = "ultHora")
     private LocalTime ultHora;
 
@@ -79,8 +83,9 @@ public class InformacionSistema {
      * @param usoCpu Campos de la BBDD
      * @param mac Campos de la BBDD
      * @param ultHora Campos de la BBDD
+     * @param ip Campos de la BBDD
      */
-    public InformacionSistema(String nombre, String so, LocalDate ultFecha, String nombreNodo, String releasee, String version, String arquitectura, String procesador, Integer memTotal, Integer memDisp, String usoCpu, String mac, LocalTime ultHora) {
+    public InformacionSistema(String nombre, String so, LocalDate ultFecha, String nombreNodo, String releasee, String version, String arquitectura, String procesador, Integer memTotal, Integer memDisp, String usoCpu, String mac, LocalTime ultHora, String ip) {
         this.nombre = nombre;
         this.so = so;
         this.ultFecha = ultFecha;
@@ -94,12 +99,15 @@ public class InformacionSistema {
         this.usoCpu = usoCpu;
         this.mac = mac;
         this.ultHora = ultHora;
+        this.ip = ip;
     }
 
-    public InformacionSistema(String nombre, String mac) {
+    public InformacionSistema(String nombre, String mac, String ip) {
         this.nombre = nombre;
         this.mac = mac;
+        this.ip = ip;
     }
+
 
     //Getters y Setters
 
@@ -120,7 +128,6 @@ public class InformacionSistema {
     public void setId(Integer id) {
         this.id = id;
     }
-
     /**
      * Obtiene el nombre.
      *
@@ -129,7 +136,6 @@ public class InformacionSistema {
     public String getNombre() {
         return nombre;
     }
-
     /**
      * Establece el nombre.
      *
@@ -138,7 +144,6 @@ public class InformacionSistema {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
     /**
      * Obtiene el sistema operativo.
      *
@@ -147,7 +152,6 @@ public class InformacionSistema {
     public String getSo() {
         return so;
     }
-
     /**
      * Establece el sistema operativo.
      *
@@ -156,7 +160,6 @@ public class InformacionSistema {
     public void setSo(String so) {
         this.so = so;
     }
-
     /**
      * Obtiene la última fecha.
      *
@@ -165,7 +168,6 @@ public class InformacionSistema {
     public LocalDate getUltFecha() {
         return ultFecha;
     }
-
     /**
      * Establece la última fecha.
      *
@@ -174,61 +176,54 @@ public class InformacionSistema {
     public void setUltFecha(LocalDate ultFecha) {
         this.ultFecha = ultFecha;
     }
-
-    /**
-     * Obtiene el nombre del nodo.
-     *
-     * @return el nombre del nodo
-     */
-    public String getNombreNodo() {
-        return nombreNodo;
-    }
-
     /**
      * Establece el nombre del nodo.
      *
      * @param nombreNodo el nuevo nombre del nodo
      */
-    public void setNombreNodo(String nombreNodo) {
-        this.nombreNodo = nombreNodo;
+    public String getNombreNodo() {
+        return nombreNodo;
     }
-
     /**
      * Obtiene la versión.
      *
      * @return la versión
      */
-    public String getReleasee() {
-        return releasee;
+    public void setNombreNodo(String nombreNodo) {
+        this.nombreNodo = nombreNodo;
     }
-
     /**
      * Establece la versión.
      *
      * @param releasee la nueva versión
      */
-    public void setReleasee(String releasee) {
-        this.releasee = releasee;
+    public String getReleasee() {
+        return releasee;
     }
-
     /**
      * Obtiene la versión.
      *
      * @return la versión
      */
-    public String getVersion() {
-        return version;
+    public void setReleasee(String releasee) {
+        this.releasee = releasee;
     }
-
     /**
      * Establece la versión.
      *
      * @param version la nueva versión
      */
+    public String getVersion() {
+        return version;
+    }
+    /**
+     * Obtiene la arquitectura.
+     *
+     * @return la arquitectura
+     */
     public void setVersion(String version) {
         this.version = version;
     }
-
     /**
      * Obtiene la arquitectura.
      *
@@ -237,7 +232,6 @@ public class InformacionSistema {
     public String getArquitectura() {
         return arquitectura;
     }
-
     /**
      * Establece la arquitectura.
      *
@@ -246,7 +240,6 @@ public class InformacionSistema {
     public void setArquitectura(String arquitectura) {
         this.arquitectura = arquitectura;
     }
-
     /**
      * Obtiene el procesador.
      *
@@ -255,7 +248,6 @@ public class InformacionSistema {
     public String getProcesador() {
         return procesador;
     }
-
     /**
      * Establece el procesador.
      *
@@ -264,7 +256,6 @@ public class InformacionSistema {
     public void setProcesador(String procesador) {
         this.procesador = procesador;
     }
-
     /**
      * Obtiene la memoria total.
      *
@@ -273,7 +264,6 @@ public class InformacionSistema {
     public Integer getMemTotal() {
         return memTotal;
     }
-
     /**
      * Establece la memoria total.
      *
@@ -282,7 +272,6 @@ public class InformacionSistema {
     public void setMemTotal(Integer memTotal) {
         this.memTotal = memTotal;
     }
-
     /**
      * Obtiene la memoria disponible.
      *
@@ -291,7 +280,6 @@ public class InformacionSistema {
     public Integer getMemDisp() {
         return memDisp;
     }
-
     /**
      * Establece la memoria disponible.
      *
@@ -300,7 +288,6 @@ public class InformacionSistema {
     public void setMemDisp(Integer memDisp) {
         this.memDisp = memDisp;
     }
-
     /**
      * Obtiene el uso de la CPU.
      *
@@ -309,7 +296,6 @@ public class InformacionSistema {
     public String getUsoCpu() {
         return usoCpu;
     }
-
     /**
      * Establece el uso de la CPU.
      *
@@ -318,7 +304,6 @@ public class InformacionSistema {
     public void setUsoCpu(String usoCpu) {
         this.usoCpu = usoCpu;
     }
-
     /**
      * Obtiene la dirección MAC.
      *
@@ -327,7 +312,6 @@ public class InformacionSistema {
     public String getMac() {
         return mac;
     }
-
     /**
      * Establece la dirección MAC.
      *
@@ -336,7 +320,22 @@ public class InformacionSistema {
     public void setMac(String mac) {
         this.mac = mac;
     }
-
+    /**
+     * Obtiene la dirección IP.
+     *
+     * @return la dirección IP
+     */
+    public String getIp() {
+        return ip;
+    }
+    /**
+     * Establece la dirección IP.
+     *
+     * @param ip la nueva dirección IP
+     */
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
     /**
      * Obtiene la última hora.
      *
@@ -345,7 +344,6 @@ public class InformacionSistema {
     public LocalTime getUltHora() {
         return ultHora;
     }
-
     /**
      * Establece la última hora.
      *
@@ -354,6 +352,7 @@ public class InformacionSistema {
     public void setUltHora(LocalTime ultHora) {
         this.ultHora = ultHora;
     }
+
 
     /**
      * Método que genera el toString de la instancia

@@ -53,9 +53,9 @@
                                     <Insets bottom="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="Ultima hora" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Label text=" Ultima hora " GridPane.rowIndex="1">
                                  <GridPane.margin>
-                                    <Insets bottom="30.0" />
+                                    <Insets bottom="30.0" left="180.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="Direccion MAC" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -78,12 +78,12 @@
                                     <Insets top="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="campoHora" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="10:43:25" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <TextField fx:id="campoHora" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="70.0" promptText="10:43:25" GridPane.rowIndex="1">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
                                  <GridPane.margin>
-                                    <Insets top="20.0" />
+                                    <Insets left="180.0" top="20.0" />
                                  </GridPane.margin>
                               </TextField>
                               <TextField fx:id="campoMAC" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="00:1A:2B:3C:4D:5E" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -91,11 +91,24 @@
                                     <Insets top="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <DatePicker fx:id="campoFecha" prefHeight="30.0" prefWidth="250.0" promptText="21/03/2025" GridPane.rowIndex="1">
+                              <DatePicker fx:id="campoFecha" prefHeight="30.0" prefWidth="161.0" promptText="21/03/2025" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets top="20.0" />
                                  </GridPane.margin>
                               </DatePicker>
+                              <Label text="IP" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets bottom="30.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="campoIP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="192.168.0.40" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <GridPane.margin>
+                                    <Insets top="20.0" />
+                                 </GridPane.margin>
+                              </TextField>
                            </children>
                         </GridPane>
                      </children>

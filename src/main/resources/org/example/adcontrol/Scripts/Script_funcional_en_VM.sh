@@ -3,7 +3,7 @@
 USUARIO="parallels"                # Usuario del equipo remoto
 HOST_REMOTO="192.168.0.40"      # Dirección IP o nombre del equipo remoto
 GET_REPOSITORIO="git clone https://github.com/Bertitox/ADControl.git"
-SCRIPT_REMOTO="bash ./ADControl/script.sh"  # Ruta al script en el equipo remoto
+SCRIPT_REMOTO="bash ./ADControl/ScriptV2.sh"  # Ruta al script en el equipo remoto
 RUTA_JSON_REMOTO="./system_info.json"    # Ruta al JSON generado por el script remoto
 RUTA_LOCAL="src/main/resources/org/example/adcontrol/ResultadoScript/"                          # Ruta en el equipo anfitrión para guardar el JSON
 PASSWORD="usuarioxd"        # Contraseña de sudo del equipo remoto
