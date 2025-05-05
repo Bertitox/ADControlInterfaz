@@ -228,4 +228,18 @@ public class ControladorPanelAula extends Controlador {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void conectarIncidencias(MouseEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelMonitor.fxml"));
+            Parent root = fxmlLoader.load();
+
+            panelLargo.getChildren().clear();
+            panelLargo.getChildren().add(root);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
