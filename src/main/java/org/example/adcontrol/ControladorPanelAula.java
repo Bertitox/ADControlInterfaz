@@ -3,11 +3,14 @@ package org.example.adcontrol;
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
 import BBDD.Excepciones.AulaNotFoundException;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -17,10 +20,15 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javafx.scene.chart.NumberAxis;
+import javafx.util.Duration;
+import javafx.animation.KeyFrame;
+
 
 public class ControladorPanelAula extends Controlador {
 
@@ -48,7 +56,16 @@ public class ControladorPanelAula extends Controlador {
     @FXML
     private Pane panelLargo;
 
+    private XYChart.Series<Number, Number> series = new XYChart.Series<>();
+    private int tiempo = 0;
+    private int incidenciasActuales = -1;
+    private Timeline timeline;
+
+    @FXML
+    private LineChart<Number, Number> graficoIncidenciasAula;
+
     ControladorMapa cm = new ControladorMapa();
+
     //Clases gestoras de la BBDD
     CRUDAula_Equipo AE = new CRUDAula_Equipo();
     CRUDIncidencia I = new CRUDIncidencia();
@@ -61,13 +78,73 @@ public class ControladorPanelAula extends Controlador {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaFormateada = LocalDate.now().format(formatter);
         fechaActual.setText(fechaFormateada);
+        initializeLineChart();
+        startChartUpdater();
 
+    }
+
+
+    public void initializeLineChart() {
+        if (graficoIncidenciasAula.getXAxis() instanceof NumberAxis
+                && graficoIncidenciasAula.getYAxis() instanceof NumberAxis) {
+
+            NumberAxis xAxis = (NumberAxis) graficoIncidenciasAula.getXAxis();
+            NumberAxis yAxis = (NumberAxis) graficoIncidenciasAula.getYAxis();
+
+            xAxis.setLabel("Tiempo");
+            yAxis.setLabel("Incidencias");
+
+            yAxis.setTickUnit(1);
+            yAxis.setMinorTickCount(0);
+            yAxis.setTickLabelFormatter(new StringConverter<Number>() {
+                @Override
+                public String toString(Number value) {
+                    return String.valueOf(value.intValue()); //Solo enteros
+                }
+
+                @Override
+                public Number fromString(String string) {
+                    return Integer.parseInt(string);
+                }
+            });
+
+            graficoIncidenciasAula.setTitle("Histórico de Incidencias");
+            series.setName("Histórico de Incidencias");
+
+            graficoIncidenciasAula.getData().clear();
+            series.getData().add(new XYChart.Data<>(0, 0)); //Punto inicial a 0
+            graficoIncidenciasAula.getData().add(series);
+        } else {
+            System.out.println("Error: El gráfico no tiene ejes numéricos.");
+        }
+    }
+
+    public void startChartUpdater() {
+        timeline = new Timeline(
+                new KeyFrame(Duration.seconds(5), e -> {
+                    try {
+                        actualizarGraficoIncidencias();
+                    } catch (AulaNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                })
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void actualizarGraficoIncidencias() throws AulaNotFoundException {
+        int nuevasIncidencias = I.getNumIncidenciasAulas(labelAula.getText());
+        if (nuevasIncidencias != incidenciasActuales) {
+            tiempo++;
+            incidenciasActuales = nuevasIncidencias;
+            series.getData().add(new XYChart.Data<>(tiempo, incidenciasActuales));
+        }
     }
 
     public void ponerClase(String nombreAula) throws AulaNotFoundException {
         labelAula.setText(nombreAula);
 
-        // Ahora sí puedes hacer tus consultas
         labelNumEquiposAula.setText(AE.numEquiposXAula(nombreAula));
         labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(nombreAula));
         if (I.getUltFechaMod(labelAula.getText()) == null) {
@@ -78,7 +155,7 @@ public class ControladorPanelAula extends Controlador {
             DateTimeFormatter formatoBD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             DateTimeFormatter formatoES = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            // Obtener la fecha en formato yyyy-MM-dd desde la base de datos
+            //Obtenemos la fecha en formato yyyy-MM-dd desde la base de datos
             String fechaBD = I.getUltFechaMod(labelAula.getText());
 
             if (fechaBD != null) {
@@ -115,10 +192,10 @@ public class ControladorPanelAula extends Controlador {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/OpcionAutomaticoManual.fxml"));
             Parent root = loader.load();
 
-            // Obtener el controlador cargado desde el FXML
+            //Obtener el controlador cargado desde el FXML
             ControladorAutomaticoManual controladorAutomaticoManual = loader.getController();
 
-            // Pasarle el dato al controlador
+            //Pasarle el dato al controlador
             controladorAutomaticoManual.setAulaActual(labelAula.getText());
 
             Stage stage = new Stage();
