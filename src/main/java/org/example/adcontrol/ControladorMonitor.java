@@ -11,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javax.swing.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -105,7 +104,7 @@ public class ControladorMonitor extends Controlador{
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            Alert alerta = new Alert( Alert.AlertType.ERROR, "Error al cargar el idioma ", ButtonType.CLOSE);
         }
 
     }

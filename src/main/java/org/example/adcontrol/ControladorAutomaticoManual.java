@@ -103,6 +103,8 @@ public class ControladorAutomaticoManual extends Controlador {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaResultadoEscaneo.fxml"));
             Parent root = fxmlLoader.load();
+            ControladorResultadoEscaneo controladorA = fxmlLoader.getController();
+            controladorA.setAulaActual(aulaActual);
             Stage stage = (Stage) anchorPane.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
