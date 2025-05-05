@@ -1,8 +1,10 @@
 package org.example.adcontrol;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javax.swing.*;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -64,7 +66,7 @@ public class ControladorAyuda extends Controlador{
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al cargar el idioma: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            Alert alerta = new Alert( Alert.AlertType.ERROR, "Error al cargar el idioma ", ButtonType.CLOSE);
         }
     }
     /**

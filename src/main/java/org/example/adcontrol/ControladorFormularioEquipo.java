@@ -6,6 +6,8 @@ import BBDD.DAO.CRUDInfoSistema;
 import BBDD.DTO.Aula_Equipo;
 import BBDD.DTO.Aulas;
 import BBDD.DTO.InformacionSistema;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,6 +15,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -61,6 +65,17 @@ public class ControladorFormularioEquipo {
 
     LocalTime horaActual;
     LocalDate fechaActual;
+
+    Boolean leerJson = false;
+
+    public void setLeerJson(Boolean leerJson) {
+        this.leerJson = leerJson;
+        if(leerJson){
+            System.out.println("Leyendo json");
+            cargarDatosDesdeJSON();
+            leerJson = false;
+        }
+    }
 
     @FXML
     void initialize() {
@@ -131,5 +146,39 @@ public class ControladorFormularioEquipo {
 
     public void setAulaActual(String aulaActual) {
         this.aulaActual = aulaActual;
+    }
+
+    private void cargarDatosDesdeJSON() {
+        ObjectMapper mapper = new ObjectMapper();
+        File jsonFile = new File("src/main/resources/org/example/adcontrol/ResultadoScript/system_info.json");
+        try {
+            JsonNode root = mapper.readTree(jsonFile);
+
+            campoNombre.setText(root.path("nombre_equipo").asText());
+            campoNodo.setText(root.path("Nombre_Nodo").asText());
+            campoSO.setText(root.path("Sistema_Operativo").asText());
+            campoMAC.setText(root.path("MAC").asText());
+
+            campoCPU.setText(root.path("Procesador").asText());
+            campoUsoCPU.setText(root.path("Uso_CPU").asText());
+            campoMemTotal.setText(root.path("Memoria_Total_MB").asText());
+            campoMemDisp.setText(root.path("Memoria_Disponible_MB").asText());
+
+            campoKernel.setText(root.path("Release").asText());
+            campoVersion.setText(root.path("Version").asText());
+            campoArquitectura.setText(root.path("Arquitectura").asText());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+        // Intentar borrar el archivo tras leerlo
+        if (jsonFile.exists()) {
+            if (jsonFile.delete()) {
+                System.out.println("Archivo JSON eliminado correctamente.");
+            } else {
+                System.err.println("No se pudo eliminar el archivo JSON.");
+            }
+        }
+    }
     }
 }
