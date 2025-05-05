@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -227,15 +226,15 @@
                               </DropShadow>
                            </effect>
                         </Pane>
-                        <LineChart fx:id="graficoIncidenciasAula" GridPane.columnSpan="3" GridPane.rowIndex="2">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </LineChart>
-                        <Label fx:id="labelAula" text="DAM 1" GridPane.columnIndex="1">
+                         <LineChart fx:id="graficoIncidenciasAula" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                             <xAxis>
+                                 <NumberAxis label="Tiempo" side="BOTTOM" />
+                             </xAxis>
+                             <yAxis>
+                                 <NumberAxis label="Incidencias" side="LEFT" />
+                             </yAxis>
+                         </LineChart>
+                         <Label fx:id="labelAula" text="DAM 1" GridPane.columnIndex="1">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
