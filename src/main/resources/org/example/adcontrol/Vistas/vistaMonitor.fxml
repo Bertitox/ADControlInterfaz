@@ -14,7 +14,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1090.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMonitor">
@@ -133,30 +132,21 @@
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <Button fx:id="crearIncidencia" layoutX="320.0" layoutY="15.0" mnemonicParsing="false" onAction="#crearIncidencia" prefHeight="95.0" prefWidth="115.0" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="87.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Imagenes/triangle-alert.png" />
-                     </image>
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color red="0.8719298243522644" green="0.9342105388641357" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                  </ImageView>
-               </graphic>
+            <Button fx:id="crearIncidencia" layoutX="359.0" layoutY="88.0" mnemonicParsing="false" onAction="#crearIncidencia" prefHeight="44.0" prefWidth="77.0" text="Crear">
                <tooltip>
                   <Tooltip text="Pulsa para crear incidencias" />
                </tooltip>
             </Button>
-            <TextArea fx:id="labelDescripcion" layoutX="129.0" layoutY="116.0" prefHeight="95.0" prefWidth="311.0" promptText="Descripción de la Incidencia" style="-fx-background-radius: 10px; -fx-border-radius: 10px;">
+            <TextArea fx:id="labelDescripcion" layoutX="121.0" layoutY="85.0" prefHeight="122.0" prefWidth="229.0" promptText="Descripción de la Incidencia" style="-fx-background-radius: 10px; -fx-border-radius: 10px;">
                <tooltip>
                   <Tooltip text="Añade una descripción de la incidencia" />
                </tooltip>
             </TextArea>
+            <Button fx:id="borrarInidencias" layoutX="360.0" layoutY="154.0" mnemonicParsing="false" onAction="#borrarIncidencia" prefHeight="44.0" prefWidth="77.0" text="Eliminar">
+               <tooltip>
+                  <Tooltip text="Pulsa para eliminar incidencias" />
+               </tooltip>
+            </Button>
          </children>
       </Pane>
       <Pane fx:id="panelErrores1" layoutX="33.0" layoutY="605.0" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="468.0" prefWidth="931.0" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-color: grey; -fx-border-width: 2px; -fx-border-radius: 10px;">
