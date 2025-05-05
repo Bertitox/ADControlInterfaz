@@ -187,6 +187,17 @@ public class ControladorPanelAula extends Controlador {
     }
 
     @FXML
+    void refrescar(MouseEvent event) throws AulaNotFoundException {
+        labelNumEquiposAula.setText(AE.numEquiposXAula(labelAula.getText()));
+        labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(labelAula.getText()));
+        cargarBarra();
+    }
+
+    void cargarBarra() {
+
+    }
+
+    @FXML
     void agregarEquipo(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/OpcionAutomaticoManual.fxml"));

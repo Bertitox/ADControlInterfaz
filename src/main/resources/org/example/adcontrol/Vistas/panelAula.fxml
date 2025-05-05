@@ -280,7 +280,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Pane onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;">
+                              <Pane onMouseClicked="#refrescar" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;">
                                  <children>
                                     <VBox alignment="CENTER" prefHeight="73.0" prefWidth="95.0">
                                        <children>
