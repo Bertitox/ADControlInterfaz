@@ -51,7 +51,7 @@ public class ControlSSH {
         salidaTerminal.setWrapText(true);
         entradaComando = new TextArea();
 
-        // Agregar listener para capturar "Enter"
+        //Agregamos un listener para capturar el "Enter"
         entradaComando.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case ENTER -> enviarComando();
@@ -75,7 +75,7 @@ public class ControlSSH {
             InputStream in = channel.getInputStream();
 
             channel.connect();
-            // Hilo para leer la salida en tiempo real
+            //Hilo para leer la salida en tiempo real
             new Thread(() -> {
                 try {
                     byte[] buffer = new byte[1024];
@@ -97,12 +97,12 @@ public class ControlSSH {
     }
 
     public void convSuper() throws IOException, InterruptedException {
-        // Elevar privilegios a root con "sudo su"
+        //Damos privilegios al usuario root con "sudo su"
         out.write("sudo su\n".getBytes());
         out.flush();
-        Thread.sleep(500); // Esperar un poco para que pida la contraseña
+        Thread.sleep(500); //Esperamos un poco para que pida la contraseña
 
-        // Enviar la contraseña cuando el sistema la solicite
+        //Enviar la contraseña cuando el sistema la solicite
         out.write((password + "\n").getBytes());
         out.flush();
         superusuario = false;
@@ -121,7 +121,7 @@ public class ControlSSH {
                 out.write((comando + "\n").getBytes());
                 out.flush();
             }
-            Platform.runLater(() -> entradaComando.clear()); // Limpiar el TextArea de entrada
+            Platform.runLater(() -> entradaComando.clear()); //Limpiamos el TextArea de entrada
 
         } catch (Exception e) {
             salidaTerminal.appendText("Error al enviar comando: " + e.getMessage() + "\n");
@@ -163,11 +163,11 @@ public class ControlSSH {
         dialog.setTitle("Conexión SSH");
         dialog.setHeaderText("Introduce tus credenciales SSH");
 
-        // Botones Aceptar / Cancelar
+        //Botones Aceptar / Cancelar
         ButtonType loginButtonType = new ButtonType("Conectar", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
 
-        // Campos de texto
+        //Campos de texto
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -183,20 +183,20 @@ public class ControlSSH {
         grid.add(new Label("Contraseña:"), 0, 1);
         grid.add(contrasenaField, 1, 1);
 
-        // Hacer que el textfield crezca si se redimensiona
+        //Hacemos que el textfield crezca si se redimensiona
         GridPane.setHgrow(usuarioField, Priority.ALWAYS);
         GridPane.setHgrow(contrasenaField, Priority.ALWAYS);
 
         dialog.getDialogPane().setContent(grid);
 
-        // Habilitar o deshabilitar el botón de Conectar según haya usuario escrito
+        //Habilitamos o deshabilitamos el botón de Conectar según haya usuarios escritos
         dialog.getDialogPane().lookupButton(loginButtonType).setDisable(true);
 
         usuarioField.textProperty().addListener((observable, oldValue, newValue) -> {
             dialog.getDialogPane().lookupButton(loginButtonType).setDisable(newValue.trim().isEmpty());
         });
 
-        // Devolver los datos al pulsar Conectar
+        //Devolvemos los datos al pulsar Conectar
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
                 return new Pair<>(usuarioField.getText(), contrasenaField.getText());

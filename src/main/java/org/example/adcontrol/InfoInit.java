@@ -58,10 +58,10 @@ public class InfoInit {
         Path ini = Path.of("src/main/resources/org/example/adcontrol/Fichero Inicio/init");
         Path predefinido = Path.of("src/main/resources/org/example/adcontrol/Fichero Inicio/predefinido");
         try {
-            // Leer todo el contenido del archivo origen
+            //Leemos el contenido del archivo origen
             byte[] contenido = Files.readAllBytes(predefinido);
 
-            // Escribir (reemplazar) el contenido en el archivo destino
+            //Escribimos el contenido en el archivo destino
             Files.write(ini, contenido, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.CREATE);
 
             System.out.println("Contenido copiado y reemplazado correctamente.");
