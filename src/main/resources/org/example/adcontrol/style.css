@@ -1,14 +1,12 @@
-
-
 .custom-menu-buttom .arrow {
     -fx-background-color: white; /* Cambia el color de la flecha del menu button */
+    -fx-text-fill: white;
 }
 
 .chart-bar{
     -fx-background-color:  #01a5e7;
     -fx-background-radius: 5px 5px 0px 0px;
 }
-
 
 .chart-bar {
     -fx-background-color: #01a5e7; /* Color de las barras del gráfico */
@@ -22,7 +20,6 @@
     -fx-scale-y: 1.05; /* Cambia la altura */
 }
 
-
 .chart-content {
     -fx-background-color: white; /* Propiedad que cambia el color de fondo del gráfico */
 }
@@ -31,21 +28,22 @@
     -fx-background-color: transparent; /* Elimina fondo gris del chart */
 }
 
-.botonPrueba{
-    -fx-background-color: transparent;
-    -fx-border-color: grey;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-}
-
-.botonPrueba:hover{
-    -fx-background-color: grey;
-    -fx-border-color: grey;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
+.botonPrueba {
+    -fx-background-color: #01a5e7;
     -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+    -fx-transition: all 0.3s ease-in-out;
 }
 
+.botonPrueba:hover {
+    -fx-background-color: #33a5ed;
+    -fx-border-width: 1px;
+    -fx-text-fill: #ecf0f1;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 2);
+}
 
 .listView{
     -fx-font-size: 14px;
@@ -72,7 +70,6 @@
     -fx-border-color: #e0e0e0;
     -fx-border-radius: 8;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 2);
-    -fx-padding: 10;
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
 }
@@ -103,8 +100,6 @@
 .tableViewErrores .table-row-cell:hover {
     -fx-background-color: #e8eaf6; /* azul clarito */
 }
-
-
 
 .tablaIps {
     -fx-background-color: white;
@@ -157,7 +152,3 @@
 .circle-button:pressed {
     -fx-background-color: rgba(100, 149, 237, 0.6);
 }
-
-
-
-

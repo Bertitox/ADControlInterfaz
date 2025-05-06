@@ -25,16 +25,13 @@ public class ControladorMonitor extends Controlador{
     TableView<Incidencia> tableIncidencias;
 
     @FXML
-    TextField textIncidencias;
+    MenuButton textIncidencias;
 
     @FXML
     PieChart graficoIncidencias;
 
     @FXML
-    Button actualizar;
-
-    @FXML
-    Button actualizar1;
+    Button cargarDatosButton;
 
     @FXML
     Button borrarInidencias;
@@ -83,6 +80,7 @@ public class ControladorMonitor extends Controlador{
         refrescarIdioma();
         mostrarErroresTableView();
         rellenarMenuButtonAula();
+        rellenarMenuButtonSelecciónAula();
         //rellenarMenuButtonEquipo();
         rellenarMenuButtonErrores();
     }
@@ -98,8 +96,7 @@ public class ControladorMonitor extends Controlador{
             bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
             textIncidencia.setText(bundle.getString("textIncidencia"));
             tituloIncidencias.setText(bundle.getString("tituloIncidencias"));
-            actualizar.setText(bundle.getString("boton.text"));
-            actualizar1.setText(bundle.getString("boton2.text"));
+            cargarDatosButton.setText(bundle.getString("boton2.text"));
 
             System.out.println("Idioma cargado exitosamente.");//Debug
 
@@ -163,7 +160,7 @@ public class ControladorMonitor extends Controlador{
      * Método que actualiza y rellena el gráfico de incidencias.
      */
     @FXML
-    public void actualizarGrafico() {
+    public void actualizarGrafico() throws AulaNotFoundException {
         String referencia = textIncidencias.getText().trim();
         CRUDIncidencia crudIncidencia = new CRUDIncidencia();
 
@@ -189,6 +186,8 @@ public class ControladorMonitor extends Controlador{
         }
 
         graficoIncidencias.setData(datosGrafico);
+
+        mostrarIncidenciasTableView(); //Llamamos al método que rellena la tabla de incidencias
     }
 
     /**
@@ -224,6 +223,29 @@ public class ControladorMonitor extends Controlador{
                     rellenarMenuButtonEquipo();
                 });
                 MBaula.getItems().add(item);
+            }
+        }
+    }
+
+    /**
+     * Método que rellena los MenuItem del MenuButton de Aulas
+     */
+    public void rellenarMenuButtonSelecciónAula() {
+        textIncidencias.getItems().clear(); //Limpiamos elementos anteriores
+        Set<String> referenciasUnicas = new HashSet<>();
+
+        for (Aula_Equipo a : aulaEquipo.readAllAulas()) {
+            String referencia = a.getReferencia().getReferencia();
+
+            //Agregamos referencias si no han sido añadida antes
+            if (!referenciasUnicas.contains(referencia)) {
+                referenciasUnicas.add(referencia);
+                MenuItem item = new MenuItem(referencia);
+                item.setOnAction(e -> {
+                    textIncidencias.setText(referencia);
+                    rellenarMenuButtonEquipo();
+                });
+                textIncidencias.getItems().add(item);
             }
         }
     }

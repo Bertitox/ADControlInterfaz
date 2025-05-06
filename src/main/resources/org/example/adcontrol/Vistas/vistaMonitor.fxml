@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -40,12 +39,15 @@
                   <Image url="@../Imagenes/actualizar.png" />
                </image>
             </ImageView>
-            <TextField fx:id="textIncidencias" layoutX="258.0" layoutY="85.0" />
-            <Button fx:id="actualizar" layoutX="72.0" layoutY="143.0" mnemonicParsing="false" onAction="#mostrarIncidenciasTableView" prefHeight="40.0" prefWidth="105.0" styleClass="botonPrueba" text="Actualizar" textFill="#030303" />
-            <Button fx:id="actualizar1" layoutX="264.0" layoutY="141.0" mnemonicParsing="false" onAction="#actualizarGrafico" prefHeight="40.0" prefWidth="109.0" styleClass="botonPrueba" text="Ver Gráfico" textFill="#030303">
+            <Button fx:id="cargarDatosButton" layoutX="170.0" layoutY="145.0" mnemonicParsing="false" onAction="#actualizarGrafico" prefHeight="40.0" prefWidth="109.0" styleClass="botonPrueba" text="Cargar Datos" textFill="#030303">
                <tooltip>
                   <Tooltip text="Pulsa para ver el gráfico" />
                </tooltip></Button>
+            <MenuButton fx:id="textIncidencias" alignment="CENTER" layoutX="264.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: #01a5e7;" styleClass="custom-menu-buttom" text="Aula" textAlignment="CENTER" textFill="#f5f4f4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </MenuButton>
          </children>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -93,7 +95,7 @@
                   <Image url="@../Imagenes/error.png" />
                </image>
             </ImageView>
-            <TableView fx:id="tableViewErrores" layoutX="18.0" layoutY="62.0" prefHeight="148.0" prefWidth="411.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px;" styleClass="tableViewErrores">
+            <TableView fx:id="tableViewErrores" layoutX="16.0" layoutY="65.0" prefHeight="142.0" prefWidth="417.0" style="-fx-border-radius: 10px; -fx-background-radius: 10px;" styleClass="tableViewErrores">
               <columns>
                 <TableColumn prefWidth="75.0" text="CÓDIGO ERROR" />
                 <TableColumn prefWidth="347.0" text="DESCRIPCIÓN" />
@@ -117,22 +119,22 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <MenuButton fx:id="MBaula" alignment="CENTER" layoutX="14.0" layoutY="86.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="Aula" textAlignment="CENTER">
+            <MenuButton fx:id="MBaula" alignment="CENTER" layoutX="14.0" layoutY="86.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-background-color: #01a5e7;" styleClass="custom-menu-buttom" text="Aula" textAlignment="CENTER" textFill="#f2efef">
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <MenuButton fx:id="MBequipo" alignment="CENTER" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Equipo" textAlignment="CENTER">
+            <MenuButton fx:id="MBequipo" alignment="CENTER" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #01a5e7;" styleClass="custom-menu-buttom" text="Equipo" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <MenuButton fx:id="MBerror" alignment="CENTER" layoutX="14.0" layoutY="176.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="Error">
+            <MenuButton fx:id="MBerror" alignment="CENTER" layoutX="14.0" layoutY="176.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-background-color: #01a5e7;" styleClass="custom-menu-buttom" text="Error" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <Button fx:id="crearIncidencia" layoutX="359.0" layoutY="88.0" mnemonicParsing="false" onAction="#crearIncidencia" prefHeight="44.0" prefWidth="77.0" text="Crear">
+            <Button fx:id="crearIncidencia" layoutX="359.0" layoutY="88.0" mnemonicParsing="false" onAction="#crearIncidencia" prefHeight="44.0" prefWidth="77.0" styleClass="botonPrueba" text="Crear">
                <tooltip>
                   <Tooltip text="Pulsa para crear incidencias" />
                </tooltip>
@@ -142,7 +144,7 @@
                   <Tooltip text="Añade una descripción de la incidencia" />
                </tooltip>
             </TextArea>
-            <Button fx:id="borrarInidencias" layoutX="360.0" layoutY="154.0" mnemonicParsing="false" onAction="#borrarIncidencia" prefHeight="44.0" prefWidth="77.0" text="Eliminar">
+            <Button fx:id="borrarInidencias" layoutX="360.0" layoutY="154.0" mnemonicParsing="false" onAction="#borrarIncidencia" prefHeight="44.0" prefWidth="77.0" styleClass="botonPrueba" text="Eliminar">
                <tooltip>
                   <Tooltip text="Pulsa para eliminar incidencias" />
                </tooltip>
@@ -167,7 +169,7 @@
                   <Image url="@../Imagenes/advertencia-de-triangulo.png" />
                </image>
             </ImageView>
-            <TableView fx:id="tableIncidencias" layoutX="3.0" layoutY="60.0" prefHeight="406.0" prefWidth="925.0" style="-fx-background-radius: 10PX; -fx-border-radius: 10px;" styleClass="tableViewErrores">
+            <TableView fx:id="tableIncidencias" layoutX="15.0" layoutY="66.0" prefHeight="388.0" prefWidth="903.0" style="-fx-background-radius: 10PX; -fx-border-radius: 10px;" styleClass="tableViewErrores">
               <columns>
                 <TableColumn prefWidth="167.0" text="ERROR" />
                 <TableColumn prefWidth="748.0" text="DESCRIPCIÓN" />
