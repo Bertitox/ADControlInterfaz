@@ -123,13 +123,17 @@ public class ControladorMonitor extends Controlador{
         ObservableList<Incidencia> items = FXCollections.observableArrayList(incidencias);
 
         //Configuramos las columnas del TableView si aún no están configuradas
-        TableColumn<Incidencia, String> colCodigo = new TableColumn<>("CÓDIGO ERROR");
+        TableColumn<Incidencia, String> colEquipo = new TableColumn<>("EQUIPO");//Columna que contiene el nombre del equipo
+        colEquipo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getIdInformacionSistema().getNombre()));
+
+
+        TableColumn<Incidencia, String> colCodigo = new TableColumn<>("CÓDIGO ERROR");//Columna que contiene el código de error de la incidencia sobre un equipo
         colCodigo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCodigoError().getCodigoError()));
 
-        TableColumn<Incidencia, String> colDescripcion = new TableColumn<>("DESCRIPCIÓN");
+        TableColumn<Incidencia, String> colDescripcion = new TableColumn<>("DESCRIPCIÓN");//Columna que contiene la descripción de una incidencia sobre un equipo
         colDescripcion.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescripcion()));
 
-        tableIncidencias.getColumns().setAll(colCodigo, colDescripcion);
+        tableIncidencias.getColumns().setAll(colEquipo, colCodigo, colDescripcion);
 
         tableIncidencias.setItems(items);
     }
