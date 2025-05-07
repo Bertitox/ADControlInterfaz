@@ -2,6 +2,7 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
+import BBDD.DTO.Incidencia;
 import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.Timeline;
@@ -34,6 +35,33 @@ import javafx.animation.KeyFrame;
 
 
 public class ControladorPanelAula extends Controlador {
+
+    @FXML
+    private Label incidenciaRecEq1;
+
+    @FXML
+    private Label incidenciaRecEq2;
+
+    @FXML
+    private Label incidenciaRecEq3;
+
+    @FXML
+    private ImageView imgIncidencia1;
+
+    @FXML
+    private ImageView imgIncidencia2;
+
+    @FXML
+    private ImageView imgIncidencia3;
+
+    @FXML
+    private Label incidencia1;
+
+    @FXML
+    private Label incidencia2;
+
+    @FXML
+    private Label incidencia3;
 
     @FXML
     Label labelNumEquiposAula;
@@ -180,6 +208,66 @@ public class ControladorPanelAula extends Controlador {
     }
 
 
+    public void rellenarIncidenciasRecientes() throws AulaNotFoundException {
+        List<Incidencia> incidencias = I.getUltimasTresIncidenciasAula(labelAula.getText());  // Simulado
+        System.out.println(incidencias.size());
+        // Primero limpiar huecos restantes
+        if (incidencias.size() < 3) {
+            if (incidencias.size() < 1) {
+                imgIncidencia1.setOpacity(0.0);
+                incidencia1.setText("");
+                incidenciaRecEq1.setText("");
+            }
+            if (incidencias.size() < 2) {
+                imgIncidencia2.setOpacity(0.0);
+                incidencia2.setText("");
+                incidenciaRecEq2.setText("");
+            }
+            if (incidencias.size() < 3) {
+                imgIncidencia3.setOpacity(0.0);
+                incidencia3.setText("");
+                incidenciaRecEq3.setText("");
+            }
+        }
+
+        for (int i = 0; i < incidencias.size(); i++) {
+            Incidencia inc = incidencias.get(i);
+            ImageView imgView;
+            Label lblIncidencia;
+            Label nombreEqIncidencia;
+            switch (i) {
+                case 0:
+                    imgView = imgIncidencia1;
+                    lblIncidencia = incidencia1;
+                    nombreEqIncidencia = incidenciaRecEq1;
+                    break;
+                case 1:
+                    imgView = imgIncidencia2;
+                    lblIncidencia = incidencia2;
+                    nombreEqIncidencia = incidenciaRecEq2;
+                    break;
+                case 2:
+                    imgView = imgIncidencia3;
+                    lblIncidencia = incidencia3;
+                    nombreEqIncidencia = incidenciaRecEq3;
+                    break;
+                default:
+                    continue;
+            }
+
+            imgView.setOpacity(1.0);
+            lblIncidencia.setText(inc.getDescripcion());
+            nombreEqIncidencia.setText(inc.getIdInformacionSistema().getNombre());
+
+            if (inc.getCodigoError().getCodigoError().equals("E001")) {
+                imgView.setImage(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/errorRed.png").toExternalForm()));
+            } else {
+                imgView.setImage(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/cpuError.png").toExternalForm()));
+            }
+        }
+    }
+
+
     public void initializeLineChart() {
         if (graficoIncidenciasAula.getXAxis() instanceof NumberAxis
                 && graficoIncidenciasAula.getYAxis() instanceof NumberAxis) {
@@ -244,8 +332,8 @@ public class ControladorPanelAula extends Controlador {
         labelNumEquiposAula.setText(AE.numEquiposXAula(nombreAula));
         labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(nombreAula));
         if (I.getUltFechaMod(labelAula.getText()) == null) {
-            fechaUltMod.setText("00000000");
-            horaUltMod.setText("000000");
+            fechaUltMod.setText("Sin datos");
+            horaUltMod.setText("Sin datos");
 
         } else {
             DateTimeFormatter formatoBD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -265,10 +353,11 @@ public class ControladorPanelAula extends Controlador {
 
         cargarBarra();
         rellenarAdministrarEquipos();
+        rellenarIncidenciasRecientes();
     }
 
     @FXML
-    void vistaEquipos(MouseEvent event) throws IOException {
+    void vistaEquipos(ActionEvent event) throws IOException {
         if (AE.numEquiposXAula(labelAula.getText()).equals("0")) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "No hay aulas en esta clase, debes de agregar un equipo al menos.", ButtonType.OK);
             alert.setTitle("No hay equipos");
@@ -317,8 +406,9 @@ public class ControladorPanelAula extends Controlador {
         }
     }
 
+
     @FXML
-    void agregarEquipo(ActionEvent event) {
+    void agregarEquipo(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/OpcionAutomaticoManual.fxml"));
             Parent root = loader.load();
