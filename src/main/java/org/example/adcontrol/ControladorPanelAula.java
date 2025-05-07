@@ -161,19 +161,19 @@ public class ControladorPanelAula extends Controlador {
                     ip1.setText(equipo.getIp()); // Asumiendo que tienes getIp()
                     imgMonitor1.setOpacity(1.0);
                     nombreEQ1.setText(equipo.getNombre());
-                    botonEQ1.setDisable(false);
+                    botonEQ1.setOpacity(1.0);
                     break;
                 case 1:
                     ip2.setText(equipo.getIp());
                     imgMonitor2.setOpacity(1.0);
                     nombreEQ2.setText(equipo.getNombre());
-                    botonEQ2.setDisable(false);
+                    botonEQ2.setOpacity(1.0);
                     break;
                 case 2:
                     ip3.setText(equipo.getIp());
                     imgMonitor3.setOpacity(1.0);
                     nombreEQ3.setText(equipo.getNombre());
-                    botonEQ3.setDisable(false);
+                    botonEQ3.setOpacity(1.0);
                     break;
             }
         }
