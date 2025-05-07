@@ -2,6 +2,8 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
+import BBDD.DAO.CRUDInfoSistema;
+import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,10 +15,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -53,6 +52,7 @@ public class ControladorAula {
     @FXML
     AnchorPane panelLargo;
 
+
     /**
      * Método que inicializa los elementos del controlador que se usarán.
      */
@@ -75,7 +75,7 @@ public class ControladorAula {
      * Método que se encarga de actualizar, cargar y mostrar las imágenes de los monitores por aula y el texto del comboBox correspondiente a cada aula
      * @param aulaSeleccionada Recibe como parámetro el aula seleccionada, y la cambia en el combobox
      */
-    private void actualizarMonitores(String aulaSeleccionada) {
+    public void actualizarMonitores(String aulaSeleccionada) {
         gridPaneMonitores.getChildren().clear();
 
         if (aulaSeleccionada == null || aulaSeleccionada.isEmpty()) {
@@ -118,8 +118,6 @@ public class ControladorAula {
             monitor.setFitWidth(150);
             monitor.setFitHeight(150);
 
-            // 📌 IP ficticia de ejemplo (sustituye esto por un getIP o similar si tienes la info real)
-            //String ip = "192.168.1." + (i + 1);
             String ip = new CRUDAula_Equipo().getEquipoPorIndiceYAula(aulaSeleccionada, i).getIp();
 
             // 📌 Label de la IP
@@ -136,6 +134,64 @@ public class ControladorAula {
 
             // 📌 Tooltip personalizado
             String nombreEquipo = cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getNombre();
+
+            ContextMenu menu = new ContextMenu();
+
+            MenuItem modificarEquipo = new MenuItem("Modificar equipo");
+            MenuItem eliminarEquipo = new MenuItem("Eliminar equipo");
+
+            modificarEquipo.setOnAction(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/formularioEquipo.fxml"));
+                    Parent root = loader.load();
+                    ControladorFormularioEquipo controladorB = loader.getController();
+                    CRUDInfoSistema crudInfoSistema = new CRUDInfoSistema();
+                    InformacionSistema equipoSeleccionado = crudInfoSistema.getByNombre(nombreEquipo);
+                    controladorB.setAulaActual(aulaActual);
+                    controladorB.setCampoCPU(equipoSeleccionado.getProcesador());
+                    controladorB.setCampoArquitectura(equipoSeleccionado.getArquitectura());
+                    controladorB.setCampoIP(equipoSeleccionado.getIp());
+                    controladorB.setCampoNombre(equipoSeleccionado.getNombre());
+                    controladorB.setCampoKernel(equipoSeleccionado.getReleasee());
+                    controladorB.setCampoMAC(equipoSeleccionado.getMac());
+                    controladorB.setCampoSO(equipoSeleccionado.getSo());
+                    controladorB.setCampoMemDisp(equipoSeleccionado.getMemDisp().toString());
+                    controladorB.setCampoMemTotal(equipoSeleccionado.getMemTotal().toString());
+                    controladorB.setCampoVersion(equipoSeleccionado.getVersion());
+                    controladorB.setCampoUsoCPU(equipoSeleccionado.getUsoCpu());
+                    controladorB.setCampoNodo(equipoSeleccionado.getNombreNodo());
+                    controladorB.setModificar(true);
+
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+
+                    // 📌 Aquí el truco: cuando se cierre la ventana, actualizamos monitores
+                    stage.setOnHidden(e -> {
+                        actualizarMonitores(aulaActual);  // refrescamos el GridPane al cerrarse
+                    });
+
+                }catch (IOException e){
+                    System.out.println("Error al cambiar la pantalla al formulario para crear el equipo");
+                }
+            });
+
+            eliminarEquipo.setOnAction(event -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea eliminar el equipo?", ButtonType.YES, ButtonType.NO);
+                alert.showAndWait();
+                if(alert.getResult() == ButtonType.YES){
+                    CRUDInfoSistema crudInfoSistema = new CRUDInfoSistema();
+                    crudInfoSistema.delete(crudInfoSistema.getByNombre(nombreEquipo));
+                }
+
+                alert.setOnHidden(e -> {
+                    actualizarMonitores(aulaActual);  // refrescamos el GridPane al cerrarse
+                });
+            });
+
+            menu.getItems().addAll(modificarEquipo, eliminarEquipo);
+
+            stack.setOnContextMenuRequested(e -> menu.show(stack, e.getScreenX(), e.getScreenY()));
 
             //int numIncidencias = 0; // Sustituye con llamada a tu método real de incidencias
             int numIncidencias = crudIncidencia.getNumIncidenciasEquipo(cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getId());

@@ -58,7 +58,7 @@
                                     <Insets bottom="30.0" left="180.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="Direccion MAC" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Label text="Direccion MAC *" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets bottom="30.0" />
                                  </GridPane.margin>
@@ -96,7 +96,7 @@
                                     <Insets top="20.0" />
                                  </GridPane.margin>
                               </DatePicker>
-                              <Label text="IP" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Label text="IP *" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="30.0" />
                                  </GridPane.margin>
@@ -200,8 +200,8 @@
             <Insets />
          </opaqueInsets>
       </TabPane>
-      <Label layoutX="12.0" layoutY="42.0" text="Ingresa los datos del equipo para registrarlo en la base de datos." textFill="#6b6b6b" />
-      <Label layoutX="12.0" layoutY="16.0" text="Formulario para agregar un nuevo equipo">
+      <Label fx:id="labelSecundario" layoutX="12.0" layoutY="42.0" text="Ingresa los datos del equipo para registrarlo en la base de datos." textFill="#6b6b6b" />
+      <Label fx:id="labelPrincipal" layoutX="12.0" layoutY="16.0" text="Formulario para agregar un nuevo equipo">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

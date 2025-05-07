@@ -10,10 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,16 +61,23 @@ public class ControladorFormularioEquipo {
     @FXML
     private TextField campoVersion;
 
+    @FXML
+    private Label labelPrincipal;
+
+    @FXML
+    private Label labelSecundario;
+
     String aulaActual;
 
     LocalTime horaActual;
     LocalDate fechaActual;
 
     Boolean leerJson = false;
+    Boolean Modificar = false;
 
     public void setLeerJson(Boolean leerJson) {
         this.leerJson = leerJson;
-        if(leerJson){
+        if (leerJson) {
             System.out.println("Leyendo json");
             cargarDatosDesdeJSON();
             leerJson = false;
@@ -99,25 +103,20 @@ public class ControladorFormularioEquipo {
     void crearEquipo(ActionEvent event) {
         CRUDInfoSistema crudinfoSistema = new CRUDInfoSistema();
         CRUDAula_Equipo crudaula_equipo = new CRUDAula_Equipo();
+        CRUDAulas crudaulas = new CRUDAulas();
 
-        InformacionSistema informacionSistema = new InformacionSistema();
-        if(!campoNombre.getText().isEmpty() || !campoMAC.getText().isEmpty()) {
+        if (!campoNombre.getText().isEmpty() || !campoMAC.getText().isEmpty() || campoIP.getText().isEmpty()) {
+            InformacionSistema informacionSistema = null;
+            if (!Modificar) {
+                informacionSistema = new InformacionSistema();
+            } else {
+                informacionSistema = crudinfoSistema.getByMac(campoMAC.getText());
+            }
+
             informacionSistema.setNombre(campoNombre.getText());
             informacionSistema.setArquitectura(campoArquitectura.getText());
             informacionSistema.setUsoCpu(campoUsoCPU.getText());
             informacionSistema.setProcesador(campoCPU.getText());
-
-            if(campoMemTotal.getText().isEmpty()){
-                informacionSistema.setMemTotal(0);
-            }else{
-                informacionSistema.setMemTotal(Integer.valueOf(campoMemTotal.getText()));
-            }
-
-            if(campoMemDisp.getText().isEmpty()){
-                informacionSistema.setMemDisp(0);
-            }else{
-                informacionSistema.setMemDisp(Integer.valueOf(campoMemTotal.getText()));
-            }
             informacionSistema.setUltHora(horaActual);
             informacionSistema.setIp(campoIP.getText());
             informacionSistema.setUltFecha(fechaActual);
@@ -126,23 +125,43 @@ public class ControladorFormularioEquipo {
             informacionSistema.setNombreNodo(campoNodo.getText());
             informacionSistema.setMac(campoMAC.getText());
             informacionSistema.setReleasee(campoKernel.getText());
-            crudinfoSistema.insert(informacionSistema);
 
-            CRUDAulas crudaulas = new CRUDAulas();
+            if (campoMemTotal.getText().isEmpty()) {
+                informacionSistema.setMemTotal(0);
+            } else {
+                informacionSistema.setMemTotal(Integer.valueOf(campoMemTotal.getText()));
+            }
+
+            if (campoMemDisp.getText().isEmpty()) {
+                informacionSistema.setMemDisp(0);
+            } else {
+                informacionSistema.setMemDisp(Integer.valueOf(campoMemTotal.getText()));
+            }
+
             Aulas aula = new Aulas();
-            try{
+            try {
                 aula = crudaulas.getbyReferencia(aulaActual);
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("error al buscar el aula por la referencia");
             }
 
-            Aula_Equipo aula_equipo = new Aula_Equipo(aula, informacionSistema);
-            crudaula_equipo.insertAula(aula_equipo);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Equipo creado con éxito", ButtonType.OK);
-            alert.showAndWait();
-        }else{
+            if (!Modificar) {
+                System.out.println("Creando");
+                crudinfoSistema.insert(informacionSistema);
+                Aula_Equipo aula_equipo = new Aula_Equipo(aula, informacionSistema);
+                crudaula_equipo.insertAula(aula_equipo);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Equipo creado con éxito", ButtonType.OK);
+                alert.showAndWait();
+            } else {
+                System.out.println("Modificando");
+                crudinfoSistema.update(informacionSistema);
+                Modificar = false;
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Equipo modificado con éxito", ButtonType.OK);
+                alert.showAndWait();
+            }
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "El equipo debe tener al menos un nombre", ButtonType.OK);
             alert.showAndWait();
         }
@@ -175,15 +194,79 @@ public class ControladorFormularioEquipo {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-        // Intentar borrar el archivo tras leerlo
-        if (jsonFile.exists()) {
-            if (jsonFile.delete()) {
-                System.out.println("Archivo JSON eliminado correctamente.");
-            } else {
-                System.err.println("No se pudo eliminar el archivo JSON.");
+        } finally {
+            // Intentar borrar el archivo tras leerlo
+            if (jsonFile.exists()) {
+                if (jsonFile.delete()) {
+                    System.out.println("Archivo JSON eliminado correctamente.");
+                } else {
+                    System.err.println("No se pudo eliminar el archivo JSON.");
+                }
             }
         }
     }
+
+    public void setCampoArquitectura(String campoArquitectura) {
+        this.campoArquitectura.setText(campoArquitectura);
+    }
+
+    public void setCampoCPU(String campoCPU) {
+        this.campoCPU.setText(campoCPU);
+    }
+
+    public void setCampoFecha(LocalDate campoFecha) {
+        this.campoFecha.setValue(campoFecha);
+    }
+
+    public void setCampoHora(String campoHora) {
+        this.campoHora.setText(campoHora);
+    }
+
+    public void setCampoIP(String campoIP) {
+        this.campoIP.setText(campoIP);
+    }
+
+    public void setCampoKernel(String campoKernel) {
+        this.campoKernel.setText(campoKernel);
+    }
+
+    public void setCampoMAC(String campoMAC) {
+        this.campoMAC.setText(campoMAC);
+    }
+
+    public void setCampoMemDisp(String campoMemDisp) {
+        this.campoMemDisp.setText(campoMemDisp);
+    }
+
+    public void setCampoMemTotal(String campoMemTotal) {
+        this.campoMemTotal.setText(campoMemTotal);
+    }
+
+    public void setCampoNodo(String campoNodo) {
+        this.campoNodo.setText(campoNodo);
+    }
+
+    public void setCampoNombre(String campoNombre) {
+        this.campoNombre.setText(campoNombre);
+    }
+
+    public void setCampoSO(String campoSO) {
+        this.campoSO.setText(campoSO);
+    }
+
+    public void setCampoUsoCPU(String campoUsoCPU) {
+        this.campoUsoCPU.setText(campoUsoCPU);
+    }
+
+    public void setCampoVersion(String campoVersion) {
+        this.campoVersion.setText(campoVersion);
+    }
+
+    public void setModificar(Boolean modificar) {
+        Modificar = modificar;
+        if(Modificar) {
+            labelPrincipal.setText("Formulario para modificar un equipo");
+            labelSecundario.setText("Modifica los datos del equipo para actualizarlo en la base de datos.");
+        }
     }
 }

@@ -207,7 +207,7 @@
                                  </font>
                               </Label>
                               <ProgressBar fx:id="barraEstadoAula" layoutX="15.0" layoutY="61.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="10.0" prefWidth="190.0" progress="0.0" />
-                              <Label fx:id="labelPorcentajeProgreso" layoutX="167.0" layoutY="39.0" text="0%">
+                              <Label fx:id="labelPorcentajeProgreso" layoutX="157.0" layoutY="39.0" text="100.0%">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -411,7 +411,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#vistaEquipos" prefHeight="35.0" prefWidth="153.0" styleClass="botonAgregarEquipo" text="Modificar equipos" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                        <Button mnemonicParsing="false" onAction="#vistaEquipos" prefHeight="35.0" prefWidth="153.0" styleClass="botonAgregarEquipo" text="Gestionar equipos" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets right="15.0" top="10.0" />
                            </GridPane.margin>
