@@ -206,13 +206,13 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <ProgressBar fx:id="barraEstadoAula" layoutX="15.0" layoutY="61.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="10.0" prefWidth="190.0" progress="0.56" />
-                              <Label fx:id="labelPorcentajeProgreso" layoutX="174.0" layoutY="39.0" text="56%">
+                              <ProgressBar fx:id="barraEstadoAula" layoutX="15.0" layoutY="61.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="10.0" prefWidth="190.0" progress="0.0" />
+                              <Label fx:id="labelPorcentajeProgreso" layoutX="167.0" layoutY="39.0" text="0%">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="185.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="caraImagen" fitHeight="20.0" fitWidth="20.0" layoutX="185.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Imagenes/medio.png" />
                                  </image>
@@ -234,7 +234,7 @@
                                  <NumberAxis label="Incidencias" side="LEFT" />
                              </yAxis>
                          </LineChart>
-                         <Label fx:id="labelAula" text="DAM 1" GridPane.columnIndex="1">
+                         <Label fx:id="labelAula" GridPane.columnIndex="1">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -429,7 +429,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                        <ImageView fx:id="imgMonitor1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                            <image>
                               <Image url="@../Imagenes/imagenmonitor.png" />
                            </image>
@@ -437,7 +437,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </ImageView>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                        <ImageView fx:id="imgMonitor2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                            <image>
                               <Image url="@../Imagenes/imagenmonitor.png" />
                            </image>
@@ -445,7 +445,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </ImageView>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                        <ImageView fx:id="imgMonitor3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                            <image>
                               <Image url="@../Imagenes/imagenmonitor.png" />
                            </image>
@@ -453,7 +453,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </ImageView>
-                        <Label text="Equipo 4 (Alberto)" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                        <Label fx:id="nombreEQ1" text="Equipo 4 (Alberto)" GridPane.columnSpan="2" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="20.0" left="65.0" />
                            </GridPane.margin>
@@ -461,7 +461,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label text="Equipo 10 (Jorge)" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                        <Label fx:id="nombreEQ2" text="Equipo 10 (Jorge)" GridPane.columnSpan="2" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets bottom="20.0" left="65.0" />
                            </GridPane.margin>
@@ -469,7 +469,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label text="Equipo 8 (Manuel)" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                        <Label fx:id="nombreEQ3" text="Equipo 8 (Manuel)" GridPane.columnSpan="2" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets bottom="20.0" left="65.0" />
                            </GridPane.margin>
@@ -477,22 +477,22 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label text="192.168.1.4" textFill="#6f6f6f" GridPane.rowIndex="1">
+                        <Label fx:id="ip1" text="192.168.1.4" textFill="#6f6f6f" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="65.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label text="192.168.1.10" textFill="#6f6f6f" GridPane.rowIndex="2">
+                        <Label fx:id="ip2" text="192.168.1.10" textFill="#6f6f6f" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="65.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label text="192.168.1.8" textFill="#6f6f6f" GridPane.rowIndex="3">
+                        <Label fx:id="ip3" text="192.168.1.8" textFill="#6f6f6f" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="65.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Button fx:id="botonEQ1" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true">
                                  <image>
@@ -507,7 +507,7 @@
                               <Insets right="20.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <Button fx:id="botonEQ2" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true">
                                  <image>
@@ -522,7 +522,7 @@
                               <Insets right="20.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Button fx:id="botonEQ3" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" preserveRatio="true">
                                  <image>

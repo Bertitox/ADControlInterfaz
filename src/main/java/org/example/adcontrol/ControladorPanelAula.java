@@ -2,8 +2,10 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
+import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,10 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -25,6 +26,8 @@ import javafx.util.StringConverter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import javafx.scene.chart.NumberAxis;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
@@ -52,6 +55,45 @@ public class ControladorPanelAula extends Controlador {
 
     @FXML
     Label horaUltMod;
+
+    @FXML
+    private Button botonEQ1;
+
+    @FXML
+    private Button botonEQ2;
+
+    @FXML
+    private Button botonEQ3;
+
+    @FXML
+    private Label nombreEQ1;
+
+    @FXML
+    private Label nombreEQ2;
+
+    @FXML
+    private Label nombreEQ3;
+
+    @FXML
+    private ImageView imgMonitor1;
+
+    @FXML
+    private ImageView imgMonitor2;
+
+    @FXML
+    private ImageView imgMonitor3;
+
+    @FXML
+    private Label ip1;
+
+    @FXML
+    private Label ip2;
+
+    @FXML
+    private Label ip3;
+
+    @FXML
+    private ImageView caraImagen;
 
     @FXML
     Label labelPorcentajeProgreso;
@@ -83,8 +125,59 @@ public class ControladorPanelAula extends Controlador {
         fechaActual.setText(fechaFormateada);
         initializeLineChart();
         startChartUpdater();
-        cargarBarra(); //Método que se encarga de actualizar la barra de progreso del estado general del aula
+        //cargarBarra(); //Método que se encarga de actualizar la barra de progreso del estado general del aula
+    }
 
+    public void rellenarAdministrarEquipos(){
+        List<InformacionSistema> equipos = AE.get3EquiposXAula(labelAula.getText());
+        // Asignamos valores según posición
+
+        // Opcional: si quieres limpiar los huecos restantes cuando hay menos de 3
+        if (equipos.size() < 3) {
+            if (equipos.size() < 1) {
+                ip1.setText("");
+                imgMonitor1.setOpacity(0.0);
+                nombreEQ1.setText("");
+                botonEQ1.setOpacity(0.0);
+            }
+            if (equipos.size() < 2) {
+                ip2.setText("");
+                imgMonitor2.setOpacity(0.0);
+                nombreEQ2.setText("");
+                botonEQ2.setOpacity(0.0);
+            }
+            if (equipos.size() < 3) {
+                ip3.setText("");
+                imgMonitor3.setOpacity(0.0);
+                nombreEQ3.setText("");
+                botonEQ3.setOpacity(0.0);
+            }
+        }
+
+        for (int i = 0; i < equipos.size(); i++) {
+            InformacionSistema equipo = equipos.get(i);
+
+        switch (i) {
+            case 0:
+                ip1.setText(equipo.getIp()); // Asumiendo que tienes getIp()
+                imgMonitor3.setOpacity(0.0);
+                nombreEQ1.setText(equipo.getNombre());
+                botonEQ1.setDisable(false);
+                break;
+            case 1:
+                ip2.setText(equipo.getIp());
+                imgMonitor3.setOpacity(0.0);
+                nombreEQ2.setText(equipo.getNombre());
+                botonEQ2.setDisable(false);
+                break;
+            case 2:
+                ip3.setText(equipo.getIp());
+                imgMonitor3.setOpacity(0.0);
+                nombreEQ3.setText(equipo.getNombre());
+                botonEQ3.setDisable(false);
+                break;
+        }
+    }
     }
 
 
@@ -113,7 +206,7 @@ public class ControladorPanelAula extends Controlador {
             });
 
             graficoIncidenciasAula.setTitle("Histórico de Incidencias");
-            series.setName("Histórico de Incidencias");
+            series.setName("Incidencias");
 
             graficoIncidenciasAula.getData().clear();
             series.getData().add(new XYChart.Data<>(0, 0)); //Punto inicial a 0
@@ -170,6 +263,9 @@ public class ControladorPanelAula extends Controlador {
             }
             horaUltMod.setText(I.getUltHoraMod(labelAula.getText()));
         }
+
+        cargarBarra();
+        rellenarAdministrarEquipos();
     }
 
     @FXML
@@ -199,8 +295,25 @@ public class ControladorPanelAula extends Controlador {
 
     void cargarBarra() throws AulaNotFoundException {
         //Fórmula para calcular el estado general del aula --> % Estado General = (Num Equipos Incidencias / Num Total Equipos) * 100
-        labelPorcentajeProgreso.setText(String.valueOf((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText()) * 100) + " %");
-        barraEstadoAula.setProgress((((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText())) * 100) / 100);
+        //Si no hay equipos ponemos el progreso del progress bar a 0
+        int totalEquipos = Integer.parseInt(labelNumEquiposAula.getText());
+        Double calculo = 0.0;
+
+        if (totalEquipos == 0) {
+            barraEstadoAula.setProgress(0);
+            labelPorcentajeProgreso.setText("0 %");
+        }else{
+            calculo = (double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText()) * 100;
+            labelPorcentajeProgreso.setText(calculo + " %");
+            barraEstadoAula.setProgress((((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText())) * 100) / 100);
+        }
+        if (calculo <= 25.0) {
+            caraImagen.setImage(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/contento.png").toExternalForm()));
+        } else if (calculo > 25.0 && calculo < 75.0) {
+            caraImagen.setImage(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/medio.png").toExternalForm()));
+        } else {
+            caraImagen.setImage(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/triste.png").toExternalForm()));
+        }
     }
 
     @FXML

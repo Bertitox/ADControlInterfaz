@@ -197,8 +197,10 @@ public class ControladorHome extends Controlador{//implements Initializable {
             XYChart.Data<String, Number> data = new XYChart.Data<>(referencia, numIncidencias);
             datosGrafico.add(data);
         }
-
+        CategoryAxis xAxis = (CategoryAxis) barChart.getXAxis();
         NumberAxis yAxis = (NumberAxis) barChart.getYAxis();
+        xAxis.setLabel("Aulas");
+        yAxis.setLabel("Incidencias");
         barChart.setLegendVisible(false);
         barChart.setTitle("Aulas con incidencias");
         //Desactivamos el ajuste automático del rango

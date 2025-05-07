@@ -260,7 +260,15 @@ public class CRUDIncidencia {
     }
 
     public int getEquipoIncidenciasXAula(String referencia) throws AulaNotFoundException {
-        return Integer.parseInt(em.createNativeQuery("select COUNT(Distinct id_informacion_sistema) from incidencias where id_aula ='"+referencia+"' group by id_aula;").getSingleResult().toString());
+        Set<String> aulasConIncidencias = getAulasIncidencias();
+        for (String aula : aulasConIncidencias) {
+            if (aula.equals(referencia)) {
+                //SI EXISTE EL AULA DEVUELVE EL Nº DE EQUIPOS CON INCIDENCIAS
+                return Integer.parseInt(em.createNativeQuery("select COUNT(Distinct id_informacion_sistema) from incidencias where id_aula ='"+referencia+"' group by id_aula;").getSingleResult().toString());
+            }
+        }
+        //SI NO EXISTE EL AULA DEVUELVE 0
+        return 0;
     }
 
 

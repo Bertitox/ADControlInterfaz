@@ -104,18 +104,5 @@ public class CRUDInfoSistema {
         return info;
     }
 
-    /**
-     * Método principal para probar las operaciones CRUD.
-     *
-     * @param args los argumentos de la línea de comandos
-     */
-    public static void main(String[] args) {
-        CRUDInfoSistema crudInfoSistema = new CRUDInfoSistema();
-        InformacionSistema info = MapearJson.mapJsonToEntity("src/main/java/BBDD/DAO/System_info.json");
-        if (info != null) {
-            crudInfoSistema.mostrarInformacionSistema(); // Insertamos la entidad correctamente
-        }
 
-        //System.out.println(crudInfoSistema.getIdEquipo("PC Aula 102"));
-    }
 }

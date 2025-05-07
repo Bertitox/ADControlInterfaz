@@ -2,6 +2,7 @@ package BBDD.DAO;
 
 import BBDD.Conexion.Conexion;
 import BBDD.DTO.Aula_Equipo;
+import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
 import BBDD.Validaciones.Validaciones_systema;
 import jakarta.persistence.EntityManager;
@@ -157,6 +158,27 @@ public class CRUDAula_Equipo {
         }
 
         return equiposPorAula;  //Devolvemos el mapa
+    }
+
+    public List<InformacionSistema> get3EquiposXAula(String referencia) {
+        try {
+            // Consulta nativa que obtiene los InformacionSistema relacionados a la referencia de aula
+            List<InformacionSistema> equipos = gestorEntidad.createNativeQuery("""
+            SELECT i.*
+            FROM aula a
+            JOIN informacion_sistema i ON a.id_informacion_sistema = i.id
+            WHERE a.referencia = :referencia
+            """, InformacionSistema.class)
+                    .setParameter("referencia", referencia)
+                    .setMaxResults(3) // Limitar a 3 resultados
+                    .getResultList();
+
+            return equipos;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     //Método main para realizar pruebas.
