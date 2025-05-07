@@ -27,7 +27,7 @@
                   <Image url="@../Imagenes/adcontrolVerde.png" />
                </image>
             </ImageView>
-            <TextArea fx:id="salidaTerminal" editable="false" layoutX="9.0" layoutY="9.0" prefHeight="478.0" prefWidth="903.0" style="-fx-background-color: rgba(2,10,5,1); -fx-control-inner-background: rgba(2,10,5,1); -fx-border-radius: 0px; -fx-background-radius: 0px;" styleClass="textAreaTerminal" wrapText="true">
+            <TextArea fx:id="salidaTerminal" editable="false" layoutX="17.0" layoutY="16.0" prefHeight="465.0" prefWidth="886.0" style="-fx-background-color: rgba(2,10,5,1); -fx-control-inner-background: rgba(2,10,5,1); -fx-border-radius: 0px; -fx-background-radius: 0px;" styleClass="textAreaTerminal" wrapText="true">
                <font>
                   <Font name="JetBrains Mono NL Regular" size="13.0" />
                </font>
