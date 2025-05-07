@@ -380,6 +380,16 @@ public class ControladorPanelAula extends Controlador {
         labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(labelAula.getText()));
         cargarBarra();
         rellenarAdministrarEquipos();
+        rellenarIncidenciasRecientes();
+    }
+
+
+    void refrescar() throws AulaNotFoundException {
+        labelNumEquiposAula.setText(AE.numEquiposXAula(labelAula.getText()));
+        labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(labelAula.getText()));
+        cargarBarra();
+        rellenarAdministrarEquipos();
+        rellenarIncidenciasRecientes();
     }
 
     void cargarBarra() throws AulaNotFoundException {
@@ -395,7 +405,7 @@ public class ControladorPanelAula extends Controlador {
             calculo = (double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText()) * 100;
             double estadoRedondeado = Math.round(calculo * 10.0) / 10.0;
             labelPorcentajeProgreso.setText(estadoRedondeado + " %");
-            barraEstadoAula.setProgress((((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText())) * 100) / 100);
+            barraEstadoAula.setProgress((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText()));
         }
         if (calculo <= 25.0) {
             caraImagen.setImage(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/contento.png").toExternalForm()));
@@ -413,10 +423,10 @@ public class ControladorPanelAula extends Controlador {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/OpcionAutomaticoManual.fxml"));
             Parent root = loader.load();
 
-            //Obtener el controlador cargado desde el FXML
+            // Obtener el controlador cargado desde el FXML
             ControladorAutomaticoManual controladorAutomaticoManual = loader.getController();
 
-            //Pasarle el dato al controlador
+            // Pasar el dato al controlador
             controladorAutomaticoManual.setAulaActual(labelAula.getText());
 
             Stage stage = new Stage();
@@ -428,6 +438,16 @@ public class ControladorPanelAula extends Controlador {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setResizable(false);
+
+            // Aquí se agrega el listener para ejecutar el refresco antes de cerrar
+            stage.setOnCloseRequest(e -> {
+                try {
+                    refrescar(null); // Llamamos a refrescar al cerrar la ventana
+                } catch (AulaNotFoundException ex) {
+                    ex.printStackTrace(); // Manejo de errores
+                }
+            });
+
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();

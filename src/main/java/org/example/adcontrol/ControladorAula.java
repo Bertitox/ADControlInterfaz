@@ -73,6 +73,7 @@ public class ControladorAula {
 
     /**
      * Método que se encarga de actualizar, cargar y mostrar las imágenes de los monitores por aula y el texto del comboBox correspondiente a cada aula
+     *
      * @param aulaSeleccionada Recibe como parámetro el aula seleccionada, y la cambia en el combobox
      */
     public void actualizarMonitores(String aulaSeleccionada) {
@@ -84,6 +85,7 @@ public class ControladorAula {
         }
 
         int cantidadMonitores = aulasMonitores.getOrDefault(aulaSeleccionada, 0);
+        System.out.println(cantidadMonitores);
 
         if (cantidadMonitores < 0) {
             System.err.println("La cantidad de monitores no puede ser negativa.");
@@ -117,7 +119,7 @@ public class ControladorAula {
             ImageView monitor = new ImageView(imagenMonitor);
             monitor.setFitWidth(150);
             monitor.setFitHeight(150);
-
+            //ERROR AQUÍ
             String ip = new CRUDAula_Equipo().getEquipoPorIndiceYAula(aulaSeleccionada, i).getIp();
 
             // 📌 Label de la IP
@@ -164,14 +166,10 @@ public class ControladorAula {
 
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
-                    stage.show();
+                    stage.showAndWait();
+                    actualizarMonitores(aulaActual);  // refrescamos el GridPane al cerrarse
 
-                    // 📌 Aquí el truco: cuando se cierre la ventana, actualizamos monitores
-                    stage.setOnHidden(e -> {
-                        actualizarMonitores(aulaActual);  // refrescamos el GridPane al cerrarse
-                    });
-
-                }catch (IOException e){
+                } catch (IOException e) {
                     System.out.println("Error al cambiar la pantalla al formulario para crear el equipo");
                 }
             });
@@ -179,14 +177,13 @@ public class ControladorAula {
             eliminarEquipo.setOnAction(event -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea eliminar el equipo?", ButtonType.YES, ButtonType.NO);
                 alert.showAndWait();
-                if(alert.getResult() == ButtonType.YES){
-                    CRUDInfoSistema crudInfoSistema = new CRUDInfoSistema();
-                    crudInfoSistema.delete(crudInfoSistema.getByNombre(nombreEquipo));
-                }
 
-                alert.setOnHidden(e -> {
-                    actualizarMonitores(aulaActual);  // refrescamos el GridPane al cerrarse
-                });
+                if (alert.getResult() == ButtonType.YES) {
+                    CRUDInfoSistema crudInfoSistema = new CRUDInfoSistema();
+                    InformacionSistema info = crudInfoSistema.getByNombre(nombreEquipo);
+                    crudInfoSistema.delete(info);
+                    actualizarMonitores(aulaActual);
+                }
             });
 
             menu.getItems().addAll(modificarEquipo, eliminarEquipo);
@@ -207,10 +204,6 @@ public class ControladorAula {
         }
 
         menuButtonAulas.setText(aulaSeleccionada);
-    }
-
-    public String getAulaActual() {
-        return aulaActual;
     }
 
     public void setAulaActual(String aulaActual) {

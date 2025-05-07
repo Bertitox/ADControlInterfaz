@@ -11,6 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,6 +68,9 @@ public class ControladorFormularioEquipo {
 
     @FXML
     private Label labelSecundario;
+
+    @FXML
+    private Pane ventanaFormulario;
 
     String aulaActual;
 
@@ -154,12 +159,16 @@ public class ControladorFormularioEquipo {
                 crudaula_equipo.insertAula(aula_equipo);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Equipo creado con éxito", ButtonType.OK);
                 alert.showAndWait();
+                Stage stage = (Stage) ventanaFormulario.getScene().getWindow();
+                stage.close();
             } else {
                 System.out.println("Modificando");
                 crudinfoSistema.update(informacionSistema);
                 Modificar = false;
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Equipo modificado con éxito", ButtonType.OK);
                 alert.showAndWait();
+                Stage stage = (Stage) ventanaFormulario.getScene().getWindow();
+                stage.close();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "El equipo debe tener al menos un nombre", ButtonType.OK);

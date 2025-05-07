@@ -33,7 +33,10 @@ public class CRUDInfoSistema {
     public void insert(InformacionSistema informacionSistema) {
         transaction.begin();
         em.persist(informacionSistema); // Usa el 'em' que es correcto
+        em.flush();
+        em.clear();
         transaction.commit();
+
     }
 
     /**
@@ -55,6 +58,8 @@ public class CRUDInfoSistema {
     public void delete(InformacionSistema informacionSistema) {
         transaction.begin();
         em.remove(informacionSistema);
+        em.flush();
+        em.clear();
         transaction.commit();
     }
 
