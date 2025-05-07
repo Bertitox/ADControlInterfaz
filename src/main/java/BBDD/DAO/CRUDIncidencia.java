@@ -271,6 +271,19 @@ public class CRUDIncidencia {
         return 0;
     }
 
+    /**
+     * Método que devuelve el número de incidencias asociadas a un equipo concreto
+     * @param idEquipo el id de {@link InformacionSistema}
+     * @return número de incidencias para ese equipo
+     */
+    public int getNumIncidenciasEquipo(int idEquipo) {
+        String sql = "SELECT COUNT(*) FROM incidencias WHERE id_informacion_sistema = :idEquipo";
+        Object resultado = em.createNativeQuery(sql)
+                .setParameter("idEquipo", idEquipo)
+                .getSingleResult();
+        return Integer.parseInt(resultado.toString());
+    }
+
 
     /**
      * Clase main para realizar pruebas

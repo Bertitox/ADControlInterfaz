@@ -1,6 +1,7 @@
 package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula_Equipo;
+import BBDD.DAO.CRUDIncidencia;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -8,15 +9,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -40,6 +45,7 @@ public class ControladorAula {
     private GridPane gridPaneMonitores;
 
     CRUDAula_Equipo cruda = new CRUDAula_Equipo(); //Llamada al CRUD que conecta con la tabla Aula de la BBDD
+    CRUDIncidencia crudIncidencia = new CRUDIncidencia();
     private Map<String, Integer> aulasMonitores;
 
     String aulaActual;
@@ -70,10 +76,8 @@ public class ControladorAula {
      * @param aulaSeleccionada Recibe como parámetro el aula seleccionada, y la cambia en el combobox
      */
     private void actualizarMonitores(String aulaSeleccionada) {
-        //Limpiar el grid antes de agregar nuevos monitores
         gridPaneMonitores.getChildren().clear();
 
-        //Validamos el aula seleccionada y la cantidad de monitores por aula
         if (aulaSeleccionada == null || aulaSeleccionada.isEmpty()) {
             System.err.println("El aula seleccionada no es válida.");
             return;
@@ -86,7 +90,6 @@ public class ControladorAula {
             return;
         }
 
-        //Cargamos la imagen del monitor y la manejamos
         Image imagenMonitor;
         try (InputStream imagenStream = getClass().getResourceAsStream("/org/example/adcontrol/Imagenes/imagenmonitor.png")) {
             if (imagenStream == null) {
@@ -98,12 +101,11 @@ public class ControladorAula {
             return;
         }
 
-        //Dimensiones dinámicas del contenedor
-        int columnas = 5; //Configuración total de las columnas
-        int filas = 3;    //Configuración total de las filas
+        int columnas = 5;
+        int filas = 3;
 
-        gridPaneMonitores.setHgap(10); //Espaciado horizontal entre columnas
-        gridPaneMonitores.setVgap(100); //Espaciado vertical entre filas
+        gridPaneMonitores.setHgap(10);
+        gridPaneMonitores.setVgap(100);
 
         for (int i = 0; i < cantidadMonitores; i++) {
             int fila = i / columnas;
@@ -111,18 +113,43 @@ public class ControladorAula {
 
             if (fila >= filas) break;
 
+            // 📌 Imagen del monitor
             ImageView monitor = new ImageView(imagenMonitor);
             monitor.setFitWidth(150);
             monitor.setFitHeight(150);
 
-            GridPane.setHalignment(monitor, HPos.CENTER);
-            GridPane.setValignment(monitor, VPos.CENTER);
+            // 📌 IP ficticia de ejemplo (sustituye esto por un getIP o similar si tienes la info real)
+            //String ip = "192.168.1." + (i + 1);
+            String ip = new CRUDAula_Equipo().getEquipoPorIndiceYAula(aulaSeleccionada, i).getIp();
 
-            GridPane.setMargin(monitor, new Insets(50, 0, 0, 0)); //Espaciado extra entre los elementos
-            gridPaneMonitores.add(monitor, columna, fila);
+            // 📌 Label de la IP
+            Label ipLabel = new Label(ip);
+            ipLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; "
+                    + "-fx-background-color: rgba(0, 0, 0, 0.5); -fx-padding: 3px 5px; "
+                    + "-fx-background-radius: 5px;");
+            ipLabel.setMouseTransparent(true);  // Para que no bloquee clics ni tooltips
+
+            // 📌 StackPane para imagen + IP superpuesta
+            StackPane stack = new StackPane();
+            stack.getChildren().addAll(monitor, ipLabel);
+            StackPane.setAlignment(ipLabel, Pos.CENTER);
+
+            // 📌 Tooltip personalizado
+            String nombreEquipo = cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getNombre();
+
+            //int numIncidencias = 0; // Sustituye con llamada a tu método real de incidencias
+            int numIncidencias = crudIncidencia.getNumIncidenciasEquipo(cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getId());
+            Tooltip tooltip = new Tooltip("Nombre: " + nombreEquipo + "\nIncidencias: " + numIncidencias);
+            Tooltip.install(stack, tooltip);
+
+            // 📌 Añadir al GridPane
+            GridPane.setHalignment(stack, HPos.CENTER);
+            GridPane.setValignment(stack, VPos.CENTER);
+            GridPane.setMargin(stack, new Insets(50, 0, 0, 0));
+
+            gridPaneMonitores.add(stack, columna, fila);
         }
 
-        //Cambiamos el texto del MenuButton a la opción seleccionada (Aula seleccionada)
         menuButtonAulas.setText(aulaSeleccionada);
     }
 

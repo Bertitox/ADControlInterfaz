@@ -128,7 +128,7 @@ public class ControladorPanelAula extends Controlador {
         //cargarBarra(); //Método que se encarga de actualizar la barra de progreso del estado general del aula
     }
 
-    public void rellenarAdministrarEquipos(){
+    public void rellenarAdministrarEquipos() {
         List<InformacionSistema> equipos = AE.get3EquiposXAula(labelAula.getText());
         // Asignamos valores según posición
 
@@ -156,28 +156,27 @@ public class ControladorPanelAula extends Controlador {
 
         for (int i = 0; i < equipos.size(); i++) {
             InformacionSistema equipo = equipos.get(i);
-
-        switch (i) {
-            case 0:
-                ip1.setText(equipo.getIp()); // Asumiendo que tienes getIp()
-                imgMonitor3.setOpacity(0.0);
-                nombreEQ1.setText(equipo.getNombre());
-                botonEQ1.setDisable(false);
-                break;
-            case 1:
-                ip2.setText(equipo.getIp());
-                imgMonitor3.setOpacity(0.0);
-                nombreEQ2.setText(equipo.getNombre());
-                botonEQ2.setDisable(false);
-                break;
-            case 2:
-                ip3.setText(equipo.getIp());
-                imgMonitor3.setOpacity(0.0);
-                nombreEQ3.setText(equipo.getNombre());
-                botonEQ3.setDisable(false);
-                break;
+            switch (i) {
+                case 0:
+                    ip1.setText(equipo.getIp()); // Asumiendo que tienes getIp()
+                    imgMonitor1.setOpacity(1.0);
+                    nombreEQ1.setText(equipo.getNombre());
+                    botonEQ1.setDisable(false);
+                    break;
+                case 1:
+                    ip2.setText(equipo.getIp());
+                    imgMonitor2.setOpacity(1.0);
+                    nombreEQ2.setText(equipo.getNombre());
+                    botonEQ2.setDisable(false);
+                    break;
+                case 2:
+                    ip3.setText(equipo.getIp());
+                    imgMonitor3.setOpacity(1.0);
+                    nombreEQ3.setText(equipo.getNombre());
+                    botonEQ3.setDisable(false);
+                    break;
+            }
         }
-    }
     }
 
 
@@ -291,6 +290,7 @@ public class ControladorPanelAula extends Controlador {
         labelNumEquiposAula.setText(AE.numEquiposXAula(labelAula.getText()));
         labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(labelAula.getText()));
         cargarBarra();
+        rellenarAdministrarEquipos();
     }
 
     void cargarBarra() throws AulaNotFoundException {
@@ -302,9 +302,10 @@ public class ControladorPanelAula extends Controlador {
         if (totalEquipos == 0) {
             barraEstadoAula.setProgress(0);
             labelPorcentajeProgreso.setText("0 %");
-        }else{
+        } else {
             calculo = (double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText()) * 100;
-            labelPorcentajeProgreso.setText(calculo + " %");
+            double estadoRedondeado = Math.round(calculo * 10.0) / 10.0;
+            labelPorcentajeProgreso.setText(estadoRedondeado + " %");
             barraEstadoAula.setProgress((((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText())) * 100) / 100);
         }
         if (calculo <= 25.0) {
@@ -372,6 +373,9 @@ public class ControladorPanelAula extends Controlador {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelMonitor.fxml"));
             Parent root = fxmlLoader.load();
+
+            ControladorVistaPanelMonitor controladorVistaPanelMonitor = fxmlLoader.getController();
+            //controladorVistaPanelMonitor.setAulaActual(labelAula.getText());
 
             panelLargo.getChildren().clear();
             panelLargo.getChildren().add(root);

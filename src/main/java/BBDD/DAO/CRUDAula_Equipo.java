@@ -181,6 +181,38 @@ public class CRUDAula_Equipo {
         }
     }
 
+    /**
+     * Método que devuelve un objeto InformacionSistema de un equipo por su índice en un aula concreta.
+     * @param referenciaAula referencia del aula.
+     * @param indice índice del equipo (posición en la lista, empezando en 0).
+     * @return devuelve el objeto InformacionSistema o null si no se encuentra.
+     */
+    public InformacionSistema getEquipoPorIndiceYAula(String referenciaAula, int indice) {
+        try {
+            // Consulta para obtener todos los equipos (InformacionSistema) en el aula
+            List<InformacionSistema> equipos = gestorEntidad.createNativeQuery("""
+            SELECT i.*
+            FROM aula a
+            JOIN informacion_sistema i ON a.id_informacion_sistema = i.id
+            WHERE a.referencia = :referencia
+            ORDER BY a.id
+        """, InformacionSistema.class)
+                    .setParameter("referencia", referenciaAula)
+                    .getResultList();
+
+            // Comprobamos si el índice está dentro de los límites de la lista
+            if (indice >= 0 && indice < equipos.size()) {
+                return equipos.get(indice);
+            } else {
+                System.err.println("Índice fuera de rango: " + indice);
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     //Método main para realizar pruebas.
     public static void main(String[] args) {
         //CRUDAula_Equipo c = new CRUDAula_Equipo();
