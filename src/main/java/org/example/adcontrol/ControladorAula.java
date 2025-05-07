@@ -81,7 +81,7 @@ public class ControladorAula {
             if (aulaActual != null) {
                 Platform.runLater(() -> actualizarMonitores(aulaActual));
             }
-        }, 120, 120, TimeUnit.SECONDS);  // primer delay 120s, luego cada 120s
+        }, 15, 15, TimeUnit.SECONDS);  // primer delay 120s, luego cada 120s
     }
 
     /**
