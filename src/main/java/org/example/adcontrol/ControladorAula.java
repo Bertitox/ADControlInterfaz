@@ -2,6 +2,9 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import BBDD.DAO.CRUDInfoSistema;
 import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
@@ -27,6 +30,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.Map;
 
 
@@ -52,6 +56,8 @@ public class ControladorAula {
     @FXML
     AnchorPane panelLargo;
 
+    private ScheduledExecutorService scheduler;
+
 
     /**
      * Método que inicializa los elementos del controlador que se usarán.
@@ -69,6 +75,13 @@ public class ControladorAula {
             });
             menuButtonAulas.getItems().add(item);
         }
+        // Programar actualización automática cada 2 minutos
+        scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(() -> {
+            if (aulaActual != null) {
+                Platform.runLater(() -> actualizarMonitores(aulaActual));
+            }
+        }, 120, 120, TimeUnit.SECONDS);  // primer delay 120s, luego cada 120s
     }
 
     /**
@@ -129,10 +142,30 @@ public class ControladorAula {
                     + "-fx-background-radius: 5px;");
             ipLabel.setMouseTransparent(true);  // Para que no bloquee clics ni tooltips
 
-            // 📌 StackPane para imagen + IP superpuesta
+            // 📌 Indicador de estado (círculo)
+            javafx.scene.shape.Circle estadoCircle = new javafx.scene.shape.Circle(8);
+            estadoCircle.setStroke(javafx.scene.paint.Color.BLACK);
+            estadoCircle.setStrokeWidth(1.5);
+
+            try {
+                System.out.println("Ping a " + ip);
+                InetAddress inet = InetAddress.getByName(ip);
+                boolean reachable = inet.isReachable(3000);
+                if (reachable) {
+                    estadoCircle.setFill(javafx.scene.paint.Color.LIMEGREEN);  // Activo
+                } else {
+                    estadoCircle.setFill(javafx.scene.paint.Color.RED);  // Inactivo
+                }
+            } catch (Exception e) {
+                estadoCircle.setFill(javafx.scene.paint.Color.GREY);  // Desconocido/error
+            }
+
+            // 📌 StackPane con monitor + IP + círculo estado
             StackPane stack = new StackPane();
-            stack.getChildren().addAll(monitor, ipLabel);
+            stack.getChildren().addAll(monitor, ipLabel, estadoCircle);
             StackPane.setAlignment(ipLabel, Pos.CENTER);
+            StackPane.setAlignment(estadoCircle, Pos.TOP_RIGHT);
+            StackPane.setMargin(estadoCircle, new Insets(5, 5, 0, 0));
 
             // 📌 Tooltip personalizado
             String nombreEquipo = cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getNombre();
@@ -213,6 +246,11 @@ public class ControladorAula {
 
     @FXML
     void volver(ActionEvent event) throws IOException, AulaNotFoundException {
+        // Detenemos la tarea programada
+        if (scheduler != null && !scheduler.isShutdown()) {
+            scheduler.shutdown();
+        }
+
         Platform.runLater(() -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelAula.fxml"));
@@ -220,8 +258,6 @@ public class ControladorAula {
 
                 ControladorVistaPanelAula controladorVista = fxmlLoader.getController();
 
-                // Esperar un poco a que cargue panelAula.fxml (por el Platform.runLater interno)
-                // Alternativa simple: usar otro runLater anidado
                 Platform.runLater(() -> {
                     ControladorPanelAula controladorPanel = controladorVista.getControladorPanelAula();
                     if (controladorPanel != null) {
@@ -242,6 +278,6 @@ public class ControladorAula {
                 e.printStackTrace();
             }
         });
-
     }
+
 }
