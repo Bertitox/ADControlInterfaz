@@ -306,7 +306,6 @@ public class ControladorMonitor extends Controlador{
             alert.setHeaderText(null);
             alert.setContentText("Uno o más campos no han sido seleccionados correctamente.");
             alert.showAndWait(); //Muestra el mensaje y espera a que el usuario cierre la alerta
-
             return; //Salir del método si falta información
         }
 
@@ -328,6 +327,11 @@ public class ControladorMonitor extends Controlador{
         alert.setHeaderText(null);
         alert.setContentText("Incidencia creada correctamente.");
         alert.showAndWait();
+        try {
+            actualizarGrafico();
+        } catch (AulaNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -378,6 +382,11 @@ public class ControladorMonitor extends Controlador{
         alert.setHeaderText(null);
         alert.setContentText(incidenciaEncontrada ? "Incidencia eliminada correctamente." : "No se encontró ninguna incidencia con los criterios seleccionados.");
         alert.showAndWait();
+        try {
+            actualizarGrafico();
+        } catch (AulaNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
