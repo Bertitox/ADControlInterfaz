@@ -259,6 +259,9 @@ public class CRUDIncidencia {
         return null;
     }
 
+    public int getEquipoIncidenciasXAula(String referencia) throws AulaNotFoundException {
+        return Integer.parseInt(em.createNativeQuery("select COUNT(Distinct id_informacion_sistema) from incidencias where id_aula ='"+referencia+"' group by id_aula;").getSingleResult().toString());
+    }
 
 
     /**
@@ -280,8 +283,9 @@ public class CRUDIncidencia {
 ////            System.out.println("Hora: " + entry.getValue()[1]);
 ////            System.out.println("------------");
 ////        }
-//        System.out.println(crudIncidencia.getUltHoraMod("PRUEBA6"));
-//        System.out.println(crudIncidencia.getUltFechaMod("PRUEBA6"));
+////        System.out.println(crudIncidencia.getUltHoraMod("PRUEBA6"));
+////        System.out.println(crudIncidencia.getUltFechaMod("PRUEBA6"));
+//        System.out.println(crudIncidencia.getEquipoIncidenciasXAula("DAM 2"));
 //
 //    }
 }

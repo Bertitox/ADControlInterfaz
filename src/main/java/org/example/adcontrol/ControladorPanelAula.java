@@ -54,6 +54,9 @@ public class ControladorPanelAula extends Controlador {
     Label horaUltMod;
 
     @FXML
+    Label labelPorcentajeProgreso;
+
+    @FXML
     private Pane panelLargo;
 
     private XYChart.Series<Number, Number> series = new XYChart.Series<>();
@@ -80,6 +83,7 @@ public class ControladorPanelAula extends Controlador {
         fechaActual.setText(fechaFormateada);
         initializeLineChart();
         startChartUpdater();
+        cargarBarra(); //Método que se encarga de actualizar la barra de progreso del estado general del aula
 
     }
 
@@ -193,8 +197,10 @@ public class ControladorPanelAula extends Controlador {
         cargarBarra();
     }
 
-    void cargarBarra() {
-
+    void cargarBarra() throws AulaNotFoundException {
+        //Fórmula para calcular el estado general del aula --> % Estado General = (Num Equipos Incidencias / Num Total Equipos) * 100
+        labelPorcentajeProgreso.setText(String.valueOf((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText()) * 100) + " %");
+        barraEstadoAula.setProgress((((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText())) * 100) / 100);
     }
 
     @FXML

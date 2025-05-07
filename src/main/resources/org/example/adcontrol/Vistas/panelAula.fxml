@@ -207,7 +207,7 @@
                                  </font>
                               </Label>
                               <ProgressBar fx:id="barraEstadoAula" layoutX="15.0" layoutY="61.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="10.0" prefWidth="190.0" progress="0.56" />
-                              <Label layoutX="174.0" layoutY="39.0" text="56%">
+                              <Label fx:id="labelPorcentajeProgreso" layoutX="174.0" layoutY="39.0" text="56%">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
