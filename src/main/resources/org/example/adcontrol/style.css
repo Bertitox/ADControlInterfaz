@@ -152,3 +152,7 @@
 .circle-button:pressed {
     -fx-background-color: rgba(100, 149, 237, 0.6);
 }
+
+.textAreaTerminal .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
