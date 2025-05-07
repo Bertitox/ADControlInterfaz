@@ -230,11 +230,19 @@ public class ControladorPanelAula extends Controlador {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/vistaSSH.fxml"));
             Parent root = loader.load();
+
             ControlSSH controladorB = loader.getController();
             controladorB.setClaseActual(labelAula.getText());
+
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);  // Aquí la guardas en una variable
+
+            // Ahora sí puedes añadirle el CSS externo
+            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+            stage.setScene(scene);
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

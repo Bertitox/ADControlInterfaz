@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
@@ -18,40 +19,45 @@
          </image>
       </ImageView>
       <Text fill="WHITE" layoutX="464.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Terminal" />
-      <TextArea fx:id="salidaTerminal" layoutX="197.0" layoutY="117.0" prefHeight="300.0" prefWidth="582.0" style="-fx-control-inner-background: black; -fx-background-color: black; -fx-background-radius: 0px; -fx-border-radius: 0px; -fx-border-color: black;" wrapText="true" />
-      <TextArea fx:id="entradaComando" layoutX="197.0" layoutY="416.0" onKeyPressed="#validarTecla" prefHeight="39.0" prefWidth="493.0" promptText="ls, pwd, whoami...." />
-      <Button defaultButton="true" layoutX="690.0" layoutY="416.0" mnemonicParsing="false" onAction="#enviarComando" prefHeight="39.0" prefWidth="91.0" text="Enviar" />
-      <Button layoutX="739.0" layoutY="484.0" mnemonicParsing="false" onAction="#apagar" prefHeight="17.0" prefWidth="20.0">
+      <TextArea fx:id="salidaTerminal" editable="false" layoutX="188.0" layoutY="117.0" prefHeight="341.0" prefWidth="601.0" style="-fx-control-inner-background: black; -fx-background-color: black; -fx-background-radius: 10px; -fx-border-radius: 10px; -fx-border-color: black;" styleClass="textAreaTerminal" wrapText="true" />
+      <Button layoutX="529.0" layoutY="31.0" mnemonicParsing="false" onAction="#botonConectarse" prefHeight="33.0" prefWidth="100.0" text="Conectarse" />
+      <MenuButton fx:id="menuButtonEquipos" layoutX="348.0" layoutY="31.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="106.0" text="Equipos" />
+      <TextField fx:id="entradaComando" layoutX="174.0" layoutY="472.0" prefHeight="59.0" prefWidth="510.0" promptText="ls, pwd, whoami" style="-fx-background-radius: 0px 0px 0px 6px;" />
+      <Button defaultButton="true" layoutX="633.0" layoutY="472.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#enviarComando" prefHeight="59.0" prefWidth="47.0" style="-fx-background-radius: 0px 0px 6px 0px; -fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="39.0" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/enviar.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="0.74" contrast="0.45" saturation="-0.38" />
+               </effect>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="747.0" layoutY="481.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#apagar" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50%;">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0">
                <image>
-                  <Image url="@../Imagenes/inciar.png" />
+                  <Image url="@../Imagenes/apagarAzul.png" />
                </image>
-               <effect>
-                  <ColorAdjust hue="0.01" saturation="1.0" />
-               </effect>
             </ImageView>
          </graphic>
          <tooltip>
             <Tooltip text="Apagar" />
          </tooltip>
       </Button>
-      <Button layoutX="681.0" layoutY="483.0" mnemonicParsing="false" onAction="#reiniciar">
+      <Button layoutX="693.0" layoutY="481.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reiniciar" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50%;">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0">
                <image>
-                  <Image url="@../Imagenes/reinciar.png" />
+                  <Image url="@../Imagenes/refrescar.png" />
                </image>
-               <effect>
-                  <ColorAdjust hue="-0.69" saturation="1.0" />
-               </effect>
             </ImageView>
          </graphic>
          <tooltip>
             <Tooltip text="Reiniciar" />
          </tooltip>
       </Button>
-      <Button layoutX="529.0" layoutY="31.0" mnemonicParsing="false" onAction="#botonConectarse" text="Conectarse" />
-      <MenuButton fx:id="menuButtonEquipos" layoutX="348.0" layoutY="31.0" mnemonicParsing="false" text="Equipos" />
+      <MenuButton fx:id="menuButtonTema" layoutX="174.0" layoutY="31.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="75.0" text="Tema" />
    </children>
 </Pane>

@@ -9,15 +9,22 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import javax.xml.transform.Source;
+import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -30,7 +37,16 @@ public class ControlSSH {
     @FXML
     private TextArea salidaTerminal;
     @FXML
-    private TextArea entradaComando;
+    private TextField entradaComando;
+
+    @FXML
+    private MenuButton menuButtonEquipos;
+
+    @FXML
+    private Pane panel;
+
+    @FXML
+    private MenuButton menuButtonTema;
 
     String host = "";
     String user = "";
@@ -41,22 +57,55 @@ public class ControlSSH {
     Boolean superusuario = true;
     private OutputStream out;
     private ChannelShell channel;
+    MenuItem itemClaro = new MenuItem("Tema claro (monitor)");
+    MenuItem itemOscuro = new MenuItem("Tema oscuro (terminal)");
+
 
     @FXML
-    private MenuButton menuButtonEquipos;
-
-    public ControlSSH() {
-        salidaTerminal = new TextArea();
-        salidaTerminal.setEditable(false);
-        salidaTerminal.setWrapText(true);
-        entradaComando = new TextArea();
-
+    void initialize() {
         //Agregamos un listener para capturar el "Enter"
         entradaComando.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case ENTER -> enviarComando();
+                case ENTER -> validarTecla(event);
             }
         });
+
+
+        // Agregarlos al MenuButton
+        menuButtonTema.getItems().addAll(itemClaro, itemOscuro);
+        // Acción común
+        EventHandler<ActionEvent> handler = event -> {
+            Object source = event.getSource();
+            cambiarTema(source);
+        };
+
+        itemClaro.setOnAction(handler);
+        itemOscuro.setOnAction(handler);
+    }
+
+    void cambiarTema(Object source) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            if (source.equals(itemClaro)) {
+                loader = new FXMLLoader(getClass().getResource("Vistas/vistaSSH.fxml"));
+            } else if (source.equals(itemOscuro)) {
+                loader = new FXMLLoader(getClass().getResource("Vistas/vistaSSHV2.fxml"));
+            }
+
+            Parent root = loader.load();
+
+            // Obtener el stage actual a partir de cualquier nodo de tu escena actual
+            Stage stage = (Stage) menuButtonTema.getScene().getWindow();
+
+            ControlSSH controladorB = loader.getController();
+            controladorB.setClaseActual(claseActual);
+
+            stage.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println("Error al cambiar tema");
+            e.printStackTrace();
+
+        }
     }
 
     public void inciarConexionSSH() {
@@ -81,7 +130,8 @@ public class ControlSSH {
                     byte[] buffer = new byte[1024];
                     int bytesRead;
                     while ((bytesRead = in.read(buffer)) != -1) {
-                        String output = new String(buffer, 0, bytesRead);
+                        String outputf = new String(buffer, 0, bytesRead);
+                        String output = outputf.replaceAll("\\[\\?2004[hl]", "");
                         Platform.runLater(() -> salidaTerminal.appendText(output));
                     }
                 } catch (Exception e) {
@@ -113,10 +163,8 @@ public class ControlSSH {
         try {
             String comando = entradaComando.getText();
 
-            if (comando.equals("clear\n")) {
+            if (comando.equals("clear")) {
                 salidaTerminal.clear();
-            } else if (comando.equals("exit\n")) {
-                channel.disconnect();
             } else if (!(comando.equals("") || comando.isBlank() || comando.isEmpty() || comando == null)) {
                 out.write((comando + "\n").getBytes());
                 out.flush();
@@ -136,19 +184,17 @@ public class ControlSSH {
     }
 
     @FXML
-    void apagar(ActionEvent event) throws IOException {
+    void apagar(ActionEvent event) throws IOException, InterruptedException {
         out.write(("sudo poweroff" + "\n").getBytes());
         out.flush();
-        salidaTerminal.clear();
-        salidaTerminal.setStyle("-fx-control-inner-background: red");
+        out.close();
     }
 
     @FXML
-    void reiniciar(ActionEvent event) throws IOException {
+    void reiniciar(ActionEvent event) throws IOException, InterruptedException {
         out.write(("sudo reboot" + "\n").getBytes());
         out.flush();
-        salidaTerminal.clear();
-        salidaTerminal.setStyle("-fx-control-inner-background: orange");
+        out.close();
     }
 
     @FXML
@@ -158,6 +204,7 @@ public class ControlSSH {
         password = credenciales.getValue();
         this.inciarConexionSSH();
     }
+
     public static Pair<String, String> mostrarFormularioSSH() {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Conexión SSH");
@@ -229,7 +276,6 @@ public class ControlSSH {
                 });
             }
         }
-
-
     }
+
 }

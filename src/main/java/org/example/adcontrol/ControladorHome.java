@@ -200,7 +200,7 @@ public class ControladorHome extends Controlador{//implements Initializable {
 
         NumberAxis yAxis = (NumberAxis) barChart.getYAxis();
         barChart.setLegendVisible(false);
-
+        barChart.setTitle("Aulas con incidencias");
         //Desactivamos el ajuste automático del rango
         yAxis.setAutoRanging(false);
         //Definimos valores mínimos y máximos del eje Y
