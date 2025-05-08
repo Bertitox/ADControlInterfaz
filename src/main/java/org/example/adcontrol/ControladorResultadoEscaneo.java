@@ -270,7 +270,7 @@ public class ControladorResultadoEscaneo {
 
     public static void ejecutarScriptConSudo(String password) {
         try {
-            String rutaScript = "src/main/resources/org/example/adcontrol/Scripts/Script_funcional_en_VM.sh";
+            String rutaScript = "src/main/resources/org/example/adcontrol/Scripts/Script_funcional_en_VMV2.sh";
 
             // Hacer ejecutable el script
             Process chmod = Runtime.getRuntime().exec("chmod +x " + rutaScript);

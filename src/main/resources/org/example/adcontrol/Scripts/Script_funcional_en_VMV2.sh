@@ -25,7 +25,23 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# 3. Descargar repositorio de GitHub
+# 3. Verificar si Git está instalado en el equipo remoto, si no, instalarlo
+echo "Comprobando si Git está instalado en el equipo remoto..."
+sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no "$USUARIO@$HOST_REMOTO" "which git >/dev/null 2>&1"
+if [ $? -ne 0 ]; then
+  echo "Git no está instalado. Instalando Git..."
+  sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no "$USUARIO@$HOST_REMOTO" "echo '$PASSWORD' | sudo -S apt update && echo '$PASSWORD' | sudo -S apt install -y git"
+  if [ $? -ne 0 ]; then
+    echo "Error al instalar Git en el equipo remoto."
+    exit 1
+  else
+    echo "Git instalado correctamente."
+  fi
+else
+  echo "Git ya está instalado en el equipo remoto."
+fi
+
+# 4. Descargar repositorio de GitHub
 echo "Obteniendo el repositorio..."
 sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no "$USUARIO@$HOST_REMOTO" "$GET_REPOSITORIO"
 if [ $? -ne 0 ]; then
