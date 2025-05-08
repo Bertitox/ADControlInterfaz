@@ -147,7 +147,6 @@ public class ControladorPanelAula extends Controlador {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaFormateada = LocalDate.now().format(formatter);
         fechaActual.setText(fechaFormateada);
-        initializeLineChart();
         startChartUpdater();
         //cargarBarra(); //Método que se encarga de actualizar la barra de progreso del estado general del aula
     }
@@ -340,7 +339,9 @@ public class ControladorPanelAula extends Controlador {
         labelAula.setText(nombreAula);
 
         labelNumEquiposAula.setText(AE.numEquiposXAula(nombreAula));
-        labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(nombreAula));
+        labelNumIncidenciasAula.setText(String.valueOf(I.numIncidenciasAula(nombreAula)));
+        //CUANDO SE PONGA EL VALOR DE LA INCIDENCIA SE ACTUALIZA EL GRÁFICO
+        initializeLineChart();
         if (I.getUltFechaMod(labelAula.getText()) == null) {
             fechaUltMod.setText("Sin datos");
             horaUltMod.setText("Sin datos");
