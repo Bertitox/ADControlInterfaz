@@ -292,7 +292,7 @@
                                                 <Insets bottom="5.0" />
                                              </VBox.margin>
                                           </ImageView>
-                                          <Label text="Refrescar" />
+                                          <Label text="Actualizar" />
                                        </children>
                                     </VBox>
                                  </children>

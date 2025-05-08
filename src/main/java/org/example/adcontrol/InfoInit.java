@@ -10,6 +10,7 @@ public class InfoInit {
     private static Boolean muteLeido;
     private static Double volumenLeido;
     private static String temaLeido;
+    private static Integer intervalo;
     private static InfoInit instancia;
 
     public static InfoInit getInstance() {
@@ -44,6 +45,10 @@ public class InfoInit {
                     case "T":
                         temaLeido = palabras[1];
                         System.out.println("TEMA PREDEFINIDO: " + temaLeido);
+                        break;
+                    case "IN":
+                        intervalo = Integer.valueOf(palabras[1]);
+                        System.out.println("INTERVALO PREDEFINIDO: " + intervalo);
                         break;
                 }
             }
@@ -89,6 +94,9 @@ public class InfoInit {
             escritor.write("T " + temaLeido);
             escritor.newLine();
 
+            escritor.write("IN " + intervalo);
+            escritor.newLine();
+
         } catch (IOException e) {
             System.out.println("Error al escribir el fichero: " + e.getMessage());
         }
@@ -114,6 +122,10 @@ public class InfoInit {
         return instancia;
     }
 
+    public Integer getIntervalo() {
+        return intervalo;
+    }
+
     public void setIdiomaLeido(String idiomaLeido) {
         InfoInit.idiomaLeido = idiomaLeido;
         escribirDatos();
@@ -136,6 +148,11 @@ public class InfoInit {
 
     public void setInstancia(InfoInit instancia) {
         InfoInit.instancia = instancia;
+        escribirDatos();
+    }
+
+    public void setIntervalo(Integer intervalo) {
+        InfoInit.intervalo = intervalo;
         escribirDatos();
     }
 }

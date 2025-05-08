@@ -76,13 +76,16 @@ public class ControladorAula {
             });
             menuButtonAulas.getItems().add(item);
         }
+        InfoInit infoInit = InfoInit.getInstance();
+        Integer intervalo = infoInit.getIntervalo();
+        System.out.println("Intervalo de: " + intervalo);
         // Programar actualización automática cada 2 minutos solo de los indicadores de estado
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(() -> {
             if (aulaActual != null) {
                 actualizarEstadoMonitores();
             }
-        }, 15, 15, TimeUnit.SECONDS);
+        }, intervalo, intervalo, TimeUnit.SECONDS);
     }
 
     /**

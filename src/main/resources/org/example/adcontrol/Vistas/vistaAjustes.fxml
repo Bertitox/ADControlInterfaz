@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -29,8 +30,9 @@
          <rowConstraints>
             <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="138.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="147.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="282.0" minHeight="10.0" prefHeight="179.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="282.0" minHeight="10.0" prefHeight="107.13027954101562" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="282.0" minHeight="10.0" prefHeight="133.89434814453125" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="84.10565185546875" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <ImageView fitHeight="742.0" fitWidth="635.0" opacity="0.04" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
@@ -104,7 +106,7 @@
             </Label>
             <ColorPicker fx:id="colorPicker" prefHeight="52.0" prefWidth="104.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets bottom="-10.0" left="170.0" />
+                  <Insets bottom="-10.0" left="150.0" />
                </GridPane.margin>
                <value>
                   <Color red="0.003921568859368563" green="0.6470588445663452" blue="0.9058823585510254" />
@@ -126,16 +128,37 @@
                   <Insets bottom="100.0" left="10.0" />
                </GridPane.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#restablecerAjustes" text="Restablecer ajustes" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button mnemonicParsing="false" onAction="#restablecerAjustes" text="Restablecer ajustes" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="250.0" />
                </GridPane.margin>
             </Button>
-            <Label text="Restablecer ajustes por defecto" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label text="Restablecer ajustes por defecto" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
+            <Label prefHeight="27.0" prefWidth="300.0" style="-fx-font-weight: bold;" text="AJUSTES DE LA VISTA DE EQUIPOS" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="100.0" left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="27.0" prefWidth="303.0" text="Intervalo de actualización de estado" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="-10.0" left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Spinner fx:id="spinnerIntervalo" editable="true" prefHeight="25.0" prefWidth="94.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets bottom="-10.0" left="310.0" />
+               </GridPane.margin>
+            </Spinner>
          </children>
       </GridPane>
       <Label layoutX="114.0" layoutY="589.0" text="ADControl es una aplicación de gestión de equipos creada por Daniel García y Alberto Castellanos. Todos los derechos reservados ©" textAlignment="CENTER">

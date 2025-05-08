@@ -32,6 +32,9 @@ public class ControladorAjustes {
     @FXML
     ColorPicker colorPicker;
 
+    @FXML
+    private Spinner<Integer> spinnerIntervalo;
+
     InfoInit infoInit = InfoInit.getInstance();
 
 
@@ -41,7 +44,6 @@ public class ControladorAjustes {
         imagenSonidoApagado = new Image(getClass().getResourceAsStream("/org/example/adcontrol/Imagenes/volumenapagado.png"));
         imagenSonidoEncendido = new Image(getClass().getResourceAsStream("/org/example/adcontrol/Imagenes/volumenencendido.png"));
 
-        //FUNCIONA
         for (MenuItem item : MenuButtonIdiomas.getItems()) {
             item.setOnAction(e -> {
                 MenuButtonIdiomas.setText(item.getText());
@@ -49,7 +51,6 @@ public class ControladorAjustes {
             });
         }
 
-        //FUNCIONA
         CheckBoxSonido.setOnAction(e -> {
             if (CheckBoxSonido.isSelected()) {
                 imageViewSonido.setImage(imagenSonidoEncendido);
@@ -64,45 +65,53 @@ public class ControladorAjustes {
             }
         });
         imageViewSonido.setImage(CheckBoxSonido.isSelected() ? imagenSonidoEncendido : imagenSonidoApagado);
-        //FUNCIONA
+
         sliderVolumen.setOnMouseReleased(e -> {
-            if(CheckBoxSonido.isSelected()) {
+            if (CheckBoxSonido.isSelected()) {
                 sliderVolumen.setDisable(false);
-            }else{
+            } else {
                 sliderVolumen.setDisable(true);
             }
             Double vol = sliderVolumen.getValue() * 0.01;
             infoInit.setVolumenLeido(vol);
         });
 
-
         colorPicker.setOnAction(e -> {
             Color color = colorPicker.getValue();
             String hex = String.format("#%02X%02X%02X",
-                    (int)(color.getRed() * 255),
-                    (int)(color.getGreen() * 255),
-                    (int)(color.getBlue() * 255)
+                    (int) (color.getRed() * 255),
+                    (int) (color.getGreen() * 255),
+                    (int) (color.getBlue() * 255)
             );
             infoInit.setTemaLeido(hex);
         });
+
+        // Configuración Spinner
+        spinnerIntervalo.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 120, infoInit.getIntervalo()));
+        spinnerIntervalo.getValueFactory().valueProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                infoInit.setIntervalo(newValue);
+            }
+        });
     }
 
-    public void cargarDatos(){
+    public void cargarDatos() {
         MenuButtonIdiomas.setText(infoInit.getIdiomaLeido());
 
-        if(infoInit.getMuteLeido()){
-            CheckBoxSonido.setSelected(false);
-        }else{
-            CheckBoxSonido.setSelected(true);
-        }
+        CheckBoxSonido.setSelected(!infoInit.getMuteLeido());
 
         sliderVolumen.setValue(infoInit.getVolumenLeido() * 100.0);
 
         Color color = Color.web(infoInit.getTemaLeido());
         colorPicker.setValue(color);
+
+        // Asignamos valor al Spinner desde infoInit
+        if (spinnerIntervalo.getValueFactory() != null) {
+            spinnerIntervalo.getValueFactory().setValue(infoInit.getIntervalo());
+        }
     }
 
-    public void restablecerAjustes(){
+    public void restablecerAjustes() {
         infoInit.restablecerAjustes();
         cargarDatos();
     }
