@@ -6,7 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 /**
- * Clase que representa una entidad de Errores en la base de datos.
+ * Clase que representa en la bbdd la tabla errores, que contiene un identificador de String (p.e. E001). Tiene una pequeña descripcion
+ * para determinar el tipo de error general. Esta clase no podrá ser modificada por nadie, se usará como base para las incidencias.
  *
  * @version 1.0
  * @author Daniel y Alberto

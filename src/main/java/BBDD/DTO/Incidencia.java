@@ -5,7 +5,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 /**
- * Clase que representa una entidad de Incidencia en la base de datos.
+ * Clase que representa en la bbdd incidencias, se encarga de relacionar el equipo con el aula, el error y una descripción más detallada en la que se
+ * pueda basar el técnico para su solución
  * @author Daniel y Alberto
  * @version 1.5
  */

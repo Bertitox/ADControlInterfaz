@@ -7,57 +7,102 @@ import java.time.LocalTime;
 
 
 /**
- * Clase que representa la tabla {@link InformacionSistema}
+ * Clase que representa en la bbdd la tabla informacion_sistema, la cual contiene toda la información que tienen los equipos.
  * @author Daniel y Alberto
  * @version 1.0
  */
 @Entity
 @Table(name = "informacion_sistema", schema = "infoSistema")
 public class InformacionSistema {
+    /**
+     * Identificador de cada ordenador, es autoincremental
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    /**
+     * Nombre de cada ordenador (Equipo 1)
+     */
     @Column(name = "nombre")
     private String nombre;
 
+    /**
+     * Sistema operativo del equipo
+     */
     @Column(name = "so")
     private String so;
 
+    /**
+     * Ultima fecha de modificación del equipo
+     */
     @Column(name = "ultFecha")
     private LocalDate ultFecha;
 
+    /**
+     * Nombre que tiene el equipo por defecto
+     */
     @Column(name = "nombre_nodo")
     private String nombreNodo;
 
+    /**
+     * Nombre y version del kernel del equipo
+     */
     @Column(name = "releasee")
     private String releasee;
 
+    /**
+     * Version del sistema operativo
+     */
     @Column(name = "version")
     private String version;
 
+    /**
+     * Arquitectura del procesodor (x64, ARM...)
+     */
     @Column(name = "arquitectura")
     private String arquitectura;
 
+    /**
+     * Tipo de procesador que lleva incorporado
+     */
     @Column(name = "procesador")
     private String procesador;
 
+    /**
+     * Memoria total del equipo
+     */
     @Column(name = "mem_total")
     private Integer memTotal;
 
+    /**
+     * Memoria disponible del equipo
+     */
     @Column(name = "mem_disp")
     private Integer memDisp;
 
+    /**
+     * Uso total del procesador
+     */
     @Column(name = "uso_cpu")
     private String usoCpu;
 
+    /**
+     * MAC del equipo
+     */
     @Column(name = "mac")
     private String mac;
 
+    /**
+     * IP del equipo
+     */
     @Column(name = "ip")
     private String ip;
 
+    /**
+     * Ultima hora de modificación del equipo
+     */
     @Column(name = "ultHora")
     private LocalTime ultHora;
 

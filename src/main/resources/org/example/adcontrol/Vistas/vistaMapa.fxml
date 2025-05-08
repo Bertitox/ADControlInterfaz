@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="612.0" fitWidth="987.0">
          <image>
-            <Image url="@../Imagenes/mapa v5.png" />
+            <Image url="@../Imagenes/mapa v6.png" />
          </image>
       </ImageView>
       <Button fx:id="DAM1" layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="128.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 205, 210);" text="DAM 2" />
