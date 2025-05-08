@@ -284,6 +284,7 @@ public class ControladorPanelAula extends Controlador {
             //Obtener datos
             int diaActual = LocalDate.now().getDayOfMonth();
             int numIncidencias;
+
             try {
                 numIncidencias = Integer.parseInt(labelNumIncidenciasAula.getText().trim());
             } catch (NumberFormatException e) {
