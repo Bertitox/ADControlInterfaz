@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -75,13 +76,45 @@ public class ControladorAula {
             });
             menuButtonAulas.getItems().add(item);
         }
-        // Programar actualización automática cada 2 minutos
+        // Programar actualización automática cada 2 minutos solo de los indicadores de estado
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(() -> {
             if (aulaActual != null) {
-                Platform.runLater(() -> actualizarMonitores(aulaActual));
+                actualizarEstadoMonitores();
             }
-        }, 15, 15, TimeUnit.SECONDS);  // primer delay 120s, luego cada 120s
+        }, 15, 15, TimeUnit.SECONDS);
+    }
+
+    /**
+     * Método que actualiza únicamente el color de los indicadores de estado de los monitores, sin refrescar imágenes ni grid.
+     */
+    private void actualizarEstadoMonitores() {
+        if (aulaActual == null) return;
+
+        for (javafx.scene.Node node : gridPaneMonitores.getChildren()) {
+            if (node instanceof StackPane stack) {
+                String ip = null;
+                javafx.scene.shape.Circle estadoCircle = null;
+
+                for (javafx.scene.Node child : stack.getChildren()) {
+                    if (child instanceof Label label) {
+                        ip = label.getText();
+                    } else if (child instanceof javafx.scene.shape.Circle circle) {
+                        estadoCircle = circle;
+                    }
+                }
+
+                if (ip != null && estadoCircle != null) {
+                    String finalIp = ip;
+                    javafx.scene.shape.Circle finalEstadoCircle = estadoCircle;
+
+                    new Thread(() -> {
+                        Color estado = comprobarEstadoMonitor(finalIp);
+                        Platform.runLater(() -> finalEstadoCircle.setFill(estado));
+                    }).start();
+                }
+            }
+        }
     }
 
     /**
@@ -125,53 +158,40 @@ public class ControladorAula {
         for (int i = 0; i < cantidadMonitores; i++) {
             int fila = i / columnas;
             int columna = i % columnas;
-
             if (fila >= filas) break;
 
-            // 📌 Imagen del monitor
             ImageView monitor = new ImageView(imagenMonitor);
             monitor.setFitWidth(150);
             monitor.setFitHeight(150);
-            //ERROR AQUÍ
-            String ip = new CRUDAula_Equipo().getEquipoPorIndiceYAula(aulaSeleccionada, i).getIp();
 
-            // 📌 Label de la IP
+            String ip = cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getIp();
+
             Label ipLabel = new Label(ip);
             ipLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; "
                     + "-fx-background-color: rgba(0, 0, 0, 0.5); -fx-padding: 3px 5px; "
                     + "-fx-background-radius: 5px;");
-            ipLabel.setMouseTransparent(true);  // Para que no bloquee clics ni tooltips
+            ipLabel.setMouseTransparent(true);
 
-            // 📌 Indicador de estado (círculo)
             javafx.scene.shape.Circle estadoCircle = new javafx.scene.shape.Circle(8);
-            estadoCircle.setStroke(javafx.scene.paint.Color.BLACK);
+            estadoCircle.setStroke(Color.BLACK);
             estadoCircle.setStrokeWidth(1.5);
+            estadoCircle.setFill(Color.GREY);  // inicial en gris
 
-            try {
-                System.out.println("Ping a " + ip);
-                InetAddress inet = InetAddress.getByName(ip);
-                boolean reachable = inet.isReachable(3000);
-                if (reachable) {
-                    estadoCircle.setFill(javafx.scene.paint.Color.LIMEGREEN);  // Activo
-                } else {
-                    estadoCircle.setFill(javafx.scene.paint.Color.RED);  // Inactivo
-                }
-            } catch (Exception e) {
-                estadoCircle.setFill(javafx.scene.paint.Color.GREY);  // Desconocido/error
-            }
+            // Hacer ping en un hilo separado
+            new Thread(() -> {
+                Color estado = comprobarEstadoMonitor(ip);
+                Platform.runLater(() -> estadoCircle.setFill(estado));
+            }).start();
 
-            // 📌 StackPane con monitor + IP + círculo estado
             StackPane stack = new StackPane();
             stack.getChildren().addAll(monitor, ipLabel, estadoCircle);
             StackPane.setAlignment(ipLabel, Pos.CENTER);
             StackPane.setAlignment(estadoCircle, Pos.TOP_RIGHT);
             StackPane.setMargin(estadoCircle, new Insets(5, 5, 0, 0));
 
-            // 📌 Tooltip personalizado
             String nombreEquipo = cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getNombre();
 
             ContextMenu menu = new ContextMenu();
-
             MenuItem modificarEquipo = new MenuItem("Modificar equipo");
             MenuItem eliminarEquipo = new MenuItem("Eliminar equipo");
 
@@ -220,15 +240,12 @@ public class ControladorAula {
             });
 
             menu.getItems().addAll(modificarEquipo, eliminarEquipo);
-
             stack.setOnContextMenuRequested(e -> menu.show(stack, e.getScreenX(), e.getScreenY()));
 
-            //int numIncidencias = 0; // Sustituye con llamada a tu método real de incidencias
             int numIncidencias = crudIncidencia.getNumIncidenciasEquipo(cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getId());
             Tooltip tooltip = new Tooltip("Nombre: " + nombreEquipo + "\nIncidencias: " + numIncidencias);
             Tooltip.install(stack, tooltip);
 
-            // 📌 Añadir al GridPane
             GridPane.setHalignment(stack, HPos.CENTER);
             GridPane.setValignment(stack, VPos.CENTER);
             GridPane.setMargin(stack, new Insets(50, 0, 0, 0));
@@ -278,6 +295,27 @@ public class ControladorAula {
                 e.printStackTrace();
             }
         });
+    }
+
+    /**
+     * Método que comprueba el estado de un monitor a partir de su IP.
+     *
+     * @param ip Dirección IP del monitor
+     * @return Color que representa el estado (VERDE = activo, ROJO = inactivo, GRIS = error)
+     */
+    private Color comprobarEstadoMonitor(String ip) {
+        try {
+            System.out.println("Ping a " + ip);
+            InetAddress inet = InetAddress.getByName(ip);
+            boolean reachable = inet.isReachable(3000);
+            if (reachable) {
+                return javafx.scene.paint.Color.LIMEGREEN;
+            } else {
+                return javafx.scene.paint.Color.RED;
+            }
+        } catch (Exception e) {
+            return javafx.scene.paint.Color.GREY;
+        }
     }
 
 }
