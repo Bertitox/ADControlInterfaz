@@ -4,8 +4,6 @@ import BBDD.Conexion.Conexion;
 import BBDD.DTO.Errores;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,5 +44,4 @@ public class GestionErrores {
 //            System.out.println(error.getCodigoError());
 //        }
 //    }
-
 }

@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Case que realiza las operaciónes básicas para la Entidad Aula
+ * Case CRUD que realiza las operaciónes básicas para la Entidad Aula
  * @author Alberto y Daniel
- * @version 1.0
+ * @version 1.5
  */
 public class CRUDAula_Equipo {
 
@@ -33,7 +33,7 @@ public class CRUDAula_Equipo {
     }
 
     /**
-     * Método que lleva a cabo la insercción de un {@link Aula_Equipo}
+     * Método que lleva a cabo la inserción de un {@link Aula_Equipo}
      *
      * @param aulaEquipo Objeto {@link Aula_Equipo}
      */
@@ -160,9 +160,15 @@ public class CRUDAula_Equipo {
         return equiposPorAula;  //Devolvemos el mapa
     }
 
+    /**
+     * Método que devuelve los tres últimos equipos por referencia de aula
+     *
+     * @param referencia String que representa la referencia del aula en el que se encuentran los equipos que queremos obtener.
+     * @return El método retorna una Lista de equipos.
+     */
     public List<InformacionSistema> get3EquiposXAula(String referencia) {
         try {
-            // Consulta nativa que obtiene los InformacionSistema relacionados a la referencia de aula
+            //Consulta que obtiene los equipos (InformacionSistema) relacionados con la referencia de aula
             List<InformacionSistema> equipos = gestorEntidad.createNativeQuery("""
             SELECT i.*
             FROM aula a
@@ -170,7 +176,7 @@ public class CRUDAula_Equipo {
             WHERE a.referencia = :referencia
             """, InformacionSistema.class)
                     .setParameter("referencia", referencia)
-                    .setMaxResults(3) // Limitar a 3 resultados
+                    .setMaxResults(3) //Máximo de 3 resultados
                     .getResultList();
 
             return equipos;
@@ -189,7 +195,7 @@ public class CRUDAula_Equipo {
      */
     public InformacionSistema getEquipoPorIndiceYAula(String referenciaAula, int indice) {
         try {
-            // Consulta para obtener todos los equipos (InformacionSistema) en el aula
+            //Consulta para obtener todos los equipos (InformacionSistema) en el aula
             List<InformacionSistema> equipos = gestorEntidad.createNativeQuery("""
             SELECT i.*
             FROM aula a
@@ -200,7 +206,7 @@ public class CRUDAula_Equipo {
                     .setParameter("referencia", referenciaAula)
                     .getResultList();
 
-            // Comprobamos si el índice está dentro de los límites de la lista
+            //Comprobamos si el índice está dentro de los límites de la lista
             if (indice >= 0 && indice < equipos.size()) {
                 return equipos.get(indice);
             } else {
@@ -213,20 +219,20 @@ public class CRUDAula_Equipo {
         }
     }
 
-    //Método main para realizar pruebas.
-    public static void main(String[] args) {
-        //CRUDAula_Equipo c = new CRUDAula_Equipo();
-        //System.out.println(c.numEquiposXAula("AULA-1"));
-        //c.insertAula(new Aula("PRUEBA6", c.gestorEntidad.find(InformacionSistema.class, 7)));
-        //System.out.println(c.numEquiposXAula("PRUEBA5"));
-        /*
-        for (Map.Entry<String, Integer> entry : c.mapEquiposPorAula().entrySet()) {
-            String referencia = entry.getKey();
-            Integer totalEquipos = entry.getValue();
-            System.out.println("Aula: " + referencia + " - Total de equipos: " + totalEquipos);
-        }
-         */
-        //System.out.println(c.comprobarAula("PRUEBA1"));
-    }
+//    //Método main para realizar pruebas.
+//    public static void main(String[] args) {
+//        //CRUDAula_Equipo c = new CRUDAula_Equipo();
+//        //System.out.println(c.numEquiposXAula("AULA-1"));
+//        //c.insertAula(new Aula("PRUEBA6", c.gestorEntidad.find(InformacionSistema.class, 7)));
+//        //System.out.println(c.numEquiposXAula("PRUEBA5"));
+//        /*
+//        for (Map.Entry<String, Integer> entry: c.mapEquiposPorAula().entrySet()) {
+//            String referencia = entry.getKey();
+//            Integer totalEquipos = entry.getValue();
+//            System.out.println("Aula: " + referencia + "- Total de equipos: " + totalEquipos);
+//        }
+//         */
+//        //System.out.println(c.comprobarAula("PRUEBA1"));
+//    }
 
 }

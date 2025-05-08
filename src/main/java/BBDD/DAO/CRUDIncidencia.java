@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * Clase {@link CRUDIncidencia} que se encarga de realizar las operaciones básicas para gestionar incidencias
  * @author Alberto y Daniel
- * @version 1.5
+ * @version 2.0
  */
 
 public class CRUDIncidencia {
@@ -39,6 +39,10 @@ public class CRUDIncidencia {
         em.getTransaction().commit();
     }
 
+    /**
+     * Método que devuelve un {@link EntityManager}
+     * @return Retorna un objeto del tipo {@link EntityManager}
+     */
     public EntityManager getEntityManager(){
         return em;
     }
@@ -69,7 +73,7 @@ public class CRUDIncidencia {
      */
     public List<Incidencia> getAllIncidencias() {
         List<Incidencia> incidencias;
-        String consulta = "Select incidencia from Incidencia incidencia";
+        String consulta = "Select incidencia from Incidencia incidencia";//Consulta que muestra todas las incidencias.
         incidencias = em.createQuery(consulta, Incidencia.class).getResultList();
         return incidencias;
     }
@@ -214,13 +218,18 @@ public class CRUDIncidencia {
     }
 
     /**
-     * Método que se ecarga de recontar las incidencias por Aula
-     * @return Retorna un int número de incidencias por Aula
+     * Método que se ecarga de recontar las incidencias por Aula.
+     * @return Retorna un int número de incidencias por Aula.
      */
     public int numIncidenciasAula(String referencia) throws AulaNotFoundException {
         return incidenciasXAulas(referencia).size();
     }
 
+    /**
+     * Método que se encarga de obtener el número máximo de incidencias por Aula.
+     * @return Retorna un {@link Integer} con el número máximo de incidencias por Aula.
+     * @throws AulaNotFoundException Excepción personalizada de Aula no encontrada.
+     */
     public Integer numMaximoIcidenciasAula() throws AulaNotFoundException {
         Integer maxIncidencias  = Integer.parseInt(em.createNativeQuery("""
             SELECT MAX(incidencias_por_aula)
@@ -234,7 +243,12 @@ public class CRUDIncidencia {
         return maxIncidencias;
     }
 
+    /**
+     * Método que retorna la ultima fecha y hora de modificación por Aula.
+     * @return Retorna un Mapa con la última fecha y hora por aula.
+     */
     public Map<String, String[]> getUltimaFechaHoraPorAula() {
+        //Consulta que se encarga de sacar la referencia del aula y su fecha y hora de última modificación.
         String sql = """
             SELECT a.referencia, i.ultFecha, i.ultHora
             FROM aula a
@@ -247,21 +261,30 @@ public class CRUDIncidencia {
             )
         """;
 
-        List<Object[]> results = em.createNativeQuery(sql)
-                .getResultList();
+        //El resultado de la lista se guarda en una Lista de objetos.
+        List<Object[]> results = em.createNativeQuery(sql).getResultList();
 
+        //Mapa quie contiene la referencia al aula y un array de String que contiene la fecha y hora de última modificación.
         Map<String, String[]> resultMap = new HashMap<>();
         for (Object[] row : results) {
+            //Rellenamos el mapa
             String referencia = (String) row[0];
+            //Insertamos en las variables el contenido del array
             String ultFecha = row[1].toString();
             String ultHora = row[2].toString();
-
+            //Insertamos los nuevos valores en el mapa
             resultMap.put(referencia, new String[]{ultFecha, ultHora});
         }
 
-        return resultMap;
+        return resultMap; //Devolvemos el mapa
     }
 
+    /**
+     * Método getter que devuelve la última fecha de modificación para un aula en específico.
+     * @param referencia String con la referencia del aula.
+     * @return Retorna un String con la última fecha dse modificación.
+     * @throws AulaNotFoundException Excepción personalizada si no encuentra el aula.
+     */
     public String getUltFechaMod(String referencia) throws AulaNotFoundException {
         String[] datos = getUltimaFechaHoraPorAula().get(referencia);
         if (datos != null && datos[0] != null) {
@@ -270,6 +293,12 @@ public class CRUDIncidencia {
         return null;
     }
 
+    /**
+     * Método getter que devuelve la última hora de modificación para un aula en específico.
+     * @param referencia String con la referencia del aula.
+     * @return Retorna un String con la última hora dse modificación.
+     * @throws AulaNotFoundException Excepción personalizada si no encuentra el aula.
+     */
     public String getUltHoraMod(String referencia) throws AulaNotFoundException {
         String[] datos = getUltimaFechaHoraPorAula().get(referencia);
         if (datos != null && datos[1] != null) {
@@ -278,21 +307,27 @@ public class CRUDIncidencia {
         return null;
     }
 
+    /**
+     * Método getter que se encarga de devolver el número de equipos con incidencias por aula.
+     * @param referencia String que representa la referencia a un aula.
+     * @return Retorna un entero con el número de equipos con incidencias.
+     * @throws AulaNotFoundException
+     */
     public int getEquipoIncidenciasXAula(String referencia) throws AulaNotFoundException {
         Set<String> aulasConIncidencias = getAulasIncidencias();
         for (String aula : aulasConIncidencias) {
             if (aula.equals(referencia)) {
-                //SI EXISTE EL AULA DEVUELVE EL Nº DE EQUIPOS CON INCIDENCIAS
+                //Si existe el aula devuelve el número de equipos con incidencias.
                 return Integer.parseInt(em.createNativeQuery("select COUNT(Distinct id_informacion_sistema) from incidencias where id_aula ='"+referencia+"' group by id_aula;").getSingleResult().toString());
             }
         }
-        //SI NO EXISTE EL AULA DEVUELVE 0
+        //Si no existe el aula devuelve 0
         return 0;
     }
 
     /**
      * Método que devuelve el número de incidencias asociadas a un equipo concreto
-     * @param idEquipo el id de {@link InformacionSistema}
+     * @param idEquipo el ID de {@link BBDD.DTO.InformacionSistema}
      * @return número de incidencias para ese equipo
      */
     public int getNumIncidenciasEquipo(int idEquipo) {
@@ -303,29 +338,26 @@ public class CRUDIncidencia {
         return Integer.parseInt(resultado.toString());
     }
 
-
-    /**
-     * Clase main para realizar pruebas
-     * @param args arg del main
-     * @throws AulaNotFoundException excepción personalizada para el aula
-    */
-
-//    public static void main(String[] args) throws AulaNotFoundException {
-//        CRUDIncidencia crudIncidencia = new CRUDIncidencia();
-//        //crudIncidencia.mostrarIncidenciasxAula("PRUEBA2");
-//        //System.out.println(crudIncidencia.numMaximoIcidenciasAula());
+//    /**
+//     * Clase main para realizar pruebas
+//     * @param args arg del main
+//     * @throws AulaNotFoundException excepción personalizada para el aula
+//    */
 //
-////        Map<String, String[]> datos = crudIncidencia.getUltimaFechaHoraPorAula();
-////
-////        for (Map.Entry<String, String[]> entry : datos.entrySet()) {
-////            System.out.println("Referencia: " + entry.getKey());
-////            System.out.println("Fecha: " + entry.getValue()[0]);
-////            System.out.println("Hora: " + entry.getValue()[1]);
-////            System.out.println("------------");
-////        }
-////        System.out.println(crudIncidencia.getUltHoraMod("PRUEBA6"));
-////        System.out.println(crudIncidencia.getUltFechaMod("PRUEBA6"));
-//        System.out.println(crudIncidencia.getEquipoIncidenciasXAula("DAM 2"));
+// public static void main(String[] args) throws AulaNotFoundException {
+//     CRUDIncidencia crudIncidencia = new CRUDIncidencia();
+//     //crudIncidencia.mostrarIncidenciasxAula("PRUEBA2");
+//     //System.out.println(crudIncidencia.numMaximoIcidenciasAula());
 //
-//    }
+//       Map<String, String[]> datos = crudIncidencia.getUltimaFechaHoraPorAula();
+//       for (Map.Entry<String, String[]> entry : datos.entrySet()) {
+//           System.out.println("Referencia: " + entry.getKey());
+//           System.out.println("Fecha: " + entry.getValue()[0]);
+//           System.out.println("Hora: " + entry.getValue()[1]);
+//           System.out.println("------------");
+//       }
+//       System.out.println(crudIncidencia.getUltHoraMod("PRUEBA6"));
+//       System.out.println(crudIncidencia.getUltFechaMod("PRUEBA6"));
+//     System.out.println(crudIncidencia.getEquipoIncidenciasXAula("DAM 2"));
+// }
 }

@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * Clase CRUD de la instancia Aula que la conecta con la BBDD
- * @version 1.0
+ * @version 1.5
  * @author Daniel y Alberto
  */
 public class CRUDAulas {
@@ -26,7 +26,6 @@ public class CRUDAulas {
     //Clase para las validaciones
     Validaciones_systema validacion = new Validaciones_systema();
 
-
     /**
      * Constructor por defecto de la clase {@link CRUDAulas}
      */
@@ -35,7 +34,6 @@ public class CRUDAulas {
 
     /**
      * Método que lleva a cabo la insercción de un {@link Aulas}
-     *
      * @param aula Objeto {@link Aulas}
      */
     public void insertAula(Aulas aula) {
@@ -74,7 +72,6 @@ public class CRUDAulas {
         return aulaEquipos;
     }
 
-
     /**
      * Método que busca si un aula existe por su referencia
      * @param referencia Referencia del aula que está comprobando
@@ -91,7 +88,6 @@ public class CRUDAulas {
 
     /**
      * Método que retorna un {@link Aulas} por su referencia
-     *
      * @param referencia String que referencia al {@link Aulas}
      * @return Retorna un {@link Aulas}
      * @throws AulaNotFoundException Excepción cuando el {@link Aulas} que busca no existe
@@ -113,24 +109,24 @@ public class CRUDAulas {
         Map<String, Integer> equiposPorAula = new LinkedHashMap<>(); //Hacemos el mapa LinkedHashMap para que se ordene de menor a mayor en orden natural
 
         try {
-            //Ejecutamos la consulta
+            //Ejecutamos la consulta.
             List<Object[]> resultados = gestorEntidad.createNativeQuery("""
             SELECT referencia AS aula, COUNT(id_informacion_sistema) AS total_equipos
             FROM aula
             GROUP BY referencia
             """).getResultList();
 
-            //Agregamos los resultados de la consulta al mapa
+            //Agregamos los resultados de la consulta al mapa.
             for (Object[] row : resultados) {
-                String referencia = (String) row[0]; //Agregamos la referencia (clave)
-                Integer totalEquipos = ((Number) row[1]).intValue(); //Agregamos el conteo de los equipos (valor)
-                equiposPorAula.put(referencia, totalEquipos);  //Agregamos los valores al mapa
+                String referencia = (String) row[0]; //Agregamos la referencia (clave).
+                Integer totalEquipos = ((Number) row[1]).intValue(); //Agregamos el conteo de los equipos (valor).
+                equiposPorAula.put(referencia, totalEquipos);  //Agregamos los valores al mapa.
             }
-        } catch (Exception e) {
+        } catch (Exception e) { //Capturamos las posibles excepciones.
             e.printStackTrace();
         }
 
-        return equiposPorAula;  //Devolvemos el mapa
+        return equiposPorAula; //Devolvemos el mapa.
     }
 
 }

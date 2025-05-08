@@ -9,13 +9,12 @@ import java.util.List;
 /**
  * La clase CRUDInfoSistema proporciona métodos para realizar operaciones CRUD en la entidad InformacionSistema.
  * @author Daniel y Alberto
- * @version 1.0
+ * @version 1.5
  */
 public class CRUDInfoSistema {
 
+    //Objetos necesarios para realizar la conexión a la BBDD
     Conexion conexion = Conexion.getInstancia();
-
-    // Aquí obtienes el EntityManager desde la clase CONEXION
     EntityManager em = conexion.getGestor();
     EntityTransaction transaction = em.getTransaction();
 
@@ -74,6 +73,11 @@ public class CRUDInfoSistema {
         return info;
     }
 
+    /**
+     * Método getter que obtiene el id del equipo referente al ID de {@link InformacionSistema}
+     * @param equipo String que recive el método que representa el nombre del equipo.
+     * @return Retorna un int que representa el ID del equipo
+     */
     public int getIdEquipo(String equipo) {
         Integer idEquipo = 0;
         for (InformacionSistema info : readAll()) {
@@ -95,9 +99,8 @@ public class CRUDInfoSistema {
 
     /**
      * Recupera una entidad InformacionSistema por su id.
-     *
-     * @param id el id de la entidad InformacionSistema
-     * @return la entidad InformacionSistema con el id proporcionado
+     * @param id el ID de la entidad InformacionSistema
+     * @return la entidad InformacionSistema con el ID proporcionado
      */
     public InformacionSistema getbyId(Integer id) {
         InformacionSistema info = new InformacionSistema();
@@ -110,10 +113,9 @@ public class CRUDInfoSistema {
     }
 
     /**
-     * Recupera una entidad InformacionSistema por su id.
-     *
-     * @param id el id de la entidad InformacionSistema
-     * @return la entidad InformacionSistema con el id proporcionado
+     * Método getter que retorna el equipo (Objeto {@link InformacionSistema}) completo, según su nombre.
+     * @param nombre Nombre del equipo.
+     * @return Retorna un objeto {@link InformacionSistema}
      */
     public InformacionSistema getByNombre(String nombre) {
         InformacionSistema info = new InformacionSistema();
@@ -126,10 +128,9 @@ public class CRUDInfoSistema {
     }
 
     /**
-     * Recupera una entidad InformacionSistema por su id.
-     *
-     * @param id el id de la entidad InformacionSistema
-     * @return la entidad InformacionSistema con el id proporcionado
+     * Mettodo getter que retorna una entidad InformacionSistema recuperada por su MAC.
+     * @param mac Parámetro que representa la dirección MAC que se busca recuperar, de la entidad InformacionSistema
+     * @return Retorna la entidad InformacionSistema.
      */
     public InformacionSistema getByMac(String mac) {
         InformacionSistema info = new InformacionSistema();
@@ -140,6 +141,4 @@ public class CRUDInfoSistema {
         }
         return info;
     }
-
-
 }

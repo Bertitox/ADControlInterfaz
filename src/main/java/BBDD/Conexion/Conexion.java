@@ -8,7 +8,7 @@ import jakarta.persistence.Persistence;
 /**
  * Clase Singleton para la conexión a la BBDD con JPA
  * @author Alberto y Daniel
- * @version 1.5
+ * @version 2.0
  */
 public class Conexion {
 
@@ -29,8 +29,8 @@ public class Conexion {
      * @return instancia única de la clase Conexion
      */
     public static Conexion getInstancia() {
-        if (instancia == null) {
-            synchronized (Conexion.class) { // Bloqueo para garantizar seguridad en entornos multi-hilo
+        if (instancia == null) { //Usamos la instancia abierta, si esta no es nula, es decir, si ya está creada.
+            synchronized (Conexion.class) { //Método synchronized para el hilo de la conexión principal
                 if (instancia == null) {
                     instancia = new Conexion();
                 }
@@ -66,6 +66,6 @@ public class Conexion {
         if (factoria != null && factoria.isOpen()) {
             factoria.close();
         }
-        instancia = null; // Permitir reinicialización si es necesario
+        instancia = null; //Permitimos que la conexión se reinicialice cuando lo haga la app.
     }
 }
