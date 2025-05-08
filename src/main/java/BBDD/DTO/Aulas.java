@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 
 /**
- * Clase que representa una entidad de {@link Aulas} en la base de datos.
+ * Clase que representa en la bbdd la talba Aulas, que contiene una columna Referencia que es el nombre de cada aula
  * @author Daniel y Alberto
  * @version 1.0
  */

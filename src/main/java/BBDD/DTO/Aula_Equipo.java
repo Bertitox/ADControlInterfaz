@@ -5,14 +5,13 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 /**
- * Clase que representa una entidad de Aula en la base de datos.
+ * Clase que representa una tabla intermedia en la bbdd llamada aula. Relaciona cada clase con cada equipo.
  * @version 1.5
  * @author Daniel y Alberto
  */
 @Entity
 @Table(name = "aula")
 public class Aula_Equipo {
-    //EN BBDD SE LLAMA AULA
     /**
      * El identificador único del aula.
      */

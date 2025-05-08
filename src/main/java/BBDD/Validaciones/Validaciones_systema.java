@@ -48,12 +48,4 @@ public class Validaciones_systema {
         }
         return exist;
     }
-
-
-
-//    public static void main(String[] args) {
-//        Validaciones_systema validaciones = new Validaciones_systema();
-//        System.out.println(validaciones.existeAula("PRUEBA0"));
-//    }
-
 }
