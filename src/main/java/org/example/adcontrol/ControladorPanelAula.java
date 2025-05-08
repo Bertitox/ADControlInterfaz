@@ -6,6 +6,8 @@ import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +28,7 @@ import javafx.util.StringConverter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.*;
 
 import javafx.scene.chart.NumberAxis;
 import javafx.util.Duration;
@@ -179,37 +181,49 @@ public class ControladorPanelAula extends Controlador {
         }
     }
 
-
     public void initializeLineChart() {
-        if (graficoIncidenciasAula.getXAxis() instanceof NumberAxis
-                && graficoIncidenciasAula.getYAxis() instanceof NumberAxis) {
+        if (graficoIncidenciasAula.getXAxis() instanceof NumberAxis &&
+                graficoIncidenciasAula.getYAxis() instanceof NumberAxis) {
 
             NumberAxis xAxis = (NumberAxis) graficoIncidenciasAula.getXAxis();
             NumberAxis yAxis = (NumberAxis) graficoIncidenciasAula.getYAxis();
 
-            xAxis.setLabel("Tiempo");
+            //Etiquetas de los ejes
+            xAxis.setLabel("Día del Mes");
             yAxis.setLabel("Incidencias");
 
+            //Obtener datos
+            int diaActual = LocalDate.now().getDayOfMonth();
+            int numIncidencias;
+            try {
+                numIncidencias = Integer.parseInt(labelNumIncidenciasAula.getText().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Error: El valor del label no es un número válido.");
+                return;
+            }
+
+            //Eje X
+            xAxis.setAutoRanging(false);
+            xAxis.setLowerBound(0);
+            xAxis.setUpperBound(Math.max(1, diaActual) +1);
+            xAxis.setTickUnit(1);
+
+            yAxis.setAutoRanging(false);
+            yAxis.setLowerBound(0);
+            yAxis.setUpperBound(numIncidencias+2);
             yAxis.setTickUnit(1);
-            yAxis.setMinorTickCount(0);
-            yAxis.setTickLabelFormatter(new StringConverter<Number>() {
-                @Override
-                public String toString(Number value) {
-                    return String.valueOf(value.intValue()); //Solo enteros
-                }
 
-                @Override
-                public Number fromString(String string) {
-                    return Integer.parseInt(string);
-                }
-            });
+            //Serie del punto 0,0 y punto incidencias, días
+            XYChart.Series<Number, Number> serie = new XYChart.Series<>();
+            serie.setName("Incidencias");
 
-            graficoIncidenciasAula.setTitle("Histórico de Incidencias");
-            series.setName("Incidencias");
+            serie.getData().add(new XYChart.Data<>(0, 0)); // Creo el primer punto
+            serie.getData().add(new XYChart.Data<>(diaActual, numIncidencias));
 
+            //Limpiar y agregar datos
             graficoIncidenciasAula.getData().clear();
-            series.getData().add(new XYChart.Data<>(0, 0)); //Punto inicial a 0
-            graficoIncidenciasAula.getData().add(series);
+            graficoIncidenciasAula.getData().add(serie);
+            graficoIncidenciasAula.setTitle("Histórico de Incidencias");
         } else {
             System.out.println("Error: El gráfico no tiene ejes numéricos.");
         }
@@ -291,6 +305,7 @@ public class ControladorPanelAula extends Controlador {
         labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(labelAula.getText()));
         cargarBarra();
         rellenarAdministrarEquipos();
+        initializeLineChart();
     }
 
     void cargarBarra() throws AulaNotFoundException {
