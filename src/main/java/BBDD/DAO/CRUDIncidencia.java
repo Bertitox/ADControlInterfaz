@@ -104,6 +104,25 @@ public class CRUDIncidencia {
     }
 
     /**
+     * Método que devuelve las 3 últimas incidencias registradas para un aula concreta (por id descendente)
+     * @param referencia Referencia del aula
+     * @return List<Incidencia> con las últimas 3 incidencias del aula o lista vacía si no hay
+     * @throws AulaNotFoundException excepción personalizada si no existe el aula
+     */
+    public List<Incidencia> getUltimasTresIncidenciasAula(String referencia) throws AulaNotFoundException {
+        CRUDAulas crudAulas = new CRUDAulas();
+        Aulas aula = crudAulas.getbyReferencia(referencia);
+
+        List<Incidencia> incidencias = em.createQuery(
+                        "SELECT i FROM Incidencia i WHERE i.Aula.referencia = :referencia ORDER BY i.id DESC", Incidencia.class)
+                .setParameter("referencia", referencia)
+                .setMaxResults(3)
+                .getResultList();
+
+        return incidencias;
+    }
+
+    /**
      * Método que retorna una lList<Incidencia> por {@link Aula_Equipo}
      *
      * @param referencia referencia a un {@link Aula_Equipo}

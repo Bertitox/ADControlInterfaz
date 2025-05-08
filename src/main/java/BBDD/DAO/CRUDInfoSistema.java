@@ -33,7 +33,10 @@ public class CRUDInfoSistema {
     public void insert(InformacionSistema informacionSistema) {
         transaction.begin();
         em.persist(informacionSistema); // Usa el 'em' que es correcto
+        em.flush();
+        em.clear();
         transaction.commit();
+
     }
 
     /**
@@ -55,6 +58,8 @@ public class CRUDInfoSistema {
     public void delete(InformacionSistema informacionSistema) {
         transaction.begin();
         em.remove(informacionSistema);
+        em.flush();
+        em.clear();
         transaction.commit();
     }
 
@@ -98,6 +103,38 @@ public class CRUDInfoSistema {
         InformacionSistema info = new InformacionSistema();
         for (InformacionSistema informacionSistema : readAll()) {
             if (informacionSistema.getId().equals(id)) {
+                info = informacionSistema;
+            }
+        }
+        return info;
+    }
+
+    /**
+     * Recupera una entidad InformacionSistema por su id.
+     *
+     * @param id el id de la entidad InformacionSistema
+     * @return la entidad InformacionSistema con el id proporcionado
+     */
+    public InformacionSistema getByNombre(String nombre) {
+        InformacionSistema info = new InformacionSistema();
+        for (InformacionSistema informacionSistema : readAll()) {
+            if (informacionSistema.getNombre().equals(nombre)) {
+                info = informacionSistema;
+            }
+        }
+        return info;
+    }
+
+    /**
+     * Recupera una entidad InformacionSistema por su id.
+     *
+     * @param id el id de la entidad InformacionSistema
+     * @return la entidad InformacionSistema con el id proporcionado
+     */
+    public InformacionSistema getByMac(String mac) {
+        InformacionSistema info = new InformacionSistema();
+        for (InformacionSistema informacionSistema : readAll()) {
+            if (informacionSistema.getMac().equals(mac)) {
                 info = informacionSistema;
             }
         }

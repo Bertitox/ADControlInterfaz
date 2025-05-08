@@ -77,12 +77,12 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="fechaUltMod" layoutX="79.0" layoutY="44.0" text="00000000" textAlignment="CENTER">
+                              <Label fx:id="fechaUltMod" layoutX="79.0" layoutY="44.0" text="Sin datos" textAlignment="CENTER">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="horaUltMod" layoutX="76.0" layoutY="64.0" text="000000" textAlignment="CENTER" textFill="#3ea8ee">
+                              <Label fx:id="horaUltMod" layoutX="76.0" layoutY="64.0" text="Sin datos" textAlignment="CENTER" textFill="#3ea8ee">
                                  <font>
                                     <Font name="Cascadia Code Regular" size="21.0" />
                                  </font>
@@ -207,7 +207,7 @@
                                  </font>
                               </Label>
                               <ProgressBar fx:id="barraEstadoAula" layoutX="15.0" layoutY="61.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="10.0" prefWidth="190.0" progress="0.0" />
-                              <Label fx:id="labelPorcentajeProgreso" layoutX="167.0" layoutY="39.0" text="0%">
+                              <Label fx:id="labelPorcentajeProgreso" layoutX="157.0" layoutY="39.0" text="100.0%">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -320,19 +320,19 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Pane>
-                              <Pane onMouseClicked="#vistaEquipos" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;" GridPane.rowIndex="1">
+                              <Pane onMouseClicked="#agregarEquipo" onMouseEntered="#zoomPane" onMouseExited="#quitarzoomPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-radius: 7px;" GridPane.rowIndex="1">
                                  <children>
                                     <VBox alignment="CENTER" prefHeight="73.0" prefWidth="95.0">
                                        <children>
                                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../Imagenes/monitorCrear.png" />
+                                                <Image url="@../Imagenes/monitormasazul.png" />
                                              </image>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" />
-                                             </VBox.margin>
+                                             <effect>
+                                                <ColorAdjust brightness="-0.02" contrast="0.1" saturation="-0.38" />
+                                             </effect>
                                           </ImageView>
-                                          <Label text="Ver equipos" />
+                                          <Label text="Añadir equipo" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -403,7 +403,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Administrar equipos" GridPane.columnSpan="2" GridPane.valignment="CENTER">
+                        <Label text="Equipos del aula" GridPane.columnSpan="2" GridPane.valignment="CENTER">
                            <GridPane.margin>
                               <Insets left="15.0" />
                            </GridPane.margin>
@@ -411,7 +411,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#agregarEquipo" prefHeight="35.0" prefWidth="136.0" styleClass="botonAgregarEquipo" text="Agregar equipo" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                        <Button mnemonicParsing="false" onAction="#vistaEquipos" prefHeight="35.0" prefWidth="153.0" styleClass="botonAgregarEquipo" text="Gestionar equipos" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets right="15.0" top="10.0" />
                            </GridPane.margin>
@@ -421,7 +421,7 @@
                                     <Image url="@../Imagenes/monitormas.png" />
                                  </image>
                                  <effect>
-                                    <ColorAdjust contrast="-0.64" />
+                                    <ColorAdjust contrast="-1.0" />
                                  </effect>
                               </ImageView>
                            </graphic>
@@ -564,7 +564,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Incidencias añadidas hoy" GridPane.columnSpan="2">
+                        <Label text="Incidencias añadidas recientemente" GridPane.columnSpan="2">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -572,7 +572,7 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                        <ImageView fx:id="imgIncidencia1" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="15.0" />
                            </GridPane.margin>
@@ -583,17 +583,15 @@
                               <ColorAdjust brightness="0.29" contrast="-1.0" hue="-0.02" saturation="1.0" />
                            </effect>
                         </ImageView>
-                        <Label text="Disco duro lleno, reemplazarlo" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                        <Label fx:id="incidencia1" text="Disco duro lleno, reemplazarlo" GridPane.columnSpan="2" GridPane.rowIndex="1">
                            <GridPane.margin>
-                              <Insets left="50.0" />
+                              <Insets bottom="20.0" left="50.0" />
                            </GridPane.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                         </Label>
-                        <Label text="12:45 p.m" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets right="15.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <ImageView fx:id="imgIncidencia2" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../Imagenes/RAMError.png" />
                            </image>
@@ -604,17 +602,15 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </ImageView>
-                        <Label text="RAM antigua, cambiar" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <Label fx:id="incidencia2" text="RAM antigua, cambiar" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <GridPane.margin>
-                              <Insets left="50.0" />
+                              <Insets bottom="20.0" left="50.0" />
                            </GridPane.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                         </Label>
-                        <Label text="10:13 p.m" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                           <GridPane.margin>
-                              <Insets right="15.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                        <ImageView fx:id="imgIncidencia3" fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                            <image>
                               <Image url="@../Imagenes/errorGeneral.png" />
                            </image>
@@ -625,14 +621,27 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </ImageView>
-                        <Label text="Pantallazo azul, ver porque pasa" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                        <Label fx:id="incidencia3" text="Pantallazo azul, ver porque pasa" GridPane.columnSpan="2" GridPane.rowIndex="3">
                            <GridPane.margin>
-                              <Insets left="50.0" />
+                              <Insets bottom="20.0" left="50.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="incidenciaRecEq1" text="Equipo 9" textFill="#6f6f6f" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="50.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label text="8:58 p.m" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Label fx:id="incidenciaRecEq2" layoutX="60.0" layoutY="89.0" text="Equipo 3" textFill="#6f6f6f" GridPane.rowIndex="2">
                            <GridPane.margin>
-                              <Insets right="15.0" />
+                              <Insets left="50.0" top="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="incidenciaRecEq3" layoutX="10.0" layoutY="130.0" text="Equipo 2" textFill="#6f6f6f" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="50.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
                      </children>

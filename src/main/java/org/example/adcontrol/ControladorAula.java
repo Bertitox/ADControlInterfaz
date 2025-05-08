@@ -2,6 +2,11 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import BBDD.DAO.CRUDInfoSistema;
+import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,10 +18,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -28,6 +30,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.Map;
 
 
@@ -53,6 +56,9 @@ public class ControladorAula {
     @FXML
     AnchorPane panelLargo;
 
+    private ScheduledExecutorService scheduler;
+
+
     /**
      * Método que inicializa los elementos del controlador que se usarán.
      */
@@ -69,13 +75,21 @@ public class ControladorAula {
             });
             menuButtonAulas.getItems().add(item);
         }
+        // Programar actualización automática cada 2 minutos
+        scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(() -> {
+            if (aulaActual != null) {
+                Platform.runLater(() -> actualizarMonitores(aulaActual));
+            }
+        }, 15, 15, TimeUnit.SECONDS);  // primer delay 120s, luego cada 120s
     }
 
     /**
      * Método que se encarga de actualizar, cargar y mostrar las imágenes de los monitores por aula y el texto del comboBox correspondiente a cada aula
+     *
      * @param aulaSeleccionada Recibe como parámetro el aula seleccionada, y la cambia en el combobox
      */
-    private void actualizarMonitores(String aulaSeleccionada) {
+    public void actualizarMonitores(String aulaSeleccionada) {
         gridPaneMonitores.getChildren().clear();
 
         if (aulaSeleccionada == null || aulaSeleccionada.isEmpty()) {
@@ -84,6 +98,7 @@ public class ControladorAula {
         }
 
         int cantidadMonitores = aulasMonitores.getOrDefault(aulaSeleccionada, 0);
+        System.out.println(cantidadMonitores);
 
         if (cantidadMonitores < 0) {
             System.err.println("La cantidad de monitores no puede ser negativa.");
@@ -117,9 +132,7 @@ public class ControladorAula {
             ImageView monitor = new ImageView(imagenMonitor);
             monitor.setFitWidth(150);
             monitor.setFitHeight(150);
-
-            // 📌 IP ficticia de ejemplo (sustituye esto por un getIP o similar si tienes la info real)
-            //String ip = "192.168.1." + (i + 1);
+            //ERROR AQUÍ
             String ip = new CRUDAula_Equipo().getEquipoPorIndiceYAula(aulaSeleccionada, i).getIp();
 
             // 📌 Label de la IP
@@ -129,13 +142,86 @@ public class ControladorAula {
                     + "-fx-background-radius: 5px;");
             ipLabel.setMouseTransparent(true);  // Para que no bloquee clics ni tooltips
 
-            // 📌 StackPane para imagen + IP superpuesta
+            // 📌 Indicador de estado (círculo)
+            javafx.scene.shape.Circle estadoCircle = new javafx.scene.shape.Circle(8);
+            estadoCircle.setStroke(javafx.scene.paint.Color.BLACK);
+            estadoCircle.setStrokeWidth(1.5);
+
+            try {
+                System.out.println("Ping a " + ip);
+                InetAddress inet = InetAddress.getByName(ip);
+                boolean reachable = inet.isReachable(3000);
+                if (reachable) {
+                    estadoCircle.setFill(javafx.scene.paint.Color.LIMEGREEN);  // Activo
+                } else {
+                    estadoCircle.setFill(javafx.scene.paint.Color.RED);  // Inactivo
+                }
+            } catch (Exception e) {
+                estadoCircle.setFill(javafx.scene.paint.Color.GREY);  // Desconocido/error
+            }
+
+            // 📌 StackPane con monitor + IP + círculo estado
             StackPane stack = new StackPane();
-            stack.getChildren().addAll(monitor, ipLabel);
+            stack.getChildren().addAll(monitor, ipLabel, estadoCircle);
             StackPane.setAlignment(ipLabel, Pos.CENTER);
+            StackPane.setAlignment(estadoCircle, Pos.TOP_RIGHT);
+            StackPane.setMargin(estadoCircle, new Insets(5, 5, 0, 0));
 
             // 📌 Tooltip personalizado
             String nombreEquipo = cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getNombre();
+
+            ContextMenu menu = new ContextMenu();
+
+            MenuItem modificarEquipo = new MenuItem("Modificar equipo");
+            MenuItem eliminarEquipo = new MenuItem("Eliminar equipo");
+
+            modificarEquipo.setOnAction(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/formularioEquipo.fxml"));
+                    Parent root = loader.load();
+                    ControladorFormularioEquipo controladorB = loader.getController();
+                    CRUDInfoSistema crudInfoSistema = new CRUDInfoSistema();
+                    InformacionSistema equipoSeleccionado = crudInfoSistema.getByNombre(nombreEquipo);
+                    controladorB.setAulaActual(aulaActual);
+                    controladorB.setCampoCPU(equipoSeleccionado.getProcesador());
+                    controladorB.setCampoArquitectura(equipoSeleccionado.getArquitectura());
+                    controladorB.setCampoIP(equipoSeleccionado.getIp());
+                    controladorB.setCampoNombre(equipoSeleccionado.getNombre());
+                    controladorB.setCampoKernel(equipoSeleccionado.getReleasee());
+                    controladorB.setCampoMAC(equipoSeleccionado.getMac());
+                    controladorB.setCampoSO(equipoSeleccionado.getSo());
+                    controladorB.setCampoMemDisp(equipoSeleccionado.getMemDisp().toString());
+                    controladorB.setCampoMemTotal(equipoSeleccionado.getMemTotal().toString());
+                    controladorB.setCampoVersion(equipoSeleccionado.getVersion());
+                    controladorB.setCampoUsoCPU(equipoSeleccionado.getUsoCpu());
+                    controladorB.setCampoNodo(equipoSeleccionado.getNombreNodo());
+                    controladorB.setModificar(true);
+
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.showAndWait();
+                    actualizarMonitores(aulaActual);  // refrescamos el GridPane al cerrarse
+
+                } catch (IOException e) {
+                    System.out.println("Error al cambiar la pantalla al formulario para crear el equipo");
+                }
+            });
+
+            eliminarEquipo.setOnAction(event -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea eliminar el equipo?", ButtonType.YES, ButtonType.NO);
+                alert.showAndWait();
+
+                if (alert.getResult() == ButtonType.YES) {
+                    CRUDInfoSistema crudInfoSistema = new CRUDInfoSistema();
+                    InformacionSistema info = crudInfoSistema.getByNombre(nombreEquipo);
+                    crudInfoSistema.delete(info);
+                    actualizarMonitores(aulaActual);
+                }
+            });
+
+            menu.getItems().addAll(modificarEquipo, eliminarEquipo);
+
+            stack.setOnContextMenuRequested(e -> menu.show(stack, e.getScreenX(), e.getScreenY()));
 
             //int numIncidencias = 0; // Sustituye con llamada a tu método real de incidencias
             int numIncidencias = crudIncidencia.getNumIncidenciasEquipo(cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getId());
@@ -153,10 +239,6 @@ public class ControladorAula {
         menuButtonAulas.setText(aulaSeleccionada);
     }
 
-    public String getAulaActual() {
-        return aulaActual;
-    }
-
     public void setAulaActual(String aulaActual) {
         this.aulaActual = aulaActual;
         actualizarMonitores(aulaActual);
@@ -164,6 +246,11 @@ public class ControladorAula {
 
     @FXML
     void volver(ActionEvent event) throws IOException, AulaNotFoundException {
+        // Detenemos la tarea programada
+        if (scheduler != null && !scheduler.isShutdown()) {
+            scheduler.shutdown();
+        }
+
         Platform.runLater(() -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelAula.fxml"));
@@ -171,8 +258,6 @@ public class ControladorAula {
 
                 ControladorVistaPanelAula controladorVista = fxmlLoader.getController();
 
-                // Esperar un poco a que cargue panelAula.fxml (por el Platform.runLater interno)
-                // Alternativa simple: usar otro runLater anidado
                 Platform.runLater(() -> {
                     ControladorPanelAula controladorPanel = controladorVista.getControladorPanelAula();
                     if (controladorPanel != null) {
@@ -193,6 +278,6 @@ public class ControladorAula {
                 e.printStackTrace();
             }
         });
-
     }
+
 }

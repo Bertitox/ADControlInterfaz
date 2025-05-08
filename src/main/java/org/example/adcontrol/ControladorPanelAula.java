@@ -2,6 +2,7 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
+import BBDD.DTO.Incidencia;
 import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
 import javafx.animation.Timeline;
@@ -36,6 +37,33 @@ import javafx.animation.KeyFrame;
 
 
 public class ControladorPanelAula extends Controlador {
+
+    @FXML
+    private Label incidenciaRecEq1;
+
+    @FXML
+    private Label incidenciaRecEq2;
+
+    @FXML
+    private Label incidenciaRecEq3;
+
+    @FXML
+    private ImageView imgIncidencia1;
+
+    @FXML
+    private ImageView imgIncidencia2;
+
+    @FXML
+    private ImageView imgIncidencia3;
+
+    @FXML
+    private Label incidencia1;
+
+    @FXML
+    private Label incidencia2;
+
+    @FXML
+    private Label incidencia3;
 
     @FXML
     Label labelNumEquiposAula;
@@ -163,23 +191,84 @@ public class ControladorPanelAula extends Controlador {
                     ip1.setText(equipo.getIp()); // Asumiendo que tienes getIp()
                     imgMonitor1.setOpacity(1.0);
                     nombreEQ1.setText(equipo.getNombre());
-                    botonEQ1.setDisable(false);
+                    botonEQ1.setOpacity(1.0);
                     break;
                 case 1:
                     ip2.setText(equipo.getIp());
                     imgMonitor2.setOpacity(1.0);
                     nombreEQ2.setText(equipo.getNombre());
-                    botonEQ2.setDisable(false);
+                    botonEQ2.setOpacity(1.0);
                     break;
                 case 2:
                     ip3.setText(equipo.getIp());
                     imgMonitor3.setOpacity(1.0);
                     nombreEQ3.setText(equipo.getNombre());
-                    botonEQ3.setDisable(false);
+                    botonEQ3.setOpacity(1.0);
                     break;
             }
         }
     }
+
+
+    public void rellenarIncidenciasRecientes() throws AulaNotFoundException {
+        List<Incidencia> incidencias = I.getUltimasTresIncidenciasAula(labelAula.getText());  // Simulado
+        System.out.println(incidencias.size());
+        // Primero limpiar huecos restantes
+        if (incidencias.size() < 3) {
+            if (incidencias.size() < 1) {
+                imgIncidencia1.setOpacity(0.0);
+                incidencia1.setText("");
+                incidenciaRecEq1.setText("");
+            }
+            if (incidencias.size() < 2) {
+                imgIncidencia2.setOpacity(0.0);
+                incidencia2.setText("");
+                incidenciaRecEq2.setText("");
+            }
+            if (incidencias.size() < 3) {
+                imgIncidencia3.setOpacity(0.0);
+                incidencia3.setText("");
+                incidenciaRecEq3.setText("");
+            }
+        }
+
+        for (int i = 0; i < incidencias.size(); i++) {
+            Incidencia inc = incidencias.get(i);
+            ImageView imgView;
+            Label lblIncidencia;
+            Label nombreEqIncidencia;
+            switch (i) {
+                case 0:
+                    imgView = imgIncidencia1;
+                    lblIncidencia = incidencia1;
+                    nombreEqIncidencia = incidenciaRecEq1;
+                    break;
+                case 1:
+                    imgView = imgIncidencia2;
+                    lblIncidencia = incidencia2;
+                    nombreEqIncidencia = incidenciaRecEq2;
+                    break;
+                case 2:
+                    imgView = imgIncidencia3;
+                    lblIncidencia = incidencia3;
+                    nombreEqIncidencia = incidenciaRecEq3;
+                    break;
+                default:
+                    continue;
+            }
+
+            imgView.setOpacity(1.0);
+            lblIncidencia.setText(inc.getDescripcion());
+            nombreEqIncidencia.setText(inc.getIdInformacionSistema().getNombre());
+
+            if (inc.getCodigoError().getCodigoError().equals("E001")) {
+                imgView.setImage(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/errorRed.png").toExternalForm()));
+            } else {
+                imgView.setImage(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/cpuError.png").toExternalForm()));
+            }
+        }
+    }
+
 
     public void initializeLineChart() {
         if (graficoIncidenciasAula.getXAxis() instanceof NumberAxis &&
@@ -258,8 +347,8 @@ public class ControladorPanelAula extends Controlador {
         labelNumEquiposAula.setText(AE.numEquiposXAula(nombreAula));
         labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(nombreAula));
         if (I.getUltFechaMod(labelAula.getText()) == null) {
-            fechaUltMod.setText("00000000");
-            horaUltMod.setText("000000");
+            fechaUltMod.setText("Sin datos");
+            horaUltMod.setText("Sin datos");
 
         } else {
             DateTimeFormatter formatoBD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -279,10 +368,11 @@ public class ControladorPanelAula extends Controlador {
 
         cargarBarra();
         rellenarAdministrarEquipos();
+        rellenarIncidenciasRecientes();
     }
 
     @FXML
-    void vistaEquipos(MouseEvent event) throws IOException {
+    void vistaEquipos(ActionEvent event) throws IOException {
         if (AE.numEquiposXAula(labelAula.getText()).equals("0")) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "No hay aulas en esta clase, debes de agregar un equipo al menos.", ButtonType.OK);
             alert.setTitle("No hay equipos");
@@ -306,6 +396,16 @@ public class ControladorPanelAula extends Controlador {
         cargarBarra();
         rellenarAdministrarEquipos();
         initializeLineChart();
+        rellenarIncidenciasRecientes();
+    }
+
+
+    void refrescar() throws AulaNotFoundException {
+        labelNumEquiposAula.setText(AE.numEquiposXAula(labelAula.getText()));
+        labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(labelAula.getText()));
+        cargarBarra();
+        rellenarAdministrarEquipos();
+        rellenarIncidenciasRecientes();
     }
 
     void cargarBarra() throws AulaNotFoundException {
@@ -321,7 +421,7 @@ public class ControladorPanelAula extends Controlador {
             calculo = (double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText()) * 100;
             double estadoRedondeado = Math.round(calculo * 10.0) / 10.0;
             labelPorcentajeProgreso.setText(estadoRedondeado + " %");
-            barraEstadoAula.setProgress((((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText())) * 100) / 100);
+            barraEstadoAula.setProgress((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText()));
         }
         if (calculo <= 25.0) {
             caraImagen.setImage(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/contento.png").toExternalForm()));
@@ -332,8 +432,9 @@ public class ControladorPanelAula extends Controlador {
         }
     }
 
+
     @FXML
-    void agregarEquipo(ActionEvent event) {
+    void agregarEquipo(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/OpcionAutomaticoManual.fxml"));
             Parent root = loader.load();
@@ -353,6 +454,15 @@ public class ControladorPanelAula extends Controlador {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setResizable(false);
+
+            stage.setOnCloseRequest(e -> {
+                try {
+                    refrescar(null); // Llamamos a refrescar al cerrar la ventana
+                } catch (AulaNotFoundException ex) {
+                    ex.printStackTrace(); // Manejo de errores
+                }
+            });
+
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -370,9 +480,8 @@ public class ControladorPanelAula extends Controlador {
             controladorB.setClaseActual(labelAula.getText());
 
             Stage stage = new Stage();
-            Scene scene = new Scene(root);  // Aquí la guardas en una variable
+            Scene scene = new Scene(root);  //Aquí la guardas en una variable
 
-            // Ahora sí puedes añadirle el CSS externo
             scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
             stage.setScene(scene);
