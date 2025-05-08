@@ -31,7 +31,7 @@ public class CRUDInfoSistema {
      */
     public void insert(InformacionSistema informacionSistema) {
         transaction.begin();
-        em.persist(informacionSistema); // Usa el 'em' que es correcto
+        em.persist(informacionSistema);
         em.flush();
         em.clear();
         transaction.commit();
