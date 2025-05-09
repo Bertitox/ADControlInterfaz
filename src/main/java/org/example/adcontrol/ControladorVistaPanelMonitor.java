@@ -6,16 +6,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 
+/**
+ * Clase intermedia que añade el scrollPane, y dentro de este, el pane que se va a cargar
+ *
+ * @author Daniel y Alberto
+ * @version 1.0
+ */
 public class ControladorVistaPanelMonitor {
+    //Elemento padre del fxml donde se crean todos los elementos
     @FXML
     private Pane panelGrande;
-
+    //Controlador necesario para iniciarlizar la nueva vista con este controlador
     private ControladorMonitor controladorMonitor;
 
-    public ControladorMonitor getControladorMonitor() {
-        return controladorMonitor;
-    }
-
+    /**
+     * Nada más inciar la vista con este controlador, se carga dentro del scrollbar la vista vistaMonitor.fxml
+     */
     @FXML
     void initialize() {
         Platform.runLater(() -> {
