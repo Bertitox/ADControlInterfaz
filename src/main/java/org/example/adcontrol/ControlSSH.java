@@ -2,6 +2,7 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DTO.Aula_Equipo;
+import BBDD.DTO.InformacionSistema;
 import com.jcraft.jsch.ChannelShell;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
@@ -230,6 +231,40 @@ public class ControlSSH {
     }
 
     /**
+     * Método se encarga de conectarse al equipo mediante ssh y apagarlo
+     *
+     * @throws IOException Excepción de entrada y salida
+     */
+    void conectarYApagar(InformacionSistema informacionSistema) throws IOException {
+        //Formulario para que rellene el usuario y contraseña del equipo al que va a conectarse
+        Pair<String, String> credenciales = mostrarFormularioSSH();
+        user = credenciales.getKey();
+        password = credenciales.getValue();
+        //Se establece la ip del equipo al que se va a conectar
+        host = informacionSistema.getIp();
+
+        try {
+            JSch jsch = new JSch();
+            Session session = jsch.getSession(user, host, 22); //Se declara el usuario, ip y puerto para conectarse con ssh
+            session.setPassword(password); //Se añade la contraseña
+            session.setConfig("StrictHostKeyChecking", "no"); //Emitimos la validación de la clave del servidor para evitar errores de conexión (suponemos que no hay un man-in-the-middle)
+
+            session.connect(30000);
+
+            channel = (ChannelShell) session.openChannel("shell"); //Iniciamos un canal de tipo channel para "interpretar" la terminal del equipo al que nos conectamos.
+            out = channel.getOutputStream(); //Comunicamos la entrada del canal con nuestro OutPutStream para poder mandar mensajes y comandos.
+
+            channel.connect();
+            convSuper();
+            out.write(("sudo poweroff" + "\n").getBytes());
+            out.flush();
+            out.close(); //Se cierra el canal de comunicación
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Método asignado a un botón "Reiniciar", que cuando se pulsa manda por el canal un comando "sudo reboot" para apagar el equipo
      *
      * @param event Evento que determina si se ha pulsado o no el botón
@@ -339,5 +374,4 @@ public class ControlSSH {
             }
         }
     }
-
 }

@@ -50,14 +50,20 @@ public class ControladorAula {
     CRUDAula_Equipo cruda = new CRUDAula_Equipo(); //Llamada al CRUD que conecta con la tabla Aula de la BBDD
     CRUDIncidencia crudIncidencia = new CRUDIncidencia();
 
+    //Mapa clave-valor con las aulas y el número de equipos
     private Map<String, Integer> aulasMonitores;
 
+    //Aula actual
     String aulaActual;
 
+    //Panel padre que contiene todos los elementos de la clase
     @FXML
     AnchorPane panelLargo;
 
-    private ScheduledExecutorService scheduler;
+    //Clase
+    private ScheduledExecutorService temporizador;
+
+    CRUDInfoSistema crudInfoSistema = new CRUDInfoSistema();
 
 
     /**
@@ -80,8 +86,8 @@ public class ControladorAula {
         Integer intervalo = infoInit.getIntervalo();
         System.out.println("Intervalo de: " + intervalo);
         //Programar actualización automática cada 2 minutos solo de los indicadores de estado
-        scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(() -> {
+        temporizador = Executors.newSingleThreadScheduledExecutor();
+        temporizador.scheduleAtFixedRate(() -> {
             if (aulaActual != null) {
                 actualizarEstadoMonitores();
             }
@@ -197,9 +203,11 @@ public class ControladorAula {
             String nombreEquipo = cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getNombre();
 
             ContextMenu menu = new ContextMenu();//Creamos el menu que aparecerá al dar clic derecho en el dispositivo.
+
             //Configuramos los MenuItem del contextMenu
             MenuItem modificarEquipo = new MenuItem("Modificar equipo");
             MenuItem eliminarEquipo = new MenuItem("Eliminar equipo");
+            MenuItem apagarEquipo = new MenuItem("Apagar equipo");
 
             //Acción del menuItem modificarEquipo que sirve para abrir una nueva pestaña para modificar el equipo.
             modificarEquipo.setOnAction(event -> {
@@ -207,7 +215,6 @@ public class ControladorAula {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/formularioEquipo.fxml"));
                     Parent root = loader.load();
                     ControladorFormularioEquipo controladorB = loader.getController();
-                    CRUDInfoSistema crudInfoSistema = new CRUDInfoSistema();
                     InformacionSistema equipoSeleccionado = crudInfoSistema.getByNombre(nombreEquipo);
                     controladorB.setAulaActual(aulaActual);
                     controladorB.setCampoCPU(equipoSeleccionado.getProcesador());
@@ -247,7 +254,19 @@ public class ControladorAula {
                 }
             });
 
-            menu.getItems().addAll(modificarEquipo, eliminarEquipo);
+            //MenuItem que apaga el equipo
+            apagarEquipo.setOnAction(event -> {
+                ControlSSH controlSSH = new ControlSSH();
+                InformacionSistema equipoSeleccionado = crudInfoSistema.getByNombre(nombreEquipo);
+                try {
+                    controlSSH.conectarYApagar(equipoSeleccionado);
+                } catch (IOException e) {
+                    System.out.println("Error al intentar apagar");
+                    throw new RuntimeException(e);
+                }
+            });
+
+            menu.getItems().addAll(modificarEquipo, eliminarEquipo, apagarEquipo);
             stack.setOnContextMenuRequested(e -> menu.show(stack, e.getScreenX(), e.getScreenY()));
 
             int numIncidencias = crudIncidencia.getNumIncidenciasEquipo(cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getId());
@@ -284,8 +303,8 @@ public class ControladorAula {
     @FXML
     void volver(ActionEvent event) throws IOException, AulaNotFoundException {
         //Detenemos la tarea programada
-        if (scheduler != null && !scheduler.isShutdown()) {
-            scheduler.shutdown();
+        if (temporizador != null && !temporizador.isShutdown()) {
+            temporizador.shutdown();
         }
 
         Platform.runLater(() -> {
