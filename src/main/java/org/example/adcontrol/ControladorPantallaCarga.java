@@ -14,6 +14,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -52,7 +53,7 @@ public class ControladorPantallaCarga {
     void initialize() {
         InfoInit infoInit = InfoInit.getInstance();
 
-        // Cargar y reproducir vídeo
+        //Cargar y reproducir vídeo
         File f = new File("src/main/resources/org/example/adcontrol/VideoCarga.mp4"); //Iniciamos el video de la pantalla de carga.
         media = new Media(f.toURI().toString());
         mediaPlayer = new MediaPlayer(media);//El media player será el reproductor que usaremos para el video.
@@ -69,7 +70,7 @@ public class ControladorPantallaCarga {
         panelMediaView.setPreserveRatio(true);
         //mediaPlayer.setMute(true); Esto mutea el audio.
 
-        // Cargar datos en segundo plano.
+        //Cargar datos en segundo plano.
         Thread thread = new Thread(this::cargarDatosBBDD);
         thread.setDaemon(true);
         thread.start();
@@ -90,7 +91,7 @@ public class ControladorPantallaCarga {
      * Método que realiza la carga de la base de datos
      */
     private void cargarDatosBBDD() {
-        // Simula la carga de la base de datos
+        //Simula la carga de la base de datos
         CRUDIncidencia incidencia = new CRUDIncidencia();
         CRUDAula_Equipo aula = new CRUDAula_Equipo();
 

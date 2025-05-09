@@ -2,14 +2,15 @@ package org.example.adcontrol;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import java.io.*;
+
+import java.io.IOException;
 
 /**
  * Clase que se encarga de gestionar la vista de los Ajustes principales de la App.
+ *
  * @author Daniel García y Alberto
  * @version 1.0
  */
@@ -44,6 +45,7 @@ public class ControladorAjustes {
 
     /**
      * Método que inicializa los ajustes y sus componentes.
+     *
      * @throws IOException error de entrada o salida.
      */
     @FXML
@@ -75,11 +77,7 @@ public class ControladorAjustes {
         imageViewSonido.setImage(CheckBoxSonido.isSelected() ? imagenSonidoEncendido : imagenSonidoApagado);
 
         sliderVolumen.setOnMouseReleased(e -> {
-            if (CheckBoxSonido.isSelected()) {
-                sliderVolumen.setDisable(false);
-            } else {
-                sliderVolumen.setDisable(true);
-            }
+            sliderVolumen.setDisable(!CheckBoxSonido.isSelected());
             Double vol = sliderVolumen.getValue() * 0.01;
             infoInit.setVolumenLeido(vol);
         });
@@ -126,7 +124,7 @@ public class ControladorAjustes {
      * Botón que restablece los componentes de los ajustes a su valor original.
      */
     public void restablecerAjustes() {
-        infoInit.restablecerAjustes();
+        InfoInit.restablecerAjustes();
         cargarDatos();
     }
 }

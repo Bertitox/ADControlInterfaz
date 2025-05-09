@@ -167,7 +167,7 @@ public class ControladorPanelAula extends Controlador {
      */
     public void rellenarAdministrarEquipos() {
         List<InformacionSistema> equipos = AE.get3EquiposXAula(labelAula.getText());
-        // Asignamos valores según posición
+        //Asignamos valores según posición
         if (equipos.size() < 3) {
             if (equipos.size() < 1) {
                 ip1.setText("");
@@ -316,7 +316,7 @@ public class ControladorPanelAula extends Controlador {
             XYChart.Series<Number, Number> serie = new XYChart.Series<>();
             serie.setName("Incidencias");
 
-            serie.getData().add(new XYChart.Data<>(0, 0)); // Creo el primer punto
+            serie.getData().add(new XYChart.Data<>(0, 0)); //Creo el primer punto
             serie.getData().add(new XYChart.Data<>(diaActual, numIncidencias));
 
             //Limpiar y agregar datos
