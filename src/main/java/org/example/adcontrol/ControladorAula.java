@@ -2,9 +2,6 @@ package org.example.adcontrol;
 
 import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDIncidencia;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import BBDD.DAO.CRUDInfoSistema;
 import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
@@ -25,31 +22,34 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.Map;
-
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Daniel y Alberto
- * @version 1.0
+ * @version 1.5
  * Clase controladora de la interfaz para las aulas.
  */
 public class ControladorAula {
 
+    //Elementos FXML que se usarán en el controlador.
     @FXML
     private MenuButton menuButtonAulas = new MenuButton();
 
     @FXML
     private GridPane gridPaneMonitores;
 
+    //Clases de acceso a BBDD
     CRUDAula_Equipo cruda = new CRUDAula_Equipo(); //Llamada al CRUD que conecta con la tabla Aula de la BBDD
     CRUDIncidencia crudIncidencia = new CRUDIncidencia();
+
     private Map<String, Integer> aulasMonitores;
 
     String aulaActual;
@@ -79,7 +79,7 @@ public class ControladorAula {
         InfoInit infoInit = InfoInit.getInstance();
         Integer intervalo = infoInit.getIntervalo();
         System.out.println("Intervalo de: " + intervalo);
-        // Programar actualización automática cada 2 minutos solo de los indicadores de estado
+        //Programar actualización automática cada 2 minutos solo de los indicadores de estado
         scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(() -> {
             if (aulaActual != null) {
@@ -128,6 +128,7 @@ public class ControladorAula {
     public void actualizarMonitores(String aulaSeleccionada) {
         gridPaneMonitores.getChildren().clear();
 
+        //Validaciónes previas
         if (aulaSeleccionada == null || aulaSeleccionada.isEmpty()) {
             System.err.println("El aula seleccionada no es válida.");
             return;
@@ -158,7 +159,7 @@ public class ControladorAula {
         gridPaneMonitores.setHgap(10);
         gridPaneMonitores.setVgap(100);
 
-        for (int i = 0; i < cantidadMonitores; i++) {
+        for (int i = 0; i < cantidadMonitores; i++) { //Calculamos cuantos monitores hay y les aplicamos estilos y funciones
             int fila = i / columnas;
             int columna = i % columnas;
             if (fila >= filas) break;
@@ -169,6 +170,7 @@ public class ControladorAula {
 
             String ip = cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getIp();
 
+            //Damos color al círculo de estado del minitor y configuramos el label de la IP
             Label ipLabel = new Label(ip);
             ipLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; "
                     + "-fx-background-color: rgba(0, 0, 0, 0.5); -fx-padding: 3px 5px; "
@@ -178,9 +180,9 @@ public class ControladorAula {
             javafx.scene.shape.Circle estadoCircle = new javafx.scene.shape.Circle(8);
             estadoCircle.setStroke(Color.BLACK);
             estadoCircle.setStrokeWidth(1.5);
-            estadoCircle.setFill(Color.GREY);  // inicial en gris
+            estadoCircle.setFill(Color.GREY);
 
-            // Hacer ping en un hilo separado
+            //Hacemos ping, para ello usaremos un hilo separado del principal
             new Thread(() -> {
                 Color estado = comprobarEstadoMonitor(ip);
                 Platform.runLater(() -> estadoCircle.setFill(estado));
@@ -194,10 +196,12 @@ public class ControladorAula {
 
             String nombreEquipo = cruda.getEquipoPorIndiceYAula(aulaSeleccionada, i).getNombre();
 
-            ContextMenu menu = new ContextMenu();
+            ContextMenu menu = new ContextMenu();//Creamos el menu que aparecerá al dar clic derecho en el dispositivo.
+            //Configuramos los MenuItem del contextMenu
             MenuItem modificarEquipo = new MenuItem("Modificar equipo");
             MenuItem eliminarEquipo = new MenuItem("Eliminar equipo");
 
+            //Acción del menuItem modificarEquipo que sirve para abrir una nueva pestaña para modificar el equipo.
             modificarEquipo.setOnAction(event -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/formularioEquipo.fxml"));
@@ -223,13 +227,14 @@ public class ControladorAula {
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
                     stage.showAndWait();
-                    actualizarMonitores(aulaActual);  // refrescamos el GridPane al cerrarse
+                    actualizarMonitores(aulaActual);  //Actualizamos el GridPane al cerrarse
 
                 } catch (IOException e) {
                     System.out.println("Error al cambiar la pantalla al formulario para crear el equipo");
                 }
             });
 
+            //MenuItem que elimina el equipo
             eliminarEquipo.setOnAction(event -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "¿Estás seguro de que desea eliminar el equipo?", ButtonType.YES, ButtonType.NO);
                 alert.showAndWait();
@@ -259,24 +264,37 @@ public class ControladorAula {
         menuButtonAulas.setText(aulaSeleccionada);
     }
 
+    /**
+     * Método que se encarga de cambiar el aula actual.
+     *
+     * @param aulaActual String que representa la referencia al aula actual.
+     */
     public void setAulaActual(String aulaActual) {
         this.aulaActual = aulaActual;
         actualizarMonitores(aulaActual);
     }
 
+    /**
+     * Método que se encarga de realizar la acción de volver atrás.
+     *
+     * @param event Evento del tipo ActionEvent que espera el método.
+     * @throws IOException           Error de entrada/salida que pueda experimentar el método.
+     * @throws AulaNotFoundException Excepción si no encuentra el aula.
+     */
     @FXML
     void volver(ActionEvent event) throws IOException, AulaNotFoundException {
-        // Detenemos la tarea programada
+        //Detenemos la tarea programada
         if (scheduler != null && !scheduler.isShutdown()) {
             scheduler.shutdown();
         }
 
         Platform.runLater(() -> {
             try {
+                //Cargamos la vista a la que queremos volver, en este caso PanelAula.
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelAula.fxml"));
                 Parent root = fxmlLoader.load();
 
-                ControladorVistaPanelAula controladorVista = fxmlLoader.getController();
+                ControladorVistaPanelAula controladorVista = fxmlLoader.getController();//Cargamos la vista.
 
                 Platform.runLater(() -> {
                     ControladorPanelAula controladorPanel = controladorVista.getControladorPanelAula();
@@ -310,15 +328,14 @@ public class ControladorAula {
         try {
             System.out.println("Ping a " + ip);
             InetAddress inet = InetAddress.getByName(ip);
-            boolean reachable = inet.isReachable(3000);
-            if (reachable) {
-                return javafx.scene.paint.Color.LIMEGREEN;
+            boolean reachable = inet.isReachable(3000);//Tiempo que tarda esperando a que responda el ping, máximo de 3 segundos.
+            if (reachable) { //Dependiendo de si lo acepta o no se pone el rojo o en verde el círculo.
+                return javafx.scene.paint.Color.LIMEGREEN;//Circulo en verde.
             } else {
-                return javafx.scene.paint.Color.RED;
+                return javafx.scene.paint.Color.RED;//Círculo en rojo.
             }
         } catch (Exception e) {
-            return javafx.scene.paint.Color.GREY;
+            return javafx.scene.paint.Color.GREY;//Círculo en gris.
         }
     }
-
 }

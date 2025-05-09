@@ -206,6 +206,6 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button layoutX="489.0" layoutY="365.0" mnemonicParsing="false" onAction="#crearEquipo" text="Crear equipo" />
+      <Button fx:id="boton" layoutX="489.0" layoutY="365.0" mnemonicParsing="false" onAction="#crearEquipo" text="Crear equipo" />
    </children>
 </Pane>

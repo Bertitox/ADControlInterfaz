@@ -9,11 +9,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
 import java.util.Locale;
 
 /**
- * @author Daniel y Alberto
- * @version 1.5
+ * @author Daniel García y Alberto
+ * @version 2.0
  * Clase controladora de toda la app. Incluye métodos comunes a todos los demás controladores.
  */
 public class Controlador {
@@ -62,10 +63,11 @@ public class Controlador {
 
     /**
      * Método que carga el idioma, y que implementará cada controlador.
+     *
      * @param locale
      */
     public void cargarIdioma(Locale locale) {
-        //MÉTDODO VACÍO QUE SOBREESCRIBEN LAS CLASES QUE EXTIENDEN DE ESTA
+        //Método vacío que sobreescribe las clases de provienen de esta.
     }
 
     /**
@@ -76,10 +78,9 @@ public class Controlador {
     @FXML
     void hoverBoton(MouseEvent event) {
         Button boton = (Button) event.getSource();
-
         ScaleTransition zoomIn = new ScaleTransition(Duration.millis(100), boton);
-        zoomIn.setToX(1.1);  // 10% más grande en X
-        zoomIn.setToY(1.1);  // 10% más grande en Y
+        zoomIn.setToX(1.1);
+        zoomIn.setToY(1.1);
         zoomIn.play();
     }
 
@@ -93,8 +94,8 @@ public class Controlador {
         Button boton = (Button) event.getSource();
 
         ScaleTransition zoomIn = new ScaleTransition(Duration.millis(150), boton);
-        zoomIn.setToX(1.0);  // 10% más grande en X
-        zoomIn.setToY(1.0);  // 10% más grande en Y
+        zoomIn.setToX(1.0);
+        zoomIn.setToY(1.0);
         zoomIn.play();
     }
 

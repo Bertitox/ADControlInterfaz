@@ -5,6 +5,7 @@ import BBDD.DAO.CRUDIncidencia;
 import BBDD.DTO.Incidencia;
 import BBDD.DTO.InformacionSistema;
 import BBDD.Excepciones.AulaNotFoundException;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -21,17 +23,21 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import javafx.scene.chart.NumberAxis;
-import javafx.util.Duration;
-import javafx.animation.KeyFrame;
+import java.util.List;
 
-
+/**
+ * Clase controladora del panel aula.
+ *
+ * @author Daniel García y Alberto
+ * @version 1.0
+ */
 public class ControladorPanelAula extends Controlador {
-
+    //Elementos FXML usados en la clase.
     @FXML
     private Label incidenciaRecEq1;
 
@@ -125,7 +131,7 @@ public class ControladorPanelAula extends Controlador {
     @FXML
     private Pane panelLargo;
 
-    private XYChart.Series<Number, Number> series = new XYChart.Series<>();
+    private final XYChart.Series<Number, Number> series = new XYChart.Series<>();
     private int tiempo = 0;
     private int incidenciasActuales = -1;
     private Timeline timeline;
@@ -139,6 +145,11 @@ public class ControladorPanelAula extends Controlador {
     CRUDAula_Equipo AE = new CRUDAula_Equipo();
     CRUDIncidencia I = new CRUDIncidencia();
 
+    /**
+     * Método que inicializa todos los componentes.
+     *
+     * @throws AulaNotFoundException Excepción personalizada que lanza el método.
+     */
     @FXML
     public void initialize() throws AulaNotFoundException {
         //labelAula.setText(cm.getAulaSeleccionada());
@@ -147,15 +158,16 @@ public class ControladorPanelAula extends Controlador {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaFormateada = LocalDate.now().format(formatter);
         fechaActual.setText(fechaFormateada);
-        startChartUpdater();
+        inicioChartUpdater();
         //cargarBarra(); //Método que se encarga de actualizar la barra de progreso del estado general del aula
     }
 
+    /**
+     * Método que rellena el widget de "administrar equipos"
+     */
     public void rellenarAdministrarEquipos() {
         List<InformacionSistema> equipos = AE.get3EquiposXAula(labelAula.getText());
         // Asignamos valores según posición
-
-        // Opcional: si quieres limpiar los huecos restantes cuando hay menos de 3
         if (equipos.size() < 3) {
             if (equipos.size() < 1) {
                 ip1.setText("");
@@ -180,8 +192,9 @@ public class ControladorPanelAula extends Controlador {
         for (int i = 0; i < equipos.size(); i++) {
             InformacionSistema equipo = equipos.get(i);
             switch (i) {
+                //En cada caso rellenamos la información del equipo
                 case 0:
-                    ip1.setText(equipo.getIp()); // Asumiendo que tienes getIp()
+                    ip1.setText(equipo.getIp());
                     imgMonitor1.setOpacity(1.0);
                     nombreEQ1.setText(equipo.getNombre());
                     botonEQ1.setOpacity(1.0);
@@ -202,11 +215,15 @@ public class ControladorPanelAula extends Controlador {
         }
     }
 
-
+    /**
+     * Método que rellena el widget de "incidencias recientes".
+     *
+     * @throws AulaNotFoundException Excepción personalizada que lanza el método.
+     */
     public void rellenarIncidenciasRecientes() throws AulaNotFoundException {
-        List<Incidencia> incidencias = I.getUltimasTresIncidenciasAula(labelAula.getText());  // Simulado
+        List<Incidencia> incidencias = I.getUltimasTresIncidenciasAula(labelAula.getText());
         System.out.println(incidencias.size());
-        // Primero limpiar huecos restantes
+        //Coloca las últimas incidencias
         if (incidencias.size() < 3) {
             if (incidencias.size() < 1) {
                 imgIncidencia1.setOpacity(0.0);
@@ -224,7 +241,7 @@ public class ControladorPanelAula extends Controlador {
                 incidenciaRecEq3.setText("");
             }
         }
-
+        //Configuramos el label de la incidencia y su imagen respectivamente.
         for (int i = 0; i < incidencias.size(); i++) {
             Incidencia inc = incidencias.get(i);
             ImageView imgView;
@@ -262,13 +279,12 @@ public class ControladorPanelAula extends Controlador {
         }
     }
 
-
+    /**
+     * Método que inicializa la gráfica lineal del panel aula.
+     */
     public void initializeLineChart() {
-        if (graficoIncidenciasAula.getXAxis() instanceof NumberAxis &&
-                graficoIncidenciasAula.getYAxis() instanceof NumberAxis) {
-
-            NumberAxis xAxis = (NumberAxis) graficoIncidenciasAula.getXAxis();
-            NumberAxis yAxis = (NumberAxis) graficoIncidenciasAula.getYAxis();
+        if (graficoIncidenciasAula.getXAxis() instanceof NumberAxis xAxis &&
+                graficoIncidenciasAula.getYAxis() instanceof NumberAxis yAxis) {
 
             //Etiquetas de los ejes
             xAxis.setLabel("Día del Mes");
@@ -288,12 +304,12 @@ public class ControladorPanelAula extends Controlador {
             //Eje X
             xAxis.setAutoRanging(false);
             xAxis.setLowerBound(0);
-            xAxis.setUpperBound(Math.max(1, diaActual) +1);
+            xAxis.setUpperBound(Math.max(1, diaActual) + 1);
             xAxis.setTickUnit(1);
 
             yAxis.setAutoRanging(false);
             yAxis.setLowerBound(0);
-            yAxis.setUpperBound(numIncidencias+2);
+            yAxis.setUpperBound(numIncidencias + 2);
             yAxis.setTickUnit(1);
 
             //Serie del punto 0,0 y punto incidencias, días
@@ -312,11 +328,14 @@ public class ControladorPanelAula extends Controlador {
         }
     }
 
-    public void startChartUpdater() {
+    /**
+     * Método que inicia el updateo de la tabla.
+     */
+    public void inicioChartUpdater() {
         timeline = new Timeline(
-                new KeyFrame(Duration.seconds(5), e -> {
+                new KeyFrame(Duration.seconds(5), e -> {//A los 5 segundos se realiza la acción.
                     try {
-                        actualizarGraficoIncidencias();
+                        actualizarGraficoIncidencias();//Llamamos al método que actualiza el gráfico de incidencias.
                     } catch (AulaNotFoundException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -326,21 +345,32 @@ public class ControladorPanelAula extends Controlador {
         timeline.play();
     }
 
+    /**
+     * Método que actualiza el gráfico de incidencias.
+     *
+     * @throws AulaNotFoundException excepción personalizada que lanza el método.
+     */
     private void actualizarGraficoIncidencias() throws AulaNotFoundException {
         int nuevasIncidencias = I.getNumIncidenciasAulas(labelAula.getText());
         if (nuevasIncidencias != incidenciasActuales) {
             tiempo++;
             incidenciasActuales = nuevasIncidencias;
-            series.getData().add(new XYChart.Data<>(tiempo, incidenciasActuales));
+            series.getData().add(new XYChart.Data<>(tiempo, incidenciasActuales)); //Añadimos las series al gráfico de incidencias.
         }
     }
 
+    /**
+     * Método que se encarga de poner la clase actual y sacar datos sobre esa clase.
+     *
+     * @param nombreAula parámetro String que recibe el método con el nombre del aula.
+     * @throws AulaNotFoundException excepción personalizada que lanza el método.
+     */
     public void ponerClase(String nombreAula) throws AulaNotFoundException {
+        //Adaptamos los distintos labels a la clase (aula) seleccionada.
         labelAula.setText(nombreAula);
-
         labelNumEquiposAula.setText(AE.numEquiposXAula(nombreAula));
         labelNumIncidenciasAula.setText(String.valueOf(I.numIncidenciasAula(nombreAula)));
-        //CUANDO SE PONGA EL VALOR DE LA INCIDENCIA SE ACTUALIZA EL GRÁFICO
+        //Cuando se ponga el valor de la incidencia se actualiza el gráfico.
         initializeLineChart();
         if (I.getUltFechaMod(labelAula.getText()) == null) {
             fechaUltMod.setText("Sin datos");
@@ -350,7 +380,7 @@ public class ControladorPanelAula extends Controlador {
             DateTimeFormatter formatoBD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             DateTimeFormatter formatoES = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            //Obtenemos la fecha en formato yyyy-MM-dd desde la base de datos
+            //Obtenemos la fecha en formato "yyyy-MM-dd" desde la base de datos
             String fechaBD = I.getUltFechaMod(labelAula.getText());
 
             if (fechaBD != null) {
@@ -362,11 +392,18 @@ public class ControladorPanelAula extends Controlador {
             horaUltMod.setText(I.getUltHoraMod(labelAula.getText()));
         }
 
+        //Métodos que se inician al cargar la clase.
         cargarBarra();
         rellenarAdministrarEquipos();
         rellenarIncidenciasRecientes();
     }
 
+    /**
+     * Método que se encarga de cargar la vista de equipos del aula.
+     *
+     * @param event Evento ActionEvent que espera el método.
+     * @throws IOException excepción que lanza el método.
+     */
     @FXML
     void vistaEquipos(ActionEvent event) throws IOException {
         if (AE.numEquiposXAula(labelAula.getText()).equals("0")) {
@@ -375,7 +412,7 @@ public class ControladorPanelAula extends Controlador {
             alert.setHeaderText(null); //Elimina el encabezado
             alert.showAndWait();
         } else {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAula.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaAula.fxml"));//Cargamos la vista de los equipos del aula.
             Parent root = fxmlLoader.load();
             ControladorAula controladorAula = fxmlLoader.getController();
             controladorAula.setAulaActual(labelAula.getText());
@@ -385,25 +422,41 @@ public class ControladorPanelAula extends Controlador {
         }
     }
 
+    /**
+     * Método que se encarga de actualizar la información de la interfaz.
+     *
+     * @param event Evento ActionEvent que espera el método.
+     * @throws AulaNotFoundException excepción personalizada que lanza el método.
+     */
     @FXML
     void refrescar(MouseEvent event) throws AulaNotFoundException {
         labelNumEquiposAula.setText(AE.numEquiposXAula(labelAula.getText()));
         labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(labelAula.getText()));
+        //Llamamos de nuevo a los métodos para actualizar la información.
         cargarBarra();
         rellenarAdministrarEquipos();
-        initializeLineChart();
         rellenarIncidenciasRecientes();
     }
 
-
+    /**
+     * Método que se encarga de actualizar la información de la interfaz, pero sin esperar un evento.
+     *
+     * @throws AulaNotFoundException excepción personalizada que lanza el método.
+     */
     void refrescar() throws AulaNotFoundException {
         labelNumEquiposAula.setText(AE.numEquiposXAula(labelAula.getText()));
         labelNumIncidenciasAula.setText(" " + I.numIncidenciasAula(labelAula.getText()));
+        //Llamamos de nuevo a los métodos para actualizar la información.
         cargarBarra();
         rellenarAdministrarEquipos();
         rellenarIncidenciasRecientes();
     }
 
+    /**
+     * Método que se encarga de cargar la barra de estado general según las incidencias del aula.
+     *
+     * @throws AulaNotFoundException excepción personalizada que lanza el método.
+     */
     void cargarBarra() throws AulaNotFoundException {
         //Fórmula para calcular el estado general del aula --> % Estado General = (Num Equipos Incidencias / Num Total Equipos) * 100
         //Si no hay equipos ponemos el progreso del progress bar a 0
@@ -414,11 +467,13 @@ public class ControladorPanelAula extends Controlador {
             barraEstadoAula.setProgress(0);
             labelPorcentajeProgreso.setText("0 %");
         } else {
+            //Realizamos el cálculo según la fórmula del estado general.
             calculo = (double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText()) * 100;
             double estadoRedondeado = Math.round(calculo * 10.0) / 10.0;
             labelPorcentajeProgreso.setText(estadoRedondeado + " %");
             barraEstadoAula.setProgress((double) I.getEquipoIncidenciasXAula(labelAula.getText()) / Integer.parseInt(labelNumEquiposAula.getText()));
         }
+        //Cambiamos la imagen de la carita en función del rango del aula en el que se encuentre.
         if (calculo <= 25.0) {
             caraImagen.setImage(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/contento.png").toExternalForm()));
         } else if (calculo > 25.0 && calculo < 75.0) {
@@ -428,21 +483,25 @@ public class ControladorPanelAula extends Controlador {
         }
     }
 
-
+    /**
+     * Método que se encarga de agregar equipos.
+     *
+     * @param event evento MouseEvent que espera el método.
+     */
     @FXML
     void agregarEquipo(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/OpcionAutomaticoManual.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/OpcionAutomaticoManual.fxml"));//Cargamos el pop up de crear equipos manual o automáticamente.
             Parent root = loader.load();
 
-            //Obtener el controlador cargado desde el FXML
+            //Obtenemos el controlador cargado desde el FXML.
             ControladorAutomaticoManual controladorAutomaticoManual = loader.getController();
 
-            //Pasarle el dato al controlador
+            //Pasamos el dato al controlador.
             controladorAutomaticoManual.setAulaActual(labelAula.getText());
 
             Stage stage = new Stage();
-            stage.setTitle("Modo de creación");
+            stage.setTitle("Modo de creación");//Cambiamos el título.
 
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.DECORATED);
@@ -453,9 +512,9 @@ public class ControladorPanelAula extends Controlador {
 
             stage.setOnCloseRequest(e -> {
                 try {
-                    refrescar(null); // Llamamos a refrescar al cerrar la ventana
+                    refrescar(null); //Llamamos a refrescar al cerrar la ventana
                 } catch (AulaNotFoundException ex) {
-                    ex.printStackTrace(); // Manejo de errores
+                    ex.printStackTrace(); //Manejo de errores
                 }
             });
 
@@ -465,18 +524,22 @@ public class ControladorPanelAula extends Controlador {
         }
     }
 
-
+    /**
+     * Método que conecta con la vista del panel vistaSSH.
+     *
+     * @param event evento MouseEvent que espera el método.
+     */
     @FXML
     void conectarSSH(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/vistaSSH.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Vistas/vistaSSH.fxml")); //Cargamos la vista de SSH.
             Parent root = loader.load();
 
             ControlSSH controladorB = loader.getController();
             controladorB.setClaseActual(labelAula.getText());
 
             Stage stage = new Stage();
-            Scene scene = new Scene(root);  //Aquí la guardas en una variable
+            Scene scene = new Scene(root);
 
             scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
@@ -488,13 +551,18 @@ public class ControladorPanelAula extends Controlador {
         }
     }
 
+    /**
+     * Método que conecta con la vista del panel de las Incidencias en vistaPanelMonitor.
+     *
+     * @param event evento MouseEvent que espera el método.
+     */
     @FXML
     void conectarIncidencias(MouseEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelMonitor.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelMonitor.fxml")); //Cargamos la vista de vistaPanelMonitor.
             Parent root = fxmlLoader.load();
 
-            ControladorVistaPanelMonitor controladorVistaPanelMonitor = fxmlLoader.getController();
+            ControladorVistaPanelMonitor controladorVistaPanelMonitor = fxmlLoader.getController(); //Obtenemos el controlador.
             //controladorVistaPanelMonitor.setAulaActual(labelAula.getText());
 
             panelLargo.getChildren().clear();
