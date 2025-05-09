@@ -2,15 +2,21 @@ package org.example.adcontrol;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-import java.io.*;
+import java.io.IOException;
 
+/**
+ * Clase que se encarga de gestionar la vista de los Ajustes principales de la App.
+ *
+ * @author Daniel García y Alberto
+ * @version 1.0
+ */
 public class ControladorAjustes {
 
+    //Elementos del FXML a usar.
     @FXML
     private MenuButton MenuButtonIdiomas;
 
@@ -37,7 +43,11 @@ public class ControladorAjustes {
 
     InfoInit infoInit = InfoInit.getInstance();
 
-
+    /**
+     * Método que inicializa los ajustes y sus componentes.
+     *
+     * @throws IOException error de entrada o salida.
+     */
     @FXML
     public void initialize() throws IOException {
         cargarDatos();
@@ -67,11 +77,7 @@ public class ControladorAjustes {
         imageViewSonido.setImage(CheckBoxSonido.isSelected() ? imagenSonidoEncendido : imagenSonidoApagado);
 
         sliderVolumen.setOnMouseReleased(e -> {
-            if (CheckBoxSonido.isSelected()) {
-                sliderVolumen.setDisable(false);
-            } else {
-                sliderVolumen.setDisable(true);
-            }
+            sliderVolumen.setDisable(!CheckBoxSonido.isSelected());
             Double vol = sliderVolumen.getValue() * 0.01;
             infoInit.setVolumenLeido(vol);
         });
@@ -86,7 +92,7 @@ public class ControladorAjustes {
             infoInit.setTemaLeido(hex);
         });
 
-        // Configuración Spinner
+        //Configuración Spinner
         spinnerIntervalo.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 120, infoInit.getIntervalo()));
         spinnerIntervalo.getValueFactory().valueProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue != null) {
@@ -95,6 +101,9 @@ public class ControladorAjustes {
         });
     }
 
+    /**
+     * Método que carga los datos de los distintos campos de los ajustes.
+     */
     public void cargarDatos() {
         MenuButtonIdiomas.setText(infoInit.getIdiomaLeido());
 
@@ -105,14 +114,17 @@ public class ControladorAjustes {
         Color color = Color.web(infoInit.getTemaLeido());
         colorPicker.setValue(color);
 
-        // Asignamos valor al Spinner desde infoInit
+        //Asignamos valor al Spinner desde infoInit
         if (spinnerIntervalo.getValueFactory() != null) {
             spinnerIntervalo.getValueFactory().setValue(infoInit.getIntervalo());
         }
     }
 
+    /**
+     * Botón que restablece los componentes de los ajustes a su valor original.
+     */
     public void restablecerAjustes() {
-        infoInit.restablecerAjustes();
+        InfoInit.restablecerAjustes();
         cargarDatos();
     }
 }

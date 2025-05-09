@@ -5,9 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import net.sf.jasperreports.engine.JRException;
@@ -21,16 +18,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.List;
 
 /**
  * Clase Controladora de la pestaña informes
  *
- * @author Daniel y Alberto
- * @version 1.5
+ * @author Daniel García y Alberto
+ * @version 2.0
  */
 public class ControladorInforme extends Controlador {
 
+    //Elementos FXML que se usarán.
     @FXML
     private Label tituloInforme;
     @FXML
@@ -48,8 +45,7 @@ public class ControladorInforme extends Controlador {
     @FXML
     private Label textNombreUltimo;
 
-    //Generar Informes
-
+    //Elementos para generar Informes
     @FXML
     private TextArea nombreInforme;
     @FXML
@@ -65,7 +61,6 @@ public class ControladorInforme extends Controlador {
 
     @FXML
     private Label ultimoInforme;
-
 
     Map<String, Integer> mapaInformeUtilizado;
 
@@ -108,10 +103,16 @@ public class ControladorInforme extends Controlador {
         comboboxInforme.setItems(items);
     }
 
+    /**
+     * Método que se encarga de cargar el idioma seleccionado.
+     *
+     * @param locale Parámetro que recibe el método que representa el idioma.
+     */
     public void cargarIdioma(Locale locale) {
         try {
-            System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
+            System.out.println("Cargando idioma: " + locale.getLanguage()); //Linea de Debug para asegurarse que funciona
 
+            //Traducción de los elementos
             bundle = ResourceBundle.getBundle("org/example/adcontrol/messages", locale);
             tituloInforme.setText(bundle.getString("tituloInforme"));
             tipo1.setText(bundle.getString("tipo1"));
@@ -146,15 +147,16 @@ public class ControladorInforme extends Controlador {
         if (comboboxInforme.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error al generar el informe", ButtonType.OK);
             alert.setTitle("Error");
-            alert.setHeaderText(null); // Elimina encabezado
+            alert.setHeaderText(null); //Eliminamos el encabezado
             alert.showAndWait();
 
         } else if (textAreaRuta.getText().isBlank() || textAreaRuta.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Selecciona una ruta", ButtonType.OK);
             alert.setTitle("Error");
-            alert.setHeaderText(null); // Elimina encabezado
+            alert.setHeaderText(null); //Elimina encabezado el encabezado
             alert.showAndWait();
         } else {
+            //Según el tipo de informe que queramos, nos lo genera.
             switch (comboboxInforme.getValue().toString()) {
                 case "Aulas":
                     print = JasperFillManager.fillReport("src/main/resources/org/example/adcontrol/Jaspers/InformeAula.jasper", null, conexion);
@@ -168,7 +170,7 @@ public class ControladorInforme extends Controlador {
                 default:
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Error al generar el informe", ButtonType.OK);
                     alert.setTitle("Error");
-                    alert.setHeaderText(null); // Elimina encabezado
+                    alert.setHeaderText(null); //Elimina el encabezado
                     alert.showAndWait();
                     break;
             }
@@ -179,16 +181,19 @@ public class ControladorInforme extends Controlador {
             } else {
                 ruta = textAreaRuta.getText() + "/" + nombreInforme.getText() + ".pdf";
             }
-            JasperExportManager.exportReportToPdfFile(print, ruta);
+            JasperExportManager.exportReportToPdfFile(print, ruta); //Pasamos el reporte a pdf.
+            //Actualización de los labels correspondientes a los informes.
             ultimoInforme.setText(comboboxInforme.getValue().toString());
             mapaInformeUtilizado.put(comboboxInforme.getValue().toString(), mapaInformeUtilizado.getOrDefault(comboboxInforme.getValue().toString(), 0) + 1);
             this.nTotal++;
             numeroTotalInformes.setText(this.nTotal.toString());
-            informeMasUtilizado.setText(getInformeMas().toString());
+            informeMasUtilizado.setText(getInformeMas());
             ultimoNombre.setText(nombreInforme.getText());
+
+            //Alerta que nos avisa de que se ha creado un nuevo informe.
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Informe creado correctamente", ButtonType.OK);
             alert.setTitle("Informe creado");
-            alert.setHeaderText(null); // Elimina encabezado
+            alert.setHeaderText(null); //Elimina el encabezado
             alert.showAndWait();
             nombreInforme.setText("");
         }
@@ -209,13 +214,13 @@ public class ControladorInforme extends Controlador {
     /**
      * Método que obtiene el informe más utilizado basado en el contador de informes generados.
      *
-     * @return El nombre del informe más utilizado.
+     * @return Retorna el nombre del informe más utilizado.
      */
     public String getInformeMas() {
-        Integer MAX = 0;
-        String informe = null;
-        for (String i : mapaInformeUtilizado.keySet()) {
-            if (mapaInformeUtilizado.get(i) > MAX) {
+        Integer MAX = 0; //Variable acumuladora.
+        String informe = null; //Variable String que almacena el Nombre del informe más usado.
+        for (String i : mapaInformeUtilizado.keySet()) { //Buscamos dentro del mapa
+            if (mapaInformeUtilizado.get(i) > MAX) {//Si es mayor al máximo guardamos el String.
                 MAX = mapaInformeUtilizado.get(i);
                 informe = i;
             }
@@ -246,10 +251,9 @@ public class ControladorInforme extends Controlador {
     void hoverNormalInforme(MouseEvent event) {
         Button boton = (Button) event.getSource();
 
-        boton.getStyleClass().add("botonPrueba"); // Aplica la clase CSS al botón
+        boton.getStyleClass().add("botonPrueba"); //Aplicamos la clase CSS al botón
         boton.setStyle("-fx-background-color: transparent");
         boton.setStyle("-fx-border-color: grey");
         boton.setStyle("-fx-border-radius: 5px");
-
     }
 }

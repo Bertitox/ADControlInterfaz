@@ -1,4 +1,5 @@
 package org.example.adcontrol;
+
 import BBDD.DAO.*;
 import BBDD.DTO.*;
 import BBDD.Excepciones.AulaNotFoundException;
@@ -8,27 +9,26 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 import java.util.*;
 
 /**
- * Clase que controla la interfaz de usuario y la lógica de la aplicación.
- * @author Daniel y Alberto
+ * Clase ControladorMonitor que controla la interfaz de incidencias y la lógica de la aplicación.
+ *
+ * @author Daniel García y Alberto.
  * @version 1.5
  */
-public class ControladorMonitor extends Controlador{
+public class ControladorMonitor extends Controlador {
 
+    //Elementos FXML que se usarán en la clase.
     @FXML
-    TableView<Incidencia> tableIncidencias;
+    TableView<Incidencia> tableIncidencias;//Tabla para representar las distintas incidencias del sistema.
 
     @FXML
     MenuButton textIncidencias;
 
     @FXML
-    PieChart graficoIncidencias;
+    PieChart graficoIncidencias; //Gráfico para las incidencias.
 
     @FXML
     Button cargarDatosButton;
@@ -37,7 +37,7 @@ public class ControladorMonitor extends Controlador{
     Button borrarInidencias;
 
     @FXML
-    TableView<Map.Entry<String, String>> tableViewErrores;
+    TableView<Map.Entry<String, String>> tableViewErrores; //Tabla para representar los distintos errores del sistema.
 
     //Elementos para la creación de incidencias
     @FXML
@@ -76,7 +76,7 @@ public class ControladorMonitor extends Controlador{
      * Inicializa los elementos de la interfaz y configura los botones de idioma.
      */
     @FXML
-    public void initialize(){
+    public void initialize() {
         refrescarIdioma();
         mostrarErroresTableView();
         rellenarMenuButtonAula();
@@ -87,6 +87,7 @@ public class ControladorMonitor extends Controlador{
 
     /**
      * Método que carga el idioma y se encarga de la traducción de los elementos.
+     *
      * @param locale Idioma que recibe el método y con el que actúa.
      */
     public void cargarIdioma(Locale locale) {
@@ -102,7 +103,7 @@ public class ControladorMonitor extends Controlador{
 
         } catch (Exception e) {
             e.printStackTrace();
-            Alert alerta = new Alert( Alert.AlertType.ERROR, "Error al cargar el idioma ", ButtonType.CLOSE);
+            Alert alerta = new Alert(Alert.AlertType.ERROR, "Error al cargar el idioma ", ButtonType.CLOSE);
         }
 
     }
@@ -114,7 +115,7 @@ public class ControladorMonitor extends Controlador{
      */
     public void mostrarIncidenciasTableView() throws AulaNotFoundException {
         CRUDIncidencia crud = new CRUDIncidencia();
-        List<Incidencia> incidencias = crud.incidenciasXAulas(textIncidencias.getText().toString());
+        List<Incidencia> incidencias = crud.incidenciasXAulas(textIncidencias.getText()); //Lista de todas las incidencias por aula seleccionada, usando la referencia del aula recogida en el label textIncidencias.
 
         //Pasamos la información a una Lista observable para el TableView
         ObservableList<Incidencia> items = FXCollections.observableArrayList(incidencias);
@@ -130,16 +131,16 @@ public class ControladorMonitor extends Controlador{
         TableColumn<Incidencia, String> colDescripcion = new TableColumn<>("DESCRIPCIÓN");//Columna que contiene la descripción de una incidencia sobre un equipo
         colDescripcion.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescripcion()));
 
-        tableIncidencias.getColumns().setAll(colEquipo, colCodigo, colDescripcion);
+        tableIncidencias.getColumns().setAll(colEquipo, colCodigo, colDescripcion);//Editamos las columnas de la tabla.
 
-        tableIncidencias.setItems(items);
+        tableIncidencias.setItems(items);//Editamos los items de la tabla.
     }
 
 
     /**
      * Método para mostrar todos los tipos del errores creados y su descripción.
      */
-    public void mostrarErroresTableView(){
+    public void mostrarErroresTableView() {
         GestionErrores g = new GestionErrores();
         Map<String, String> errores = g.erroresMap();
 
@@ -155,7 +156,6 @@ public class ControladorMonitor extends Controlador{
         tableViewErrores.setItems(items);
     }
 
-    //Método para rellenar el gráfico
     /**
      * Método que actualiza y rellena el gráfico de incidencias.
      */
@@ -165,29 +165,28 @@ public class ControladorMonitor extends Controlador{
         CRUDIncidencia crudIncidencia = new CRUDIncidencia();
 
         if (referencia.isEmpty()) {
-            mostrarAlerta("Incidencias Aula", "Ingrese la referencia a un Aula");
+            mostrarAlerta("Incidencias Aula", "Ingrese la referencia a un Aula");//Alerta si la referencia esta vacía.
             return;
         }
 
         ObservableList<PieChart.Data> datosGrafico = FXCollections.observableArrayList();
 
         try {
-            int numIncidencias = crudIncidencia.numIncidenciasAula(referencia);
+            int numIncidencias = crudIncidencia.numIncidenciasAula(referencia);//Sacamos el número de incidencias.
 
             if (numIncidencias > 0) {
                 for (int i = 1; i <= numIncidencias; i++) {
-                    datosGrafico.add(new PieChart.Data("Incidencia " + i, 1));
+                    datosGrafico.add(new PieChart.Data("Incidencia " + i, 1));//Añadimos los datos al gráficos si las incidencias son mayores de 0.
                 }
             } else {
-                mostrarAlerta("Incidencias Aula", "No hay Incidencias para el Aula " + referencia);
+                mostrarAlerta("Incidencias Aula", "No hay Incidencias para el Aula " + referencia);//Alerta si no se encuentran incidencias.
             }
         } catch (AulaNotFoundException e) {
             System.err.println("Error: " + e.getMessage());
         }
 
-        graficoIncidencias.setData(datosGrafico);
-
-        mostrarIncidenciasTableView(); //Llamamos al método que rellena la tabla de incidencias
+        graficoIncidencias.setData(datosGrafico);//cambiamos los datos del gráfico de incidencias.
+        mostrarIncidenciasTableView(); //Llamamos al método que rellena la tabla de incidencias.
     }
 
     /**
@@ -280,7 +279,7 @@ public class ControladorMonitor extends Controlador{
     /**
      * Método que rellena los MenuItem del MenuButton de Errores
      */
-    public void rellenarMenuButtonErrores(){
+    public void rellenarMenuButtonErrores() {
         for (Errores i : errores.readAllErrores()) {
             MenuItem item = new MenuItem(i.getCodigoError());
             item.setOnAction(e -> MBerror.setText(i.getCodigoError()));
@@ -387,8 +386,5 @@ public class ControladorMonitor extends Controlador{
         } catch (AulaNotFoundException e) {
             throw new RuntimeException(e);
         }
-
     }
-
-
 }

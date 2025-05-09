@@ -1,6 +1,5 @@
 package org.example.adcontrol;
 
-import BBDD.DAO.CRUDAula_Equipo;
 import BBDD.DAO.CRUDAulas;
 import BBDD.DTO.Aulas;
 import BBDD.Excepciones.AulaNotFoundException;
@@ -8,26 +7,26 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
+/**
+ * Clase controladora que se encarga de todas las acciónes relacionadas con la vista del mapa
+ *
+ * @author Daniel García y Alberto
+ * @version 1.0
+ */
 public class ControladorMapa {//implements Initializable {
 
+    //Elementos FXML que usará la clase.
     @FXML
     private Pane panelMapa;
 
@@ -109,7 +108,6 @@ public class ControladorMapa {//implements Initializable {
     @FXML
     private Button pared2;
 
-
     @FXML
     private Button pared3;
 
@@ -143,22 +141,22 @@ public class ControladorMapa {//implements Initializable {
     @FXML
     private Button pared13;
 
-
+    //Listas que guardan los datos, relacionado con el movimiento de las personas en el mapa.
     private final List<Rectangle2D> zonasPasillo = new ArrayList<>();
     private final List<Button> aulas = new ArrayList<>();
 
-    //Métrodo que genera las personas
+    //Método que genera las personas, posible implementación.
 //    @Override
 //    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        // Define zonas negras del pasillo (ajústalas según tu imagen)
-//        zonasPasillo.add(new Rectangle2D(165, 40, 655, 50));   // Pasillo horizontal superior
-//        zonasPasillo.add(new Rectangle2D(165, 90, 50, 460));   // Pasillo vertical izquierdo
-//        zonasPasillo.add(new Rectangle2D(215, 470, 610, 50));  // Pasillo horizontal inferior
-//        zonasPasillo.add(new Rectangle2D(775, 90, 50, 380));   // Pasillo vertical derecho
-//        zonasPasillo.add(new Rectangle2D(420, 220, 190, 40));  // Pasillo entre Aula Estudio y Sala Prof. 1
+//        //Define zonas negras del pasillo (ajústalas según tu imagen)
+//        zonasPasillo.add(new Rectangle2D(165, 40, 655, 50));   //Pasillo horizontal superior
+//        zonasPasillo.add(new Rectangle2D(165, 90, 50, 460));   //Pasillo vertical izquierdo
+//        zonasPasillo.add(new Rectangle2D(215, 470, 610, 50));  //Pasillo horizontal inferior
+//        zonasPasillo.add(new Rectangle2D(775, 90, 50, 380));   //Pasillo vertical derecho
+//        zonasPasillo.add(new Rectangle2D(420, 220, 190, 40));  //Pasillo entre Aula Estudio y Sala Prof. 1
 //
 //
-//        // Agrega las aulas (botones)
+//        //Agrega las aulas (botones)
 //        aulas.add(DespachoProfesores2);
 //        aulas.add(aulaInfo1);
 //        aulas.add(secretaria);
@@ -204,21 +202,27 @@ public class ControladorMapa {//implements Initializable {
 //        }
 //    }
 
+    /**
+     * Método que se encarga de cambiar entre las aulas del mapa.
+     *
+     * @param event Evento ActionEvent que espera el método.
+     */
     @FXML
     void cambiarAula(ActionEvent event) {
-        CRUDAulas cruda = new CRUDAulas();
+        CRUDAulas cruda = new CRUDAulas(); //Crud con conexión a BBDD
         Button b = (Button) event.getSource();
-        String nombreAula = b.getText();
+
+        String nombreAula = b.getText(); //String que recoje el nombre del aula.
 
         if (cruda.comprobarAula(b.getText().trim())) {
             //Entrar a vista aula (la vista con pcs)
             vistaAula(nombreAula);
         } else {
-            //CREAR EL AULA EN AULA Y AULA_EQUIPO
-            Alert alert = new Alert(Alert.AlertType.ERROR, "El aula no está en la BBDD, ¿desea crearla?", ButtonType.YES, ButtonType.NO);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "El aula no está en la BBDD, ¿desea crearla?", ButtonType.YES, ButtonType.NO); //Mensaje de advertencia de que el aula no se encontró, para poder crearla.
             alert.setTitle(b.getText() + " no se encontró");
             alert.showAndWait();
-            if (alert.getResult() == ButtonType.YES) {
+            if (alert.getResult() == ButtonType.YES) { //Si el usuario decide crear un aula pulsando "YES" en el alert, entonces creamos el aula.
+                //Creación del el aula nueva
                 cruda.insertAula(new Aulas(b.getText().trim()));
             } else {
                 alert.hide();
@@ -227,9 +231,15 @@ public class ControladorMapa {//implements Initializable {
     }
 
 
+    /**
+     * Método que se encarga de poner un hover a los diferentes botones del mapa.
+     *
+     * @param event Evento del tipo MouseEvent que espera el método.
+     */
     @FXML
     void botonMapaHover(MouseEvent event) {
         Button b = (Button) event.getSource();
+        //Al haber clases que no son cuadradas, se componen de dos botones en vez de uno, esa es la razón para en estos casos usar condicionales.
         if (b.getId().equalsIgnoreCase("aulaInfo1rect") || b.getId().equalsIgnoreCase("aulaInfo1")) {
             aulaInfo1.setOpacity(0.5);
             aulaInfo1rect.setOpacity(0.5);
@@ -244,9 +254,15 @@ public class ControladorMapa {//implements Initializable {
         }
     }
 
+    /**
+     * Método que representa los botones de forma normal.
+     *
+     * @param event Evento del tipo MouseEvent que espera el método.
+     */
     @FXML
     void botonMapaNormal(MouseEvent event) {
         Button b = (Button) event.getSource();
+        //Al haber clases que no son cuadradas, se componen de dos botones en vez de uno, esa es la razón para en estos casos usar condicionales.
         if (b.getId().equalsIgnoreCase("aulaInfo1rect") || b.getId().equalsIgnoreCase("aulaInfo1")) {
             aulaInfo1.setOpacity(1);
             aulaInfo1rect.setOpacity(1);
@@ -261,34 +277,24 @@ public class ControladorMapa {//implements Initializable {
         }
     }
 
-//    public void vistaAula(String nombreAula)  {
-//        Platform.runLater(() -> {
-//            try {
-//                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelAula.fxml"));
-//                Parent root = fxmlLoader.load();
-//                panelMapa.getChildren().clear();
-//                panelMapa.getChildren().add(root);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        });
-//    }
-
+    /**
+     * Método que se encarga de conectar el aula seleccionado al pulsar el botón, con el panel de ese aula en específico.
+     *
+     * @param nombreAula String que indica la referencia (el nombre) del aula.
+     */
     public void vistaAula(String nombreAula) {
         Platform.runLater(() -> {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelAula.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelAula.fxml"));//Cargamos la vista del panel del aula
                 Parent root = fxmlLoader.load();
-
                 ControladorVistaPanelAula controladorVista = fxmlLoader.getController();
 
-                // Esperar un poco a que cargue panelAula.fxml (por el Platform.runLater interno)
-                // Alternativa simple: usar otro runLater anidado
+                //Esperar un poco a que cargue panelAula.fxml (por el Platform.runLater interno)
                 Platform.runLater(() -> {
                     ControladorPanelAula controladorPanel = controladorVista.getControladorPanelAula();
                     if (controladorPanel != null) {
                         try {
-                            controladorPanel.ponerClase(nombreAula);
+                            controladorPanel.ponerClase(nombreAula);//Actualizamos el nombre de la clase con el actual.
                         } catch (AulaNotFoundException e) {
                             throw new RuntimeException(e);
                         }
@@ -305,6 +311,4 @@ public class ControladorMapa {//implements Initializable {
             }
         });
     }
-
-
 }

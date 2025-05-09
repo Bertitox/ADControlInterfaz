@@ -1,4 +1,5 @@
 package org.example.adcontrol;
+
 import BBDD.DAO.CRUDAulas;
 import BBDD.DAO.CRUDIncidencia;
 import BBDD.Excepciones.AulaNotFoundException;
@@ -8,24 +9,29 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.chart.*;
-import javafx.scene.control.*;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
 /**
- * @author Daniel y Alberto
+ * @author Daniel García y Alberto
  * @version 2.0
  */
-public class ControladorHome extends Controlador{//implements Initializable {
+public class ControladorHome extends Controlador {//implements Initializable {
 
+    //Elementos FXML que se usarán en el controlador.
     @FXML
     private Label lblTituloGrave;
 
@@ -46,8 +52,7 @@ public class ControladorHome extends Controlador{//implements Initializable {
     private Pane panelPrincipal;
 
     @FXML
-    private ComboBox comboboxInforme = new ComboBox();
-
+    private final ComboBox comboboxInforme = new ComboBox();
 
     @FXML
     Button botonGenerar;
@@ -206,7 +211,7 @@ public class ControladorHome extends Controlador{//implements Initializable {
         //Desactivamos el ajuste automático del rango
         yAxis.setAutoRanging(false);
         //Definimos valores mínimos y máximos del eje Y
-        yAxis.setLowerBound(0); // Empieza en 0
+        yAxis.setLowerBound(0); //Empieza en 0
         yAxis.setUpperBound(incidencia.numMaximoIcidenciasAula()); //Ajustamos al máximo necesario
         //Configura la separación entre marcas del eje
         yAxis.setTickUnit(1);
@@ -235,20 +240,31 @@ public class ControladorHome extends Controlador{//implements Initializable {
         barChart.getData().add(serie);
     }
 
+    /**
+     * Método que se encarga de cargar la vista del panel de incidencias (correspondiente a vistaPanelMonitor).
+     *
+     * @param event Evento del tipo MouseEvent que espera el método.
+     * @throws IOException Excepción de entrada salida.
+     */
     @FXML
     void vistaIncidencias(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelMonitor.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaPanelMonitor.fxml"));//Cargamos la vista
         Parent root = fxmlLoader.load();
         panelPrincipal.getChildren().clear();
         panelPrincipal.getChildren().add(root);
     }
 
+    /**
+     * Método que se encarga de cargar la vista del mapa (correspondiente a vistaMapa).
+     *
+     * @param event Evento del tipo MouseEvent que espera el método.
+     * @throws IOException Excepción de entrada salida.
+     */
     @FXML
     void vistaMapa(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaMapa.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Vistas/vistaMapa.fxml"));//Cargamos la vista
         Parent root = fxmlLoader.load();
         panelPrincipal.getChildren().clear();
         panelPrincipal.getChildren().add(root);
     }
-
 }

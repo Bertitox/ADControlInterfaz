@@ -1,4 +1,5 @@
 package org.example.adcontrol;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,14 +16,14 @@ import java.util.ResourceBundle;
 /**
  * Clase que controla la interfaz de la ayuda al usuario.
  *
- * @author Daniel y Alberto
- * @version 1.5
+ * @author Daniel García y Alberto
+ * @version 2.0
  */
-public class ControladorAyuda extends Controlador{
+public class ControladorAyuda extends Controlador {
 
     private ResourceBundle bundle;
 
-    //Elementos a traducir
+    //Elementos FXML a traducir
     @FXML
     private Label PreguntaIncidencias;
     @FXML
@@ -48,6 +49,11 @@ public class ControladorAyuda extends Controlador{
         refrescarIdioma();
     }
 
+    /**
+     * Método cargarIdioma que se encarga de realizar la carga del idioma seleccionado.
+     *
+     * @param locale El método recibe como parámetro el idioma al que se quiere traducir.
+     */
     public void cargarIdioma(Locale locale) {
         try {
             System.out.println("Cargando idioma: " + locale.getLanguage()); //Debug
@@ -66,15 +72,16 @@ public class ControladorAyuda extends Controlador{
 
         } catch (Exception e) {
             e.printStackTrace();
-            Alert alerta = new Alert( Alert.AlertType.ERROR, "Error al cargar el idioma ", ButtonType.CLOSE);
+            Alert alerta = new Alert(Alert.AlertType.ERROR, "Error al cargar el idioma ", ButtonType.CLOSE);
         }
     }
+
     /**
      * Método encargado de abrir un enlace web en el navegador
      *
      * @param event El evento que espera el método
-     * @throws URISyntaxException Error del recurso
-     * @throws IOException Error si no encuentra el recurso
+     * @throws URISyntaxException Error en el recurso
+     * @throws IOException        Error si no se encuentra el recurso
      */
     @FXML
     public void lanza1(Event event) throws URISyntaxException, IOException {
@@ -85,12 +92,11 @@ public class ControladorAyuda extends Controlador{
      * Método encargado de abrir un enlace web en el navegador
      *
      * @param event El evento que espera el método
-     * @throws URISyntaxException Error del recurso
-     * @throws IOException Error si no encuentra el recurso
+     * @throws URISyntaxException Error en el recurso
+     * @throws IOException        Error si no se encuentra el recurso
      */
     @FXML
     public void lanza2(Event event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://es.wikipedia.org/wiki/JasperReports"));
     }
-
 }
