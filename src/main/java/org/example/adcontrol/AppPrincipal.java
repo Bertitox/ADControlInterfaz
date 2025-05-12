@@ -3,6 +3,7 @@ package org.example.adcontrol;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class AppPrincipal extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(main.class.getResource("Vistas/pantallaCarga.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        stage.getIcons().add(new Image(getClass().getResource("/org/example/adcontrol/Imagenes/ControlADWhite copia.png").toExternalForm()));
         stage.setTitle("ADControl");
         stage.setScene(scene);
         stage.setResizable(true);
