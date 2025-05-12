@@ -256,6 +256,7 @@ public class ControlSSH {
 
             channel.connect();
             convSuper();
+            Thread.sleep(500);
             out.write(("sudo poweroff" + "\n").getBytes());
             out.flush();
             out.close(); //Se cierra el canal de comunicación

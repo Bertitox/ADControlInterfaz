@@ -82,6 +82,10 @@ public class ControladorAjustes {
             infoInit.setVolumenLeido(vol);
         });
 
+        if(!CheckBoxSonido.isSelected()) {
+            sliderVolumen.setDisable(true);
+        }
+
         colorPicker.setOnAction(e -> {
             Color color = colorPicker.getValue();
             String hex = String.format("#%02X%02X%02X",
