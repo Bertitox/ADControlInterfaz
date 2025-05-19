@@ -115,20 +115,20 @@ public class InformacionSistema {
     /**
      * Constructor sobrecargado principal de la clase
      *
-     * @param nombre Campos de la BBDD
-     * @param so Campos de la BBDD
-     * @param ultFecha Campos de la BBDD
-     * @param nombreNodo Campos de la BBDD
-     * @param releasee Campos de la BBDD
-     * @param version Campos de la BBDD
-     * @param arquitectura Campos de la BBDD
-     * @param procesador Campos de la BBDD
-     * @param memTotal Campos de la BBDD
-     * @param memDisp Campos de la BBDD
-     * @param usoCpu Campos de la BBDD
-     * @param mac Campos de la BBDD
-     * @param ultHora Campos de la BBDD
-     * @param ip Campos de la BBDD
+     * @param nombre Campo de la BBDD
+     * @param so Campo de la BBDD
+     * @param ultFecha Campo de la BBDD
+     * @param nombreNodo Campo de la BBDD
+     * @param releasee Campo de la BBDD
+     * @param version Campo de la BBDD
+     * @param arquitectura Campo de la BBDD
+     * @param procesador Campo de la BBDD
+     * @param memTotal Campo de la BBDD
+     * @param memDisp Campo de la BBDD
+     * @param usoCpu Campo de la BBDD
+     * @param mac Campo de la BBDD
+     * @param ultHora Campo de la BBDD
+     * @param ip Campo de la BBDD
      */
     public InformacionSistema(String nombre, String so, LocalDate ultFecha, String nombreNodo, String releasee, String version, String arquitectura, String procesador, Integer memTotal, Integer memDisp, String usoCpu, String mac, LocalTime ultHora, String ip) {
         this.nombre = nombre;
