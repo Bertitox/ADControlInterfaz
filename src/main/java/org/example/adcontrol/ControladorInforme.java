@@ -92,15 +92,14 @@ public class ControladorInforme extends Controlador {
     public void initialize() {
         refrescarIdioma();
 
-        botonGenerar = new Button();
-        botonExplorar = new Button();
-        botonExplorar.getStyleClass().add("botonPrueba");
-        botonGenerar.getStyleClass().add("botonPrueba");
-
         mapaInformeUtilizado = new HashMap<>();
         //Para el Combobox
         ObservableList<String> items = FXCollections.observableArrayList("Aulas", "Incidencias", "Equipos");
         comboboxInforme.setItems(items);
+        aplicarEfectoHoverButton(botonExplorar);
+        aplicarEfectoHoverButton(botonGenerar, 1.03);
+        aplicarEfectoHoverComboBox(comboboxInforme, 1.03);
+
     }
 
     /**

@@ -3,12 +3,14 @@ package org.example.adcontrol;
 import BBDD.DAO.*;
 import BBDD.DTO.*;
 import BBDD.Excepciones.AulaNotFoundException;
+import javafx.animation.ScaleTransition;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 
 import java.util.*;
 
@@ -83,7 +85,19 @@ public class ControladorMonitor extends Controlador {
         rellenarMenuButtonSelecciónAula();
         //rellenarMenuButtonEquipo();
         rellenarMenuButtonErrores();
+
+        //Efecto hover de los botones de la pagina
+        aplicarEfectoHoverButton(crearIncidencia);
+        aplicarEfectoHoverButton(cargarDatosButton);
+        aplicarEfectoHoverButton(borrarInidencias);
+        aplicarEfectoHoverMenuButton(MBaula);
+        aplicarEfectoHoverMenuButton(MBequipo);
+        aplicarEfectoHoverMenuButton(MBerror);
+        aplicarEfectoHoverMenuButton(textIncidencias);
     }
+
+
+
 
     /**
      * Método que carga el idioma y se encarga de la traducción de los elementos.

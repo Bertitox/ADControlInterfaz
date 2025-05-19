@@ -5,6 +5,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -41,6 +43,98 @@ public class Controlador {
                 }
             }
         });
+    }
+
+    /**
+     * Aplica una animación de escala al pasar el ratón sobre un botón.
+     *
+     * @param menuButton Menubutton al que se le aplica el efecto.
+     */
+    public void aplicarEfectoHoverMenuButton(MenuButton menuButton) {
+        ScaleTransition stHover = new ScaleTransition(Duration.millis(200), menuButton);
+        stHover.setToX(1.05);
+        stHover.setToY(1.05);
+
+        ScaleTransition stNormal = new ScaleTransition(Duration.millis(200), menuButton);
+        stNormal.setToX(1.0);
+        stNormal.setToY(1.0);
+
+        menuButton.setOnMouseEntered(e -> stHover.playFromStart());
+        menuButton.setOnMouseExited(e -> stNormal.playFromStart());
+    }
+
+    /**
+     * Aplica una animación de escala al pasar el ratón sobre un botón.
+     *
+     * @param Button Botom al que se le aplica el efecto.
+     */
+    public void aplicarEfectoHoverButton(Button Button) {
+        ScaleTransition stHover = new ScaleTransition(Duration.millis(200), Button);
+        stHover.setToX(1.05);
+        stHover.setToY(1.05);
+
+        ScaleTransition stNormal = new ScaleTransition(Duration.millis(200), Button);
+        stNormal.setToX(1.0);
+        stNormal.setToY(1.0);
+
+        Button.setOnMouseEntered(e -> stHover.playFromStart());
+        Button.setOnMouseExited(e -> stNormal.playFromStart());
+    }
+
+    /**
+     * Aplica una animación de escala al pasar el ratón sobre un botón.
+     *
+     * @param Button Botom al que se le aplica el efecto.
+     * @valor Valor numerico que especifica el tamaño de la escala del boton
+     */
+    public void aplicarEfectoHoverButton(Button Button, Double valor) {
+        ScaleTransition stHover = new ScaleTransition(Duration.millis(200), Button);
+        stHover.setToX(valor);
+        stHover.setToY(valor);
+
+        ScaleTransition stNormal = new ScaleTransition(Duration.millis(200), Button);
+        stNormal.setToX(1.0);
+        stNormal.setToY(1.0);
+
+        Button.setOnMouseEntered(e -> stHover.playFromStart());
+        Button.setOnMouseExited(e -> stNormal.playFromStart());
+    }
+
+    /**
+     * Aplica una animación de escala al pasar el ratón sobre un botón.
+     *
+     * @param comboBox comboBox al que se le aplica el efecto.
+     */
+    public void aplicarEfectoHoverComboBox(ComboBox comboBox) {
+        ScaleTransition stHover = new ScaleTransition(Duration.millis(200), comboBox);
+        stHover.setToX(1.05);
+        stHover.setToY(1.05);
+
+        ScaleTransition stNormal = new ScaleTransition(Duration.millis(200), comboBox);
+        stNormal.setToX(1.0);
+        stNormal.setToY(1.0);
+
+        comboBox.setOnMouseEntered(e -> stHover.playFromStart());
+        comboBox.setOnMouseExited(e -> stNormal.playFromStart());
+    }
+
+    /**
+     * Aplica una animación de escala al pasar el ratón sobre un botón.
+     *
+     * @param comboBox comboBox al que se le aplica el efecto.
+     * @param valor Valor numerico que especifica el tamaño de la escala del boton
+     */
+    public void aplicarEfectoHoverComboBox(ComboBox comboBox, Double valor) {
+        ScaleTransition stHover = new ScaleTransition(Duration.millis(200), comboBox);
+        stHover.setToX(valor);
+        stHover.setToY(valor);
+
+        ScaleTransition stNormal = new ScaleTransition(Duration.millis(200), comboBox);
+        stNormal.setToX(1.0);
+        stNormal.setToY(1.0);
+
+        comboBox.setOnMouseEntered(e -> stHover.playFromStart());
+        comboBox.setOnMouseExited(e -> stNormal.playFromStart());
     }
 
     /**
