@@ -20,17 +20,15 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="panelLargo" maxHeight="-Infinity" maxWidth="970.0" minWidth="-Infinity" prefWidth="970.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorPanelAula">
+<Pane fx:id="panelLargo" maxHeight="-Infinity" maxWidth="970.0" minWidth="-Infinity" prefHeight="694.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorPanelAula">
     <children>
-        <GridPane maxHeight="1.7976931348623157E308" maxWidth="970.0" prefWidth="970.0">
+        <GridPane maxHeight="1.7976931348623157E308" maxWidth="970.0" prefHeight="685.0" prefWidth="970.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0" />
                 <ColumnConstraints hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="250.0" prefWidth="250.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="-Infinity" minHeight="225.0" prefHeight="225.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="-Infinity" minHeight="225.0" prefHeight="225.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="-Infinity" minHeight="225.0" prefHeight="225.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="-Infinity" minHeight="225.0" prefHeight="225.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="-Infinity" minHeight="225.0" prefHeight="225.0" vgrow="SOMETIMES" />
@@ -267,7 +265,7 @@
                               <Insets left="15.0" right="10.0" top="10.0" />
                            </VBox.margin>
                            <font>
-                              <Font size="14.0" />
+                              <Font size="18.0" />
                            </font>
                         </Label>
                         <GridPane hgap="10.0" vgap="10.0" VBox.vgrow="ALWAYS">
@@ -372,14 +370,6 @@
                   <DropShadow blurType="GAUSSIAN" height="15.0" radius="7.0" width="15.0" />
                </effect>
                 </Pane>
-                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                    <GridPane.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </GridPane.margin>
-                </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: grey; -fx-border-radius: 10px; -fx-background-radius: 10px;" GridPane.rowIndex="2">
                     <opaqueInsets>
                         <Insets />
@@ -405,13 +395,13 @@
                      <children>
                         <Label text="Equipos del aula" GridPane.columnSpan="2" GridPane.valignment="CENTER">
                            <GridPane.margin>
-                              <Insets left="15.0" />
+                              <Insets left="45.0" />
                            </GridPane.margin>
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#vistaEquipos" prefHeight="35.0" prefWidth="153.0" styleClass="botonAgregarEquipo" text="Gestionar equipos" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                        <Button mnemonicParsing="false" onAction="#vistaEquipos" prefHeight="33.0" prefWidth="144.0" styleClass="botonAgregarEquipo" text="Gestionar equipos" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets right="15.0" top="10.0" />
                            </GridPane.margin>
@@ -537,6 +527,14 @@
                               <Insets right="20.0" />
                            </GridPane.margin>
                         </Button>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Imagenes/monitor1.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets left="15.0" />
+                           </GridPane.margin>
+                        </ImageView>
                      </children>
                   </GridPane>
                </children>
@@ -648,14 +646,65 @@
                   </GridPane>
                </children>
                 </Pane>
-                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2">
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                    <GridPane.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </GridPane.margin>
-                </Pane>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: white; -fx-border-color: grey; -fx-background-radius: 10px; -fx-border-radius: 10px;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <DropShadow height="15.0" radius="7.0" width="15.0" />
+               </effect>
+               <children>
+                  <GridPane prefHeight="205.0" prefWidth="230.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Imagenes/arrow-down-to-line.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets left="15.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <Label prefHeight="51.0" prefWidth="174.0" text="Generar informe de esta clase" wrapText="true" GridPane.columnSpan="2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="45.0" top="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Genera un informe detallado de la clase actual sobre los equipos e incidencias" textAlignment="JUSTIFY" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="15.0" right="15.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Button fx:id="generarInforme" mnemonicParsing="false" onAction="#descargarInforme" prefHeight="34.0" prefWidth="146.0" styleClass="estiloBlancoAzul" text="Generar informe" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </GridPane>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Pane>
             </children>
         </GridPane>
     </children>

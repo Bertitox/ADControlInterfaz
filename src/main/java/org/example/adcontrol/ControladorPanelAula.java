@@ -20,15 +20,26 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Clase controladora del panel aula.
@@ -52,6 +63,9 @@ public class ControladorPanelAula extends Controlador {
 
     @FXML
     private ImageView imgIncidencia2;
+
+    @FXML
+    private Button generarInforme;
 
     @FXML
     private ImageView imgIncidencia3;
@@ -160,6 +174,7 @@ public class ControladorPanelAula extends Controlador {
         fechaActual.setText(fechaFormateada);
         inicioChartUpdater();
         //cargarBarra(); //Método que se encarga de actualizar la barra de progreso del estado general del aula
+        aplicarEfectoHoverButton(generarInforme);
     }
 
     /**
@@ -571,5 +586,52 @@ public class ControladorPanelAula extends Controlador {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void descargarInforme(ActionEvent event) throws ClassNotFoundException, SQLException, JRException {
+        // Cargar el driver de MySQL
+        Class.forName("com.mysql.jdbc.Driver");
+
+        // Crear el mapa de parámetros (por si quieres pasar datos al informe)
+        Map<String, Object> parametros = new HashMap<>();
+
+        // Conexión a la base de datos
+        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/infoSistema", "root", "210205");
+
+        // Generar el informe Jasper
+        JasperPrint print = JasperFillManager.fillReport(
+                "src/main/resources/org/example/adcontrol/Jaspers/InformeAula.jasper",
+                parametros,
+                conexion
+        );
+
+        // Abrir ventana para que el usuario elija dónde guardar el PDF
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar informe PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivo PDF", "*.pdf"));
+        fileChooser.setInitialFileName("informe.pdf");
+
+        File file = fileChooser.showSaveDialog(null); // Puedes pasar aquí tu Stage si quieres anclarlo
+
+        if (file != null) {
+            // Exportar el informe a la ruta seleccionada
+            JasperExportManager.exportReportToPdfFile(print, file.getAbsolutePath());
+
+            // Mostrar alerta de éxito
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Informe creado correctamente en:\n" + file.getAbsolutePath(), ButtonType.OK);
+            alert.setTitle("Informe creado");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        } else {
+            // Si el usuario cancela la ventana de guardado
+            Alert alert = new Alert(Alert.AlertType.WARNING, "No se ha seleccionado ninguna ubicación para guardar el informe.", ButtonType.OK);
+            alert.setTitle("Guardado cancelado");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        }
+
+        // Cerrar la conexión
+        conexion.close();
     }
 }
