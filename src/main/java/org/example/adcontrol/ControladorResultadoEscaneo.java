@@ -236,7 +236,7 @@ public class ControladorResultadoEscaneo {
      * @throws IOException Excepción de entrada y salida
      */
     public static void actualizarCredenciales(String usuario, String password, String ip) throws IOException {
-        Path path = Paths.get("src/main/resources/org/example/adcontrol/Scripts/Script_funcional_en_VM.sh"); //Localización del script
+        Path path = Paths.get("src/main/resources/org/example/adcontrol/Scripts/Script_funcional_en_VMV2.sh"); //Localización del script
         List<String> lineas = Files.readAllLines(path);
 
         for (int i = 0; i < lineas.size(); i++) {
