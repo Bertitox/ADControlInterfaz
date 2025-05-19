@@ -156,7 +156,7 @@
                         <Insets left="520.0" />
                      </HBox.margin>
                   </Button>
-                  <MenuButton fx:id="menuButtonIdiomas" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass="custom-menu-buttom" text="Español" textFill="WHITE">
+                  <MenuButton fx:id="menuButtonIdiomas" mnemonicParsing="false" prefHeight="49.0" prefWidth="141.0" style="-fx-background-radius: 10px; -fx-background-color: transparent;" styleClass=".custom-menu-buttomIDIOMA" text="Español" textFill="WHITE">
                      <items>
                         <MenuItem fx:id="español" mnemonicParsing="false" text="Español" />
                         <MenuItem fx:id="ingles" mnemonicParsing="false" text="English" />

@@ -1,12 +1,12 @@
 #!/bin/bash
 # Variables
-USUARIO="parallels"                # Usuario del equipo remoto
-HOST_REMOTO="192.168.0.24"      # Dirección IP o nombre del equipo remoto
+USUARIO="alumno"                # Usuario del equipo remoto
+HOST_REMOTO="192.168.153.222"      # Dirección IP o nombre del equipo remoto
 GET_REPOSITORIO="git clone https://github.com/Bertitox/ADControl.git"
 SCRIPT_REMOTO="bash ./ADControl/ScriptV2.sh"  # Ruta al script en el equipo remoto
 RUTA_JSON_REMOTO="./system_info.json"    # Ruta al JSON generado por el script remoto
 RUTA_LOCAL="src/main/resources/org/example/adcontrol/ResultadoScript/"                          # Ruta en el equipo anfitrión para guardar el JSON
-PASSWORD="usuarioxd"        # Contraseña de sudo del equipo remoto
+PASSWORD="a"        # Contraseña de sudo del equipo remoto
 
 # 1. Verificar si existe una clave SSH local
 if [ ! -f "/Users/alber/.ssh/id_rsa.pub" ]; then

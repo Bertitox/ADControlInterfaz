@@ -39,11 +39,11 @@
                   <Image url="@../Imagenes/actualizar.png" />
                </image>
             </ImageView>
-            <Button fx:id="cargarDatosButton" layoutX="170.0" layoutY="145.0" mnemonicParsing="false" onAction="#actualizarGrafico" prefHeight="40.0" prefWidth="109.0" styleClass="botonPrueba" text="Cargar Datos" textFill="#030303">
+            <Button fx:id="cargarDatosButton" layoutX="170.0" layoutY="145.0" mnemonicParsing="false" onAction="#actualizarGrafico" prefHeight="40.0" prefWidth="109.0" styleClass="estiloBlancoAzul" text="Cargar Datos" textFill="#030303">
                <tooltip>
                   <Tooltip text="Pulsa para ver el gráfico" />
                </tooltip></Button>
-            <MenuButton fx:id="textIncidencias" alignment="CENTER" layoutX="264.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="109.0" style="-fx-background-color: #01a5e7;" styleClass="custom-menu-buttom" text="Aula" textAlignment="CENTER" textFill="#f5f4f4">
+            <MenuButton fx:id="textIncidencias" alignment="CENTER" layoutX="264.0" layoutY="75.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="109.0" styleClass="custom-menu-buttom" text="Aula" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>
@@ -119,27 +119,27 @@
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <MenuButton fx:id="MBaula" alignment="CENTER" layoutX="24.0" layoutY="87.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-background-color: #01a5e7;" styleClass="custom-menu-buttom" text="Aula" textAlignment="CENTER" textFill="#f2efef">
+            <MenuButton fx:id="MBaula" alignment="CENTER" layoutX="24.0" layoutY="87.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" styleClass="custom-menu-buttom" text="Aula" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <MenuButton fx:id="MBequipo" alignment="CENTER" layoutX="178.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #01a5e7;" styleClass="custom-menu-buttom" text="Equipo" textAlignment="CENTER" textFill="WHITE">
+            <MenuButton fx:id="MBequipo" alignment="CENTER" layoutX="178.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" styleClass="custom-menu-buttom" text="Equipo" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <MenuButton fx:id="MBerror" alignment="CENTER" layoutX="325.0" layoutY="87.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-background-color: #01a5e7;" styleClass="custom-menu-buttom" text="Error" textFill="WHITE">
+            <MenuButton fx:id="MBerror" alignment="CENTER" layoutX="325.0" layoutY="87.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" styleClass="custom-menu-buttom" text="Error">
                <font>
                   <Font size="14.0" />
                </font>
             </MenuButton>
-            <Button fx:id="crearIncidencia" layoutX="364.0" layoutY="130.0" mnemonicParsing="false" onAction="#crearIncidencia" prefHeight="30.0" prefWidth="62.0" styleClass="botonPrueba" text="Crear">
+            <Button fx:id="crearIncidencia" layoutX="364.0" layoutY="130.0" mnemonicParsing="false" onAction="#crearIncidencia" prefHeight="30.0" prefWidth="62.0" styleClass="estiloBlancoAzul" text="Crear">
                <tooltip>
                   <Tooltip text="Pulsa para crear incidencias" />
                </tooltip>
             </Button>
-            <Button fx:id="borrarInidencias" layoutX="364.0" layoutY="176.0" mnemonicParsing="false" onAction="#borrarIncidencia" prefHeight="30.0" prefWidth="62.0" styleClass="botonPrueba" text="Eliminar">
+            <Button fx:id="borrarInidencias" layoutX="364.0" layoutY="176.0" mnemonicParsing="false" onAction="#borrarIncidencia" prefHeight="30.0" prefWidth="62.0" styleClass="estiloBlancoAzul" text="Eliminar">
                <tooltip>
                   <Tooltip text="Pulsa para eliminar incidencias" />
                </tooltip>

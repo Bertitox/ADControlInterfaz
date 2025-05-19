@@ -1,18 +1,7 @@
-.custom-menu-buttom .arrow {
-    -fx-background-color: white; /* Cambia el color de la flecha del menu button */
-    -fx-text-fill: white;
-}
-
 .chart-bar{
     -fx-background-color:  #01a5e7;
     -fx-background-radius: 5px 5px 0px 0px;
-}
-
-.chart-bar {
-    -fx-background-color: #01a5e7; /* Color de las barras del gráfico */
-    -fx-background-radius: 5px 5px 0px 0px; /* Bordes redondos */
     -fx-bar-width: 10px; /* Ancho base */
-
 }
 
 .chart-bar:hover {
@@ -28,21 +17,66 @@
     -fx-background-color: transparent; /* Elimina fondo gris del chart */
 }
 
-.botonPrueba {
+.estiloBlancoAzul {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);
+    -fx-transition: all 0.3s ease-in-out; /* No funciona en JavaFX CSS, pero se puede simular con efectos */
+}
+
+.estiloBlancoAzul:hover {
     -fx-background-color: #01a5e7;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0.3, 0, 2);
+}
+
+.custom-menu-buttom .arrow {
+    -fx-background-color: black; /* Cambia el color de la flecha del menu button */
+}
+
+.custom-menu-buttom {
+    -fx-background-color: white; /* Cambia el color de la flecha del menu button */
+    -fx-border-color: black;
+    -fx-text-fill: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);
+    -fx-transition: all 0.3s ease-in-out; /* No funciona en JavaFX CSS, pero se puede simular con efectos */
+}
+
+.custom-menu-buttom:hover .arrow {
+    -fx-background-color: white; /* Cambia el color de la flecha del menu button */
+}
+
+.custom-menu-buttom:hover{
+    -fx-background-color: #01a5e7; /* Cambia el color de la flecha del menu button */
+    -fx-border-color: black;
+    -fx-border-width: 1px;
     -fx-text-fill: white;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
-    -fx-transition: all 0.3s ease-in-out;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0.3, 0, 2);
 }
 
-.botonPrueba:hover {
-    -fx-background-color: #33a5ed;
+.custom-menu-buttom:hover .label{
+-fx-text-fill: white;
+}
+
+.custom-menu-buttomIDIOMA {
+    -fx-background-color: white; /* Cambia el color de la flecha del menu button */
+    -fx-text-fill: black;
     -fx-border-width: 1px;
-    -fx-text-fill: #ecf0f1;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 2);
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);
+    -fx-transition: all 0.3s ease-in-out; /* No funciona en JavaFX CSS, pero se puede simular con efectos */
 }
 
 .listView{
