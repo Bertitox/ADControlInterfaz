@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane fx:id="panelMapa" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="612.0" prefWidth="987.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.adcontrol.ControladorMapa">
    <children>
@@ -13,37 +14,43 @@
             <Image url="@../Imagenes/mapa v6.png" />
          </image>
       </ImageView>
-      <Button fx:id="DAM1" layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="128.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 205, 210);" text="DAM 2" />
-      <Button fx:id="DAM2" layoutX="751.0" layoutY="146.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="101.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 205, 210);" text="DAM 1" />
-      <Button fx:id="DAW2" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="107.0" prefWidth="140.0" style="-fx-background-color: rgb(187, 222, 251);" text="DAW 2" />
-      <Button fx:id="DespachoProfesores1" layoutX="648.0" layoutY="176.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="71.0" prefWidth="101.0" style="-fx-background-color: rgb(255, 249, 196);" text="Sala Prof. 1" />
+      <Button fx:id="DAM1" layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="128.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 205, 210);" text="DAM 2  (B110)" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="DAM2" layoutX="751.0" layoutY="146.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="101.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 205, 210);" text="DAM 1 (B111)" />
+      <Button fx:id="DAW2" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="107.0" prefWidth="140.0" style="-fx-background-color: rgb(187, 222, 251);" text="DAW 2 (B109)" />
+      <Button fx:id="DespachoProfesores1" layoutX="648.0" layoutY="176.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="71.0" prefWidth="101.0" style="-fx-background-color: rgb(255, 249, 196);" text="DPTO Informática (B1D2)" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="pared6" layoutX="431.0" layoutY="247.0" mnemonicParsing="false" prefHeight="135.0" prefWidth="34.0" style="-fx-background-color: trasnparent;">
          <tooltip>
             <Tooltip text="Escaleras" />
          </tooltip>
       </Button>
-      <Button fx:id="ASIR2" layoutX="297.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="127.0" prefWidth="132.0" style="-fx-background-color: rgb(178, 223, 219);" text="ASIR 2" />
-      <Button fx:id="aulaCristal1" layoutX="297.0" layoutY="144.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="55.0" prefWidth="132.0" style="-fx-background-color: rgb(238, 238, 238);" text="Aula convencional 1" />
-      <Button fx:id="AulaEstudio" layoutX="213.0" layoutY="284.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="46.0" prefWidth="113.0" rotate="90.0" style="-fx-background-color: rgb(200, 230, 201);" text="Aula de estudio" />
-      <Button fx:id="ASIR1" layoutX="751.0" layoutY="498.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="97.0" prefWidth="144.0" style="-fx-background-color: rgb(178, 223, 219);" text="ASIR 1" />
-      <Button fx:id="aulaInfo1" layoutX="751.0" layoutY="363.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="90.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 204, 188);" text="Aula de informatica" />
+      <Button fx:id="ASIR2" layoutX="297.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="127.0" prefWidth="132.0" style="-fx-background-color: rgb(178, 223, 219);" text="ASIR 1 (B108)" />
+      <Button fx:id="aulaCristal1" layoutX="297.0" layoutY="144.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="55.0" prefWidth="132.0" style="-fx-background-color: rgb(238, 238, 238);" text="Aula convencional 1 (B107)" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="AulaEstudio" layoutX="213.0" layoutY="284.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="46.0" prefWidth="113.0" rotate="90.0" style="-fx-background-color: rgb(200, 230, 201);" text="Aula de estudio (B1R1)" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="ASIR1" layoutX="751.0" layoutY="498.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="97.0" prefWidth="144.0" style="-fx-background-color: rgb(178, 223, 219);" text="ASIR 2 (B115)" />
+      <Button fx:id="aulaInfo1" layoutX="751.0" layoutY="363.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="90.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 204, 188);" text="Aula informatica BACH. 2 (B114)" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="pared1" layoutX="508.0" layoutY="175.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="138.0" style="-fx-background-color: rgba(0, 0, 0, 0.46);">
          <tooltip>
             <Tooltip text="Baños" />
          </tooltip>
       </Button>
-      <Button fx:id="DAW1" layoutX="647.0" layoutY="250.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="171.0" prefWidth="102.0" style="-fx-background-color: rgb(187, 222, 251);" text="DAW 1" />
-      <Button fx:id="DespachoProfesores2" layoutX="190.0" layoutY="59.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="37.0" prefWidth="104.0" style="-fx-background-color: rgb(255, 249, 196);" styleClass="botonMapa" text="Sala Prof. 2" />
-      <Button fx:id="aulaCristal2" layoutX="431.0" layoutY="498.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="98.0" prefWidth="75.0" style="-fx-background-color: rgb(238, 238, 238);" text="Aula conv. 3" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="aulaCristal3" layoutX="510.0" layoutY="498.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="97.0" prefWidth="135.0" style="-fx-background-color: rgb(238, 238, 238);" text="Aula convencional 4" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="aulaConvencional" layoutX="510.0" layoutY="356.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="81.0" prefWidth="134.0" style="-fx-background-color: rgb(215, 204, 200);" styleClass="botonMapa" text="Aula convencional 2" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="SMR1A" layoutX="44.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="126.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 236, 179);" text="SMR 1A" />
-      <Button fx:id="SMR1B" layoutX="44.0" layoutY="143.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="104.0" prefWidth="144.0" style="-fx-background-color: rgb(197, 202, 233);" text="SMR 1B" />
-      <Button fx:id="SMR2A" layoutX="295.0" layoutY="366.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="111.0" prefWidth="134.0" style="-fx-background-color: rgb(255, 236, 179);" text="Aula informatica BACH" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="SMR2B" layoutX="295.0" layoutY="481.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="115.0" prefWidth="134.0" style="-fx-background-color: rgb(197, 202, 233);" text="SMR 2A" />
-      <Button fx:id="taller" layoutX="44.0" layoutY="363.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="114.0" prefWidth="144.0" style="-fx-background-color: rgb(240, 244, 195);" text="Taller" />
-      <Button fx:id="aulaInfo2" layoutX="44.0" layoutY="481.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="115.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 204, 188);" text="SMR 2B" />
-      <Button fx:id="secretaria" layoutX="651.0" layoutY="53.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="41.0" prefWidth="98.0" style="-fx-background-color: rgb(225, 190, 231);" text="Jefatura" />
+      <Button fx:id="DAW1" layoutX="647.0" layoutY="250.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="171.0" prefWidth="102.0" style="-fx-background-color: rgb(187, 222, 251);" text="DAW 1 (B1D2)" />
+      <Button fx:id="DespachoProfesores2" layoutX="190.0" layoutY="59.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="37.0" prefWidth="104.0" style="-fx-background-color: rgb(255, 249, 196);" styleClass="botonMapa" text="Sala Prof. (B1R2)" wrapText="true">
+         <font>
+            <Font size="11.0" />
+         </font></Button>
+      <Button fx:id="aulaCristal2" layoutX="431.0" layoutY="498.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="98.0" prefWidth="75.0" style="-fx-background-color: rgb(238, 238, 238);" text="Aula conv. 3 (B117)" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="aulaCristal3" layoutX="510.0" layoutY="498.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="97.0" prefWidth="135.0" style="-fx-background-color: rgb(238, 238, 238);" text="EASD2 (B116)" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="aulaConvencional" layoutX="510.0" layoutY="356.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="81.0" prefWidth="134.0" style="-fx-background-color: rgb(215, 204, 200);" styleClass="botonMapa" text="Aula convencional 2 (B112)" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="SMR1A" layoutX="44.0" layoutY="14.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="126.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 236, 179);" text="SMR 1A (B106)" />
+      <Button fx:id="SMR1B" layoutX="44.0" layoutY="143.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="104.0" prefWidth="144.0" style="-fx-background-color: rgb(197, 202, 233);" text="SMR 1B (B105)" />
+      <Button fx:id="SMR2A" layoutX="295.0" layoutY="366.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="111.0" prefWidth="134.0" style="-fx-background-color: rgb(255, 236, 179);" text="Aula informatica BACH. 1 (B101)" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="SMR2B" layoutX="295.0" layoutY="481.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="115.0" prefWidth="134.0" style="-fx-background-color: rgb(197, 202, 233);" text="SMR 2A (B102)" />
+      <Button fx:id="taller" layoutX="44.0" layoutY="363.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="114.0" prefWidth="144.0" style="-fx-background-color: rgb(240, 244, 195);" text="Taller informática (B104)" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="aulaInfo2" layoutX="44.0" layoutY="481.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="115.0" prefWidth="144.0" style="-fx-background-color: rgb(255, 204, 188);" text="SMR 2B (B103)" />
+      <Button fx:id="secretaria" alignment="CENTER" layoutX="651.0" layoutY="53.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="41.0" prefWidth="98.0" style="-fx-background-color: rgb(225, 190, 231);" text="Jefatura (B1D1)" wrapText="true">
+         <font>
+            <Font size="12.0" />
+         </font></Button>
       <Button fx:id="pared5" layoutX="589.0" layoutY="250.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="56.0" style="-fx-background-color: trasnparent;">
          <tooltip>
             <Tooltip text="Jardin" />
@@ -69,12 +76,18 @@
             <Tooltip text="Jardin" />
          </tooltip>
       </Button>
-      <Button fx:id="DespachoProfesores2rect" layoutX="220.0" layoutY="97.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="61.0" prefWidth="74.0" style="-fx-background-color: rgb(255, 249, 196);" styleClass="botonMapa" text="Desp. Prof 2" textFill="#fff9c4" />
-      <Button fx:id="secretariarect" layoutX="651.0" layoutY="95.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: rgb(225, 190, 231);" text="Secretaria" textFill="#e1bee7" />
-      <Button fx:id="aulaInfo1rect" layoutX="777.0" layoutY="454.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="41.0" prefWidth="118.0" style="-fx-background-color: rgb(255, 204, 188);" text="Aula de informatica 1" textFill="#ffccbc" />
+      <Button fx:id="DespachoProfesores2rect" layoutX="220.0" layoutY="97.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="61.0" prefWidth="74.0" style="-fx-background-color: rgb(255, 249, 196);" styleClass="botonMapa" text="Sala Prof. (B1R2)" textFill="#fff9c4" />
+      <Button fx:id="secretariarect" layoutX="651.0" layoutY="95.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: rgb(225, 190, 231);" text="Jefatura (B1D1)" textFill="#e1bee7" />
+      <Button fx:id="aulaInfo1rect" layoutX="777.0" layoutY="454.0" mnemonicParsing="false" onAction="#cambiarAula" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="41.0" prefWidth="118.0" style="-fx-background-color: rgb(255, 204, 188);" text="Aula informatica BACH. 2 (B114)" textFill="#ffccbc" />
       <Button fx:id="pared7" layoutX="431.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="71.0" prefWidth="75.0" style="-fx-background-color: #dfdfdf;" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="pared8" layoutX="649.0" layoutY="501.0" mnemonicParsing="false" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="41.0" prefWidth="46.0" style="-fx-background-color: rgb(238, 238, 238);" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="pared9" layoutX="700.0" layoutY="501.0" mnemonicParsing="false" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="41.0" prefWidth="46.0" style="-fx-background-color: rgb(238, 238, 238);" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="pared8" alignment="CENTER" layoutX="647.0" layoutY="499.0" mnemonicParsing="false" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="48.0" prefWidth="50.0" style="-fx-background-color: rgb(238, 238, 238);" text="DPTO. FOL Filosofía (B1D4)" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="11.0" />
+         </font></Button>
+      <Button fx:id="pared9" layoutX="699.0" layoutY="499.0" mnemonicParsing="false" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="48.0" prefWidth="50.0" style="-fx-background-color: rgb(238, 238, 238);" text="Despacho TIC (B1D3)" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="11.0" />
+         </font></Button>
       <Button fx:id="pared10" layoutX="28.0" layoutY="251.0" mnemonicParsing="false" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="107.0" prefWidth="160.0" style="-fx-background-color: #dfdfdf;" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="pared11" layoutX="753.0" layoutY="254.0" mnemonicParsing="false" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="104.0" prefWidth="160.0" style="-fx-background-color: #dfdfdf;" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="pared12" layoutX="192.0" layoutY="554.0" mnemonicParsing="false" onMouseEntered="#botonMapaHover" onMouseExited="#botonMapaNormal" prefHeight="25.0" prefWidth="27.0" style="-fx-background-color: #dfdfdf;" textAlignment="CENTER" wrapText="true" />

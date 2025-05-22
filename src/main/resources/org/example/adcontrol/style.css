@@ -55,7 +55,7 @@
 }
 
 .custom-menu-buttom:hover{
-        -fx-background-color: #01a5e7; /* Cambia el color de la flecha del menu button */
+    -fx-background-color: #01a5e7; /* Cambia el color de la flecha del menu button */
     -fx-border-color: black;
     -fx-border-width: 1px;
     -fx-text-fill: white;
@@ -66,7 +66,7 @@
 }
 
 .custom-menu-buttom:hover .label{
--fx-text-fill: white;
+-fx-text-fill: black;
 }
 
 .custom-menu-buttomIDIOMA {
